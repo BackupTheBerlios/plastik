@@ -1,0 +1,2 @@
+bitstream vera sans muss installiert sein im jre:
+$JAVA_HOME/jre/lib/fonts 
