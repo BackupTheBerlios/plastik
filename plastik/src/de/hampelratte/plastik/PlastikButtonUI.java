@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 
@@ -37,7 +38,7 @@ public class PlastikButtonUI extends MetalButtonUI {
 			backgroundColor = UIManager.getColor("Common.background");
 			defaults_initialized = true;
 		}
-		b.setOpaque(true);
+		b.setOpaque(false);
 	}
 
 	public void update(Graphics g, JComponent c) {
@@ -46,12 +47,11 @@ public class PlastikButtonUI extends MetalButtonUI {
 
 		// draw background
 		Rectangle rect = c.getVisibleRect();
-		/*Insets i = c.getInsets();
-		rect.x += i.left;
-		rect.y += i.top;
+		Insets i = c.getInsets();
+		rect.x = i.left;
+		rect.y = i.top;
 		rect.width = c.getWidth() - (i.right + rect.x);
-		rect.height = c.getHeight() - (i.bottom + rect.y);*/
-
+		rect.height = c.getHeight() - (i.bottom + rect.y);
         g.setColor(backgroundColor);
 		g.fillRect(rect.x, rect.y, rect.width, rect.height);
 
@@ -60,22 +60,9 @@ public class PlastikButtonUI extends MetalButtonUI {
 			if (!model.isPressed()) {
 				Color lightGray = new Color(229, 231, 236);
 				Color darkGray = new Color(206, 207, 213);
-				Rectangle rectangle = (Rectangle)rect.clone();
-				rectangle.x++; rectangle.width--;
-				rectangle.y++; rectangle.height--;
-				Gradients.drawRoundBoxGradient(g, rectangle, lightGray, darkGray);
-
-				// TODO 3d streifen in den uimanager einarbeiten
-				// draw 3d effect lines
-				g.setColor(new Color(241, 241, 246)); // bright lines
-				g.drawLine(2, 1, rect.width - 2, 1);
-				g.drawLine(1, 2, 1, rect.height - 2);
-				g.setColor(new Color(202, 203, 208)); // darker lines
-				g.drawLine(2, rect.height - 2, rect.width - 2, rect.height - 2);
-				g.drawLine(rect.width - 2, 2, rect.width - 2, rect.height - 2);
+				Gradients.drawBoxGradient(g, rect, lightGray, darkGray);
 			}
 		} else {
-			
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setColor(backgroundColor);
 			g2.fillRoundRect((int) rect.getX(), (int) rect.getY(), (int) rect
@@ -92,12 +79,14 @@ public class PlastikButtonUI extends MetalButtonUI {
 	
 	protected void paintButtonPressed(Graphics g, AbstractButton b) {
 		Rectangle rect = b.getVisibleRect();
+		Insets i = b.getInsets();
+		rect.x = i.left;
+		rect.y = i.top;
+		rect.width = b.getWidth() - (i.right + rect.x);
+		rect.height = b.getHeight() - (i.bottom + rect.y);
 		Color color1 = new Color(182, 185, 189);
 		Color color2 = new Color(189, 191, 195);
-		Rectangle rectangle = (Rectangle)rect.clone();
-		rectangle.x++; rectangle.width--;
-		rectangle.y++; rectangle.height--;
-		Gradients.drawBoxGradient(g, rectangle, color1, color2);
+		Gradients.drawBoxGradient(g, rect, color1, color2);
 	}
 
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect,
