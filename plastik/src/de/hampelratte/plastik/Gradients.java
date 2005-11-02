@@ -13,7 +13,7 @@ public class Gradients {
 		GradientPaint gp = new GradientPaint(0,0,c1,0,rect.height,c2);
 		g2.setPaint(gp);
 		g2.fillRoundRect((int)rect.getX(), (int)rect.getY(), 
-				(int)rect.getWidth()-1, (int)rect.getHeight()-1, 4, 4);
+				(int)rect.getWidth(), (int)rect.getHeight(), 4, 4);
 	}
 	
 	
@@ -22,7 +22,7 @@ public class Gradients {
 		GradientPaint gp = new GradientPaint(0,0,c1,0,rect.height,c2);
 		g2.setPaint(gp);
 		g2.fillRect((int)rect.getX(), (int)rect.getY(), 
-				(int)rect.getWidth()-1, (int)rect.getHeight()-1);
+				(int)rect.getWidth(), (int)rect.getHeight());
 	}
 	
 	
@@ -31,6 +31,6 @@ public class Gradients {
 		GradientPaint gp = new GradientPaint(0,0,c1,0,rect.height,c2);
 		g2.setPaint(gp);
 		g2.fillOval((int)rect.getX(), (int)rect.getY(), 
-				(int)rect.getWidth()-1, (int)rect.getHeight()-1);
+				(int)rect.getWidth(), (int)rect.getHeight());
 	}
 }
