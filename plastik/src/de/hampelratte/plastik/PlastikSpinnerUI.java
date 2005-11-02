@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.Map;
 
 import javax.swing.AbstractAction;
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
@@ -53,6 +54,7 @@ public class PlastikSpinnerUI extends BasicSpinnerUI implements
 	private JButton previousButton;
 
 	public static ComponentUI createUI(JComponent c) {
+		c.setOpaque(false);
 		PlastikSpinnerUI ui = new PlastikSpinnerUI();
 		return ui;
 	}

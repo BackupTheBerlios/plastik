@@ -26,6 +26,8 @@ public class PlastikSpinnerButtonBorder extends AbstractBorder implements
 
 	private PlastikSpinnerUI spinnerUI;
 
+	private Color background = UIManager.getColor("Common.background");
+
 	private Color contour = UIManager.getColor("Common.contour");
 
 	private Color contourSmoother = UIManager
@@ -46,11 +48,24 @@ public class PlastikSpinnerButtonBorder extends AbstractBorder implements
 	public void paintBorder(Component c, Graphics g, int x, int y, int width,
 			int height) {
 		g.translate(x, y);
-		g.setColor(contour);
+		g.setColor(background);
 
 		switch (position) {
 		case SwingConstants.NORTH:
 			if (spinner.getComponentOrientation().isLeftToRight()) {
+				{ // draw background
+					g.setColor(background);
+					//top
+					g.drawLine(0, 0, width - 2, 0);
+					//bottom
+					g.drawLine(0, height-1, width - 1, height-1);
+					//left
+					g.drawLine(0, 1, 0, height-2);
+					//right
+					g.drawLine(width-1, 1, width-1, height-2);
+				}
+
+				g.setColor(contour);
 				g.drawLine(1, 0, width - 3, 0); // top
 				g.drawLine(0, 0, 0, height - 1); // left
 				g.drawLine(width - 1, 2, width - 1, height - 1); // right
@@ -61,10 +76,23 @@ public class PlastikSpinnerButtonBorder extends AbstractBorder implements
 				g.drawLine(width - 2, 0, width - 2, 0);
 				g.drawLine(width - 1, 1, width - 1, 1);
 			} else {
+				{ // draw background
+					g.setColor(background);
+					//top
+					g.drawLine(1, 0, width - 1, 0);
+					//bottom
+					g.drawLine(0, height-1, width - 1, height-1);
+					//left
+					g.drawLine(0, 1, 0, height-2);
+					//right
+					g.drawLine(width-1, 1, width-1, height-2);
+				}
+				
+				g.setColor(contour);
 				g.drawLine(2, 0, width - 2, 0); // top
 				g.drawLine(0, 2, 0, height - 1); // left
 				g.drawLine(width - 1, 0, width - 1, height - 1); // right
-				g.drawLine(2, height - 1, width - 2, height - 1); // bottom
+				g.drawLine(1, height - 1, width - 2, height - 1); // bottom
 				// round corner
 				g.drawLine(1, 1, 1, 1);
 				g.setColor(contourSmoother);
@@ -74,6 +102,19 @@ public class PlastikSpinnerButtonBorder extends AbstractBorder implements
 			break;
 		case SwingConstants.SOUTH:
 			if (spinner.getComponentOrientation().isLeftToRight()) {
+				{ // draw background
+					g.setColor(background);
+					//top
+					g.drawLine(0, 0, width - 1, 0);
+					//bottom
+					g.drawLine(0, height-1, width - 2, height-1);
+					//left
+					g.drawLine(0, 1, 0, height-2);
+					//right
+					g.drawLine(width-1, 1, width-1, height-2);
+				}
+				
+				g.setColor(contour);
 				g.drawLine(1, 0, width - 2, 0); // top
 				g.drawLine(0, 0, 0, height - 1); // left
 				g.drawLine(width - 1, 0, width - 1, height - 3); // right
@@ -84,9 +125,22 @@ public class PlastikSpinnerButtonBorder extends AbstractBorder implements
 				g.drawLine(width - 2, height - 1, width - 2, height - 1);
 				g.drawLine(width - 1, height - 2, width - 1, height - 2);
 			} else {
-				g.drawLine(2, 0, width - 1, 0); // top
+				{ // draw background
+					g.setColor(background);
+					//top
+					g.drawLine(0, 0, width - 1, 0);
+					//bottom
+					g.drawLine(1, height-1, width - 1, height-1);
+					//left
+					g.drawLine(0, 1, 0, height-2);
+					//right
+					g.drawLine(width-1, 1, width-1, height-2);
+				}
+				
+				g.setColor(contour);
+				g.drawLine(1, 0, width - 1, 0); // top
 				g.drawLine(0, 0, 0, height - 3); // left
-				g.drawLine(width - 1, 0, width - 1, height - 1); // right
+				g.drawLine(width - 1, 1, width - 1, height - 1); // right
 				g.drawLine(2, height - 1, width - 2, height - 1); // bottom
 				// round corner
 				g.drawLine(1, height - 2, 1, height - 2);
@@ -108,7 +162,7 @@ public class PlastikSpinnerButtonBorder extends AbstractBorder implements
 	}
 
 	public Insets getBorderInsets(Component c) {
-		return new Insets(2, 2, 2, 2);
+		return new Insets(1, 1, 1, 1);
 	}
 
 }
