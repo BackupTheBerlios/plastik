@@ -1,5 +1,6 @@
 package de.hampelratte.plastik;
 
+import java.awt.Graphics;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.beans.PropertyChangeEvent;
@@ -17,6 +18,7 @@ public class PlastikTextFieldUI extends BasicTextFieldUI {
 		JTextField tf = (JTextField)c;
 		textFieldUI = new PlastikTextFieldUI();
 		tf.addFocusListener(textFieldUI.new PlastikTextFieldFocusAdapter(tf));
+		c.setOpaque(false);
 		return textFieldUI;
 	}
 
@@ -37,5 +39,9 @@ public class PlastikTextFieldUI extends BasicTextFieldUI {
 		public void focusLost(FocusEvent e) {
 			tf.repaint();
 		}
+	}
+	
+	public void update(Graphics g, JComponent c) {
+		super.paint(g,c);
 	}
 }

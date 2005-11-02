@@ -12,6 +12,8 @@ import de.hampelratte.plastik.borders.PlastikBorder;
 import de.hampelratte.plastik.borders.PlastikButtonBorder;
 import de.hampelratte.plastik.borders.PlastikTextComponentBorder;
 
+// TODO ALLE runden ecken müssen nachgearbeitet werden. im moment sind die nicht transparent. 
+// zu sehen wenn man dem Panel in der Main.java ne andere hintergrundfarbe verpasst. 
 public class PlastikLookAndFeel extends MetalLookAndFeel {
 	
 	// TODO theme entwickeln
@@ -48,6 +50,7 @@ public class PlastikLookAndFeel extends MetalLookAndFeel {
 		table.put("ButtonUI", "de.hampelratte.plastik.PlastikButtonUI");
 		table.put("CheckBoxUI", "de.hampelratte.plastik.PlastikCheckBoxUI");
 		table.put("ComboBoxUI", "de.hampelratte.plastik.PlastikComboBoxUI");
+		table.put("LabelUI", "de.hampelratte.plastik.PlastikLabelUI");
 		table.put("RadioButtonUI",
 		"de.hampelratte.plastik.PlastikRadioButtonUI");
 		table.put("ScrollBarUI", "de.hampelratte.plastik.PlastikScrollBarUI");

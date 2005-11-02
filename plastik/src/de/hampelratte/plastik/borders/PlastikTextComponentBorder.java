@@ -107,11 +107,12 @@ public class PlastikTextComponentBorder extends AbstractBorder implements
 		}
 
 		// corner background
-		g.setColor(background);
+		/*g.setColor(background);
 		g.drawLine(0, 0, 0, 0); // ul
 		g.drawLine(width - 1, 0, width - 1, 0); // ur
 		g.drawLine(0, height - 1, 0, height - 1); // ll
 		g.drawLine(width - 1, height - 1, width - 1, height - 1); // lr
+		*/
 
 		g.translate(-x, -y);
 	}

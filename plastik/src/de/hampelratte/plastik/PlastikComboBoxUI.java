@@ -20,9 +20,11 @@ import javax.swing.plaf.metal.MetalComboBoxUI;
 
 import de.hampelratte.plastik.borders.PlastikComboBoxArrowButtonBorder;
 
+// TODO editor cornerns are not transparent
 public class PlastikComboBoxUI extends MetalComboBoxUI implements MouseListener, MouseWheelListener {
 
 	public static ComponentUI createUI(JComponent c) {
+		c.setOpaque(false);
 		return new PlastikComboBoxUI();
 	}
 

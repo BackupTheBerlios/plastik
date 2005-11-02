@@ -116,12 +116,6 @@ public class PlastikComboBoxEditorBorder extends AbstractBorder implements
 			}
 		}
 
-		// corner background
-		g.setColor(background);
-		xpos = isLeftToRight ? 0 : width - 1;
-		g.drawLine(xpos, 0, xpos, 0);
-		g.drawLine(xpos, height - 1, xpos, height - 1);
-
 		g.translate(-x, -y);
 	}
 }

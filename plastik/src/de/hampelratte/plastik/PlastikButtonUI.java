@@ -58,7 +58,7 @@ public class PlastikButtonUI extends MetalButtonUI {
 		if (button.isEnabled()) {
 			// draw gradient
 			if (!model.isPressed()) {
-				Color lightGray = new Color(229, 231, 236);
+				Color lightGray = new Color(229, 231, 236); // TODO ins laf
 				Color darkGray = new Color(206, 207, 213);
 				Gradients.drawBoxGradient(g, rect, lightGray, darkGray);
 			}

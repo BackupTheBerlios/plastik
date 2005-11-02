@@ -72,18 +72,18 @@ public class PlastikComboBoxArrowButtonBorder extends AbstractBorder implements
 		g.drawLine(0, 1, width - 1, 1);
 		g.drawLine(0, 1, 0, height - 2);
 		g.drawLine(width - 1, 1, width - 1, height - 2);
-		xpos = isLeftToRight ? width - 2 : 1;
-		g.drawLine(xpos, 2, xpos, height - 2);
-
+		xpos = isLeftToRight ? width-2 : 1;
+		g.drawLine(xpos, 2, xpos, height -2);
+		
 		AbstractButton b = (AbstractButton) c;
 
 		// draw dark 3d lines over the bright 3d lines, if the button is pressed
-		if (b.getModel().isPressed()) {
+		if(b.getModel().isPressed()) {
 			g.setColor(new Color(182, 185, 189)); // darker lines TODO ins laf
 			xpos = isLeftToRight ? 1 : 2;
-			newWidth = isLeftToRight ? width - 3 : width - 2;
+			newWidth = isLeftToRight ? width - 3: width-2;
 			g.drawLine(xpos, 1, newWidth, 1);
-			xpos = isLeftToRight ? width - 2 : 1;
+			xpos = isLeftToRight ? width-2 : 1;
 			g.drawLine(xpos, 2, xpos, height - 3);
 		}
 
@@ -116,12 +116,14 @@ public class PlastikComboBoxArrowButtonBorder extends AbstractBorder implements
 
 		// paint inner lines
 		/*
-		 * xpos = isLeftToRight ? 1 : 2; newWidth = isLeftToRight ? width - 3 :
-		 * width - 1; g.drawLine(xpos, 1, newWidth, 1); // horizontal // TODO
-		 * farbe ins laf einbauen g.setColor(b.getModel().isPressed() ?
-		 * contourSmoother : new Color(225, 225, 225)); g.drawLine(xpos, 2,
-		 * xpos, height - 2); // vertical
-		 */
+		xpos = isLeftToRight ? 1 : 2;
+		newWidth = isLeftToRight ? width - 3 : width - 1;
+		g.drawLine(xpos, 1, newWidth, 1); // horizontal
+		// TODO farbe ins laf einbauen
+		g.setColor(b.getModel().isPressed() ? contourSmoother : new Color(225,
+				225, 225));
+		g.drawLine(xpos, 2, xpos, height - 2); // vertical
+		*/
 
 		if (b.isEnabled() && !b.getModel().isPressed() && b.isRolloverEnabled()
 				&& b.getModel().isRollover()) {

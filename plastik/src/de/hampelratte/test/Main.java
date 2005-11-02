@@ -1,6 +1,8 @@
 package de.hampelratte.test;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -46,6 +48,8 @@ public class Main {
 	
 	private static JSpinner spinner;
 	
+	private static JLabel label;
+	
 	public static void main(String[] args) {
 		try {
 			PlastikLookAndFeel.setTextAntialiasing(true);
@@ -56,7 +60,8 @@ public class Main {
 
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
-
+		panel.setBackground(Color.GRAY);
+		
 		JButton button = new JButton("Hallo Welt!");
 		button.setBounds(10, 10, 100, 25);
 		button.setToolTipText("was geht ab?");
@@ -64,18 +69,18 @@ public class Main {
 		
 		//JFileChooser fc = new JFileChooser();
 		//fc.showOpenDialog(frame);
-
-		JLabel label = new JLabel("Was geht denn hier ab?");
+		
+		label = new JLabel("Was geht denn hier ab?");
 		label.setBounds(10, 50, 200, 25);
 		panel.add(label);
 
 		radiobutton = new JRadioButton("radiobutton");
 		radiobutton.setToolTipText("hallo kinder");
-		radiobutton.setBounds(10, 200, 100, 25);
+		radiobutton.setBounds(10, 220, 100, 25);
 		panel.add(radiobutton);
 
 		checkbox = new JCheckBox("checkbox");
-		checkbox.setBounds(10, 230, 100, 25);
+		checkbox.setBounds(10, 250, 100, 25);
 		panel.add(checkbox);
 		
 		scrollb = new JScrollBar(SwingConstants.VERTICAL);
@@ -141,6 +146,7 @@ public class Main {
 				//combo.setEnabled(!combo.isEnabled());
 				combo.setEditable(!combo.isEditable());
 				spinner.setEnabled(!spinner.isEnabled());
+				label.setEnabled(!label.isEnabled());
 			}
 		});
 	}

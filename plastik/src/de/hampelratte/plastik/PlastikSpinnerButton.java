@@ -11,11 +11,10 @@ import javax.swing.UIManager;
 
 import de.hampelratte.plastik.borders.PlastikSpinnerButtonBorder;
 
+//FIXME button wird beim ersten drücken zu hell (wie disabled)
 public class PlastikSpinnerButton extends JButton {
 
 	private int orientation = 0;
-
-	private int arrowWidth = 7;
 
 	private int arrowHeight = 4;
 
