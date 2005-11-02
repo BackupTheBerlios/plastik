@@ -40,10 +40,10 @@ public class PlastikComboBoxArrowButtonBorder extends AbstractBorder implements
 		boolean isLeftToRight = combo.getComponentOrientation().isLeftToRight();
 
 		// leave room for default visual
-		insets.top = 3;
-		insets.bottom = 2;
-		insets.left = isLeftToRight ? 3 : 0;
-		insets.right = isLeftToRight ? 0 : 2;
+		insets.top = 2;
+		insets.bottom = 1;
+		insets.left = isLeftToRight ? 2 : 1;
+		insets.right = isLeftToRight ? 1 : 2;
 		return insets;
 	}
 
