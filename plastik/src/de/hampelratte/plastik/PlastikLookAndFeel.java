@@ -17,6 +17,8 @@ public class PlastikLookAndFeel extends MetalLookAndFeel {
 	// TODO theme entwickeln
 	private PlastikColorTheme theme;
 	
+	private static boolean textAntialiasing = false;
+	
 	public void setTheme(PlastikColorTheme theme) {
 		this.theme = theme;
 	}
@@ -155,5 +157,13 @@ public class PlastikLookAndFeel extends MetalLookAndFeel {
 	    //table.put("Spinner.editorBorderPainted", new Boolean(true));
 
 		// TODO farben für die ganzen gradienten handeln
+	}
+
+	public static boolean isTextAntialiasing() {
+		return textAntialiasing;
+	}
+
+	public static void setTextAntialiasing(boolean textAntialiasing) {
+		PlastikLookAndFeel.textAntialiasing = textAntialiasing;
 	}
 }

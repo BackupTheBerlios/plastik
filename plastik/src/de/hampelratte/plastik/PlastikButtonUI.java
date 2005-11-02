@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
@@ -81,6 +82,11 @@ public class PlastikButtonUI extends MetalButtonUI {
 					.getWidth() - 1, (int) rect.getHeight() - 1, 4, 4);
 		}
 		
+		if(PlastikLookAndFeel.isTextAntialiasing()) {
+			Graphics2D g2d = (Graphics2D)g;
+			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+	                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		}
 		super.paint(g, c);
 	}
 	

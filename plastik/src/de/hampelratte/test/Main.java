@@ -48,6 +48,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		try {
+			PlastikLookAndFeel.setTextAntialiasing(true);
 			UIManager.setLookAndFeel(new PlastikLookAndFeel());
 		} catch (Exception e) {
 			e.printStackTrace();

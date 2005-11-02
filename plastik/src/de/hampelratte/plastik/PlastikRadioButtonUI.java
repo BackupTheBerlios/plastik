@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
@@ -146,7 +147,13 @@ public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 			getDefaultIcon().paintIcon(c, g, iconRect.x, iconRect.y);
 		}
 
+		
 		// Draw the Text
+		if(PlastikLookAndFeel.isTextAntialiasing()) {
+			Graphics2D g2d = (Graphics2D)g;
+			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+	                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		}
 		if (text != null) {
 			View v = (View) c.getClientProperty(BasicHTML.propertyKey);
 			if (v != null) {
