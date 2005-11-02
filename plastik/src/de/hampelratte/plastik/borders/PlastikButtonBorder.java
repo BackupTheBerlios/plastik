@@ -22,7 +22,7 @@ public class PlastikButtonBorder extends PlastikBorder implements UIResource {
 
 		// draw dark 3d lines over the bright 3d lines, if the button is pressed
 		if(b.getModel().isPressed()) {
-			g.setColor(new Color(195, 195, 201)); // darker lines
+			g.setColor(new Color(195, 195, 201)); // darker lines TODO ins laf
 			g.drawLine(2, 1, width - 3, 1);
 			g.drawLine(1, 2, 1, height - 3);
 		}
