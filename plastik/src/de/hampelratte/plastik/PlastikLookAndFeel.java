@@ -1,48 +1,120 @@
 package de.hampelratte.plastik;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
-
 import javax.swing.UIDefaults;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
-import javax.swing.plaf.metal.MetalLookAndFeel;
-
+import javax.swing.plaf.basic.BasicLookAndFeel;
 import de.hampelratte.plastik.borders.PlastikBorder;
 import de.hampelratte.plastik.borders.PlastikButtonBorder;
 import de.hampelratte.plastik.borders.PlastikTextComponentBorder;
 
+
+/**
+ * TODO Diskussion ob sinnvoll oder nicht<br>
+ *
+ * Hier ein paar Vorschläge aus meinem Avio-Theme:
+ * Das PlastikLookAndFeel sollte an spätere Veränderungen durch Themes 
+ * (PlastikTheme) entsprechend anpassbar sein. Ein solches Theme besteht aus 
+ * mehreren Sub-Themes:
+ *  - PlastikAudioTheme
+ *  - PlastikBackgroundTheme
+ *  - PlastikBorderTheme
+ *  - PlastikColorTheme
+ *  - PlastikFontTheme
+ *
+ * Dies hat den Vorteil das man nur bestimmte Teile des gesammten Themes 
+ * austauschen braucht.
+ * Ein Nachteil ist der höhere Aufwand.
+ */
 // TODO ALLE runden ecken müssen nachgearbeitet werden. im moment sind die nicht transparent. 
 // zu sehen wenn man dem Panel in der Main.java ne andere hintergrundfarbe verpasst. 
-public class PlastikLookAndFeel extends MetalLookAndFeel {
+public class PlastikLookAndFeel extends BasicLookAndFeel {
 	
-	// TODO theme entwickeln
-	private PlastikColorTheme theme;
+	/** The PlastikTheme used by the LookAndFeel */
+	private static PlastikColorTheme theme = null;
+	
+	/**
+	 * Creates a new <code>PlastikLookAndFeel</code> object.
+	 * The initialisation is completet after the calling of 
+	 * {@link #getDefaults()}. This enables the setup of a theme before the 
+	 * default theme is created.
+	 */
+	public PlastikLookAndFeel() {
+	}
+	
+	/**
+	 * Returns the name of the LookAndFeel as String.
+	 * @return the name of the LookAndFeel
+	 */
+	public String getName() {
+		return "Plastik";
+	}
+	
+	/**
+	 * Returns the ID of the LookAndFeel as String.
+	 * @return the ID of the LookAndFeel
+	 */
+	public String getID() {
+		return "Plastik";
+	}
+	
+	/**
+	 * Returns a short description of the LookAndFeel as String.
+	 * @return a short description of the LookAndFeel.
+	 */
+	public String getDescription() {
+		return "Plastik Look and Feel";
+	}	
+	
+	/**
+	 * Shows that the LookAndFeel depends on a native platform or not. 
+	 * The result should always be false.
+	 * @return always false for this LookAndFeel
+	 */
+	public boolean isNativeLookAndFeel() {
+		return false;
+	}
+	
+	/**
+	 * Shows that the LookAndFeel is supportet on this platform. As long we 
+	 * support all platforms this should be always true.
+	 * @return always true
+	 */
+	public boolean isSupportedLookAndFeel() {
+		return true;
+	}
+	
+	/**
+	 * Returns true if the <code>LookAndFeel</code> returned
+	 * <code>RootPaneUI</code> instances support providing Window decorations
+	 * in a <code>JRootPane</code>.
+	 * <p>
+	 * The implementation returns false, until this support is implemented.
+	 * @return always false
+	 */
+	public boolean getSupportsWindowDecorations() {
+		return false;
+	}
+	
+	/**
+     * Invoked when the user attempts an invalid operation, 
+     * such as pasting into an uneditable <code>JTextField</code> 
+     * that has focus. The current implementation beeps. 
+	 * @param component the <code>Component</code> the error occurred in,
+     *                  may be <code>null</code> indicating the error condition 
+	 *                  is not directly associated with a <code>Component</code>
+	 */
+	public void provideErrorFeedback(Component component) { 
+		super.provideErrorFeedback(component); 
+	}
 	
 	private static boolean textAntialiasing = false;
 	
 	public void setTheme(PlastikColorTheme theme) {
 		this.theme = theme;
-	}
-
-	public String getDescription() {
-		return "Plastik Look and Feel";
-	}
-
-	public String getName() {
-		return "Plastik";
-	}
-
-	public String getID() {
-		return "Plastik";
-	}
-
-	public boolean isNativeLookAndFeel() {
-		return false;
-	}
-
-	public boolean isSupportedLookAndFeel() {
-		return true;
 	}
 
 	protected void initClassDefaults(UIDefaults table) {
@@ -60,34 +132,34 @@ public class PlastikLookAndFeel extends MetalLookAndFeel {
 	}
 
 	protected void initSystemColorDefaults(UIDefaults table) {
-		table.put("desktop", getDesktopColor());
-		table.put("activeCaption", getWindowTitleBackground());
-		table.put("activeCaptionText", getWindowTitleForeground());
-		table.put("activeCaptionBorder", Color.WHITE/* getPrimaryControlShadow()*/);
-		table.put("inactiveCaption", getWindowTitleInactiveBackground());
-		table.put("inactiveCaptionText", getWindowTitleInactiveForeground());
-		table.put("inactiveCaptionBorder", getControlShadow());
-		table.put("window", Color.WHITE/*new ColorUIResource(new Color(239,239,239))*/);
-		table.put("windowBorder", getControl());
-		table.put("windowText", getUserTextColor());
-		table.put("menu", getMenuBackground()); /* Background color for menus */
-		table.put("menuText", getMenuForeground()); /* Text color for menus */
-		table.put("text", getWindowBackground()); /* Text background color */
-		table.put("textText", getUserTextColor());
-		table.put("textHighlight", new PlastikColorUIResource(new Color(103,
-				141, 178)));
-		table.put("textHighlightText", Color.WHITE);
-		table.put("textInactiveText", new ColorUIResource(new Color(200, 200,
-				200)));
-		table.put("control", getControl());
-		table.put("controlText", getControlTextColor());
-		table.put("controlHighlight", getControlHighlight());
-		table.put("controlLtHighlight", getControlHighlight());
-		table.put("controlShadow", getControlShadow()); 
-		table.put("controlDkShadow", getControlDarkShadow());
-		table.put("scrollbar", getControl());
-		table.put("info", new ColorUIResource(new Color(255,255,220))); // tooltip bg
-		table.put("infoText", new ColorUIResource(Color.BLACK)); // tooltip fg
+//		table.put("desktop", getDesktopColor());
+//		table.put("activeCaption", getWindowTitleBackground());
+//		table.put("activeCaptionText", getWindowTitleForeground());
+//		table.put("activeCaptionBorder", Color.WHITE/* getPrimaryControlShadow()*/);
+//		table.put("inactiveCaption", getWindowTitleInactiveBackground());
+//		table.put("inactiveCaptionText", getWindowTitleInactiveForeground());
+//		table.put("inactiveCaptionBorder", getControlShadow());
+//		table.put("window", Color.WHITE/*new ColorUIResource(new Color(239,239,239))*/);
+//		table.put("windowBorder", getControl());
+//		table.put("windowText", getUserTextColor());
+//		table.put("menu", getMenuBackground()); /* Background color for menus */
+//		table.put("menuText", getMenuForeground()); /* Text color for menus */
+//		table.put("text", getWindowBackground()); /* Text background color */
+//		table.put("textText", getUserTextColor());
+//		table.put("textHighlight", new PlastikColorUIResource(new Color(103,
+//				141, 178)));
+//		table.put("textHighlightText", Color.WHITE);
+//		table.put("textInactiveText", new ColorUIResource(new Color(200, 200,
+//				200)));
+//		table.put("control", getControl());
+//		table.put("controlText", getControlTextColor());
+//		table.put("controlHighlight", getControlHighlight());
+//		table.put("controlLtHighlight", getControlHighlight());
+//		table.put("controlShadow", getControlShadow()); 
+//		table.put("controlDkShadow", getControlDarkShadow());
+//		table.put("scrollbar", getControl());
+//		table.put("info", new ColorUIResource(new Color(255,255,220))); // tooltip bg
+//		table.put("infoText", new ColorUIResource(Color.BLACK)); // tooltip fg
 
 	}
 	
