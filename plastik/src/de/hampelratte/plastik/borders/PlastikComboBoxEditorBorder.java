@@ -37,12 +37,10 @@ public class PlastikComboBoxEditorBorder extends AbstractBorder implements
 
 	public Insets getBorderInsets(Component c, Insets insets) {
 		boolean isLeftToRight = component.getComponentOrientation().isLeftToRight();
-
-		// leave room for default visual
-		insets.top = 3;
-		insets.bottom = 2;
-		insets.left = isLeftToRight ? 3 : 2;
-		insets.right = isLeftToRight ? 2 : 3;
+		insets.top = 2;
+		insets.bottom = 1;
+		insets.left = isLeftToRight ? 2 : 0;
+		insets.right = isLeftToRight ? 0 : 1;
 		return insets;
 	}
 
@@ -64,17 +62,35 @@ public class PlastikComboBoxEditorBorder extends AbstractBorder implements
 
 		getColors();
 		g.translate(x, y);
+		
+		int xpos = 0;
+		int newWidth = 0;
+		
+		{ // paint background
+			g.setColor(background);
+			xpos = isLeftToRight ? 1 : 0;
+			newWidth = isLeftToRight ? width - 1 : width - 2;
+			g.drawLine(xpos, 0, newWidth, 0);
+			g.drawLine(xpos, 1, newWidth, 1);
+			g.drawLine(xpos, height - 1, newWidth, height - 1);
+			// vertical
+			xpos = isLeftToRight ? 0 : width - 1;
+			g.drawLine(xpos, 1, xpos, height - 2);
+			xpos = isLeftToRight ? 1 : width - 2;
+			g.drawLine(xpos, 1, xpos, height - 2);
+		}
 
-		// paint contour
-		g.setColor(comp.hasFocus() ? highlight : contour);
-		// horizontal
-		int xpos = isLeftToRight ? 2 : 0;
-		int newWidth = isLeftToRight ? width - 1 : width - 3;
-		g.drawLine(xpos, 0, newWidth, 0);
-		g.drawLine(xpos, height - 1, newWidth, height - 1);
-		// vertical
-		xpos = isLeftToRight ? 0 : width - 1;
-		g.drawLine(xpos, 2, xpos, height - 3);
+		{ // paint contour 
+			g.setColor(comp.hasFocus() ? highlight : contour);
+			// horizontal
+			xpos = isLeftToRight ? 2 : 0;
+			newWidth = isLeftToRight ? width - 1 : width - 3;
+			g.drawLine(xpos, 0, newWidth, 0);
+			g.drawLine(xpos, height - 1, newWidth, height - 1);
+			// vertical
+			xpos = isLeftToRight ? 0 : width - 1;
+			g.drawLine(xpos, 2, xpos, height - 3);
+		}
 
 		// corners
 		xpos = isLeftToRight ? 1 : width - 2;
