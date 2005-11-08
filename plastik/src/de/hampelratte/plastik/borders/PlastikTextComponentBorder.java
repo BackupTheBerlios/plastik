@@ -28,26 +28,21 @@ public class PlastikTextComponentBorder extends AbstractBorder implements
 	protected Color background;
 
 	public Insets getBorderInsets(Component c) {
-		return getBorderInsets(c, new Insets(3, 3, 2, 3));
+		return getBorderInsets(c, new Insets(0,0,0,0)); // dummy values
 	}
 
 	public Insets getBorderInsets(Component c, Insets insets) {
 		// leave room for default visual
-		insets.top = insets.left = insets.right = 3;
-		insets.bottom = 2;
+		insets.top = insets.left = insets.right = insets.bottom = 2;
 		return insets;
 	}
 
 	private void getColors() {
 		if (!gotColors) {
 			contour = UIManager.getColor("Common.contour");
-
 			contourSmoother = UIManager.getColor("Common.contourSmoother");
-
 			highlight = UIManager.getColor("Common.highlight");
-
 			highlightSmoother = UIManager.getColor("Common.highlightSmoother");
-
 			background = UIManager.getColor("Common.background");
 			gotColors = true;
 		}
@@ -64,6 +59,17 @@ public class PlastikTextComponentBorder extends AbstractBorder implements
 
 		getColors();
 		g.translate(x, y);
+		
+		// draw background
+		g.setColor(background);
+		g.drawLine(1,0,width-2,0);
+		g.drawLine(0,1,width-1,1);
+		g.drawLine(0,2,0,height-3);
+		g.drawLine(1,2,1,height-3);
+		g.drawLine(width-1,2,width-1,height-3);
+		g.drawLine(width-2,2,width-2,height-3);
+		g.drawLine(0,height-2,width-1,height-2);
+		g.drawLine(1,height-1,width-2,height-1);
 
 		// paint contour
 		g.setColor(comp.hasFocus() ? highlight : contour);
