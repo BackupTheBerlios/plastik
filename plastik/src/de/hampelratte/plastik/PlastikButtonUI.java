@@ -1,13 +1,15 @@
 package de.hampelratte.plastik;
-
-import java.awt.BasicStroke;
+import de.hampelratte.test.TransparencyTest;
+import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.lang.reflect.Method;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
@@ -16,11 +18,10 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
-import javax.swing.plaf.basic.BasicButtonListener;
-import javax.swing.plaf.metal.MetalButtonUI;
+import javax.swing.plaf.basic.BasicButtonUI;
 
 //TODO text beim drücken verschieben
-public class PlastikButtonUI extends MetalButtonUI {
+public class PlastikButtonUI extends BasicButtonUI {
 	
 	private static final PlastikButtonUI BUTTON_UI = new PlastikButtonUI();
 	
@@ -49,9 +50,8 @@ public class PlastikButtonUI extends MetalButtonUI {
 		String pp = getPropertyPrefix();
 		if (!defaultsInitialized) {
 			// TODO TextIconGap
-			// TextIconGap wird nicht an den Button übergeben, aber scheinbar
-			// auch sonst nirgends verwendet, da man hier UIResource-Objekte
-			// nicht von "User"-Objekten unterscheiden kann
+			// TextIconGap wird nicht an den Button übergeben, da man hier 
+			// UIResource-Objekte nicht von "User"-Objekten unterscheiden kann
 			// (kein UIResource-Flag).
 			defaultTextIconGap     = ((Integer)UIManager.get(pp + "textIconGap")).intValue();
 			defaultTextShiftOffset = ((Integer)UIManager.get(pp + "textShiftOffset")).intValue();
@@ -79,26 +79,6 @@ public class PlastikButtonUI extends MetalButtonUI {
 		if (currentBorder     == null || currentBorder     instanceof UIResource) b.setBorder(defaultBorder);
 		if (currentMargin     == null || currentMargin     instanceof UIResource) b.setMargin(defaultMargin);
 		
-		// TODO PropertyWrapper für Transparenz einführen.
-/*
-		// Ein Problem stellt die Transparenz der Ecken der Buttons dar. Aus
-		// diesem Grund verwenden wir "transparente" Buttons. Allerdings sollte
-		// die Ursprüngliche Eigenschaft "opaque" erhalten werden. Dies kann man
-		// mit einem PropertyListener erreichen. Die originalen Werte werden
-		// dort entgegengenommen, gespeichert aber nicht übernommen, denn
-		// schließlich soll unser Button immer nicht "opaque"
- 
-		// Die originalen Werte des Buttons! Diese werden evtl. überschrieben
-		// und daher werden diese hier gesichert, um sie später wieder
-		// zurücksetzen zu können.
-		PropertyWrapper p = new PropertyWrapper();
-		p.setOpaque(b.isOpaque());
- 
-		b.putClientProperty("plastikWrapper", p);
- 
-		// Nun setzen wir noch die veränderten Defaults
-		b.setOpaque(opaque);
- */
 	}
 	
 	
@@ -113,50 +93,65 @@ public class PlastikButtonUI extends MetalButtonUI {
 		defaultsInitialized = false;
 	}
 	
-	class PlastikButtonListener extends BasicButtonListener {
-		
-		public PlastikButtonListener(AbstractButton b) {
-			super(b);
-		}
-		
-		// TODO Wrapper einbinden...
-/*
-		public void propertyChange(java.beans.PropertyChangeEvent e) {
-			super.propertyChange(e);
-			String prop = e.getPropertyName();
- 
-			if (prop.equals("opaque")) {
-				AbstractButton b = (AbstractButton) e.getSource();
-				checkOpacity(b);
-				PropertyWrapper p = (PropertyWrapper) b.getClientProperty("cionWrapper");
-				p.setOpaque( ((Boolean)e.getNewValue()).booleanValue() );
-			} else if (prop.equals("background")) {
-				checkOpacity((AbstractButton) e.getSource());
-			}
-		}
- 
-		// Hier fehlt noch eine eindeutige Regelung und den Wrapper nicht vergessen...
-		protected void checkOpacity(AbstractButton b) {
-			boolean opaque;
-			PropertyWrapper p = (PropertyWrapper) b.getClientProperty("cionWrapper");
-			opaque = p.isOpaque() && b.isContentAreaFilled();
-			if (opaque) {
-				if (b.getBackground() instanceof CionBackgroundPainter) {
-					opaque = ((CionBackgroundPainter)b.getBackground()).paintsOpaque();
-				} else {
-					CionBackgroundTheme t = CionLookAndFeel.getCurrentTheme().getBackgroundTheme();
-					opaque = t.getButtonBackgroundPainter().paintsOpaque();
-				}
-			}
-			b.setOpaque(opaque);
-		}*/
-	}
+//	class PlastikButtonListener extends BasicButtonListener {
+//
+//		public PlastikButtonListener(AbstractButton b) {
+//			super(b);
+//		}
+//
+//	}
+//	
+//	protected BasicButtonListener createButtonListener(AbstractButton b) {
+//		return new PlastikButtonListener(b);
+//	}
 	
-	protected BasicButtonListener createButtonListener(AbstractButton b) {
-		return new PlastikButtonListener(b);
-	}
-	
+	/**
+	 * Ich bastle hier mal einen Workaround mit dem man auch ohne das isOpaque() 
+	 * false liefert transparenzen darstellen kann. Momentan ist die Performance
+	 * aber alles andere als gut. Dies kann man aber sicherlich mit einem 
+	 * entsprechenden Cache für die erzeugten BufferedImages beheben.
+	 * 
+	 */
 	public void update(Graphics g, JComponent c) {
+		AbstractButton button = (AbstractButton) c;
+		ButtonModel model = button.getModel();
+		
+		if (button.isOpaque()) {
+			Component parent = button.getParent();
+			if (parent instanceof JComponent) {
+				JComponent jParent = (JComponent) parent;
+				Rectangle bounds = button.getBounds();
+				BufferedImage img = c.getGraphicsConfiguration().createCompatibleImage(jParent.getWidth(), jParent.getHeight());
+				Graphics gg = img.getGraphics();
+				
+				//gg.translate(-bounds.x, -bounds.y);
+				gg.setClip(bounds.x, bounds.y, bounds.width, bounds.height);
+				
+				try {
+					Method m = JComponent.class.getDeclaredMethod("paintComponent", new Class[]{Graphics.class});
+					m.setAccessible(true);
+					m.invoke(jParent, new Object[]{gg});
+				} catch(Exception e) { e.printStackTrace(); }
+				
+				//gg.copyArea(bounds.x, bounds.y, bounds.width, bounds.height, -bounds.x, -bounds.y);
+				g.drawImage(img,0,0,bounds.width, bounds.height, bounds.x, bounds.y, bounds.x+bounds.width, bounds.y+bounds.height, null);
+				
+				//TransparencyTest.displayImage(img);
+				
+				Graphics2D g2d = (Graphics2D) g;
+				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+				g2d.setColor(Color.WHITE);
+				g2d.fillRect(0, 0, button.getWidth(), button.getHeight());
+			} else {
+				// geht nicht... -> normal zeichen
+			}		
+		} else {
+			// normal da Transparent..
+		}
+	}
+	
+	
+/*	public void update(Graphics g, JComponent c) {
 		AbstractButton button = (AbstractButton) c;
 		ButtonModel model = button.getModel();
 		
@@ -214,5 +209,5 @@ public class PlastikButtonUI extends MetalButtonUI {
 		g2.setStroke(stroke);
 		g.drawRect(textRect.x - 2, textRect.y, textRect.width + 2,
 				textRect.height - 1);
-	}
+	}*/
 }
