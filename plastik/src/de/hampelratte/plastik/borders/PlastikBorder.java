@@ -61,26 +61,15 @@ public class PlastikBorder extends AbstractBorder implements UIResource {
 		g.drawLine(width - 2, height - 1, width - 2, height - 1); // upperright
 		g.drawLine(width - 1, height - 2, width - 1, height - 2);
 		
-		// TODO 3d streifen in den uimanager einarbeiten
-		// draw 3d effect lines
-		// FIXME sind die hier überhaupt richtig?
-		// vielleicht sollte der normale plastikborder nur insets 1 haben und keine 3d streifen
-		g.setColor(new Color(241, 241, 246)); // bright lines
-		g.drawLine(2, 1, width - 3, 1);
-		g.drawLine(1, 2, 1, height - 3);
-		g.setColor(new Color(195, 195, 201)); // darker lines
-		g.drawLine(2, height - 2, width - 3, height - 2);
-		g.drawLine(width - 2, 2, width - 2, height - 3);
-		
 		g.translate(-x, -y);
 	}
 
 	public Insets getBorderInsets(Component c) {
-		return getBorderInsets(c, new Insets(2, 2, 2, 2));
+		return getBorderInsets(c, new Insets(1, 1, 1, 1));
 	}
 
 	public Insets getBorderInsets(Component c, Insets insets) {
-		insets.top = insets.left = insets.right = insets.bottom = 2;
+		insets.top = insets.left = insets.right = insets.bottom = 1;
 		return insets;
 	}
 }
