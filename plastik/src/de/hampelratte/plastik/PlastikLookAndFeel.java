@@ -3,12 +3,14 @@ package de.hampelratte.plastik;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+
 import javax.swing.UIDefaults;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.basic.BasicLookAndFeel;
 import de.hampelratte.plastik.borders.PlastikBorder;
 import de.hampelratte.plastik.borders.PlastikButtonBorder;
+import de.hampelratte.plastik.borders.PlastikScrollPaneBorder;
 import de.hampelratte.plastik.borders.PlastikTextComponentBorder;
 
 
@@ -34,17 +36,17 @@ import de.hampelratte.plastik.borders.PlastikTextComponentBorder;
 public class PlastikLookAndFeel extends BasicLookAndFeel {
 	
 	/** The PlastikTheme used by the LookAndFeel */
-	private static PlastikColorTheme theme = null;
-	
+	private PlastikColorTheme theme = null;
+		
 	/**
 	 * Creates a new <code>PlastikLookAndFeel</code> object.
-	 * The initialisation is completet after the calling of 
+	 * The initialisation is completed after the calling of 
 	 * {@link #getDefaults()}. This enables the setup of a theme before the 
 	 * default theme is created.
 	 */
 	public PlastikLookAndFeel() {
 	}
-	
+
 	/**
 	 * Returns the name of the LookAndFeel as String.
 	 * @return the name of the LookAndFeel
@@ -67,8 +69,8 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 	 */
 	public String getDescription() {
 		return "Plastik Look and Feel";
-	}	
-	
+	}
+
 	/**
 	 * Shows that the LookAndFeel depends on a native platform or not. 
 	 * The result should always be false.
@@ -170,7 +172,7 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("Common.border", new PlastikBorder());
 		table.put("Button.border", new PlastikButtonBorder());
 		table.put("ComboBox.border", null);
-		table.put("ScrollPane.border", table.get("Common.border"));
+		table.put("ScrollPane.border", new PlastikScrollPaneBorder());
 		table.put("TextArea.border", new PlastikTextComponentBorder());
 		table.put("TextField.border", new PlastikTextComponentBorder());
 		
@@ -217,6 +219,7 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table
 				.put("RadioButton.background", table
 						.getColor("Common.background"));
+		table.put("Button.background", new PlastikColorUIResource(new Color(229, 231, 236)));
 		table.put("Label.background", table.getColor("Common.background"));
 		table.put("Panel.background", table.getColor("Common.background"));
 		table.put("ScrollPane.background", table.getColor("Common.background"));
@@ -241,4 +244,14 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 	public static void setTextAntialiasing(boolean textAntialiasing) {
 		PlastikLookAndFeel.textAntialiasing = textAntialiasing;
 	}
+	
+	private static boolean defaultOpacity = true;
+
+	public static boolean isDefaultOpacity() {
+		return defaultOpacity;
+	}
+
+	public static void setDefaultOpacity(boolean defaultOpacity) {
+		PlastikLookAndFeel.defaultOpacity = defaultOpacity;
+	} 
 }
