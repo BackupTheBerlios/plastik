@@ -1,0 +1,2 @@
+TODO hinweis:
+dieses look and feel benutzt icons des Crystal SVG icon sets, welches unter der LGPL steht

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="ide-one-click" name="Plastik">
+    
+    <property name="src.dir" value="./src/"/>
+    <property name="res.dir" value="./res"/>
+    <property name="doc.dir" value="./doc"/>
+    <property name="build.dir" value="./bin"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="dist.filename" value="${build.dir}/plastik.jar"/>
+   
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+    </target>
+    
+    <target name="compile" depends="init" description="Compile all source code">
+        <mkdir dir="${classes.dir}"/>
+        
+        <javac srcdir="${src.dir}" 
+               destdir="${classes.dir}"
+               deprecation="on"/>
+    </target>
+    
+    <target name="build-jar" depends="compile" description="Pack the jar file for distribution.">
+        <property name="dist-tmp.dir" value="${build.dir}/dist-tmp"/>        
+        <mkdir dir="${dist-tmp.dir}"/>
+        
+        <delete file="${dist.filename}"/>
+                
+        <copy todir="${dist-tmp.dir}">
+            <fileset dir="${classes.dir}">
+                <include name="**/*.class"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${dist-tmp.dir}/de/hampelratte/plastik/themes/iconthemes/CrystalSVG/icons">
+             <fileset dir="${res.dir}/icons/CrystalSVG"/>
+        </copy>
+        
+        <jar jarfile="${dist.filename}" basedir="${dist-tmp.dir}" /> 
+        
+        <delete dir="${dist-tmp.dir}"/>
+        <!--<delete dir="${classes.dir}"/>-->
+    </target>
+
+    <target name="clean" depends="init" description="Remove all build results">
+        <delete dir="${build.dir}"/>
+        <delete dir="${javadoc.dir}"/>
+    </target>
+	
+	<target name="run" depends="init" description="Start jmp3renamer">
+	        <java classname="de.hampelratte.test.Main" fork="yes">
+	            <classpath>
+	                <pathelement path="${build.dir}/plastik.jar"/>
+	            </classpath>
+	        </java>
+	    </target>
+    
+    <target name="ide-one-click" description="Build jar and run">
+        <antcall target="build-jar"/>
+        <antcall target="run"/>
+    </target>
+</project>
