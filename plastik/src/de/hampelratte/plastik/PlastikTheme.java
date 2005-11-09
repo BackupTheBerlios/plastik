@@ -10,6 +10,8 @@ public class PlastikTheme {
 	private PlastikColorTheme colorTheme;
 
 	private PlastikFontTheme fontTheme;
+	
+	private PlastikIconTheme iconTheme;
 
 	public PlastikAudioTheme getAudioTheme() {
 		return audioTheme;
@@ -49,5 +51,13 @@ public class PlastikTheme {
 
 	public void setFontTheme(PlastikFontTheme fontTheme) {
 		this.fontTheme = fontTheme;
+	}
+
+	public PlastikIconTheme getIconTheme() {
+		return iconTheme;
+	}
+
+	public void setIconTheme(PlastikIconTheme iconTheme) {
+		this.iconTheme = iconTheme;
 	}
 }
