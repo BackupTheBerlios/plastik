@@ -1,63 +1,17 @@
 package de.hampelratte.plastik;
 
-public class PlastikTheme {
-	private PlastikAudioTheme audioTheme;
+public abstract class PlastikTheme {
+	public abstract PlastikAudioTheme getAudioTheme();
+	public abstract PlastikBackgroundTheme getBackgroundTheme();
+	public abstract PlastikBorderTheme getBorderTheme();
+	public abstract PlastikColorTheme getColorTheme();
+	public abstract PlastikFontTheme getFontTheme();
+	public abstract PlastikIconTheme getIconTheme();
 
-	private PlastikBackgroundTheme backgroundTheme;
-
-	private PlastikBorderTheme borderTheme;
-
-	private PlastikColorTheme colorTheme;
-
-	private PlastikFontTheme fontTheme;
-	
-	private PlastikIconTheme iconTheme;
-
-	public PlastikAudioTheme getAudioTheme() {
-		return audioTheme;
-	}
-
-	public void setAudioTheme(PlastikAudioTheme audioTheme) {
-		this.audioTheme = audioTheme;
-	}
-
-	public PlastikBackgroundTheme getBackgroundTheme() {
-		return backgroundTheme;
-	}
-
-	public void setBackgroundTheme(PlastikBackgroundTheme backgroundTheme) {
-		this.backgroundTheme = backgroundTheme;
-	}
-
-	public PlastikBorderTheme getBorderTheme() {
-		return borderTheme;
-	}
-
-	public void setBorderTheme(PlastikBorderTheme borderTheme) {
-		this.borderTheme = borderTheme;
-	}
-
-	public PlastikColorTheme getColorTheme() {
-		return colorTheme;
-	}
-
-	public void setColorTheme(PlastikColorTheme colorTheme) {
-		this.colorTheme = colorTheme;
-	}
-
-	public PlastikFontTheme getFontTheme() {
-		return fontTheme;
-	}
-
-	public void setFontTheme(PlastikFontTheme fontTheme) {
-		this.fontTheme = fontTheme;
-	}
-
-	public PlastikIconTheme getIconTheme() {
-		return iconTheme;
-	}
-
-	public void setIconTheme(PlastikIconTheme iconTheme) {
-		this.iconTheme = iconTheme;
-	}
+	public abstract void setAudioTheme(PlastikAudioTheme audioTheme);
+	public abstract void setBackgroundTheme(PlastikBackgroundTheme backgroundTheme);
+	public abstract void setBorderTheme(PlastikBorderTheme borderTheme);
+	public abstract void setColorTheme(PlastikColorTheme colorTheme);
+	public abstract void setFontTheme(PlastikFontTheme fontTheme);
+	public abstract void setIconTheme(PlastikIconTheme iconTheme);
 }
