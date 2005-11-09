@@ -1,12 +1,12 @@
 package de.hampelratte.test;
 
-import de.hampelratte.plastik.PlastikLookAndFeel;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -15,8 +15,12 @@ import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
+import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+
+import de.hampelratte.plastik.PlastikLookAndFeel;
+import de.hampelratte.plastik.themes.Plastik.Plastik;
 
 /**
  * Dieser Test soll das Verhalten beim Umschalten der UI aufzeigen.
@@ -131,7 +135,12 @@ public class TestFrame extends JFrame {
 		if (choosePlastikAction == null) {
 			choosePlastikAction = new AbstractAction("Plastik LnF") {
 				public void actionPerformed(ActionEvent e) {
-					changeLookTo("de.hampelratte.plastik.PlastikLookAndFeel");
+					PlastikLookAndFeel.setTextAntialiasing(true);
+					PlastikLookAndFeel.setDefaultOpacity(false);
+					PlastikLookAndFeel.setRolloverEnabled(true);
+					PlastikLookAndFeel laf = new PlastikLookAndFeel();
+					laf.setTheme(new Plastik());
+					changeLookTo(laf);
 				}
 			};
 		}
@@ -183,6 +192,17 @@ public class TestFrame extends JFrame {
 	private boolean changeLookTo(String lfName) {
 		try {
 			UIManager.setLookAndFeel(lfName);
+			SwingUtilities.updateComponentTreeUI(this);
+		} catch (Exception ex) {
+			JOptionPane.showConfirmDialog(this, ex.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean changeLookTo(LookAndFeel laf) {
+		try {
+			UIManager.setLookAndFeel(laf);
 			SwingUtilities.updateComponentTreeUI(this);
 		} catch (Exception ex) {
 			JOptionPane.showConfirmDialog(this, ex.getMessage());

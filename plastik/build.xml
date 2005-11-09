@@ -47,13 +47,21 @@
         <delete dir="${javadoc.dir}"/>
     </target>
 	
-	<target name="run" depends="init" description="Start jmp3renamer">
-	        <java classname="de.hampelratte.test.Main" fork="yes">
-	            <classpath>
-	                <pathelement path="${build.dir}/plastik.jar"/>
-	            </classpath>
-	        </java>
-	    </target>
+	<target name="run" depends="build-jar" description="Start">
+	    <java classname="de.hampelratte.test.Main" fork="yes">
+	        <classpath>
+	            <pathelement path="${build.dir}/plastik.jar"/>
+	        </classpath>
+	    </java>
+	</target>
+	
+	<target name="allcomps" depends="build-jar" description="Start">
+		<java classname="de.hampelratte.test.TestFrame" fork="yes">
+			<classpath>
+		    	<pathelement path="${build.dir}/plastik.jar"/>
+		    </classpath>
+		</java>
+	</target>
     
     <target name="ide-one-click" description="Build jar and run">
         <antcall target="build-jar"/>
