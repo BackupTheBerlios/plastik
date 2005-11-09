@@ -18,18 +18,27 @@ public class PlastikButtonBorder extends PlastikBorder implements UIResource {
 		Color highlightColor = UIManager.getColor("Common.highlight");
 		Color highlightSmoother = UIManager
 				.getColor("Common.highlightSmoother");
+		Color background = UIManager.getColor("Common.background");
 
 		AbstractButton b = (AbstractButton) c;
-
 		g.translate(x,y);
 		
-		/*
+		// draw background
+		if(b.isEnabled() && !b.getModel().isPressed()) { 
+			g.setColor(background);
+			g.drawLine(2, 1, width - 3, 1); // top
+			g.drawLine(2, height - 2, width - 3, height - 2); // bottom
+			g.drawLine(1, 2, 1, height - 3); // left
+			g.drawLine(width-2, 2, width-2, height - 3); // right
+		}
+		
 		// draw dark 3d lines over the bright 3d lines, if the button is pressed
-		if(b.getModel().isPressed()) {
-			g.setColor(new Color(195, 195, 201)); // darker lines TODO ins laf
-			g.drawLine(2, 1, width - 3, 1);
-			g.drawLine(1, 2, 1, height - 3);
-		}*/
+		if (b.isEnabled() && !b.getModel().isPressed()) {
+			g.setColor(new Color(195, 195, 201)); // darker lines TODO ins
+			// laf
+			g.drawLine(2, height - 2, width - 3, height - 2);
+			g.drawLine(width-2, 2, width-2, height - 3);
+		}
 		
 		// draw highlight
 		if (b.isEnabled() && !b.getModel().isPressed() && b.isRolloverEnabled()

@@ -1,13 +1,14 @@
 package de.hampelratte.plastik;
-import de.hampelratte.test.TransparencyTest;
-import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Method;
 
@@ -79,6 +80,13 @@ public class PlastikButtonUI extends BasicButtonUI {
 		if (currentBorder     == null || currentBorder     instanceof UIResource) b.setBorder(defaultBorder);
 		if (currentMargin     == null || currentMargin     instanceof UIResource) b.setMargin(defaultMargin);
 		
+		if(PlastikLookAndFeel.getDefaultOpacity() == false) {
+			b.setOpaque(false);
+		}
+		
+		if(PlastikLookAndFeel.isRolloverEnabled()) {
+			b.setRolloverEnabled(true);
+		}
 	}
 	
 	
@@ -137,21 +145,25 @@ public class PlastikButtonUI extends BasicButtonUI {
 				g.drawImage(img,0,0,bounds.width, bounds.height, bounds.x, bounds.y, bounds.x+bounds.width, bounds.y+bounds.height, null);
 				
 				//TransparencyTest.displayImage(img);
-				
+				/*
 				Graphics2D g2d = (Graphics2D) g;
 				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
 				g2d.setColor(Color.WHITE);
 				g2d.fillRect(0, 0, button.getWidth(), button.getHeight());
+				*/
+				MyUpdate(g,c);
 			} else {
+				MyUpdate(g,c);
 				// geht nicht... -> normal zeichen
 			}		
 		} else {
+			MyUpdate(g,c);
 			// normal da Transparent..
 		}
 	}
 	
 	
-/*	public void update(Graphics g, JComponent c) {
+	public void MyUpdate(Graphics g, JComponent c) {
 		AbstractButton button = (AbstractButton) c;
 		ButtonModel model = button.getModel();
 		
@@ -162,8 +174,12 @@ public class PlastikButtonUI extends BasicButtonUI {
 		rect.y = i.top;
 		rect.width = c.getWidth() - (i.right + rect.x);
 		rect.height = c.getHeight() - (i.bottom + rect.y);
+		/*
 		g.setColor(c.getBackground());
+		g.setColor(Color.GREEN);
+		System.out.println(rect);
 		g.fillRect(rect.x, rect.y, rect.width, rect.height);
+		*/
 		
 		if (button.isEnabled()) {
 			// draw gradient
@@ -175,8 +191,7 @@ public class PlastikButtonUI extends BasicButtonUI {
 		} else {
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setColor(c.getBackground());
-			g2.fillRoundRect((int) rect.getX(), (int) rect.getY(), (int) rect
-					.getWidth() - 1, (int) rect.getHeight() - 1, 4, 4);
+			g2.fillRect(rect.x, rect.y, rect.width, rect.height);
 		}
 		
 		if(PlastikLookAndFeel.isTextAntialiasing()) {
@@ -201,7 +216,7 @@ public class PlastikButtonUI extends BasicButtonUI {
 	
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect,
 			Rectangle textRect, Rectangle iconRect) {
-		g.setColor(focusColor);
+		g.setColor(Color.BLACK);
 		Graphics2D g2 = (Graphics2D) g;
 		float[] dashes = { 0.2f };
 		BasicStroke stroke = new BasicStroke(1.0f, BasicStroke.CAP_BUTT,
@@ -209,5 +224,12 @@ public class PlastikButtonUI extends BasicButtonUI {
 		g2.setStroke(stroke);
 		g.drawRect(textRect.x - 2, textRect.y, textRect.width + 2,
 				textRect.height - 1);
-	}*/
+	}
+	
+	public Dimension getPreferredSize(JComponent c) {
+		Dimension d = super.getPreferredSize(c);
+		d.height = d.height < 26 ? 26 : d.height;
+		d.width += 4;
+		return d;
+	}
 }
