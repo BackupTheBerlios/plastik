@@ -84,9 +84,9 @@ public class PlastikButtonUI extends BasicButtonUI {
 			b.setOpaque(false);
 		}
 		
-		if(PlastikLookAndFeel.isRolloverEnabled()) {
-			b.setRolloverEnabled(true);
-		}
+//		if(PlastikLookAndFeel.isRolloverEnabled()) {
+//			b.setRolloverEnabled(true);
+//		}
 	}
 	
 	
@@ -120,46 +120,51 @@ public class PlastikButtonUI extends BasicButtonUI {
 	 * entsprechenden Cache für die erzeugten BufferedImages beheben.
 	 * 
 	 */
+	private static Method method;
+	
+	static {
+		try {
+			method = JComponent.class.getDeclaredMethod("paintComponent", new Class[]{Graphics.class});
+			method.setAccessible(true);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	
 	public void update(Graphics g, JComponent c) {
 		AbstractButton button = (AbstractButton) c;
 		ButtonModel model = button.getModel();
 		
 		if (button.isOpaque()) {
 			Component parent = button.getParent();
+			Rectangle bounds = button.getBounds();
+			
 			if (parent instanceof JComponent) {
+				// Transparenz wird simmuliert indem die Parent-Komponente in 
+				// ein Image hineinzeichnet
 				JComponent jParent = (JComponent) parent;
-				Rectangle bounds = button.getBounds();
-				BufferedImage img = c.getGraphicsConfiguration().createCompatibleImage(jParent.getWidth(), jParent.getHeight());
+				BufferedImage img = PlastikImageCache.getCachedImage(c.getGraphicsConfiguration(), jParent.getWidth(), jParent.getHeight());
 				Graphics gg = img.getGraphics();
-				
-				//gg.translate(-bounds.x, -bounds.y);
 				gg.setClip(bounds.x, bounds.y, bounds.width, bounds.height);
-				
 				try {
-					Method m = JComponent.class.getDeclaredMethod("paintComponent", new Class[]{Graphics.class});
-					m.setAccessible(true);
-					m.invoke(jParent, new Object[]{gg});
-				} catch(Exception e) { e.printStackTrace(); }
-				
-				//gg.copyArea(bounds.x, bounds.y, bounds.width, bounds.height, -bounds.x, -bounds.y);
-				g.drawImage(img,0,0,bounds.width, bounds.height, bounds.x, bounds.y, bounds.x+bounds.width, bounds.y+bounds.height, null);
-				
-				//TransparencyTest.displayImage(img);
-				/*
-				Graphics2D g2d = (Graphics2D) g;
-				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
-				g2d.setColor(Color.WHITE);
-				g2d.fillRect(0, 0, button.getWidth(), button.getHeight());
-				*/
-				MyUpdate(g,c);
+					method.invoke(jParent, new Object[]{gg});
+				} catch(Exception ex) {
+					ex.printStackTrace(); 
+				}
+				g.drawImage(img, 0, 0, bounds.width, bounds.height, bounds.x, bounds.y, bounds.x+bounds.width, bounds.y+bounds.height, null);				
+//				TransparencyTest.displayImage(img);
 			} else {
+				// Keine transparenz möglich, daher Hintergrund wenigstens 
+				// richtig einfärben.
+				g.setColor(parent.getBackground());
+				g.fillRect(0, 0, bounds.width, bounds.height);
 				MyUpdate(g,c);
-				// geht nicht... -> normal zeichen
 			}		
-		} else {
-			MyUpdate(g,c);
-			// normal da Transparent..
 		}
+		// Zeichnen, um die Transparenz wurde sich schon gekümmert!
+		MyUpdate(g,c);
+		
 	}
 	
 	

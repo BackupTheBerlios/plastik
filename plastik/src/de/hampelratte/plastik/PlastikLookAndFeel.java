@@ -247,11 +247,11 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 	
 	private static boolean defaultOpacity = true;
 
-	public static boolean isDefaultOpacity() {
+	public static boolean getDefaultOpacity() {
 		return defaultOpacity;
 	}
 
 	public static void setDefaultOpacity(boolean defaultOpacity) {
 		PlastikLookAndFeel.defaultOpacity = defaultOpacity;
-	} 
+	}
 }
