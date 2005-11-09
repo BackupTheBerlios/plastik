@@ -8,6 +8,7 @@ import javax.swing.UIDefaults;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.basic.BasicLookAndFeel;
+
 import de.hampelratte.plastik.borders.PlastikBorder;
 import de.hampelratte.plastik.borders.PlastikButtonBorder;
 import de.hampelratte.plastik.borders.PlastikScrollPaneBorder;
@@ -36,7 +37,7 @@ import de.hampelratte.plastik.borders.PlastikTextComponentBorder;
 public class PlastikLookAndFeel extends BasicLookAndFeel {
 	
 	/** The PlastikTheme used by the LookAndFeel */
-	private PlastikColorTheme theme = null;
+	private PlastikTheme theme = null;
 		
 	/**
 	 * Creates a new <code>PlastikLookAndFeel</code> object.
@@ -115,7 +116,7 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 	
 	private static boolean textAntialiasing = false;
 	
-	public void setTheme(PlastikColorTheme theme) {
+	public void setTheme(PlastikTheme theme) {
 		this.theme = theme;
 	}
 
@@ -125,12 +126,12 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("CheckBoxUI", "de.hampelratte.plastik.PlastikCheckBoxUI");
 		table.put("ComboBoxUI", "de.hampelratte.plastik.PlastikComboBoxUI");
 		table.put("LabelUI", "de.hampelratte.plastik.PlastikLabelUI");
-		table.put("RadioButtonUI",
-		"de.hampelratte.plastik.PlastikRadioButtonUI");
+		table.put("RadioButtonUI", "de.hampelratte.plastik.PlastikRadioButtonUI");
 		table.put("ScrollBarUI", "de.hampelratte.plastik.PlastikScrollBarUI");
 		table.put("SpinnerUI", "de.hampelratte.plastik.PlastikSpinnerUI");
 		table.put("TextFieldUI", "de.hampelratte.plastik.PlastikTextFieldUI");
 		table.put("TextAreaUI", "de.hampelratte.plastik.PlastikTextAreaUI");
+		table.put("ToolTipUI", "de.hampelratte.plastik.PlastikToolTipUI");
 	}
 
 	protected void initSystemColorDefaults(UIDefaults table) {
@@ -168,72 +169,77 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
 
-		// borders
-		table.put("Common.border", new PlastikBorder());
-		table.put("Button.border", new PlastikButtonBorder());
-		table.put("ComboBox.border", null);
-		table.put("ScrollPane.border", new PlastikScrollPaneBorder());
-		table.put("TextArea.border", new PlastikTextComponentBorder());
-		table.put("TextField.border", new PlastikTextComponentBorder());
-		
-
-		// fonts
-		table.put("Common.font", new FontUIResource(new Font(
-				"Bitstream Vera Sans", Font.PLAIN, 14)));
-		table.put("Button.font", table.getFont("Common.font"));
-		table.put("ComboBox.font", table.getFont("Common.font"));
-		table.put("Label.font", table.getFont("Common.font"));
-		table.put("Panel.font", table.getFont("Common.font"));
-		table.put("RadioButton.font", table.getFont("Common.font"));
-		table.put("TextField.font", table.getFont("Common.font"));
-		table.put("TextArea.font", table.getFont("Common.font"));
-		table.put("ToolTip.font", table.getFont("Common.font"));
-		table.put("TabbedPane.font", table.getFont("Common.font"));
-
-		// colors
-		table.put("Common.background", new ColorUIResource(new Color(239, 239,
-				239)));
-		table.put("Common.foreground", new ColorUIResource(Color.BLACK));
-		table.put("Common.contour", new PlastikColorUIResource(new Color(0, 0,
-				0, 97)));
-		table.put("Common.contourSmoother", new PlastikColorUIResource(
-				new Color(0, 0, 0, 49)));
-		table.put("Common.contourDisabled", new PlastikColorUIResource(
-				new Color(0, 0, 0, 69)));
-		table.put("Common.contourDisabledSmoother", new PlastikColorUIResource(
-				new Color(0, 0, 0, 31)));
-		table.put("Common.innerContour", new PlastikColorUIResource(new Color(
-				0, 0, 0, 204)));
-		table.put("Common.innerContourSmoother", new PlastikColorUIResource(
-				new Color(0, 0, 0, 102)));
-		table.put("Common.innerContourPressed", new PlastikColorUIResource(
-				new Color(0, 0, 0, 114)));
-		table.put("Common.innerContourPressedSmoother",
-				new PlastikColorUIResource(new Color(0, 0, 0, 81)));
-		table.put("Common.highlight", new PlastikColorUIResource(new Color(103,
-				141, 178, 170)));
-		table.put("Common.highlightSmoother", new PlastikColorUIResource(
-				new Color(103, 141, 178, 100)));
-		table.put("Common.focus", new ColorUIResource(Color.BLACK));
+		// common
+		table.put("Common.background", new ColorUIResource(new Color(239, 239, 239)));
+        table.put("Common.border", new PlastikBorder());
+		table.put("Common.contour", new PlastikColorUIResource(new Color(0, 0, 0, 97)));
+		table.put("Common.contourDisabled", new PlastikColorUIResource(new Color(0, 0, 0, 69)));
+		table.put("Common.contourDisabledSmoother", new PlastikColorUIResource(new Color(0, 0, 0, 31)));
+		table.put("Common.contourSmoother", new PlastikColorUIResource(new Color(0, 0, 0, 49)));
 		table.put("Common.disabledText", table.get("textInactiveText"));
-		table
-				.put("RadioButton.background", table
-						.getColor("Common.background"));
+		table.put("Common.focus", new ColorUIResource(Color.BLACK));
+		table.put("Common.font", new FontUIResource(new Font("Bitstream Vera Sans", Font.PLAIN, 14)));
+		table.put("Common.foreground", new ColorUIResource(Color.BLACK));
+		table.put("Common.highlight", new PlastikColorUIResource(new Color(103,	141, 178, 170)));
+		table.put("Common.highlightSmoother", new PlastikColorUIResource(new Color(103, 141, 178, 100)));
+		table.put("Common.innerContour", new PlastikColorUIResource(new Color(0, 0, 0, 204)));
+		table.put("Common.innerContourPressed", new PlastikColorUIResource(new Color(0, 0, 0, 114)));
+		table.put("Common.innerContourPressedSmoother",	new PlastikColorUIResource(new Color(0, 0, 0, 81)));
+		table.put("Common.innerContourSmoother", new PlastikColorUIResource(new Color(0, 0, 0, 102)));
+		
+		// button
 		table.put("Button.background", new PlastikColorUIResource(new Color(229, 231, 236)));
-		table.put("Label.background", table.getColor("Common.background"));
-		table.put("Panel.background", table.getColor("Common.background"));
-		table.put("ScrollPane.background", table.getColor("Common.background"));
-		table.put("Slider.background", table.getColor("Common.background"));
+		table.put("Button.border", new PlastikButtonBorder());
+		table.put("Button.font", table.getFont("Common.font"));
+		
+		// combobox
 		table.put("ComboBox.background", Color.WHITE);
-	    table.put("ComboBox.foreground", table.get("Common.foreground"));
+		table.put("ComboBox.border", null);
 		table.put("ComboBox.disabledBackground", table.get("Common.background"));
 	    table.put("ComboBox.disabledForeground",table.get("Common.disabledText"));
-	    table.put("ComboBox.selectionForeground", Color.WHITE );
+		table.put("ComboBox.font", table.getFont("Common.font"));
+	    table.put("ComboBox.foreground", table.get("Common.foreground"));
 	    table.put("ComboBox.selectionBackground", table.getColor("textHighlight") );
-	    table.put("TextField.disabledBackground", table.get("Common.background"));
+	    table.put("ComboBox.selectionForeground", Color.WHITE );
+
+		
+		// label
+		table.put("Label.font", table.getFont("Common.font"));
+		table.put("Label.background", table.getColor("Common.background"));
+		
+		// panel
+		table.put("Panel.background", table.getColor("Common.background"));
+		table.put("Panel.font", table.getFont("Common.font"));
+		
+		// radiobutton
+		table.put("RadioButton.background", table.getColor("Common.background"));
+		table.put("RadioButton.font", table.getFont("Common.font"));
+		
+		// scrollpane
+		table.put("ScrollPane.background", table.getColor("Common.background"));
+		table.put("ScrollPane.border", new PlastikScrollPaneBorder());
+		
+		// slider
+		table.put("Slider.background", table.getColor("Common.background"));
+		
+		// tabbedpane
+		table.put("TabbedPane.font", table.getFont("Common.font"));
+		
+		// textarea
+		table.put("TextArea.border", new PlastikTextComponentBorder());
+		table.put("TextArea.font", table.getFont("Common.font"));
+		
+		// textfield
+		table.put("TextField.background", new ColorUIResource(Color.WHITE));
+		table.put("TextField.border", new PlastikTextComponentBorder());
+		table.put("TextField.disabledBackground", table.get("Common.background"));
+		table.put("TextField.font", table.getFont("Common.font"));
+
+		// tooltip
+		table.put("ToolTip.font", table.getFont("Common.font"));
+		
 	    
 	    //table.put("Spinner.editorBorderPainted", new Boolean(true));
-
 		// TODO farben für die ganzen gradienten handeln
 	}
 
@@ -253,5 +259,15 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 
 	public static void setDefaultOpacity(boolean defaultOpacity) {
 		PlastikLookAndFeel.defaultOpacity = defaultOpacity;
+	} 
+	
+	private static boolean rolloverEnabled = false;
+
+	public static boolean isRolloverEnabled() {
+		return rolloverEnabled;
+	}
+
+	public static void setRolloverEnabled(boolean rolloverEnabled) {
+		PlastikLookAndFeel.rolloverEnabled = rolloverEnabled;
 	}
 }

@@ -84,9 +84,9 @@ public class PlastikButtonUI extends BasicButtonUI {
 			b.setOpaque(false);
 		}
 		
-//		if(PlastikLookAndFeel.isRolloverEnabled()) {
-//			b.setRolloverEnabled(true);
-//		}
+		if(PlastikLookAndFeel.isRolloverEnabled()) {
+			b.setRolloverEnabled(true);
+		}
 	}
 	
 	
