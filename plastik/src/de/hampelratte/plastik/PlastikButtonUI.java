@@ -114,54 +114,16 @@ public class PlastikButtonUI extends BasicButtonUI {
 //	}
 	
 	/**
-	 * Ich bastle hier mal einen Workaround mit dem man auch ohne das isOpaque() 
-	 * false liefert transparenzen darstellen kann. Momentan ist die Performance
-	 * aber alles andere als gut. Dies kann man aber sicherlich mit einem 
-	 * entsprechenden Cache für die erzeugten BufferedImages beheben.
-	 * 
+	 * Ich bastle hier einen Workaround mit dem man auch ohne das isOpaque() 
+	 * false liefert transparenzen darstellen kann. 
 	 */
-	private static Method method;
-	
-	static {
-		try {
-			method = JComponent.class.getDeclaredMethod("paintComponent", new Class[]{Graphics.class});
-			method.setAccessible(true);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-	
-	
 	public void update(Graphics g, JComponent c) {
 		AbstractButton button = (AbstractButton) c;
 		ButtonModel model = button.getModel();
 		
-		if (button.isOpaque()) {
-			Component parent = button.getParent();
-			Rectangle bounds = button.getBounds();
-			
-			if (parent instanceof JComponent) {
-				// Transparenz wird simmuliert indem die Parent-Komponente in 
-				// ein Image hineinzeichnet
-				JComponent jParent = (JComponent) parent;
-				BufferedImage img = PlastikImageCache.getCachedImage(c.getGraphicsConfiguration(), jParent.getWidth(), jParent.getHeight());
-				Graphics gg = img.getGraphics();
-				gg.setClip(bounds.x, bounds.y, bounds.width, bounds.height);
-				try {
-					method.invoke(jParent, new Object[]{gg});
-				} catch(Exception ex) {
-					ex.printStackTrace(); 
-				}
-				g.drawImage(img, 0, 0, bounds.width, bounds.height, bounds.x, bounds.y, bounds.x+bounds.width, bounds.y+bounds.height, null);				
-//				TransparencyTest.displayImage(img);
-			} else {
-				// Keine transparenz möglich, daher Hintergrund wenigstens 
-				// richtig einfärben.
-				g.setColor(parent.getBackground());
-				g.fillRect(0, 0, bounds.width, bounds.height);
-				MyUpdate(g,c);
-			}		
-		}
+		// Ein Hack um Transparenzen zu ermöglichen.
+		PlastikUtils.drawTransparentBackground(g, c);
+
 		// Zeichnen, um die Transparenz wurde sich schon gekümmert!
 		MyUpdate(g,c);
 		
