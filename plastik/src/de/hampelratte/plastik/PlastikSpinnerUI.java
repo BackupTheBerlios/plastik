@@ -3,6 +3,7 @@ package de.hampelratte.plastik;
 import java.awt.AWTEvent;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FocusTraversalPolicy;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
@@ -19,7 +20,6 @@ import java.util.Calendar;
 import java.util.Map;
 
 import javax.swing.AbstractAction;
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
@@ -40,7 +40,7 @@ import de.hampelratte.plastik.borders.PlastikSpinnerEditorBorder;
 
 //TODO rollover und focus highlight
 public class PlastikSpinnerUI extends BasicSpinnerUI implements
-		MouseWheelListener {
+		MouseListener, MouseWheelListener {
 
 	private JTextField editor;
 	
@@ -83,6 +83,8 @@ public class PlastikSpinnerUI extends BasicSpinnerUI implements
 
 	protected JComponent createEditor() {
 		editor = new JTextField();
+		editor.setOpaque(false);
+		editor.addMouseListener(this);
 		return editor;
 	}
 
@@ -101,6 +103,11 @@ public class PlastikSpinnerUI extends BasicSpinnerUI implements
 	protected void replaceEditor(JComponent oldEditor, JComponent newEditor) {
 		super.replaceEditor(oldEditor, newEditor);
 		newEditor.setBorder(new PlastikSpinnerEditorBorder(spinner));
+		newEditor.setOpaque(false);
+		newEditor.addMouseListener(this);
+		for(int i=0; i<newEditor.getComponentCount(); i++) {
+			newEditor.getComponent(i).addMouseListener(this);
+		}
 	}
 
 	public void mouseWheelMoved(MouseWheelEvent e) {
@@ -336,5 +343,39 @@ public class PlastikSpinnerUI extends BasicSpinnerUI implements
 
 	public JTextField getEditor() {
 		return editor;
+	}
+	
+	public Dimension getPreferredSize(JComponent c) {
+		return new Dimension(80,26);
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mouseEntered(MouseEvent e) {
+		getNextButton().getModel().setRollover(true);
+		getNextButton().repaint();
+		getPreviousButton().getModel().setRollover(true);
+		getPreviousButton().repaint();
+	}
+
+	public void mouseExited(MouseEvent e) {
+		getNextButton().getModel().setRollover(false);
+		getNextButton().repaint();
+		getPreviousButton().getModel().setRollover(false);
+		getPreviousButton().repaint();
+		
+	}
+
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

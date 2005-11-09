@@ -32,6 +32,11 @@ public class PlastikSpinnerButtonBorder extends AbstractBorder implements
 
 	private Color contourSmoother = UIManager
 			.getColor("Common.contourSmoother");
+	
+	private Color highlight = UIManager.getColor("Common.highlight");
+
+	private Color highlightSmoother = UIManager
+			.getColor("Common.highlightSmoother");
 
 	public PlastikSpinnerButtonBorder(int position,
 			PlastikSpinnerButton button, PlastikSpinnerUI spinnerUI,
@@ -75,6 +80,18 @@ public class PlastikSpinnerButtonBorder extends AbstractBorder implements
 				g.setColor(contourSmoother);
 				g.drawLine(width - 2, 0, width - 2, 0);
 				g.drawLine(width - 1, 1, width - 1, 1);
+				
+				if (button.isEnabled() && !button.getModel().isPressed()
+						&& button.isRolloverEnabled() && button.getModel().isRollover()) {
+					g.setColor(highlight);
+					g.drawLine(1,1,width-3,1); // top
+					g.drawLine(1,2,1,height-2); // left
+					g.drawLine(width-2,2,width-2, height-2); // right
+					g.setColor(highlightSmoother);
+					g.drawLine(2,2,width-3,2); // top
+					g.drawLine(2,3,2,height-2); // left
+					g.drawLine(width-3,3,width-3, height-2); // right
+				}
 			} else {
 				{ // draw background
 					g.setColor(background);
@@ -98,6 +115,18 @@ public class PlastikSpinnerButtonBorder extends AbstractBorder implements
 				g.setColor(contourSmoother);
 				g.drawLine(1, 0, 1, 0);
 				g.drawLine(0, 1, 0, 1);
+				
+				if (button.isEnabled() && !button.getModel().isPressed()
+						&& button.isRolloverEnabled() && button.getModel().isRollover()) {
+					g.setColor(highlight);
+					g.drawLine(2,1,width-2,1); // top
+					g.drawLine(1,2,1,height-2); // left
+					g.drawLine(width-2,2,width-2, height-2); // right
+					g.setColor(highlightSmoother);
+					g.drawLine(2,2,width-3,2); // top
+					g.drawLine(2,3,2,height-2); // left
+					g.drawLine(width-3,3,width-3, height-2); // right
+				}
 			}
 			break;
 		case SwingConstants.SOUTH:
@@ -124,6 +153,18 @@ public class PlastikSpinnerButtonBorder extends AbstractBorder implements
 				g.setColor(contourSmoother);
 				g.drawLine(width - 2, height - 1, width - 2, height - 1);
 				g.drawLine(width - 1, height - 2, width - 1, height - 2);
+				
+				if (button.isEnabled() && !button.getModel().isPressed()
+						&& button.isRolloverEnabled() && button.getModel().isRollover()) {
+					g.setColor(highlight);
+					g.drawLine(1,height-2,width-3,height-2); // bottom
+					g.drawLine(1,1,1,height-3); // left
+					g.drawLine(width-2,1,width-2, height-3); // right
+					g.setColor(highlightSmoother);
+					g.drawLine(3,height-3,width-4,height-3); // bottom
+					g.drawLine(2,1,2,height-3); // left
+					g.drawLine(width-3,1,width-3, height-3); // right
+				}
 			} else {
 				{ // draw background
 					g.setColor(background);
@@ -147,16 +188,26 @@ public class PlastikSpinnerButtonBorder extends AbstractBorder implements
 				g.setColor(contourSmoother);
 				g.drawLine(1, height - 1, 1, height - 1);
 				g.drawLine(0, height - 2, 0, height - 2);
+				
+				if (button.isEnabled() && !button.getModel().isPressed()
+						&& button.isRolloverEnabled() && button.getModel().isRollover()) {
+					g.setColor(highlight);
+					g.drawLine(2,height-2,width-2,height-2); // bottom
+					g.drawLine(1,1,1,height-3); // left
+					g.drawLine(width-2,1,width-2, height-3); // right
+					g.setColor(highlightSmoother);
+					g.drawLine(3,height-3,width-4,height-3); // bottom
+					g.drawLine(2,1,2,height-3); // left
+					g.drawLine(width-3,1,width-3, height-3); // right
+				}
 			}
 			break;
 		default:
 			break;
 		}
 
-		// paint rollover highlight
-		if (button.isEnabled() && !button.getModel().isPressed()
-				&& button.isRolloverEnabled() && button.getModel().isRollover()) {
-		}
+		// TODO paint rollover highlight
+		
 
 		g.translate(-x, -y);
 	}

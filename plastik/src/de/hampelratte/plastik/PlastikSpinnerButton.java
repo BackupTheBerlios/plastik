@@ -3,6 +3,8 @@ package de.hampelratte.plastik;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JSpinner;
@@ -12,7 +14,7 @@ import javax.swing.UIManager;
 import de.hampelratte.plastik.borders.PlastikSpinnerButtonBorder;
 
 //FIXME button wird beim ersten drücken zu hell (wie disabled)
-public class PlastikSpinnerButton extends JButton {
+public class PlastikSpinnerButton extends JButton implements MouseListener {
 
 	private int orientation = 0;
 
@@ -22,13 +24,17 @@ public class PlastikSpinnerButton extends JButton {
 
 	private Color innerContourPressed = UIManager
 			.getColor("Common.innerContourPressed");
+	
+	private PlastikSpinnerUI spinnerUI;
 
 	public PlastikSpinnerButton(int orientation, PlastikSpinnerUI spinnerUI, JSpinner spinner) {
 		this.orientation = orientation;
+		this.spinnerUI = spinnerUI;
 		this.setBorder(new PlastikSpinnerButtonBorder(orientation, this,
 						spinnerUI, spinner));
 		this.setPreferredSize(new Dimension(17, 13));
 		this.setRolloverEnabled(true);
+		this.addMouseListener(this);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -59,5 +65,32 @@ public class PlastikSpinnerButton extends JButton {
 						- line);
 			}
 		}
+	}
+
+
+	public void mouseEntered(MouseEvent e) {
+		spinnerUI.getPreviousButton().getModel().setRollover(true);
+		spinnerUI.getPreviousButton().repaint();
+		spinnerUI.getNextButton().getModel().setRollover(true);
+		spinnerUI.getNextButton().repaint();
+	}
+
+	public void mouseExited(MouseEvent e) {
+		spinnerUI.getPreviousButton().getModel().setRollover(false);
+		spinnerUI.getPreviousButton().repaint();
+		spinnerUI.getNextButton().getModel().setRollover(false);
+		spinnerUI.getNextButton().repaint();
+	}
+
+	public void mousePressed(MouseEvent e) {
+		
+	}
+
+	public void mouseReleased(MouseEvent e) {
+		
+	}
+	
+	public void mouseClicked(MouseEvent e) {
+		
 	}
 }
