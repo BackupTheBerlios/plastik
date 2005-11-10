@@ -24,10 +24,4 @@ public interface PlastikIconTheme {
 	public ImageIcon getDirectoryIcon();
 	public ImageIcon getFileIcon();
 	public ImageIcon getHardDriveIcon();
-	
-//	public ImageIcon loadImage(Class cl, String name) {
-//        URL url = cl.getResource(name);
-//        return new ImageIcon(url);
-//    }
-	
 }

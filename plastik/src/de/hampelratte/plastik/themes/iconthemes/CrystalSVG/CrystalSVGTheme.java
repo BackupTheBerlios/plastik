@@ -2,10 +2,9 @@ package de.hampelratte.plastik.themes.iconthemes.CrystalSVG;
 
 import javax.swing.ImageIcon;
 
-import de.hampelratte.plastik.PlastikIconTheme;
-import de.hampelratte.plastik.themes.Plastik.Plastik;
+import de.hampelratte.plastik.theme.AbstractIconTheme;
 
-public class CrystalSVGTheme extends PlastikIconTheme {
+public class CrystalSVGTheme extends AbstractIconTheme {
 
 	public ImageIcon getInfoIcon() {
 		return loadImage(this.getClass(), "icons/info.png");
