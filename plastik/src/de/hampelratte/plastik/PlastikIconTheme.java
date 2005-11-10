@@ -9,28 +9,28 @@ import javax.swing.ImageIcon;
  * Loads the icons used by swing.
  * Should be able to load icon sets from jars.
  */
-public abstract class PlastikIconTheme {
+public interface PlastikIconTheme {
 	
 	// TODO es fehlen noch icons
 	
-	abstract public ImageIcon getInfoIcon();
-	abstract public ImageIcon getWarningIcon();
-	abstract public ImageIcon getQuestionIcon();
-	abstract public ImageIcon getErrorIcon();
-	abstract public ImageIcon getDetailsViewIcon();
-	abstract public ImageIcon getListViewIcon();
-	abstract public ImageIcon getHomeFolderIcon();
-	abstract public ImageIcon getUpFolderIcon();
-	abstract public ImageIcon getNewFolderIcon();
-	abstract public ImageIcon getFloppyIcon();
-	abstract public ImageIcon getComputerIcon();
-	abstract public ImageIcon getDirectoryIcon();
-	abstract public ImageIcon getFileIcon();
-	abstract public ImageIcon getHardDriveIcon();
+	public ImageIcon getInfoIcon();
+	public ImageIcon getWarningIcon();
+	public ImageIcon getQuestionIcon();
+	public ImageIcon getErrorIcon();
+	public ImageIcon getDetailsViewIcon();
+	public ImageIcon getListViewIcon();
+	public ImageIcon getHomeFolderIcon();
+	public ImageIcon getUpFolderIcon();
+	public ImageIcon getNewFolderIcon();
+	public ImageIcon getFloppyIcon();
+	public ImageIcon getComputerIcon();
+	public ImageIcon getDirectoryIcon();
+	public ImageIcon getFileIcon();
+	public ImageIcon getHardDriveIcon();
 	
-	public ImageIcon loadImage(Class cl, String name) {
-        URL url = cl.getResource(name);
-        return new ImageIcon(url);
-    }
+//	public ImageIcon loadImage(Class cl, String name) {
+//        URL url = cl.getResource(name);
+//        return new ImageIcon(url);
+//    }
 	
 }

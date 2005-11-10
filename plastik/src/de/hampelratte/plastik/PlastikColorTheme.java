@@ -1,5 +1,5 @@
 package de.hampelratte.plastik;
 
-public class PlastikColorTheme {
+public interface PlastikColorTheme {
 
 }

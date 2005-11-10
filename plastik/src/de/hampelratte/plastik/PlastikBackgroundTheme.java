@@ -1,5 +1,5 @@
 package de.hampelratte.plastik;
 
-public class PlastikBackgroundTheme {
+public interface PlastikBackgroundTheme {
 
 }
