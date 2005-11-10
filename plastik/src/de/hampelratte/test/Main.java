@@ -2,7 +2,8 @@ package de.hampelratte.test;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,6 +12,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
@@ -25,6 +27,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import de.hampelratte.plastik.PlastikLookAndFeel;
+import de.hampelratte.plastik.theme.DefaultPlastikTheme;
 
 public class Main {
 
@@ -50,46 +53,65 @@ public class Main {
 	
 	private static JLabel label;
 	
+	private static JButton button;
+	
+	private static JButton button2;
+	
 	public static void main(String[] args) {
 		try {
 			PlastikLookAndFeel.setTextAntialiasing(true);
-			UIManager.setLookAndFeel(new PlastikLookAndFeel());
+			PlastikLookAndFeel.setDefaultOpacity(false);
+			PlastikLookAndFeel.setRolloverEnabled(true);
+			PlastikLookAndFeel laf = new PlastikLookAndFeel();
+			laf.setTheme(new DefaultPlastikTheme());
+			UIManager.setLookAndFeel(laf);
+			
+//			UIDefaults defaults = UIManager.getDefaults();
+//			Enumeration enumeration = defaults.keys();
+//			while (enumeration.hasMoreElements()) {
+//				Object elem = enumeration.nextElement();
+//				System.out.println(elem + " = " + defaults.get(elem));
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.GRAY);
+		panel.setBackground(Color.GREEN);
+
+		//JOptionPane.showMessageDialog(frame, "huhu", "plain", JOptionPane.PLAIN_MESSAGE);
+		//JOptionPane.showMessageDialog(frame, "huhu", "question", JOptionPane.QUESTION_MESSAGE);
+		//JOptionPane.showMessageDialog(frame, "huhu", "info", JOptionPane.INFORMATION_MESSAGE);
+		//JOptionPane.showMessageDialog(frame, "huhu", "error", JOptionPane.ERROR_MESSAGE);
+		//JOptionPane.showMessageDialog(frame, "huhu", "warn", JOptionPane.WARNING_MESSAGE);
 		
-		JButton button = new JButton("Hallo Welt!");
-		button.setBounds(10, 10, 100, 25);
+		button = new JButton("Hallo Welt!");
 		button.setToolTipText("was geht ab?");
 		panel.add(button);
+		
+		button2 = new JButton("Hallo Welt!");
+		button2.setToolTipText("was geht ab?");
+		panel.add(button2);
 		
 		//JFileChooser fc = new JFileChooser();
 		//fc.showOpenDialog(frame);
 		
 		label = new JLabel("Was geht denn hier ab?");
-		label.setBounds(10, 50, 200, 25);
 		panel.add(label);
 
 		radiobutton = new JRadioButton("radiobutton");
 		radiobutton.setToolTipText("hallo kinder");
-		radiobutton.setBounds(10, 220, 100, 25);
 		panel.add(radiobutton);
 
 		checkbox = new JCheckBox("checkbox");
-		checkbox.setBounds(10, 250, 100, 25);
 		panel.add(checkbox);
 		
 		scrollb = new JScrollBar(SwingConstants.VERTICAL);
-		scrollb.setBounds(10,100,UIManager.getInt("ScrollBar.width"),100);
 		panel.add(scrollb);
 
 		slider = new JSlider(0, 100);
 		slider.setValue(50);
-		slider.setBounds(200, 10, 150, 50);
 		slider.setPaintTicks(true);
 		slider.setMinorTickSpacing(10);
 		slider.setMajorTickSpacing(50);
@@ -98,43 +120,40 @@ public class Main {
 		
 		String[] items = {"hollaradiohiäoiuaasdasdasdasd","was","geht","ab","a1b","2ab","a3b","a4b","a5b","ab6","a7b","a8b","9ab","a0b"};
 		combo = new JComboBox(items);
-		combo.setBounds(400, 10, 150, 24);
 		//combo.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		combo.setEditable(true);
 		panel.add(combo);
 
 		textfield = new JTextField("zackbumm");
-		textfield.setBounds(200, 70, 150, 25);
 		panel.add(textfield);
 		
 		spinner = new JSpinner();
-		spinner.setBounds(400,70, 100, 25);
 		spinner.setModel(new SpinnerNumberModel(50,0,100,1));
 		//spinner.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		panel.add(spinner);
 		
 		textarea = new JTextArea(text);
 		scrollpane = new JScrollPane(textarea);
-		scrollpane.setBounds(200,150, 200,200);
+		scrollpane.setPreferredSize(new Dimension(200,200));
+		scrollpane.setOpaque(false);
 		panel.add(scrollpane);
-		//textarea.setBounds(200,150, 200,200);
 		//panel.add(textarea);
 		
 		tabbedPane = new JTabbedPane();
+		tabbedPane.setPreferredSize(new Dimension(400,200));
 		tabbedPane.addTab("wasgehtab",new JPanel());
 		tabbedPane.addTab("wasgehtab",new JPanel());
 		tabbedPane.addTab("wasgehtab",new JPanel());
-		tabbedPane.setBounds(450,150,300,200);
 		panel.add(tabbedPane);
 		
-		panel.setLayout(null);
-		panel.setBounds(0, 0, 800, 600);
+		panel.setLayout(new FlowLayout());
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 
 		frame.setSize(800, 600);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -147,9 +166,11 @@ public class Main {
 				combo.setEditable(!combo.isEditable());
 				spinner.setEnabled(!spinner.isEnabled());
 				label.setEnabled(!label.isEnabled());
+				button2.setEnabled(!button2.isEnabled());
 			}
 		});
 	}
+	
 	
 	private static String text = "bla bla bla bla bla bla bla bla bla bla bla\n"
 		+ "bla bla bla bla bla bla bla bla bla bla bla\n"
