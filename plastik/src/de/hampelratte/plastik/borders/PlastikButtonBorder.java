@@ -10,33 +10,48 @@ import javax.swing.ButtonModel;
 import javax.swing.UIManager;
 import javax.swing.plaf.UIResource;
 
+import de.hampelratte.plastik.PlastikUtils;
+
 public class PlastikButtonBorder extends PlastikBorder implements UIResource {
 
 	public void paintBorder(Component c, Graphics g, int x, int y, int width,
 			int height) {
 		super.paintBorder(c, g, x, y, width, height);
+		
+		AbstractButton b = (AbstractButton) c;
+		ButtonModel model = b.getModel();
 
 		Color highlightColor = UIManager.getColor("Common.highlight");
 		Color highlightSmoother = UIManager
 				.getColor("Common.highlightSmoother");
-		Color background = UIManager.getColor("Common.background");
+		Color background = b.getBackground();
 		Color top;
 		Color bottom;
-		AbstractButton b = (AbstractButton) c;
-		ButtonModel model = b.getModel();
 		g.translate(x,y);
 		
 		// draw 3d lines
-		// farben sind die gradienten vom button
-		if (!model.isEnabled()) {
-			top    = new Color(239, 239, 239);
-			bottom = new Color(233, 233, 233);
-		} else if (model.isArmed() && model.isPressed()) {
-			top    = new Color(203, 205, 209); // TODO ins LaF
-			bottom = new Color(213, 215, 219);
+		// farben sind die gradienten vom button // TODO ins LaF
+		if (background instanceof UIResource) {
+			if (!model.isEnabled()) {
+				top    = new Color(239, 239, 239);
+				bottom = new Color(233, 233, 233);
+			} else if (model.isArmed() && model.isPressed()) {
+				top    = new Color(203, 205, 209);
+				bottom = new Color(213, 215, 219);
+			} else {
+				top    = new Color(233, 235, 239);
+				bottom = new Color(213, 215, 219);
+			}
 		} else {
-			top    = new Color(233, 235, 239);
-			bottom = new Color(213, 215, 219);
+			// TODO calculate corresponding colors
+			if (!model.isEnabled()) {
+				top    = background;
+				bottom = background;
+			} else {
+				top    = background;
+				int rgb = PlastikUtils.computeAdjustedColor(background.getRGB(), -25);
+				bottom = new Color(rgb);
+			}
 		}
 		
 		g.setColor(top); // lighter line  

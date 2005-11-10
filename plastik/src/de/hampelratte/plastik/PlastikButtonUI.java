@@ -203,8 +203,14 @@ public class PlastikButtonUI extends BasicButtonUI {
 				}
 			} else {
 				// TODO calculate corresponding colors
-				top    = Color.RED;
-				bottom = Color.BLUE;
+				if (!model.isEnabled()) {
+					top    = background;
+					bottom = background;
+				} else {
+					top    = background;
+					int rgb = PlastikUtils.computeAdjustedColor(background.getRGB(), -25);
+					bottom = new Color(rgb);
+				}
 			}
 			// TODO be carefull with the edges..
 			Gradients.drawBoxGradient(g, viewRect, top, bottom);
