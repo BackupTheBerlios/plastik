@@ -1,8 +1,12 @@
 package de.hampelratte.plastik.themes.iconthemes.CrystalSVG;
 
 import javax.swing.ImageIcon;
-
 import de.hampelratte.plastik.theme.AbstractIconTheme;
+
+
+// TODO Class should be renamed to DefaultPlastikIconTheme 
+// and moved to de.hampelratte.plastik.theme
+// it should also be inherited from AbstractPlastikIconTheme
 
 public class CrystalSVGTheme extends AbstractIconTheme {
 
