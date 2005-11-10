@@ -18,7 +18,8 @@ public class PlastikBorder extends AbstractBorder implements UIResource {
 		Color background = UIManager.getColor("Common.background");
 
 		g.translate(x, y);
-
+		
+		/*
 		{ // draw background
 			g.setColor(background);
 			g.drawLine(1, 0, width - 2, 0); // top
@@ -30,7 +31,7 @@ public class PlastikBorder extends AbstractBorder implements UIResource {
 			g.drawLine(1,height-2,1,height-2);
 			g.drawLine(width-2,1,width-2,1);
 			g.drawLine(width-2,height-2,width-2,height-2);
-		}
+		}*/
 
 		g.setColor(contour);
 		// horizontal

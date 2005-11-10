@@ -23,19 +23,13 @@ public class PlastikButtonBorder extends PlastikBorder implements UIResource {
 		AbstractButton b = (AbstractButton) c;
 		g.translate(x,y);
 		
-		// draw background
-		if(b.isEnabled() && !b.getModel().isPressed()) { 
-			g.setColor(background);
-			g.drawLine(2, 1, width - 3, 1); // top
-			g.drawLine(2, height - 2, width - 3, height - 2); // bottom
-			g.drawLine(1, 2, 1, height - 3); // left
-			g.drawLine(width-2, 2, width-2, height - 3); // right
-		}
-		
-		// draw dark 3d lines over the bright 3d lines, if the button is pressed
+		// draw 3d lines
 		if (b.isEnabled() && !b.getModel().isPressed()) {
-			g.setColor(new Color(195, 195, 201)); // darker lines TODO ins
-			// laf
+			// TODO farben ins laf
+			g.setColor(new Color(245, 245, 245)); // lighter line  
+			g.drawLine(2,1,width-3,1);
+			g.drawLine(1,2,1,height-3);
+			g.setColor(new Color(195, 195, 201)); // darker lines 
 			g.drawLine(2, height - 2, width - 3, height - 2);
 			g.drawLine(width-2, 2, width-2, height - 3);
 		}
@@ -54,8 +48,6 @@ public class PlastikButtonBorder extends PlastikBorder implements UIResource {
 		g.translate(-x,-y);
 	}
 	
-	// FIXME normal soll er einen border mit 3D effect haben, gedrückt und
-	// disabled nur den standard PlastikBorder. das funzt aber irgendwie noch nicht
 	public Insets getBorderInsets(Component c, Insets insets) {
 		AbstractButton b = (AbstractButton) c;
 		if(b.getModel().isPressed() || !b.isEnabled()) {
