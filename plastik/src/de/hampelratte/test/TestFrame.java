@@ -20,7 +20,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import de.hampelratte.plastik.PlastikLookAndFeel;
-import de.hampelratte.plastik.themes.Plastik.Plastik;
+import de.hampelratte.plastik.theme.DefaultPlastikTheme;
 
 /**
  * Dieser Test soll das Verhalten beim Umschalten der UI aufzeigen.
@@ -139,7 +139,7 @@ public class TestFrame extends JFrame {
 					PlastikLookAndFeel.setDefaultOpacity(false);
 					PlastikLookAndFeel.setRolloverEnabled(true);
 					PlastikLookAndFeel laf = new PlastikLookAndFeel();
-					laf.setTheme(new Plastik());
+					laf.setTheme(new DefaultPlastikTheme());
 					changeLookTo(laf);
 				}
 			};
