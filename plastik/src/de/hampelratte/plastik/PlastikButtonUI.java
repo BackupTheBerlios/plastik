@@ -1,25 +1,26 @@
 package de.hampelratte.plastik;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.lang.reflect.Method;
-
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicButtonUI;
+import javax.swing.plaf.basic.BasicHTML;
+import javax.swing.text.View;
 
 //TODO text beim drücken verschieben
 public class PlastikButtonUI extends BasicButtonUI {
@@ -125,60 +126,100 @@ public class PlastikButtonUI extends BasicButtonUI {
 		PlastikUtils.drawTransparentBackground(g, c);
 
 		// Zeichnen, um die Transparenz wurde sich schon gekümmert!
-		MyUpdate(g,c);
+//		MyUpdate(g,c);
+		paint(g, c);
 		
 	}
 	
+	private static Rectangle viewRect = new Rectangle();
+    private static Rectangle textRect = new Rectangle();
+    private static Rectangle iconRect = new Rectangle();
 	
-	public void MyUpdate(Graphics g, JComponent c) {
-		AbstractButton button = (AbstractButton) c;
-		ButtonModel model = button.getModel();
+	public void paint(Graphics g, JComponent c) {
+		AbstractButton b     = (AbstractButton) c;
+        ButtonModel    model = b.getModel();
+        FontMetrics    fm    = g.getFontMetrics();
+        Insets         i     = c.getInsets();
+        Font           f     = c.getFont();
+
+        viewRect.x      = i.left;
+        viewRect.y      = i.top;
+        viewRect.width  = b.getWidth()  - (i.right  + viewRect.x);
+        viewRect.height = b.getHeight() - (i.bottom + viewRect.y);
+
+        textRect.x = textRect.y = textRect.width = textRect.height = 0;
+        iconRect.x = iconRect.y = iconRect.width = iconRect.height = 0;
 		
-		// draw background
-		Rectangle rect = c.getVisibleRect();
-		Insets i = c.getInsets();
-		rect.x = i.left;
-		rect.y = i.top;
-		rect.width = c.getWidth() - (i.right + rect.x);
-		rect.height = c.getHeight() - (i.bottom + rect.y);
-		/*
-		g.setColor(c.getBackground());
-		g.setColor(Color.GREEN);
-		System.out.println(rect);
-		g.fillRect(rect.x, rect.y, rect.width, rect.height);
-		*/
+		 // layout the text and icon
+        String text = SwingUtilities.layoutCompoundLabel(
+			c, fm, b.getText(), b.getIcon(), 
+			b.getVerticalAlignment(), b.getHorizontalAlignment(),
+			b.getVerticalTextPosition(), b.getHorizontalTextPosition(),
+			viewRect, iconRect, textRect, 
+			b.getText() == null ? 0 : b.getIconTextGap()
+		);
 		
-		if (button.isEnabled()) {
-			// draw gradient
-			if (!model.isPressed()) {
-				Color lightGray = new Color(229, 231, 236); // TODO ins laf
-				Color darkGray = new Color(206, 207, 213);
-				Gradients.drawBoxGradient(g, rect, lightGray, darkGray);
+		// painting background
+		paintBackground(g, b, model);
+		
+		// painting icon 
+        if (b.getIcon() != null)
+			paintIcon(g, c, iconRect);
+		
+		// painting text
+		if (text != null && !text.equals("")) {
+			
+			Graphics2D g2d = (Graphics2D) g;
+			
+			// storing original anitalising flag
+			Object state = null;
+			if (PlastikLookAndFeel.isTextAntialiasing()) {
+				state = g2d.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
+				if (state != RenderingHints.VALUE_TEXT_ANTIALIAS_ON) {
+					g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+				}
 			}
-		} else {
-			Graphics2D g2 = (Graphics2D) g;
-			g2.setColor(c.getBackground());
-			g2.fillRect(rect.x, rect.y, rect.width, rect.height);
+			
+			View v = (View) c.getClientProperty(BasicHTML.propertyKey);
+			if (v != null) {
+				v.paint(g, textRect);
+			} else {
+				paintText(g, b, textRect, text);
+			}
+			
+			// restoring antialising flag
+			if (state != null) {
+				g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, state);
+			}
 		}
 		
-		if(PlastikLookAndFeel.isTextAntialiasing()) {
-			Graphics2D g2d = (Graphics2D)g;
-			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-					RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		}
-		super.paint(g, c);
+        // painting focus
+        if (b.isFocusPainted() && b.hasFocus()) {
+            paintFocus(g,b,viewRect,textRect,iconRect);
+        }
 	}
 	
-	protected void paintButtonPressed(Graphics g, AbstractButton b) {
-		Rectangle rect = b.getVisibleRect();
-		Insets i = b.getInsets();
-		rect.x = i.left;
-		rect.y = i.top;
-		rect.width = b.getWidth() - (i.right + rect.x);
-		rect.height = b.getHeight() - (i.bottom + rect.y);
-		Color color1 = new Color(182, 185, 189);
-		Color color2 = new Color(189, 191, 195);
-		Gradients.drawBoxGradient(g, rect, color1, color2);
+	protected void paintBackground(Graphics g, AbstractButton b, ButtonModel model) {
+		if (b.isContentAreaFilled()) {
+			Color background = b.getBackground();
+			Color top    = null;
+			Color bottom = null;
+			if (background instanceof UIResource) {
+				if (model.isArmed() && model.isPressed()) {
+					top    = new Color(203, 205, 209); // TODO ins LaF
+					bottom = new Color(213, 215, 219);
+				} else {
+					top    = new Color(233, 235, 239);
+					bottom = new Color(213, 215, 219);
+				}
+			} else {
+				// TODO calculate corresponding colors
+				top    = Color.RED;
+				bottom = Color.BLUE;
+			}
+			// TODO be carefull with the edges..
+			Gradients.drawBoxGradient(g, viewRect, top, bottom);
+		}
 	}
 	
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect,
