@@ -19,6 +19,7 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicButtonUI;
+import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.text.View;
 
@@ -205,7 +206,10 @@ public class PlastikButtonUI extends BasicButtonUI {
 			Color top    = null;
 			Color bottom = null;
 			if (background instanceof UIResource) {
-				if (model.isArmed() && model.isPressed()) {
+				if (!model.isEnabled()) {
+					top    = new Color(239, 239, 239);
+					bottom = new Color(233, 233, 233);
+				} else if (model.isArmed() && model.isPressed()) {
 					top    = new Color(203, 205, 209); // TODO ins LaF
 					bottom = new Color(213, 215, 219);
 				} else {
@@ -221,6 +225,22 @@ public class PlastikButtonUI extends BasicButtonUI {
 			Gradients.drawBoxGradient(g, viewRect, top, bottom);
 		}
 	}
+	
+	protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
+        ButtonModel model = b.getModel();
+        FontMetrics fm    = g.getFontMetrics();
+        int mnemonicIndex = b.getDisplayedMnemonicIndex();
+
+		if (model.isEnabled()) {
+			g.setColor(b.getForeground());
+			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x, textRect.y + fm.getAscent());
+		} else {
+			g.setColor(new Color(255,255,255));
+			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + 1, textRect.y + fm.getAscent() + 1);
+			g.setColor(new Color(200,200,200));
+			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x, textRect.y + fm.getAscent());
+		}
+    }
 	
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect,
 			Rectangle textRect, Rectangle iconRect) {
