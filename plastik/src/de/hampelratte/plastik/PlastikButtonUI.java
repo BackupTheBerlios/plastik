@@ -23,7 +23,6 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.text.View;
 
-//TODO text beim drücken verschieben
 public class PlastikButtonUI extends BasicButtonUI {
 	
 	private static final PlastikButtonUI BUTTON_UI = new PlastikButtonUI();
@@ -103,18 +102,6 @@ public class PlastikButtonUI extends BasicButtonUI {
 		defaultsInitialized = false;
 	}
 	
-//	class PlastikButtonListener extends BasicButtonListener {
-//
-//		public PlastikButtonListener(AbstractButton b) {
-//			super(b);
-//		}
-//
-//	}
-//	
-//	protected BasicButtonListener createButtonListener(AbstractButton b) {
-//		return new PlastikButtonListener(b);
-//	}
-	
 	/**
 	 * Ich bastle hier einen Workaround mit dem man auch ohne das isOpaque() 
 	 * false liefert transparenzen darstellen kann. 
@@ -127,9 +114,7 @@ public class PlastikButtonUI extends BasicButtonUI {
 		PlastikUtils.drawTransparentBackground(g, c);
 
 		// Zeichnen, um die Transparenz wurde sich schon gekümmert!
-//		MyUpdate(g,c);
 		paint(g, c);
-		
 	}
 	
 	private static Rectangle viewRect = new Rectangle();
@@ -230,15 +215,17 @@ public class PlastikButtonUI extends BasicButtonUI {
         ButtonModel model = b.getModel();
         FontMetrics fm    = g.getFontMetrics();
         int mnemonicIndex = b.getDisplayedMnemonicIndex();
+		
+		int textStep = (model.isArmed() && model.isPressed()) ? 1 : 0;
 
 		if (model.isEnabled()) {
 			g.setColor(b.getForeground());
-			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x, textRect.y + fm.getAscent());
+			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + textStep, textRect.y + fm.getAscent() + textStep);
 		} else {
 			g.setColor(new Color(255,255,255));
-			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + 1, textRect.y + fm.getAscent() + 1);
+			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + 1 + textStep, textRect.y + fm.getAscent() + 1 + textStep);
 			g.setColor(new Color(200,200,200));
-			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x, textRect.y + fm.getAscent());
+			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + textStep, textRect.y + fm.getAscent() + textStep);
 		}
     }
 	
