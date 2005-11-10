@@ -135,7 +135,7 @@ public class TestFrame extends JFrame {
 		if (choosePlastikAction == null) {
 			choosePlastikAction = new AbstractAction("Plastik LnF") {
 				public void actionPerformed(ActionEvent e) {
-					PlastikLookAndFeel.setTextAntialiasing(true);
+					PlastikLookAndFeel.setTextAntialiasing(false);
 					PlastikLookAndFeel.setDefaultOpacity(false);
 					PlastikLookAndFeel.setRolloverEnabled(true);
 					PlastikLookAndFeel laf = new PlastikLookAndFeel();
