@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Insets;
 
 import javax.swing.AbstractButton;
+import javax.swing.ButtonModel;
 import javax.swing.UIManager;
 import javax.swing.plaf.UIResource;
 
@@ -19,20 +20,32 @@ public class PlastikButtonBorder extends PlastikBorder implements UIResource {
 		Color highlightSmoother = UIManager
 				.getColor("Common.highlightSmoother");
 		Color background = UIManager.getColor("Common.background");
-
+		Color top;
+		Color bottom;
 		AbstractButton b = (AbstractButton) c;
+		ButtonModel model = b.getModel();
 		g.translate(x,y);
 		
 		// draw 3d lines
-		if (b.isEnabled() && !b.getModel().isPressed()) {
-			// TODO farben ins laf
-			g.setColor(new Color(245, 245, 245)); // lighter line  
-			g.drawLine(2,1,width-3,1);
-			g.drawLine(1,2,1,height-3);
-			g.setColor(new Color(195, 195, 201)); // darker lines 
-			g.drawLine(2, height - 2, width - 3, height - 2);
-			g.drawLine(width-2, 2, width-2, height - 3);
+		// farben sind die gradienten vom button
+		if (!model.isEnabled()) {
+			top    = new Color(239, 239, 239);
+			bottom = new Color(233, 233, 233);
+		} else if (model.isArmed() && model.isPressed()) {
+			top    = new Color(203, 205, 209); // TODO ins LaF
+			bottom = new Color(213, 215, 219);
+		} else {
+			top    = new Color(233, 235, 239);
+			bottom = new Color(213, 215, 219);
 		}
+		
+		g.setColor(top); // lighter line  
+		g.drawLine(2,1,width-3,1);
+		g.drawLine(1,2,1,height-3);
+		g.setColor(bottom); // darker lines 
+		g.drawLine(2, height - 2, width - 3, height - 2);
+		g.drawLine(width-2, 2, width-2, height - 3);
+		
 		
 		// draw highlight
 		if (b.isEnabled() && !b.getModel().isPressed() && b.isRolloverEnabled()
@@ -50,11 +63,12 @@ public class PlastikButtonBorder extends PlastikBorder implements UIResource {
 	
 	public Insets getBorderInsets(Component c, Insets insets) {
 		AbstractButton b = (AbstractButton) c;
-		if(b.getModel().isPressed() || !b.isEnabled()) {
+		insets.top = insets.left = insets.right = insets.bottom = 2;
+		/*if(b.getModel().isPressed() || !b.isEnabled()) {
 			insets.top = insets.left = insets.right = insets.bottom = 1;
 		} else {
 			insets.top = insets.left = insets.right = insets.bottom = 2;
-		}
+		}*/
 		return insets;
 	}
 }
