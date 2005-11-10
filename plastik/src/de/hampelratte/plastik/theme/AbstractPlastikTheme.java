@@ -1,13 +1,5 @@
 package de.hampelratte.plastik.theme;
 
-import de.hampelratte.plastik.PlastikAudioTheme;
-import de.hampelratte.plastik.PlastikBackgroundTheme;
-import de.hampelratte.plastik.PlastikBorderTheme;
-import de.hampelratte.plastik.PlastikColorTheme;
-import de.hampelratte.plastik.PlastikFontTheme;
-import de.hampelratte.plastik.PlastikIconTheme;
-import de.hampelratte.plastik.PlastikTheme;
-
 public class AbstractPlastikTheme implements PlastikTheme {
 	
 	protected PlastikAudioTheme      audioTheme;

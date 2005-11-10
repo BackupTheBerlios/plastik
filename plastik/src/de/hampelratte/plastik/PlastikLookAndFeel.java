@@ -13,6 +13,7 @@ import de.hampelratte.plastik.borders.PlastikBorder;
 import de.hampelratte.plastik.borders.PlastikButtonBorder;
 import de.hampelratte.plastik.borders.PlastikScrollPaneBorder;
 import de.hampelratte.plastik.borders.PlastikTextComponentBorder;
+import de.hampelratte.plastik.theme.PlastikTheme;
 
 
 /**

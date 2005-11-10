@@ -1,14 +1,5 @@
 package de.hampelratte.plastik.theme;
 
-import de.hampelratte.plastik.PlastikAudioTheme;
-import de.hampelratte.plastik.PlastikBackgroundTheme;
-import de.hampelratte.plastik.PlastikBorderTheme;
-import de.hampelratte.plastik.PlastikColorTheme;
-import de.hampelratte.plastik.PlastikFontTheme;
-import de.hampelratte.plastik.PlastikIconTheme;
-import de.hampelratte.plastik.PlastikTheme;
-import de.hampelratte.plastik.themes.iconthemes.CrystalSVG.CrystalSVGTheme;
-
 public class DefaultPlastikTheme extends AbstractPlastikTheme {
 	
 	public DefaultPlastikTheme() {
