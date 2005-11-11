@@ -235,22 +235,34 @@ public class PlastikButtonUI extends BasicButtonUI {
 		}
     }
 	
-	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect,
-			Rectangle textRect, Rectangle iconRect) {
+	private static Rectangle focusRect = new Rectangle();
+	
+	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
+		focusRect.setBounds(viewRect);
+		
+		focusRect.x += 1;
+		focusRect.y += 1;
+		focusRect.width  -= 3;
+		focusRect.height -= 3;
+		
+		// TODO use focus color instead of this fixed value
 		g.setColor(Color.BLACK);
-		Graphics2D g2 = (Graphics2D) g;
-		float[] dashes = { 0.2f };
+		Graphics2D g2d = (Graphics2D) g;
+		float[] dashes = { 1f, 1f };
 		BasicStroke stroke = new BasicStroke(1.0f, BasicStroke.CAP_BUTT,
 				BasicStroke.JOIN_MITER, 1.0f, dashes, 1.0f);
-		g2.setStroke(stroke);
-		g.drawRect(textRect.x - 2, textRect.y, textRect.width + 2,
-				textRect.height - 1);
+		g2d.setStroke(stroke);
+		g2d.drawRect(focusRect.x, focusRect.y, focusRect.width, focusRect.height);		
 	}
 	
 	public Dimension getPreferredSize(JComponent c) {
+		AbstractButton b = (AbstractButton) c;
+		String text = b.getText();
 		Dimension d = super.getPreferredSize(c);
-		d.height = d.height < 26 ? 26 : d.height;
-		d.width += 4;
+		if (text != null && !text.equals("") || b.getIcon() == null) {
+			d.height = d.height < 22 ? 26 : d.height+4;
+			d.width += 12;
+		}
 		return d;
 	}
 }
