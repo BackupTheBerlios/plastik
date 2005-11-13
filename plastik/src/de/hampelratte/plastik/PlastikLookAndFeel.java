@@ -1,5 +1,6 @@
 package de.hampelratte.plastik;
 
+import de.hampelratte.plastik.theme.DefaultPlastikTheme;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -38,7 +39,7 @@ import de.hampelratte.plastik.theme.PlastikTheme;
 public class PlastikLookAndFeel extends BasicLookAndFeel {
 	
 	/** The PlastikTheme used by the LookAndFeel */
-	private PlastikTheme theme = null;
+	private static PlastikTheme theme = null;
 		
 	/**
 	 * Creates a new <code>PlastikLookAndFeel</code> object.
@@ -117,8 +118,15 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 	
 	private static boolean textAntialiasing = false;
 	
-	public void setTheme(PlastikTheme theme) {
-		this.theme = theme;
+	public static void setTheme(PlastikTheme newTheme) {
+		theme = newTheme;
+	}
+	
+	public static PlastikTheme getTheme() {
+		if (theme == null) {
+			theme = new DefaultPlastikTheme();
+		}
+		return theme;
 	}
 
 	protected void initClassDefaults(UIDefaults table) {
