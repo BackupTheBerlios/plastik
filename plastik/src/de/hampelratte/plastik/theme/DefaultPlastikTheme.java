@@ -6,7 +6,7 @@ public class DefaultPlastikTheme extends AbstractPlastikTheme {
 //		setAudioTheme(new DefaultAudioTheme());
 //		setBackgroundTheme(new DefaultBackgroundTheme());
 //		setBorderTheme(new DefaultBorderTheme());
-//		setColorTheme(new DefaultColorTheme());
+		setColorTheme(new DefaultColorTheme());
 //		setFontTheme(new DefaultFontTheme());
 //		setIconTheme(new DefaultIconTheme());
 	}
