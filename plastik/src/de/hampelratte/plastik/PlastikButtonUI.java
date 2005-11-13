@@ -1,5 +1,6 @@
 package de.hampelratte.plastik;
 
+import de.hampelratte.plastik.theme.PlastikColorTheme;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -34,6 +35,11 @@ public class PlastikButtonUI extends BasicButtonUI {
 	private Font   defaultFont       = null;
 	private Border defaultBorder     = null;
 	private Insets defaultMargin     = null;
+	
+	private static Rectangle viewRect  = new Rectangle();
+    private static Rectangle textRect  = new Rectangle();
+    private static Rectangle iconRect  = new Rectangle();
+	private static Rectangle focusRect = new Rectangle();
 	
 	/**
 	 * Der Konstruktor ist protected, da er nur von Subklassen überschrieben
@@ -73,7 +79,7 @@ public class PlastikButtonUI extends BasicButtonUI {
 		Insets currentMargin     = b.getMargin();
 		
 		// Defaults welche durch diesen Test kommen, können später bedenkenlos
-		// wieder entfernt werden, ohne das es beim umschalten zwischen Themes
+		// wieder entfernt werden, ohne das es beim Umschalten zwischen Themes
 		// zu Problemen kommt.
 		if (currentForeground == null || currentForeground instanceof UIResource) b.setForeground(defaultForeground);
 		if (currentBackground == null || currentBackground instanceof UIResource) b.setBackground(defaultBackground);
@@ -116,11 +122,7 @@ public class PlastikButtonUI extends BasicButtonUI {
 		// Zeichnen, um die Transparenz wurde sich schon gekümmert!
 		paint(g, c);
 	}
-	
-	private static Rectangle viewRect = new Rectangle();
-    private static Rectangle textRect = new Rectangle();
-    private static Rectangle iconRect = new Rectangle();
-	
+		
 	public void paint(Graphics g, JComponent c) {
 		AbstractButton b     = (AbstractButton) c;
         ButtonModel    model = b.getModel();
@@ -188,6 +190,7 @@ public class PlastikButtonUI extends BasicButtonUI {
 	protected void paintBackground(Graphics g, AbstractButton b, ButtonModel model) {
 		if (b.isContentAreaFilled()) {
 			Color background = b.getBackground();
+			PlastikColorTheme theme = PlastikLookAndFeel.getTheme().getColorTheme();
 			Color top    = null;
 			Color bottom = null;
 			if (background instanceof UIResource) {
@@ -195,11 +198,15 @@ public class PlastikButtonUI extends BasicButtonUI {
 					top    = new Color(239, 239, 239);
 					bottom = new Color(233, 233, 233);
 				} else if (model.isArmed() && model.isPressed()) {
-					top    = new Color(203, 205, 209); // TODO ins LaF
-					bottom = new Color(213, 215, 219);
+					top    = theme.getButtonColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.NORMAL);
+					bottom = theme.getButtonColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.BRIGHTER);
+//					top    = new Color(203, 205, 209); // TODO ins LaF
+//					bottom = new Color(213, 215, 219);
 				} else {
-					top    = new Color(233, 235, 239);
-					bottom = new Color(213, 215, 219);
+					top    = theme.getButtonColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.BRIGHTER);
+					bottom = theme.getButtonColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.DARKER);
+//					top    = new Color(233, 235, 239);
+//					bottom = new Color(213, 215, 219);
 				}
 			} else {
 				// TODO calculate corresponding colors
@@ -234,9 +241,7 @@ public class PlastikButtonUI extends BasicButtonUI {
 			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + textStep, textRect.y + fm.getAscent() + textStep);
 		}
     }
-	
-	private static Rectangle focusRect = new Rectangle();
-	
+		
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
 		focusRect.setBounds(viewRect);
 		
