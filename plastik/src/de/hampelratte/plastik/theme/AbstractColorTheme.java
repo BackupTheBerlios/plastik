@@ -6,22 +6,66 @@ import java.awt.Color;
 
 public abstract class AbstractColorTheme implements PlastikColorTheme {
 	
-	private static final int INACTIVE = 5;
-	private static final int COLOR_COUNT = 22;
+	// active
+	protected int backgroundBrighter     =  20;
+	protected int backgroundBrighterMore =  40;
+	protected int backgroundDarker       = -20;
+	protected int backgroundDarkerMore   = -40;
 	
-	protected int brighter     =  20;
-	protected int brighterMore =  40;
-	protected int darker       = -20;
-	protected int darkerMore   = -40;
+	protected int foregroundBrighter     =  20;
+	protected int foregroundBrighterMore =  40;
+	protected int foregroundDarker       = -20;
+	protected int foregroundDarkerMore   = -40;
 	
-	protected int brighterInactive     =  20;
-	protected int brighterMoreInactive =  40;
-	protected int darkerInactive       = -20;
-	protected int darkerMoreInactive   = -40;
+	protected int borderBrighter         =  20;
+	protected int borderBrighterMore     =  40;
+	protected int borderDarker           = -20;
+	protected int borderDarkerMore       = -40;
 	
+	// inactive
+	protected int inactiveBackgroundBrighter     =  20;
+	protected int inactiveBackgroundBrighterMore =  40;
+	protected int inactiveBackgroundDarker       = -20;
+	protected int inactiveBackgroundDarkerMore   = -40;
+	
+	protected int inactiveForegroundBrighter     =  20;
+	protected int inactiveForegroundBrighterMore =  40;
+	protected int inactiveForegroundDarker       = -20;
+	protected int inactiveForegroundDarkerMore   = -40;
+	
+	protected int inactiveBorderBrighter         =  20;
+	protected int inactiveBorderBrighterMore     =  40;
+	protected int inactiveBorderDarker           = -20;
+	protected int inactiveBorderDarkerMore       = -40;
+	
+	// rollover extra add
 	protected int rollover = 10;
 	
-	protected Color[] buttonColors = null;
+	// indices for colors
+	private static final int BACKGROUND_INDEX =  0;
+	private static final int FOREGROUND_INDEX = 10;
+	private static final int BORDER_INDEX     = 20;
+	private static final int FOCUS_INDEX      = 30;
+	private static final int ROLLOVER_INDEX   = 31;
+	
+	private static final int INACTIVE_BLOCK_SIZE = 5;
+	private static final int COLOR_COUNT = 32;
+	
+//	protected int brighter     =  20;
+//	protected int brighterMore =  40;
+//	protected int darker       = -20;
+//	protected int darkerMore   = -40;
+//	
+//	protected int brighterInactive     =  20;
+//	protected int brighterMoreInactive =  40;
+//	protected int darkerInactive       = -20;
+//	protected int darkerMoreInactive   = -40;
+//	
+//	protected int rollover = 10;
+	
+	protected Color[] colors = null;
+	
+//	protected Color[] buttonColors = null;
 	
 	/**
 	 * Berechnet aus der übergebenen Farbe eine hellere (1 bis 255) bzw. eine 
@@ -101,86 +145,115 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	 * Colors:
 	 *  +10 for Background
 	 *  +10 for Foreground
+	 *  +10 for Border
 	 *  + 1 for Focus
 	 *  + 1 for Rollover
 	 *  -----------------
-	 *  = 22 pre-estimated Colors
+	 *  = 32 pre-estimated Colors
 	 */
 	protected void computeColors(
 			Color[] target, 
-			Color activeColor, 
-			Color inactiveColor, 
+			Color activeBackgroundColor, 
+			Color inactiveBackgroundColor, 
 			Color activeForegroundColor, 
 			Color inactiveForegroundColor, 
-			Color focusColor,
+			Color activeBorderColor, 
+			Color inactiveBorderColor, 
+			Color focusColor, 
 			Color rolloverColor) {
 		
 		int rgb;
 		
 		// background active (0-4)
-		rgb = activeColor.getRGB();
-		target[0]                 = new PlastikColorUIResource(rgb);
-		target[0 + BRIGHTER]      = new PlastikColorUIResource(computeAdjustedColor(rgb, brighter));
-		target[0 + BRIGHTER_MORE] = new PlastikColorUIResource(computeAdjustedColor(rgb, brighterMore));
-		target[0 + DARKER]        = new PlastikColorUIResource(computeAdjustedColor(rgb, darker));
-		target[0 + DARKER_MORE]   = new PlastikColorUIResource(computeAdjustedColor(rgb, darkerMore));
+		rgb = activeBackgroundColor.getRGB();
+		target[BACKGROUND_INDEX]                 = new PlastikColorUIResource(rgb);
+		target[BACKGROUND_INDEX + BRIGHTER]      = new PlastikColorUIResource(computeAdjustedColor(rgb, backgroundBrighter));
+		target[BACKGROUND_INDEX + BRIGHTER_MORE] = new PlastikColorUIResource(computeAdjustedColor(rgb, backgroundBrighterMore));
+		target[BACKGROUND_INDEX + DARKER]        = new PlastikColorUIResource(computeAdjustedColor(rgb, backgroundDarker));
+		target[BACKGROUND_INDEX + DARKER_MORE]   = new PlastikColorUIResource(computeAdjustedColor(rgb, backgroundDarkerMore));
 		
 		// background inactive (5-9)
-		rgb = inactiveColor.getRGB();
-		target[0 + INACTIVE]                 = new PlastikColorUIResource(rgb);
-		target[0 + INACTIVE + BRIGHTER]      = new PlastikColorUIResource(computeAdjustedColor(rgb, brighterInactive));
-		target[0 + INACTIVE + BRIGHTER_MORE] = new PlastikColorUIResource(computeAdjustedColor(rgb, brighterMoreInactive));
-		target[0 + INACTIVE + DARKER]        = new PlastikColorUIResource(computeAdjustedColor(rgb, darkerInactive));
-		target[0 + INACTIVE + DARKER_MORE]   = new PlastikColorUIResource(computeAdjustedColor(rgb, darkerMoreInactive));
+		rgb = inactiveBackgroundColor.getRGB();
+		target[BACKGROUND_INDEX + INACTIVE_BLOCK_SIZE]                 = new PlastikColorUIResource(rgb);
+		target[BACKGROUND_INDEX + INACTIVE_BLOCK_SIZE + BRIGHTER]      = new PlastikColorUIResource(computeAdjustedColor(rgb, inactiveBackgroundBrighter));
+		target[BACKGROUND_INDEX + INACTIVE_BLOCK_SIZE + BRIGHTER_MORE] = new PlastikColorUIResource(computeAdjustedColor(rgb, inactiveBackgroundBrighterMore));
+		target[BACKGROUND_INDEX + INACTIVE_BLOCK_SIZE + DARKER]        = new PlastikColorUIResource(computeAdjustedColor(rgb, inactiveBackgroundDarker));
+		target[BACKGROUND_INDEX + INACTIVE_BLOCK_SIZE + DARKER_MORE]   = new PlastikColorUIResource(computeAdjustedColor(rgb, inactiveBackgroundDarkerMore));
 		
 		// foreground active (10-14)
-		rgb = activeForegroundColor.getRGB();
-		target[10]                 = new PlastikColorUIResource(rgb);
-		target[10 + BRIGHTER]      = new PlastikColorUIResource(computeAdjustedColor(rgb, brighter));
-		target[10 + BRIGHTER_MORE] = new PlastikColorUIResource(computeAdjustedColor(rgb, brighterMore));
-		target[10 + DARKER]        = new PlastikColorUIResource(computeAdjustedColor(rgb, darker));
-		target[10 + DARKER_MORE]   = new PlastikColorUIResource(computeAdjustedColor(rgb, darkerMore));
+		rgb = activeBackgroundColor.getRGB();
+		target[FOREGROUND_INDEX]                 = new PlastikColorUIResource(rgb);
+		target[FOREGROUND_INDEX + BRIGHTER]      = new PlastikColorUIResource(computeAdjustedColor(rgb, foregroundBrighter));
+		target[FOREGROUND_INDEX + BRIGHTER_MORE] = new PlastikColorUIResource(computeAdjustedColor(rgb, foregroundBrighterMore));
+		target[FOREGROUND_INDEX + DARKER]        = new PlastikColorUIResource(computeAdjustedColor(rgb, foregroundDarker));
+		target[FOREGROUND_INDEX + DARKER_MORE]   = new PlastikColorUIResource(computeAdjustedColor(rgb, foregroundDarkerMore));
 		
-		// foreground inactive (15-19)
-		rgb = inactiveForegroundColor.getRGB();
-		target[10 + INACTIVE]                 = new PlastikColorUIResource(rgb);
-		target[10 + INACTIVE + BRIGHTER]      = new PlastikColorUIResource(computeAdjustedColor(rgb, brighterInactive));
-		target[10 + INACTIVE + BRIGHTER_MORE] = new PlastikColorUIResource(computeAdjustedColor(rgb, brighterMoreInactive));
-		target[10 + INACTIVE + DARKER]        = new PlastikColorUIResource(computeAdjustedColor(rgb, darkerInactive));
-		target[10 + INACTIVE + DARKER_MORE]   = new PlastikColorUIResource(computeAdjustedColor(rgb, darkerMoreInactive));
+		// foreround inactive (15-19)
+		rgb = inactiveBackgroundColor.getRGB();
+		target[FOREGROUND_INDEX + INACTIVE_BLOCK_SIZE]                 = new PlastikColorUIResource(rgb);
+		target[FOREGROUND_INDEX + INACTIVE_BLOCK_SIZE + BRIGHTER]      = new PlastikColorUIResource(computeAdjustedColor(rgb, inactiveForegroundBrighter));
+		target[FOREGROUND_INDEX + INACTIVE_BLOCK_SIZE + BRIGHTER_MORE] = new PlastikColorUIResource(computeAdjustedColor(rgb, inactiveForegroundBrighterMore));
+		target[FOREGROUND_INDEX + INACTIVE_BLOCK_SIZE + DARKER]        = new PlastikColorUIResource(computeAdjustedColor(rgb, inactiveForegroundDarker));
+		target[FOREGROUND_INDEX + INACTIVE_BLOCK_SIZE + DARKER_MORE]   = new PlastikColorUIResource(computeAdjustedColor(rgb, inactiveForegroundDarkerMore));
 		
-		// focus color (20)
-		target[20] = focusColor;
+		// border active (20-24)
+		rgb = activeBackgroundColor.getRGB();
+		target[BORDER_INDEX]                 = new PlastikColorUIResource(rgb);
+		target[BORDER_INDEX + BRIGHTER]      = new PlastikColorUIResource(computeAdjustedColor(rgb, borderBrighter));
+		target[BORDER_INDEX + BRIGHTER_MORE] = new PlastikColorUIResource(computeAdjustedColor(rgb, borderBrighterMore));
+		target[BORDER_INDEX + DARKER]        = new PlastikColorUIResource(computeAdjustedColor(rgb, borderDarker));
+		target[BORDER_INDEX + DARKER_MORE]   = new PlastikColorUIResource(computeAdjustedColor(rgb, borderDarkerMore));
 		
-		// rollover color (21)
-		target[21] = rolloverColor;
+		// border inactive (25-29)
+		rgb = inactiveBackgroundColor.getRGB();
+		target[BORDER_INDEX + INACTIVE_BLOCK_SIZE]                 = new PlastikColorUIResource(rgb);
+		target[BORDER_INDEX + INACTIVE_BLOCK_SIZE + BRIGHTER]      = new PlastikColorUIResource(computeAdjustedColor(rgb, inactiveBorderBrighter));
+		target[BORDER_INDEX + INACTIVE_BLOCK_SIZE + BRIGHTER_MORE] = new PlastikColorUIResource(computeAdjustedColor(rgb, inactiveBorderBrighterMore));
+		target[BORDER_INDEX + INACTIVE_BLOCK_SIZE + DARKER]        = new PlastikColorUIResource(computeAdjustedColor(rgb, inactiveBorderDarker));
+		target[BORDER_INDEX + INACTIVE_BLOCK_SIZE + DARKER_MORE]   = new PlastikColorUIResource(computeAdjustedColor(rgb, inactiveBorderDarkerMore));
+			
+		// focus color (30)
+		target[FOCUS_INDEX] = focusColor;
+		
+		// rollover color (31)
+		target[ROLLOVER_INDEX] = rolloverColor;
 	}
 	
 	protected Color getColor(Color[] colors, int type, int options) {
 		Color color = null;
-		if (type == TYPE_BACKGROUND) {
-			int pos = 0;
-			if ((options & INACTIVE_MASK) != 0) {
-				pos += INACTIVE;
-			}
-			pos += (options & LIGHT_MASK); // TODO: no check for valid options..
-			color = colors[pos];
-		} else if (type == TYPE_FOREGROUND) {
-			int pos = 10;
-			if ((options & INACTIVE_MASK) != 0) {
-				pos += INACTIVE;
-			}
-			pos += (options & LIGHT_MASK); // TODO: no check for valid options..
-			color = colors[pos];			
-		} else if (type == TYPE_FOCUS) {
-			int pos = 20;
-			color = colors[20];
-		} else if (type == TYPE_ROLLOVER) {
-			int pos = 21;
-			color = colors[pos];
-			//return new PlastikColorUIResource(computeAdjustedColor(color[pos].getRGB(), rollover));
-		} else {
-			throw new IllegalArgumentException("wrong type");
+		int pos;
+		
+		switch(type) {
+			case TYPE_BACKGROUND :
+				pos = BACKGROUND_INDEX;
+				if ((options & INACTIVE_MASK) != 0)
+					pos += INACTIVE_BLOCK_SIZE;
+				pos += (options & LIGHT_MASK); // TODO: no check for valid options..
+				color = colors[pos];
+				break;
+			case TYPE_FOREGROUND :
+				pos = FOREGROUND_INDEX;
+				if ((options & INACTIVE_MASK) != 0)
+					pos += INACTIVE_BLOCK_SIZE;
+				pos += (options & LIGHT_MASK); // TODO: no check for valid options..
+				color = colors[pos];
+				break;
+			case TYPE_BORDER :
+				pos = BORDER_INDEX;
+				if ((options & INACTIVE_MASK) != 0)
+					pos += INACTIVE_BLOCK_SIZE;
+				pos += (options & LIGHT_MASK); // TODO: no check for valid options..
+				color = colors[pos];
+				break;
+			case TYPE_FOCUS :
+				pos = FOCUS_INDEX;
+				color = colors[pos];
+				break;
+			case TYPE_ROLLOVER :
+				 pos = ROLLOVER_INDEX;
+				color = colors[pos]; break;
+			default :
+				throw new IllegalArgumentException("wrong type");
 		}
 		
 		if ((options & ROLLOVER_MASK) != 0) {
@@ -189,13 +262,40 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		return color;
 	}
 	
-	public void setButtonColor(Color activeColor, Color inactiveColor, Color activeForegroundColor, Color inactiveForegroundColor, Color focusColor, Color rolloverColor) {
-		if (buttonColors == null) buttonColors = new Color[COLOR_COUNT];
-		computeColors(buttonColors, activeColor, inactiveColor, activeForegroundColor, inactiveForegroundColor, focusColor, rolloverColor);
+//	public void setButtonColor(Color activeColor, Color inactiveColor, Color activeForegroundColor, Color inactiveForegroundColor, Color focusColor, Color rolloverColor) {
+//		if (buttonColors == null) buttonColors = new Color[COLOR_COUNT];
+//		computeColors(buttonColors, activeColor, inactiveColor, activeForegroundColor, inactiveForegroundColor, focusColor, rolloverColor);
+//	}
+//	
+//	public Color getButtonColor(int type, int options) {
+//		return getColor(buttonColors, type, options);
+//	}
+	
+	public void setColors(
+			Color activeBackgroundColor, 
+			Color inactiveBackgroundColor, 
+			Color activeForegroundColor, 
+			Color inactiveForegroundColor, 
+			Color activeBorderColor, 
+			Color inactiveBorderColor, 
+			Color focusColor, 
+			Color rolloverColor) {
+		if (colors == null) 
+			colors = new Color[COLOR_COUNT];
+		computeColors(
+				colors, 
+				activeBackgroundColor, 
+				inactiveBackgroundColor, 
+				activeForegroundColor, 
+				inactiveForegroundColor, 
+				activeBorderColor, 
+				inactiveBorderColor, 
+				focusColor, 
+				rolloverColor);
 	}
 	
-	public Color getButtonColor(int type, int options) {
-		return getColor(buttonColors, type, options);
+	public Color getColor(int type, int options) {
+		return getColor(colors, type, options);
 	}
 	
 }

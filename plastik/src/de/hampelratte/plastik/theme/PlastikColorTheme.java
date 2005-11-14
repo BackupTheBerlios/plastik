@@ -7,8 +7,9 @@ public interface PlastikColorTheme {
 	// Types
 	public static final int TYPE_BACKGROUND = 0;
 	public static final int TYPE_FOREGROUND = 1;
-	public static final int TYPE_ROLLOVER   = 2;
-	public static final int TYPE_FOCUS      = 3;
+	public static final int TYPE_BORDER     = 2;
+	public static final int TYPE_ROLLOVER   = 3;
+	public static final int TYPE_FOCUS      = 4;
 	
 	// Options
 	// (günstig für Arrayimplementierung)
@@ -23,5 +24,6 @@ public interface PlastikColorTheme {
 	public static final int INACTIVE_MASK = 16; // ... 0000 0000  0001 0000
 	public static final int ROLLOVER_MASK = 32; // ... 0000 0000  0010 0000
 	
-	public Color getButtonColor(int type, int options);
+	//public Color getButtonColor(int type, int options);
+	public Color getColor(int type, int options);
 }

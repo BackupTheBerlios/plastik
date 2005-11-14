@@ -198,13 +198,13 @@ public class PlastikButtonUI extends BasicButtonUI {
 					top    = new Color(239, 239, 239);
 					bottom = new Color(233, 233, 233);
 				} else if (model.isArmed() && model.isPressed()) {
-					top    = theme.getButtonColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.NORMAL);
-					bottom = theme.getButtonColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.BRIGHTER);
+					top    = theme.getColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.NORMAL);
+					bottom = theme.getColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.BRIGHTER);
 //					top    = new Color(203, 205, 209); // TODO ins LaF
 //					bottom = new Color(213, 215, 219);
 				} else {
-					top    = theme.getButtonColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.BRIGHTER);
-					bottom = theme.getButtonColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.DARKER);
+					top    = theme.getColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.BRIGHTER);
+					bottom = theme.getColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.DARKER);
 //					top    = new Color(233, 235, 239);
 //					bottom = new Color(213, 215, 219);
 				}
