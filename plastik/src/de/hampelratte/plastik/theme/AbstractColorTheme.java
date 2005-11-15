@@ -297,5 +297,13 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	public Color getColor(int type, int options) {
 		return getColor(colors, type, options);
 	}
+
+	public PlastikColorUIResource getColor(int type) {
+		throw new IllegalArgumentException("not implemented");
+	}
+	
+	public Color computeColor(Color color, int type) {
+		throw new IllegalArgumentException("not implemented");
+	}
 	
 }
