@@ -49,6 +49,10 @@ public interface PlastikColorTheme {
 	public static final int COLOR_TYPES_SHIFT    = 4;
 	public static final int COMPONENT_UI_SHIFT   = 8;
 	
+	public static final int COLOR_VARIANTS_COUNT = 10;
+	public static final int COLOR_TYPES_COUNT    =  5;
+	public static final int COMPONENT_UI_COUNT   = 41;
+	
 	// color variants for the colors
 	public static final int NORMAL        = 0; // ..0000 0000 0000 0000
 	public static final int BRIGHTER      = 1; // ..0000 0000 0000 0001
