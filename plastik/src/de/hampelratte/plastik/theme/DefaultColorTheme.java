@@ -5,22 +5,23 @@ import java.awt.Color;
 public class DefaultColorTheme extends AbstractColorTheme {
 	
 	public DefaultColorTheme() {
-		backgroundBrighter =  18;
-		backgroundDarker   = -13;
+		super();
 		
-		backgroundBrighterMore = 100;
-		backgroundDarkerMore   = -100;
+		setColor(new Color(200, 200, 200), COMMON | BACKGROUND);
+		setColor(new Color(200, 200, 200), COMMON | BACKGROUND | INACTIVE);
 		
-		setColors(
-				new Color(220, 220, 225), // active background
-				new Color(  0, 200,   0), // inactive backgound
-				new Color(  0,   0, 200), // active foreground
-				new Color(200, 100,   0), // inactive foreground   
-				new Color(  0,   0, 200), // active border
-				new Color(200, 100,   0), // inactive border;   
-				new Color(200,   0, 100), // focus
-				new Color(123, 123, 123)  // rollover
-		);
+		setColor(new Color(50,50,50), COMMON | FOREGROUND);
+		setColor(new Color(50,50,50), COMMON | FOREGROUND | INACTIVE);
+		
+		setColor(new Color(100,100,100), COMMON | BORDER);
+		setColor(new Color(100,100,100), COMMON | BORDER | INACTIVE);
+		
+		setColor(new Color(100,200,100), COMMON | FOCUS);
+		setColor(new Color(100,200,100), COMMON | FOCUS | INACTIVE);
+		
+		setColor(new Color(100,100,200), COMMON | ROLLOVER);
+		setColor(new Color(100,100,200), COMMON | ROLLOVER | INACTIVE);
+		
 	}
 	
 }
