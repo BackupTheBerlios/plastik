@@ -65,6 +65,9 @@ public class PlastikUtils {
 	}
 	
 	
+// TODO: Remove the colorAdjustment Methods! 
+// (all colors should be provided by the theme)
+	
 	/**
 	 * Berechnet aus der übergebenen Farbe eine hellere (1 bis 255) bzw. eine 
 	 * dunklere (-1 bis -255) Farbe. Dabei orientiert sich die Berechnung an dem
