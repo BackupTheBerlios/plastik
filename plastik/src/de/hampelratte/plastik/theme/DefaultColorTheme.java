@@ -8,24 +8,34 @@ public class DefaultColorTheme extends AbstractColorTheme {
 		super();
 		
 		// COMMON (must be set)
-		setColor(new Color(239, 239, 239), COMMON | BACKGROUND                    );
-		setColor(new Color(239, 239, 239), COMMON | BACKGROUND         | INACTIVE );
-		setColor(new Color(  0,   0,   0), COMMON | FOREGROUND                    );
-		setColor(new Color(  0,   0,   0), COMMON | FOREGROUND         | INACTIVE );
-		setColor(new Color(134, 134, 134), COMMON | BORDER                        );
-		setColor(new Color(134, 134, 134), COMMON | BORDER             | INACTIVE );
-		setColor(new Color( 16,  16,  16), COMMON | FOCUS                         );
-		setColor(new Color( 16,  16,  16), COMMON | FOCUS              | INACTIVE );
-		setColor(new Color(103,	141, 178), COMMON | ROLLOVER                      );
-		setColor(new Color(  0,   0,   0), COMMON | ROLLOVER           | INACTIVE );
-		setColor(new Color(239, 239, 239), COMMON | BACKGROUND_PRESSED            );
-		setColor(new Color(239, 239, 239), COMMON | BACKGROUND_PRESSED | INACTIVE );
-		setColor(new Color(  0,   0,   0), COMMON | FOREGROUND_PRESSED            );
-		setColor(new Color(  0,   0,   0), COMMON | FOREGROUND_PRESSED | INACTIVE );
+		setColor(239, 239, 239, COMMON | BACKGROUND                          );
+		setColor(239, 239, 239, COMMON | BACKGROUND               | INACTIVE );
+		setColor(  0,   0,   0, COMMON | FOREGROUND                          );
+		setColor(  0,   0,   0, COMMON | FOREGROUND               | INACTIVE );
+		setColor(134, 134, 134, COMMON | BORDER                              );
+		setColor(134, 134, 134, COMMON | BORDER                   | INACTIVE );
+		setColor( 16,  16,  16, COMMON | FOCUS                               );
+		setColor( 16,  16,  16, COMMON | FOCUS                    | INACTIVE );
+		setColor(103, 141, 178, COMMON | ROLLOVER                            );
+		setColor(  0,   0,   0, COMMON | ROLLOVER                 | INACTIVE );
+		setColor(239, 239, 239, COMMON | BACKGROUND_PRESSED                  );
+		setColor(239, 239, 239, COMMON | BACKGROUND_PRESSED       | INACTIVE );
+		setColor(  0,   0,   0, COMMON | FOREGROUND_PRESSED                  );
+		setColor(  0,   0,   0, COMMON | FOREGROUND_PRESSED       | INACTIVE );
+		setColor(239, 239, 239, COMMON | BACKGROUND_TEXT                     );
+		setColor(239, 239, 239, COMMON | BACKGROUND_TEXT          | INACTIVE );
+		setColor(  0,   0,   0, COMMON | FOREGROUND_TEXT                     );
+		setColor(  0,   0,   0, COMMON | FOREGROUND_TEXT          | INACTIVE );
+		setColor(239, 239, 239, COMMON | BACKGROUND_TEXT_SELECTED            );
+		setColor(239, 239, 239, COMMON | BACKGROUND_TEXT_SELECTED | INACTIVE );
+		setColor(  0,   0,   0, COMMON | FOREGROUND_TEXT_SELECTED            );
+		setColor(  0,   0,   0, COMMON | FOREGROUND_TEXT_SELECTED | INACTIVE );
 		
-		// BUTTON
-		setColor(new Color(240, 230, 220), BUTTON | BACKGROUND                    );
-		setColor(new Color(239,   0, 239), BUTTON | BACKGROUND_PRESSED            );
+		// BUTTON (optional)
+		setAdjustmentValue( 5, BUTTON | BACKGROUND | BRIGHTER_GRADIENT);
+		setAdjustmentValue(-5, BUTTON | BACKGROUND | DARKER_GRADIENT);
+		setColor(221, 223, 228, BUTTON | BACKGROUND);
+		setColor(207, 209, 213, BUTTON | BACKGROUND_PRESSED);
 		
 		
 	}
