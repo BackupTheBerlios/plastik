@@ -187,6 +187,11 @@ public class PlastikButtonUI extends BasicButtonUI {
         }
 	}
 	
+	private static final int BACKGROUND = PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND;
+	private static final int BACKGROUND_INACTIVE = PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND | PlastikColorTheme.INACTIVE;
+	private static final int BACKGROUND_PRESSED = PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED;
+	private static final int BACKGROUND_PRESSED_INACTIVE = PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.INACTIVE;
+	
 	protected void paintBackground(Graphics g, AbstractButton b, ButtonModel model) {
 		if (b.isContentAreaFilled()) {
 			Color background = b.getBackground();
@@ -195,32 +200,23 @@ public class PlastikButtonUI extends BasicButtonUI {
 			Color bottom = null;
 			if (background instanceof UIResource) {
 				if (!model.isEnabled()) {
-					top    = new Color(239, 239, 239);
-					bottom = new Color(233, 233, 233);
+					top    = theme.getColor(BACKGROUND_INACTIVE | PlastikColorTheme.BRIGHTER_GRADIENT);
+					bottom = theme.getColor(BACKGROUND_INACTIVE | PlastikColorTheme.DARKER_GRADIENT);
 				} else if (model.isArmed() && model.isPressed()) {
-					top    = theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND);
-					bottom = theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND | PlastikColorTheme.BRIGHTER_LESS);
-//					top    = theme.getColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.NORMAL);
-//					bottom = theme.getColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.BRIGHTER);
-//					top    = new Color(203, 205, 209); // TODO ins LaF
-//					bottom = new Color(213, 215, 219);
+					top    = theme.getColor(BACKGROUND_PRESSED | PlastikColorTheme.BRIGHTER_GRADIENT);
+					bottom = theme.getColor(BACKGROUND_PRESSED | PlastikColorTheme.DARKER_GRADIENT);
 				} else {
-					top    = theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND | PlastikColorTheme.BRIGHTER_LESS);
-					bottom = theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND | PlastikColorTheme.DARKER);
-//					top    = theme.getColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.BRIGHTER);
-//					bottom = theme.getColor(PlastikColorTheme.TYPE_BACKGROUND, PlastikColorTheme.DARKER);
-//					top    = new Color(233, 235, 239);
-//					bottom = new Color(213, 215, 219);
+					top    = theme.getColor(BACKGROUND | PlastikColorTheme.BRIGHTER_GRADIENT);
+					bottom = theme.getColor(BACKGROUND | PlastikColorTheme.DARKER_GRADIENT);
 				}
 			} else {
 				// TODO calculate corresponding colors
 				if (!model.isEnabled()) {
-					top    = background;
-					bottom = background;
+					top    = theme.computeColor(background, BACKGROUND_INACTIVE | PlastikColorTheme.BRIGHTER_GRADIENT);
+					bottom = theme.computeColor(background, BACKGROUND_INACTIVE | PlastikColorTheme.DARKER_GRADIENT);
 				} else {
-					top    = background;
-					int rgb = PlastikUtils.computeAdjustedColor(background.getRGB(), -25);
-					bottom = new Color(rgb);
+					top    = theme.computeColor(background, BACKGROUND | PlastikColorTheme.BRIGHTER_GRADIENT);
+					bottom = theme.computeColor(background, BACKGROUND | PlastikColorTheme.DARKER_GRADIENT);
 				}
 			}
 			// TODO be carefull with the edges..

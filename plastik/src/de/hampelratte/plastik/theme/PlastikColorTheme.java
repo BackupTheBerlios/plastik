@@ -21,36 +21,36 @@ public interface PlastikColorTheme {
 	public static final int UI_COUNT       = 43;
 	
 	// color variants for the colors (0x00000007)
-	public static final int NORMAL        = 0; // ..0000 0000 0000 0000
-	public static final int BRIGHTER      = 1; // ..0000 0000 0000 0001
-	public static final int BRIGHTER_MORE = 2; // ..0000 0000 0000 0010
-	public static final int BRIGHTER_LESS = 3; // ..0000 0000 0000 0011
-	public static final int DARKER        = 4; // ..0000 0000 0000 0100
-	public static final int DARKER_MORE   = 5; // ..0000 0000 0000 0101
-	public static final int DARKER_LESS   = 6; // ..0000 0000 0000 0110
-//	public static final int UNDEFINED     = 7; // ..0000 0000 0000 0111
+	public static final int NORMAL            = 0; // ..0000 0000 0000 0000
+	public static final int BRIGHTER          = 1; // ..0000 0000 0000 0001
+	public static final int BRIGHTER_MORE     = 2; // ..0000 0000 0000 0010
+	public static final int BRIGHTER_GRADIENT = 3; // ..0000 0000 0000 0011
+	public static final int DARKER            = 4; // ..0000 0000 0000 0100
+	public static final int DARKER_MORE       = 5; // ..0000 0000 0000 0101
+	public static final int DARKER_GRADIENT   = 6; // ..0000 0000 0000 0110
+//	public static final int UNDEFINED         = 7; // ..0000 0000 0000 0111
 	
 	// inactive state (0x00000008)
 	public static final int ACTIVE        = 0; // ..0000 0000 0000 0000
 	public static final int INACTIVE      = 8; // ..0000 0000 0000 1000
 	
 	// color types for every ui-component (0x000000F0)
-	public static final int BACKGROUND = 0x00000000; // ..0000 0000 0000 0000
-	public static final int FOREGROUND = 0x00000010; // ..0000 0000 0001 0000
-	public static final int BORDER     = 0x00000020; // ..0000 0000 0010 0000
-	public static final int FOCUS      = 0x00000030; // ..0000 0000 0011 0000
-	public static final int ROLLOVER   = 0x00000040; // ..0000 0000 0100 0000
-//	public static final int UNDEFINED  = 0x00000050; // ..0000 0000 0101 0000
-//	public static final int UNDEFINED  = 0x00000060; // ..0000 0000 0110 0000
-//	public static final int UNDEFINED  = 0x00000070; // ..0000 0000 0111 0000
-//	public static final int UNDEFINED  = 0x00000080; // ..0000 0000 1000 0000
-//	public static final int UNDEFINED  = 0x00000090; // ..0000 0000 1001 0000
-//	public static final int UNDEFINED  = 0x000000A0; // ..0000 0000 1010 0000
-//	public static final int UNDEFINED  = 0x000000B0; // ..0000 0000 1011 0000
-//	public static final int UNDEFINED  = 0x000000C0; // ..0000 0000 1100 0000
-//	public static final int UNDEFINED  = 0x000000D0; // ..0000 0000 1101 0000
-//	public static final int UNDEFINED  = 0x000000E0; // ..0000 0000 1110 0000
-//	public static final int UNDEFINED  = 0x000000F0; // ..0000 0000 1111 0000
+	public static final int BACKGROUND         = 0x00000000; // ..0000 0000 0000 0000
+	public static final int FOREGROUND         = 0x00000010; // ..0000 0000 0001 0000
+	public static final int BORDER             = 0x00000020; // ..0000 0000 0010 0000
+	public static final int FOCUS              = 0x00000030; // ..0000 0000 0011 0000
+	public static final int ROLLOVER           = 0x00000040; // ..0000 0000 0100 0000
+	public static final int BACKGROUND_PRESSED = 0x00000050; // ..0000 0000 0101 0000
+	public static final int FOREGROUND_PRESSED = 0x00000060; // ..0000 0000 0110 0000
+//	public static final int UNDEFINED          = 0x00000070; // ..0000 0000 0111 0000
+//	public static final int UNDEFINED          = 0x00000080; // ..0000 0000 1000 0000
+//	public static final int UNDEFINED          = 0x00000090; // ..0000 0000 1001 0000
+//	public static final int UNDEFINED          = 0x000000A0; // ..0000 0000 1010 0000
+//	public static final int UNDEFINED          = 0x000000B0; // ..0000 0000 1011 0000
+//	public static final int UNDEFINED          = 0x000000C0; // ..0000 0000 1100 0000
+//	public static final int UNDEFINED          = 0x000000D0; // ..0000 0000 1101 0000
+//	public static final int UNDEFINED          = 0x000000E0; // ..0000 0000 1110 0000
+//	public static final int UNDEFINED          = 0x000000F0; // ..0000 0000 1111 0000
 	
 	// constants for every ui-component (0x0000FF00)
 	public static final int COMMON                  = 0x00000000; // ..0000 0000 0000 0000 

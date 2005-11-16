@@ -109,8 +109,9 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 				}
 				colorArray[type] = color;
 			} else {
-				// Frage nach der Grundfarbe von COMMON:
-				color = getColor(COMMON + (index & (INACTIVE_MASK | TYPES_MASK)));
+				// Frage nach der eigenen Grundfarbe.
+				//color = getColor(COMMON + (index & (INACTIVE_MASK | TYPES_MASK)));
+				color = getColor(index);
 				if (adjustmentValues[type] != 0) {
 					color = new PlastikColorUIResource(computeAdjustedColor(color.getRGB(), adjustmentValues[type]));
 				}
