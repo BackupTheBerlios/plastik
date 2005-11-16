@@ -42,10 +42,10 @@ public interface PlastikColorTheme {
 	public static final int ROLLOVER           = 0x00000040; // ..0000 0000 0100 0000
 	public static final int BACKGROUND_PRESSED = 0x00000050; // ..0000 0000 0101 0000
 	public static final int FOREGROUND_PRESSED = 0x00000060; // ..0000 0000 0110 0000
-//	public static final int UNDEFINED          = 0x00000070; // ..0000 0000 0111 0000
-//	public static final int UNDEFINED          = 0x00000080; // ..0000 0000 1000 0000
-//	public static final int UNDEFINED          = 0x00000090; // ..0000 0000 1001 0000
-//	public static final int UNDEFINED          = 0x000000A0; // ..0000 0000 1010 0000
+	public static final int BACKGROUND_TEXT    = 0x00000070; // ..0000 0000 0111 0000
+	public static final int FOREGROUND_TEXT    = 0x00000080; // ..0000 0000 1000 0000
+	public static final int BACKGROUND_TEXT_SELECTED = 0x00000090; // ..0000 0000 1001 0000
+	public static final int FOREGROUND_TEXT_SELECTED = 0x000000A0; // ..0000 0000 1010 0000
 //	public static final int UNDEFINED          = 0x000000B0; // ..0000 0000 1011 0000
 //	public static final int UNDEFINED          = 0x000000C0; // ..0000 0000 1100 0000
 //	public static final int UNDEFINED          = 0x000000D0; // ..0000 0000 1101 0000
