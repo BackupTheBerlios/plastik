@@ -55,6 +55,14 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		return adjustmentValues[type];
 	}
 	
+	public void setColor(int r, int g, int b, int a, int type) {
+		setColor(new Color(r,g,b,a), type);
+	}
+	
+	public void setColor(int r, int g, int b, int type) {
+		setColor(new Color(r,g,b), type);
+	}
+	
 	/**
 	 * Setzt eine eine einzelne Grundfarbe (Farbe ohne Varianten). Dabei wird 
 	 * aber sehr wohl zwischen ACTIVE und INACTIVE unterschieden. 
