@@ -35,22 +35,22 @@ public interface PlastikColorTheme {
 	public static final int INACTIVE      = 8; // ..0000 0000 0000 1000
 	
 	// color types for every ui-component (0x000000F0)
-	public static final int BACKGROUND         = 0x00000000; // ..0000 0000 0000 0000
-	public static final int FOREGROUND         = 0x00000010; // ..0000 0000 0001 0000
-	public static final int BORDER             = 0x00000020; // ..0000 0000 0010 0000
-	public static final int FOCUS              = 0x00000030; // ..0000 0000 0011 0000
-	public static final int ROLLOVER           = 0x00000040; // ..0000 0000 0100 0000
-	public static final int BACKGROUND_PRESSED = 0x00000050; // ..0000 0000 0101 0000
-	public static final int FOREGROUND_PRESSED = 0x00000060; // ..0000 0000 0110 0000
-	public static final int BACKGROUND_TEXT    = 0x00000070; // ..0000 0000 0111 0000
-	public static final int FOREGROUND_TEXT    = 0x00000080; // ..0000 0000 1000 0000
-	public static final int BACKGROUND_TEXT_SELECTED = 0x00000090; // ..0000 0000 1001 0000
-	public static final int FOREGROUND_TEXT_SELECTED = 0x000000A0; // ..0000 0000 1010 0000
-//	public static final int UNDEFINED          = 0x000000B0; // ..0000 0000 1011 0000
-//	public static final int UNDEFINED          = 0x000000C0; // ..0000 0000 1100 0000
-//	public static final int UNDEFINED          = 0x000000D0; // ..0000 0000 1101 0000
-//	public static final int UNDEFINED          = 0x000000E0; // ..0000 0000 1110 0000
-//	public static final int UNDEFINED          = 0x000000F0; // ..0000 0000 1111 0000
+	public static final int BACKGROUND               = 0x00000000; // ..0000 0000 0000 0000
+	public static final int FOREGROUND               = 0x00000010; // ..0000 0000 0001 0000
+	public static final int BORDER                   = 0x00000020; // ..0000 0000 0010 0000
+	public static final int FOCUS                    = 0x00000030; // ..0000 0000 0011 0000
+	public static final int ROLLOVER                 = 0x00000040; // ..0000 0000 0100 0000
+	public static final int BACKGROUND_COMPONENT     = 0x00000050; // ..0000 0000 0101 0000
+	public static final int FOREGROUND_COMPONENT     = 0x00000060; // ..0000 0000 0110 0000
+	public static final int BACKGROUND_PRESSED       = 0x00000070; // ..0000 0000 0111 0000
+	public static final int FOREGROUND_PRESSED       = 0x00000080; // ..0000 0000 1000 0000
+	public static final int BACKGROUND_TEXT          = 0x00000090; // ..0000 0000 1001 0000
+	public static final int FOREGROUND_TEXT          = 0x000000A0; // ..0000 0000 1010 0000
+	public static final int BACKGROUND_TEXT_SELECTED = 0x000000B0; // ..0000 0000 1011 0000
+	public static final int FOREGROUND_TEXT_SELECTED = 0x000000C0; // ..0000 0000 1100 0000
+//	public static final int UNDEFINED                = 0x000000D0; // ..0000 0000 1101 0000
+//	public static final int UNDEFINED                = 0x000000E0; // ..0000 0000 1110 0000
+//	public static final int UNDEFINED                = 0x000000F0; // ..0000 0000 1111 0000
 	
 	// constants for every ui-component (0x0000FF00)
 	public static final int COMMON                  = 0x00000000; // ..0000 0000 0000 0000 
@@ -96,6 +96,16 @@ public interface PlastikColorTheme {
 	public static final int TOOL_TIP                = 0x00002800; // ..0010 1000 0000 0000
 	public static final int TREE                    = 0x00002900; // ..0010 1001 0000 0000
 	public static final int VIEWPORT                = 0x00002A00; // ..0010 1010 0000 0000
+	
+	/**
+	 * This function should return a cached version of the color if the param 
+	 * color is an instance of PlastikColorUIResource. If the param is no 
+	 * UIResource then it should return a computed color.
+	 *
+	 * @param color the color-object of the component.
+	 * @param type the requested type.
+	 */
+	public Color getColor(Color color, int type);
 	
 	public PlastikColorUIResource getColor(int type);
 	
