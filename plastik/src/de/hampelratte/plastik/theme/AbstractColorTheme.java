@@ -21,21 +21,21 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	private void precomputeAdjustmentValues() {
 		for (int i=0; i<colorCount; i+=16) {
 			// active
-			adjustmentValues[i]   =   0;
-			adjustmentValues[i+1] =  20;
-			adjustmentValues[i+2] =  40;
-			adjustmentValues[i+3] =  10;
-			adjustmentValues[i+4] = -20;
-			adjustmentValues[i+5] = -40;
-			adjustmentValues[i+6] = -10;
+			adjustmentValues[i]    =   0; // normal
+			adjustmentValues[i+1]  =  20; // brighter
+			adjustmentValues[i+2]  =  40; // brighter more
+			adjustmentValues[i+3]  =  10; // brighter gradient
+			adjustmentValues[i+4]  = -20; // darker
+			adjustmentValues[i+5]  = -40; // darker more
+			adjustmentValues[i+6]  = -10; // darker gradient
 			// inactive
-			adjustmentValues[i+8]  =   0;
-			adjustmentValues[i+9]  =  10;
-			adjustmentValues[i+10] =  20;
-			adjustmentValues[i+11] =   5;
-			adjustmentValues[i+12] = -10;
-			adjustmentValues[i+13] = -20;
-			adjustmentValues[i+14] =  -5;
+			adjustmentValues[i+8]  =   0; // normal
+			adjustmentValues[i+9]  =  10; // brighter
+			adjustmentValues[i+10] =  20; // brighter more
+			adjustmentValues[i+11] =   5; // brighter gradient
+			adjustmentValues[i+12] = -10; // darker
+			adjustmentValues[i+13] = -20; // darker more
+			adjustmentValues[i+14] =  -5; // darker gradient
 		}
 	}
 	
