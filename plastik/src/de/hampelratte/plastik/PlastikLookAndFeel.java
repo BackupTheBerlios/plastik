@@ -35,7 +35,7 @@ import de.hampelratte.plastik.theme.PlastikTheme;
  * Ein Nachteil ist der höhere Aufwand.
  */
 // TODO ALLE runden ecken müssen nachgearbeitet werden. im moment sind die nicht transparent. 
-// zu sehen wenn man dem Panel in der Main.java ne andere hintergrundfarbe verpasst. 
+// zu sehen wenn man dem Panel in der Main.java eine andere hintergrundfarbe verpasst. 
 public class PlastikLookAndFeel extends BasicLookAndFeel {
 	
 	/** The PlastikTheme used by the LookAndFeel */
@@ -200,6 +200,7 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("Button.background", new PlastikColorUIResource(new Color(229, 231, 236)));
 		table.put("Button.border", new PlastikButtonBorder());
 		table.put("Button.font", table.getFont("Common.font"));
+		table.put("Button.foreground", new PlastikColorUIResource(new Color(0, 0, 0)));
 		
 		// combobox
 		table.put("ComboBox.background", Color.WHITE);
