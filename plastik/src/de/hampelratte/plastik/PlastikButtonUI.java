@@ -187,10 +187,23 @@ public class PlastikButtonUI extends BasicButtonUI {
         }
 	}
 	
-	private static final int BACKGROUND = PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND;
-	private static final int BACKGROUND_INACTIVE = PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND | PlastikColorTheme.INACTIVE;
-	private static final int BACKGROUND_PRESSED = PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED;
-	private static final int BACKGROUND_PRESSED_INACTIVE = PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.INACTIVE;
+	private static final int BACKGROUND
+			= PlastikColorTheme.BUTTON
+			| PlastikColorTheme.BACKGROUND_COMPONENT;
+	
+	private static final int BACKGROUND_INACTIVE
+			= PlastikColorTheme.BUTTON
+			| PlastikColorTheme.BACKGROUND_COMPONENT
+			| PlastikColorTheme.INACTIVE;
+	
+	private static final int BACKGROUND_PRESSED
+			= PlastikColorTheme.BUTTON
+			| PlastikColorTheme.BACKGROUND_PRESSED;
+	
+	private static final int BACKGROUND_PRESSED_INACTIVE
+			= PlastikColorTheme.BUTTON
+			| PlastikColorTheme.BACKGROUND_PRESSED
+			| PlastikColorTheme.INACTIVE;
 	
 	protected void paintBackground(Graphics g, AbstractButton b, ButtonModel model) {
 		if (b.isContentAreaFilled()) {
@@ -198,46 +211,44 @@ public class PlastikButtonUI extends BasicButtonUI {
 			PlastikColorTheme theme = PlastikLookAndFeel.getTheme().getColorTheme();
 			Color top    = null;
 			Color bottom = null;
-			if (background instanceof UIResource) {
-				if (!model.isEnabled()) {
-					top    = theme.getColor(BACKGROUND_INACTIVE | PlastikColorTheme.BRIGHTER_GRADIENT);
-					bottom = theme.getColor(BACKGROUND_INACTIVE | PlastikColorTheme.DARKER_GRADIENT);
-				} else if (model.isArmed() && model.isPressed()) {
-					top    = theme.getColor(BACKGROUND_PRESSED | PlastikColorTheme.BRIGHTER_GRADIENT);
-					bottom = theme.getColor(BACKGROUND_PRESSED | PlastikColorTheme.DARKER_GRADIENT);
-				} else {
-					top    = theme.getColor(BACKGROUND | PlastikColorTheme.BRIGHTER_GRADIENT);
-					bottom = theme.getColor(BACKGROUND | PlastikColorTheme.DARKER_GRADIENT);
-				}
+			if (!model.isEnabled()) {
+				top    = theme.getColor(background, BACKGROUND_INACTIVE | PlastikColorTheme.BRIGHTER_GRADIENT);
+				bottom = theme.getColor(background, BACKGROUND_INACTIVE | PlastikColorTheme.DARKER_GRADIENT);
+			} else if (model.isArmed() && model.isPressed()) {
+				top    = theme.getColor(background, BACKGROUND_PRESSED | PlastikColorTheme.BRIGHTER_GRADIENT);
+				bottom = theme.getColor(background, BACKGROUND_PRESSED | PlastikColorTheme.DARKER_GRADIENT);
 			} else {
-				// TODO calculate corresponding colors
-				if (!model.isEnabled()) {
-					top    = theme.computeColor(background, BACKGROUND_INACTIVE | PlastikColorTheme.BRIGHTER_GRADIENT);
-					bottom = theme.computeColor(background, BACKGROUND_INACTIVE | PlastikColorTheme.DARKER_GRADIENT);
-				} else {
-					top    = theme.computeColor(background, BACKGROUND | PlastikColorTheme.BRIGHTER_GRADIENT);
-					bottom = theme.computeColor(background, BACKGROUND | PlastikColorTheme.DARKER_GRADIENT);
-				}
+				top    = theme.getColor(background, BACKGROUND | PlastikColorTheme.BRIGHTER_GRADIENT);
+				bottom = theme.getColor(background, BACKGROUND | PlastikColorTheme.DARKER_GRADIENT);
 			}
 			// TODO be carefull with the edges..
 			Gradients.drawBoxGradient(g, viewRect, top, bottom);
 		}
 	}
 	
+	private static final int FOREGROUND
+			= PlastikColorTheme.BUTTON
+			| PlastikColorTheme.FOREGROUND_COMPONENT;
+	
+	private static final int FOREGROUND_INACTIVE
+			= PlastikColorTheme.BUTTON
+			| PlastikColorTheme.FOREGROUND_COMPONENT
+			| PlastikColorTheme.INACTIVE;
+	
 	protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         ButtonModel model = b.getModel();
         FontMetrics fm    = g.getFontMetrics();
         int mnemonicIndex = b.getDisplayedMnemonicIndex();
-		
 		int textStep = (model.isArmed() && model.isPressed()) ? 1 : 0;
-
+		Color foreground = b.getForeground();
+		PlastikColorTheme theme = PlastikLookAndFeel.getTheme().getColorTheme();
 		if (model.isEnabled()) {
-			g.setColor(b.getForeground());
+			g.setColor(theme.getColor(foreground, FOREGROUND));
 			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + textStep, textRect.y + fm.getAscent() + textStep);
 		} else {
-			g.setColor(new Color(255,255,255));
+			g.setColor(theme.getColor(foreground, FOREGROUND_INACTIVE | PlastikColorTheme.BRIGHTER));
 			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + 1 + textStep, textRect.y + fm.getAscent() + 1 + textStep);
-			g.setColor(new Color(200,200,200));
+			g.setColor(theme.getColor(foreground, FOREGROUND_INACTIVE | PlastikColorTheme.DARKER));
 			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + textStep, textRect.y + fm.getAscent() + textStep);
 		}
     }
@@ -250,8 +261,10 @@ public class PlastikButtonUI extends BasicButtonUI {
 		focusRect.width  -= 3;
 		focusRect.height -= 3;
 		
-		// TODO use focus color instead of this fixed value
-		g.setColor(Color.BLACK);
+		PlastikColorTheme theme = PlastikLookAndFeel.getTheme().getColorTheme();
+		Color color = theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.FOCUS);
+		g.setColor(color);
+		
 		Graphics2D g2d = (Graphics2D) g;
 		float[] dashes = { 1f, 1f };
 		BasicStroke stroke = new BasicStroke(1.0f, BasicStroke.CAP_BUTT,
