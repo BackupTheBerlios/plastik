@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.FocusTraversalPolicy;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
@@ -40,9 +42,9 @@ import de.hampelratte.plastik.borders.PlastikSpinnerEditorBorder;
 
 //TODO rollover und focus highlight
 public class PlastikSpinnerUI extends BasicSpinnerUI implements
-		MouseListener, MouseWheelListener {
+		MouseListener, FocusListener, MouseWheelListener {
 
-	private JTextField editor;
+	private JComponent editor;
 	
 	private static final ArrowButtonHandler nextButtonHandler = new ArrowButtonHandler(
 			"increment", true);
@@ -108,6 +110,11 @@ public class PlastikSpinnerUI extends BasicSpinnerUI implements
 		for(int i=0; i<newEditor.getComponentCount(); i++) {
 			newEditor.getComponent(i).addMouseListener(this);
 		}
+		
+		for(int i=0; i<newEditor.getComponentCount(); i++) {
+			newEditor.getComponent(i).addFocusListener(this);
+		}
+		editor = newEditor;
 	}
 
 	public void mouseWheelMoved(MouseWheelEvent e) {
@@ -284,9 +291,13 @@ public class PlastikSpinnerUI extends BasicSpinnerUI implements
 		public void mousePressed(MouseEvent e) {
 			if (SwingUtilities.isLeftMouseButton(e)
 					&& e.getComponent().isEnabled()) {
+				JButton button = (JButton)e.getSource();
+				button.getModel().setArmed(true);
+				button.getModel().setPressed(true);
+
 				spinner = eventToSpinner(e);
 				autoRepeatTimer.start();
-
+				
 				focusSpinnerIfNecessary();
 			}
 		}
@@ -341,7 +352,7 @@ public class PlastikSpinnerUI extends BasicSpinnerUI implements
 		return previousButton;
 	}
 
-	public JTextField getEditor() {
+	public JComponent getEditor() {
 		return editor;
 	}
 	
@@ -349,12 +360,8 @@ public class PlastikSpinnerUI extends BasicSpinnerUI implements
 		return new Dimension(80,26);
 	}
 
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void mouseEntered(MouseEvent e) {
+		// mouse entered the editor
 		getNextButton().getModel().setRollover(true);
 		getNextButton().repaint();
 		getPreviousButton().getModel().setRollover(true);
@@ -362,20 +369,30 @@ public class PlastikSpinnerUI extends BasicSpinnerUI implements
 	}
 
 	public void mouseExited(MouseEvent e) {
+		// mouse exited the editor
 		getNextButton().getModel().setRollover(false);
 		getNextButton().repaint();
 		getPreviousButton().getModel().setRollover(false);
 		getPreviousButton().repaint();
 		
 	}
+	
+	public void mouseClicked(MouseEvent e) {
+	}
 
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	}
+
+	public void focusGained(FocusEvent e) {
+		getEditor().putClientProperty("focus",Boolean.TRUE);
+		getEditor().repaint();
+	}
+
+	public void focusLost(FocusEvent e) {
+		getEditor().putClientProperty("focus",Boolean.FALSE);
+		getEditor().repaint();
 	}
 }
