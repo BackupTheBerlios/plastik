@@ -43,12 +43,15 @@ public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 	public void installDefaults(AbstractButton b) {
 		super.installDefaults(b);
 		if (!defaults_initialized) {
-			b.setRolloverEnabled(true);
 			initIcons(b);
 			focusColor = UIManager.getColor("Common.focus");
 			highlightColor = UIManager.getColor("Common.highlight");
 			disabledTextColor = UIManager.getColor("Common.disabledText");
 			defaults_initialized = true;
+			
+			if(PlastikLookAndFeel.isRolloverEnabled()) {
+				b.setRolloverEnabled(PlastikLookAndFeel.isRolloverEnabled());
+			}
 		}
 		b.setOpaque(true);
 	}

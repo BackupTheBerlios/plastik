@@ -33,7 +33,9 @@ public class PlastikSpinnerButton extends JButton implements MouseListener {
 		this.setBorder(new PlastikSpinnerButtonBorder(orientation, this,
 						spinnerUI, spinner));
 		this.setPreferredSize(new Dimension(17, 13));
-		this.setRolloverEnabled(true);
+		if(PlastikLookAndFeel.isRolloverEnabled()) {
+			this.setRolloverEnabled(true);
+		}
 		this.addMouseListener(this);
 	}
 
@@ -83,7 +85,8 @@ public class PlastikSpinnerButton extends JButton implements MouseListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		
+		spinnerUI.getEditor().putClientProperty("focus", Boolean.TRUE);
+		spinnerUI.getEditor().repaint();
 	}
 
 	public void mouseReleased(MouseEvent e) {
