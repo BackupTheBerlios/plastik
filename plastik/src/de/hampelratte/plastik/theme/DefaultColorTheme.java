@@ -32,10 +32,13 @@ public class DefaultColorTheme extends AbstractColorTheme {
 		setColor(  0,   0,   0, COMMON | FOREGROUND_TEXT_SELECTED | INACTIVE );
 		
 		// BUTTON (optional)
+		setColor(221, 223, 228, BUTTON | BACKGROUND);
 		setAdjustmentValue( 10, BUTTON | BACKGROUND | BRIGHTER_GRADIENT);
 		setAdjustmentValue(-10, BUTTON | BACKGROUND | DARKER_GRADIENT);
-		setColor(221, 223, 228, BUTTON | BACKGROUND);
+		
 		setColor(207, 209, 213, BUTTON | BACKGROUND_PRESSED);
+		setAdjustmentValue( -4, BUTTON | BACKGROUND_PRESSED | BRIGHTER_GRADIENT);
+		setAdjustmentValue( +4, BUTTON | BACKGROUND_PRESSED | DARKER_GRADIENT);
 		
 		
 	}
