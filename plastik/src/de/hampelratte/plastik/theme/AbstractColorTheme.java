@@ -159,11 +159,12 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	 *              Helligkeitsänderung angibt.
 	 * @return Die berechnete Farbe als int.
 	 */
-	public static final int computeAdjustedColor(int rgb, int light) {
+	public static final int computeAdjustedColor(int argb, int light) {
 		float h, s, l;
-		int r = (rgb >> 16) & 0xFF;
-		int g = (rgb >>  8) & 0xFF;
-		int b = (rgb >>  0) & 0xFF;
+		int a = (argb >> 24) & 0xFF;
+		int r = (argb >> 16) & 0xFF;
+		int g = (argb >>  8) & 0xFF;
+		int b = (argb >>  0) & 0xFF;
 	
 		int max = Math.max(r, Math.max(g, b));
 		int min = Math.min(r, Math.min(g, b));
@@ -201,7 +202,7 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		g = Math.round((255.0f * hueToRGB(dif, sum, h          )));
 		b = Math.round((255.0f * hueToRGB(dif, sum, h-1.0f/3.0f)));
 		
-		return 0xFF000000 | (r << 16) | (g << 8) | (b << 0);
+		return (a << 24) | (r << 16) | (g << 8) | (b << 0);
 	}
 	
 	private static final float hueToRGB(float dif, float sum, float h) {
