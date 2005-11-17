@@ -1,8 +1,6 @@
 package de.hampelratte.plastik.borders;
 
-import java.awt.Component;
-import java.awt.Insets;
-
+import javax.swing.JComponent;
 import javax.swing.JSpinner;
 
 public class PlastikSpinnerEditorBorder extends PlastikComboBoxEditorBorder {
@@ -14,16 +12,13 @@ public class PlastikSpinnerEditorBorder extends PlastikComboBoxEditorBorder {
 		this.spinner = spinner;
 	}
 
-	public Insets getBorderInsets(Component c) {
-		return getBorderInsets(c, new Insets(0, 0, 0, 0)); // dummy values
-	}
-
-	public Insets getBorderInsets(Component c, Insets insets) {
-		boolean isLeftToRight = spinner.getComponentOrientation().isLeftToRight();
-		insets.top = 2;
-		insets.bottom = 1;
-		insets.left = isLeftToRight ? 2 : 0;
-		insets.right = isLeftToRight ? 0 : 2;
-		return insets;
+	
+	public boolean hasFocus(JComponent c) {
+		Object p = c.getClientProperty("focus"); 
+		if(p != null) {
+			return ((Boolean)p).booleanValue();
+		} else {
+			return false;
+		}
 	}
 }

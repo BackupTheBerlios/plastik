@@ -64,9 +64,11 @@ public class PlastikComboBoxArrowButtonBorder extends AbstractBorder implements
 		g.translate(x, y);
 
 		// paint background
+		
 		g.setColor(background);
 		int xpos = isLeftToRight ? 0 : 1;
 		int newWidth = isLeftToRight ? width - 2 : width - 1;
+		/*
 		g.drawLine(xpos, 0, newWidth, 0);
 		g.drawLine(xpos, height - 1, newWidth, height - 1);
 		g.drawLine(0, 1, width - 1, 1);
@@ -74,6 +76,7 @@ public class PlastikComboBoxArrowButtonBorder extends AbstractBorder implements
 		g.drawLine(width - 1, 1, width - 1, height - 2);
 		xpos = isLeftToRight ? width-2 : 1;
 		g.drawLine(xpos, 2, xpos, height -2);
+		*/
 		
 		AbstractButton b = (AbstractButton) c;
 

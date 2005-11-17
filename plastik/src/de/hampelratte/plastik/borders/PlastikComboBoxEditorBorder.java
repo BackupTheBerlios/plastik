@@ -66,6 +66,7 @@ public class PlastikComboBoxEditorBorder extends AbstractBorder implements
 		int xpos = 0;
 		int newWidth = 0;
 		
+		/*
 		{ // paint background
 			g.setColor(background);
 			xpos = isLeftToRight ? 1 : 0;
@@ -78,10 +79,10 @@ public class PlastikComboBoxEditorBorder extends AbstractBorder implements
 			g.drawLine(xpos, 1, xpos, height - 2);
 			xpos = isLeftToRight ? 1 : width - 2;
 			g.drawLine(xpos, 1, xpos, height - 2);
-		}
+		}*/
 
 		{ // paint contour 
-			g.setColor(comp.hasFocus() ? highlight : contour);
+			g.setColor(hasFocus(comp) ? highlight : contour);
 			// horizontal
 			xpos = isLeftToRight ? 2 : 0;
 			newWidth = isLeftToRight ? width - 1 : width - 3;
@@ -98,7 +99,7 @@ public class PlastikComboBoxEditorBorder extends AbstractBorder implements
 		g.drawLine(xpos, height - 2, xpos, height - 2);
 
 		// smooth corners
-		g.setColor(comp.hasFocus() ? highlightSmoother : contourSmoother);
+		g.setColor(hasFocus(comp) ? highlightSmoother : contourSmoother);
 		xpos = isLeftToRight ? 0 : width - 1;
 		int increment = isLeftToRight ? 1 : -1;
 		g.drawLine(xpos, 1, xpos, 1); // upper corner
@@ -114,7 +115,7 @@ public class PlastikComboBoxEditorBorder extends AbstractBorder implements
 		xpos = isLeftToRight ? 1 : width - 2;
 		g.drawLine(xpos, 2, xpos, height - 3); // vertical
 
-		if (comp.hasFocus()) {
+		if (hasFocus(comp)) {
 			if (isLeftToRight) {
 				g.setColor(highlightSmoother.darker());
 				g.drawLine(2, 1, width - 1, 1);
@@ -133,5 +134,9 @@ public class PlastikComboBoxEditorBorder extends AbstractBorder implements
 		}
 
 		g.translate(-x, -y);
+	}
+	
+	public boolean hasFocus(JComponent c) {
+		return c.hasFocus();
 	}
 }

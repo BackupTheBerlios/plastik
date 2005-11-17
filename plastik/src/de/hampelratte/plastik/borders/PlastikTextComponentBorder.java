@@ -61,6 +61,7 @@ public class PlastikTextComponentBorder extends AbstractBorder implements
 		g.translate(x, y);
 		
 		// draw background
+		/*
 		g.setColor(background);
 		g.drawLine(1,0,width-2,0);
 		g.drawLine(0,1,width-1,1);
@@ -70,6 +71,7 @@ public class PlastikTextComponentBorder extends AbstractBorder implements
 		g.drawLine(width-2,2,width-2,height-3);
 		g.drawLine(0,height-2,width-1,height-2);
 		g.drawLine(1,height-1,width-2,height-1);
+		*/
 
 		// paint contour
 		g.setColor(comp.hasFocus() ? highlight : contour);
