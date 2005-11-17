@@ -24,7 +24,9 @@ import de.hampelratte.plastik.borders.PlastikComboBoxArrowButtonBorder;
 public class PlastikComboBoxUI extends MetalComboBoxUI implements MouseListener, MouseWheelListener {
 
 	public static ComponentUI createUI(JComponent c) {
-		c.setOpaque(false);
+		if(PlastikLookAndFeel.getDefaultOpacity() == false) {
+			c.setOpaque(false);
+		}
 		return new PlastikComboBoxUI();
 	}
 
