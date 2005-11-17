@@ -77,6 +77,21 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		colorArray[index] = new PlastikColorUIResource(rgb);		
 	}
 	
+	/**
+	 * This function should return a cached version of the color if the param 
+	 * color is an instance of PlastikColorUIResource. If the param is no 
+	 * UIResource then it should return a computed color.
+	 *
+	 * @param color the color-object of the component.
+	 * @param type the requested type.
+	 */
+	public Color getColor(Color color, int type) {
+		if (color instanceof PlastikColorUIResource) {
+			return getColor(type);
+		}
+		return computeColor(color, type);
+	}
+	
 	public PlastikColorUIResource getColor(int type) {
 		PlastikColorUIResource color = colorArray[type];
 		
