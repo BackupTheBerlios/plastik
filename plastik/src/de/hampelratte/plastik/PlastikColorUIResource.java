@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import javax.swing.plaf.UIResource;
 
-public class PlastikColorUIResource extends Color implements UIResource {
+public class PlastikColorUIResource extends Color implements PlastikUIResource {
 
 	public PlastikColorUIResource(int r, int g, int b) {
 		super(r, g, b);
