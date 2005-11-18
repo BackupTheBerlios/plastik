@@ -31,6 +31,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jToggleButton17 = new javax.swing.JToggleButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         labelPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -65,11 +66,26 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         jToggleButton4 = new javax.swing.JToggleButton();
+        jToggleButton5 = new javax.swing.JToggleButton();
+        jToggleButton6 = new javax.swing.JToggleButton();
+        jToggleButton7 = new javax.swing.JToggleButton();
+        jToggleButton8 = new javax.swing.JToggleButton();
+        jToggleButton9 = new javax.swing.JToggleButton();
+        jToggleButton10 = new javax.swing.JToggleButton();
+        jToggleButton11 = new javax.swing.JToggleButton();
+        jToggleButton12 = new javax.swing.JToggleButton();
+        jToggleButton13 = new javax.swing.JToggleButton();
+        jToggleButton14 = new javax.swing.JToggleButton();
+        jToggleButton15 = new javax.swing.JToggleButton();
+        jToggleButton16 = new javax.swing.JToggleButton();
+
+        jToggleButton17.setText("jToggleButton17");
 
         setLayout(new java.awt.BorderLayout());
 
         labelPanel.setLayout(new java.awt.GridBagLayout());
 
+        jLabel1.setDisplayedMnemonic('n');
         jLabel1.setText("normal");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -119,6 +135,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         labelPanel.add(jLabel5, gridBagConstraints);
 
+        jLabel6.setDisplayedMnemonic('B');
         jLabel6.setFont(new java.awt.Font("Dialog", 3, 14));
         jLabel6.setText("14 Bold Italic");
         jLabel6.setEnabled(false);
@@ -149,7 +166,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         labelPanel.add(jLabel9, gridBagConstraints);
 
-        jLabel10.setText("<html><b>HTML</b><br><i>styled label</i></html>");
+        jLabel10.setText("<html><b>HTML</b><br><i>styled label</i><br>disabled</html>");
         jLabel10.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -237,6 +254,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         jButton9.setBackground(new java.awt.Color(255, 204, 51));
         jButton9.setForeground(new java.awt.Color(255, 0, 0));
         jButton9.setText("colored (disabled)");
+        jButton9.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -264,7 +282,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         redSlider.setMinorTickSpacing(10);
         redSlider.setPaintLabels(true);
         redSlider.setPaintTicks(true);
-        redSlider.setValue(200);
+        redSlider.setValue(239);
         redSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 redSliderStateChanged(evt);
@@ -280,7 +298,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         greenSlider.setMinorTickSpacing(10);
         greenSlider.setPaintLabels(true);
         greenSlider.setPaintTicks(true);
-        greenSlider.setValue(200);
+        greenSlider.setValue(239);
         greenSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 greenSliderStateChanged(evt);
@@ -297,7 +315,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         blueSlider.setMinorTickSpacing(10);
         blueSlider.setPaintLabels(true);
         blueSlider.setPaintTicks(true);
-        blueSlider.setValue(200);
+        blueSlider.setValue(239);
         blueSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 blueSliderStateChanged(evt);
@@ -320,17 +338,164 @@ public class AllComponentsPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("JButton", buttonPanel);
 
-        jToggleButton1.setText("jToggleButton1");
-        jPanel1.add(jToggleButton1);
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
+        jPanel1.setEnabled(false);
+        jToggleButton1.setText("jToggleButton1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton1, gridBagConstraints);
+
+        jToggleButton2.setSelected(true);
         jToggleButton2.setText("jToggleButton2");
-        jPanel1.add(jToggleButton2);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton2, gridBagConstraints);
 
         jToggleButton3.setText("jToggleButton3");
-        jPanel1.add(jToggleButton3);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton3, gridBagConstraints);
 
+        jToggleButton4.setSelected(true);
         jToggleButton4.setText("jToggleButton4");
-        jPanel1.add(jToggleButton4);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton4, gridBagConstraints);
+
+        jToggleButton5.setText("jToggleButton5");
+        jToggleButton5.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton5, gridBagConstraints);
+
+        jToggleButton6.setSelected(true);
+        jToggleButton6.setText("jToggleButton6");
+        jToggleButton6.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton6, gridBagConstraints);
+
+        jToggleButton7.setText("jToggleButton7");
+        jToggleButton7.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton7, gridBagConstraints);
+
+        jToggleButton8.setSelected(true);
+        jToggleButton8.setText("jToggleButton8");
+        jToggleButton8.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton8, gridBagConstraints);
+
+        jToggleButton9.setBackground(new java.awt.Color(255, 204, 51));
+        jToggleButton9.setForeground(new java.awt.Color(255, 0, 0));
+        jToggleButton9.setText("jToggleButton9");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton9, gridBagConstraints);
+
+        jToggleButton10.setBackground(new java.awt.Color(255, 204, 51));
+        jToggleButton10.setForeground(new java.awt.Color(255, 0, 0));
+        jToggleButton10.setSelected(true);
+        jToggleButton10.setText("jToggleButton10");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton10, gridBagConstraints);
+
+        jToggleButton11.setBackground(new java.awt.Color(255, 204, 51));
+        jToggleButton11.setForeground(new java.awt.Color(255, 0, 0));
+        jToggleButton11.setText("jToggleButton11");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton11, gridBagConstraints);
+
+        jToggleButton12.setBackground(new java.awt.Color(255, 204, 51));
+        jToggleButton12.setForeground(new java.awt.Color(255, 0, 0));
+        jToggleButton12.setSelected(true);
+        jToggleButton12.setText("jToggleButton12");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton12, gridBagConstraints);
+
+        jToggleButton13.setBackground(new java.awt.Color(255, 204, 51));
+        jToggleButton13.setForeground(new java.awt.Color(255, 0, 0));
+        jToggleButton13.setText("jToggleButton13");
+        jToggleButton13.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton13, gridBagConstraints);
+
+        jToggleButton14.setBackground(new java.awt.Color(255, 204, 51));
+        jToggleButton14.setForeground(new java.awt.Color(255, 0, 0));
+        jToggleButton14.setSelected(true);
+        jToggleButton14.setText("jToggleButton14");
+        jToggleButton14.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton14, gridBagConstraints);
+
+        jToggleButton15.setBackground(new java.awt.Color(255, 204, 51));
+        jToggleButton15.setForeground(new java.awt.Color(255, 0, 0));
+        jToggleButton15.setText("jToggleButton15");
+        jToggleButton15.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton15, gridBagConstraints);
+
+        jToggleButton16.setBackground(new java.awt.Color(255, 204, 51));
+        jToggleButton16.setForeground(new java.awt.Color(255, 0, 0));
+        jToggleButton16.setSelected(true);
+        jToggleButton16.setText("jToggleButton16");
+        jToggleButton16.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(jToggleButton16, gridBagConstraints);
 
         jTabbedPane1.addTab("JToggleButton", jPanel1);
 
@@ -396,9 +561,22 @@ public class AllComponentsPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton10;
+    private javax.swing.JToggleButton jToggleButton11;
+    private javax.swing.JToggleButton jToggleButton12;
+    private javax.swing.JToggleButton jToggleButton13;
+    private javax.swing.JToggleButton jToggleButton14;
+    private javax.swing.JToggleButton jToggleButton15;
+    private javax.swing.JToggleButton jToggleButton16;
+    private javax.swing.JToggleButton jToggleButton17;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JToggleButton jToggleButton4;
+    private javax.swing.JToggleButton jToggleButton5;
+    private javax.swing.JToggleButton jToggleButton6;
+    private javax.swing.JToggleButton jToggleButton7;
+    private javax.swing.JToggleButton jToggleButton8;
+    private javax.swing.JToggleButton jToggleButton9;
     private javax.swing.JPanel labelPanel;
     private javax.swing.JSlider redSlider;
     // End of variables declaration//GEN-END:variables
