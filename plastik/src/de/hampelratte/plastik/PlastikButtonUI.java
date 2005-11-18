@@ -14,6 +14,7 @@ import java.awt.RenderingHints;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
@@ -81,11 +82,11 @@ public class PlastikButtonUI extends BasicButtonUI {
 		// Defaults welche durch diesen Test kommen, können später bedenkenlos
 		// wieder entfernt werden, ohne das es beim Umschalten zwischen Themes
 		// zu Problemen kommt.
-		if (currentForeground == null || currentForeground instanceof UIResource) b.setForeground(defaultForeground);
-		if (currentBackground == null || currentBackground instanceof UIResource) b.setBackground(defaultBackground);
-		if (currentFont       == null || currentFont       instanceof UIResource) b.setFont(defaultFont);
-		if (currentBorder     == null || currentBorder     instanceof UIResource) b.setBorder(defaultBorder);
-		if (currentMargin     == null || currentMargin     instanceof UIResource) b.setMargin(defaultMargin);
+		if (currentForeground == null || currentForeground instanceof PlastikUIResource) b.setForeground(defaultForeground);
+		if (currentBackground == null || currentBackground instanceof PlastikUIResource) b.setBackground(defaultBackground);
+		if (currentFont       == null || currentFont       instanceof PlastikUIResource) b.setFont(defaultFont);
+		if (currentBorder     == null || currentBorder     instanceof PlastikUIResource) b.setBorder(defaultBorder);
+		if (currentMargin     == null || currentMargin     instanceof PlastikUIResource) b.setMargin(defaultMargin);
 		
 		if(PlastikLookAndFeel.getDefaultOpacity() == false) {
 			b.setOpaque(false);
@@ -96,13 +97,12 @@ public class PlastikButtonUI extends BasicButtonUI {
 		}
 	}
 	
-	
 	public void uninstallDefaults(AbstractButton b) {
-		if (b.getForeground() instanceof UIResource) b.setForeground(null);
-		if (b.getBackground() instanceof UIResource) b.setForeground(null);
-		if (b.getFont()       instanceof UIResource) b.setFont(null);
-		if (b.getBorder()     instanceof UIResource) b.setBorder(null);
-		if (b.getMargin()     instanceof UIResource) b.setMargin(null);
+		if (b.getForeground() instanceof PlastikUIResource) b.setForeground(null);
+		if (b.getBackground() instanceof PlastikUIResource) b.setForeground(null);
+		if (b.getFont()       instanceof PlastikUIResource) b.setFont(null);
+		if (b.getBorder()     instanceof PlastikUIResource) b.setBorder(null);
+		if (b.getMargin()     instanceof PlastikUIResource) b.setMargin(null);
 		
 		// Wird mehrfach aufgerufen ist so aber sicher
 		defaultsInitialized = false;
