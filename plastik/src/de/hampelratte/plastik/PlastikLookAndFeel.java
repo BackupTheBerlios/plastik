@@ -197,10 +197,10 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("Common.innerContourSmoother", new PlastikColorUIResource(new Color(0, 0, 0, 102)));
 		
 		// button
-		table.put("Button.background", new PlastikColorUIResource(new Color(229, 231, 236)));
+		table.put("Button.background", new PlastikColorUIResource(229, 231, 236));
 		table.put("Button.border", new PlastikButtonBorder());
 		table.put("Button.font", table.getFont("Common.font"));
-		table.put("Button.foreground", new PlastikColorUIResource(new Color(0, 0, 0)));
+		table.put("Button.foreground", new PlastikColorUIResource(0, 0, 0));
 		
 		// combobox
 		table.put("ComboBox.background", Color.WHITE);
@@ -214,8 +214,9 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 
 		
 		// label
+		table.put("Label.background", new PlastikColorUIResource(239, 239, 239));
 		table.put("Label.font", table.getFont("Common.font"));
-		table.put("Label.background", table.getColor("Common.background"));
+		table.put("Label.foreground", new PlastikColorUIResource(0, 0, 0));
 		
 		// panel
 		table.put("Panel.background", table.getColor("Common.background"));
