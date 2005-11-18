@@ -9,6 +9,10 @@ public class PlastikColorUIResource extends Color implements PlastikUIResource {
 	public PlastikColorUIResource(int r, int g, int b) {
 		super(r, g, b);
 	}
+	
+	public PlastikColorUIResource(int r, int g, int b, int a) {
+		super(r, g, b, a);
+	}
 
 	public PlastikColorUIResource(int rgb) {
 		super(rgb);
@@ -16,6 +20,10 @@ public class PlastikColorUIResource extends Color implements PlastikUIResource {
 
 	public PlastikColorUIResource(float r, float g, float b) {
 		super(r, g, b);
+	}
+	
+	public PlastikColorUIResource(float r, float g, float b, float a) {
+		super(r, g, b, a);
 	}
 
 	public PlastikColorUIResource(Color c) {
