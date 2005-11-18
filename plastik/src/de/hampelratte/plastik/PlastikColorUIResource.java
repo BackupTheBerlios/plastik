@@ -29,4 +29,8 @@ public class PlastikColorUIResource extends Color implements PlastikUIResource {
 	public PlastikColorUIResource(Color c) {
 		super(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
 	}
+	
+	public String toString() {
+		return "PlastikColorUIResource[r="+getRed()+",g="+getGreen()+",b="+getBlue()+"]";
+	}
 }
