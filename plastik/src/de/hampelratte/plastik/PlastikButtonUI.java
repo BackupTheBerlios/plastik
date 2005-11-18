@@ -82,11 +82,11 @@ public class PlastikButtonUI extends BasicButtonUI {
 		// Defaults welche durch diesen Test kommen, können später bedenkenlos
 		// wieder entfernt werden, ohne das es beim Umschalten zwischen Themes
 		// zu Problemen kommt.
-		if (currentForeground == null || currentForeground instanceof PlastikUIResource) b.setForeground(defaultForeground);
-		if (currentBackground == null || currentBackground instanceof PlastikUIResource) b.setBackground(defaultBackground);
-		if (currentFont       == null || currentFont       instanceof PlastikUIResource) b.setFont(defaultFont);
-		if (currentBorder     == null || currentBorder     instanceof PlastikUIResource) b.setBorder(defaultBorder);
-		if (currentMargin     == null || currentMargin     instanceof PlastikUIResource) b.setMargin(defaultMargin);
+		if (currentForeground == null || currentForeground instanceof UIResource) b.setForeground(defaultForeground);
+		if (currentBackground == null || currentBackground instanceof UIResource) b.setBackground(defaultBackground);
+		if (currentFont       == null || currentFont       instanceof UIResource) b.setFont(defaultFont);
+		if (currentBorder     == null || currentBorder     instanceof UIResource) b.setBorder(defaultBorder);
+		if (currentMargin     == null || currentMargin     instanceof UIResource) b.setMargin(defaultMargin);
 		
 		if(PlastikLookAndFeel.getDefaultOpacity() == false) {
 			b.setOpaque(false);
@@ -103,8 +103,6 @@ public class PlastikButtonUI extends BasicButtonUI {
 		if (b.getFont()       instanceof PlastikUIResource) b.setFont(null);
 		if (b.getBorder()     instanceof PlastikUIResource) b.setBorder(null);
 		if (b.getMargin()     instanceof PlastikUIResource) b.setMargin(null);
-		
-		// Wird mehrfach aufgerufen ist so aber sicher
 		defaultsInitialized = false;
 	}
 	
