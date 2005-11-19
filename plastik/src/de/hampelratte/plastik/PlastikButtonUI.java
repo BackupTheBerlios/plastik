@@ -72,8 +72,6 @@ public class PlastikButtonUI extends BasicButtonUI {
 				g.fillRect(0, 0, c.getWidth(), c.getHeight());
 			}
 		}
-		
-		// Zeichnen, um die Transparenz wurde sich schon gekümmert!
 		paint(g, c);
 	}
 		
@@ -175,7 +173,6 @@ public class PlastikButtonUI extends BasicButtonUI {
 				top    = theme.getColor(background, BACKGROUND | PlastikColorTheme.BRIGHTER_GRADIENT);
 				bottom = theme.getColor(background, BACKGROUND | PlastikColorTheme.DARKER_GRADIENT);
 			}
-			// TODO be carefull with the edges..
 			Gradients.drawBoxGradient(g, viewRect, top, bottom);
 		}
 	}
@@ -211,10 +208,10 @@ public class PlastikButtonUI extends BasicButtonUI {
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
 		focusRect.setBounds(viewRect);
 		
-		focusRect.x += 1;
-		focusRect.y += 1;
-		focusRect.width  -= 3;
-		focusRect.height -= 3;
+		focusRect.x += 3;
+		focusRect.y += 2;
+		focusRect.width  -= 7;
+		focusRect.height -= 5;
 		
 		PlastikColorTheme theme = PlastikLookAndFeel.getTheme().getColorTheme();
 		Color color = theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.FOCUS);
@@ -229,12 +226,12 @@ public class PlastikButtonUI extends BasicButtonUI {
 	}
 	
 	public Dimension getPreferredSize(JComponent c) {
-		AbstractButton b = (AbstractButton) c;
-		String text = b.getText();
 		Dimension d = super.getPreferredSize(c);
-		if (text != null && !text.equals("") || b.getIcon() == null) {
-			d.height = d.height < 22 ? 26 : d.height+4;
-			d.width += 12;
+		AbstractButton b = (AbstractButton) c;
+		Insets margin = b.getMargin();
+		if (margin != null) {
+			d.width += margin.left + margin.right;
+			d.height += margin.top + margin.bottom;
 		}
 		return d;
 	}
