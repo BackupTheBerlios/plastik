@@ -46,12 +46,18 @@ public class PlastikButtonUI extends BasicButtonUI {
 	
 	public void installDefaults(AbstractButton b) {
 		super.installDefaults(b);
-		LookAndFeel.installProperty(b, "opaque", Boolean.FALSE);
-		LookAndFeel.installProperty(b, "rolloverEnabled", Boolean.TRUE);
+		
+		Object obj;
+		obj = PlastikLookAndFeel.getDefaultOpacity() ? Boolean.TRUE : Boolean.FALSE;
+		LookAndFeel.installProperty(b, "opaque", obj);
+		
+		obj = PlastikLookAndFeel.isRolloverEnabled() ? Boolean.TRUE : Boolean.FALSE;
+		LookAndFeel.installProperty(b, "rolloverEnabled", obj);
 	}	
 	
 	public void uninstallDefaults(AbstractButton b) {
 		super.uninstallDefaults(b);
+		// this is more secure
 		LookAndFeel.installProperty(b, "opaque", Boolean.TRUE);
 		LookAndFeel.installProperty(b, "rolloverEnabled", Boolean.FALSE);
 	}
