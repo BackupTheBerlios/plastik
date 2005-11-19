@@ -3,6 +3,7 @@ package de.hampelratte.plastik;
 import de.hampelratte.plastik.theme.PlastikColorTheme;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -14,12 +15,9 @@ import java.awt.RenderingHints;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
+import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicHTML;
@@ -28,14 +26,6 @@ import javax.swing.text.View;
 public class PlastikButtonUI extends BasicButtonUI {
 	
 	private static final PlastikButtonUI BUTTON_UI = new PlastikButtonUI();
-	
-	private boolean defaultsInitialized = false;
-	
-	private Color  defaultForeground = null;
-	private Color  defaultBackground = null;
-	private Font   defaultFont       = null;
-	private Border defaultBorder     = null;
-	private Insets defaultMargin     = null;
 	
 	private static Rectangle viewRect  = new Rectangle();
     private static Rectangle textRect  = new Rectangle();
@@ -54,69 +44,29 @@ public class PlastikButtonUI extends BasicButtonUI {
 		return BUTTON_UI;
 	}
 	
-	
 	public void installDefaults(AbstractButton b) {
-		String pp = getPropertyPrefix();
-		if (!defaultsInitialized) {
-			// TODO TextIconGap
-			// TextIconGap wird nicht an den Button übergeben, da man hier 
-			// UIResource-Objekte nicht von "User"-Objekten unterscheiden kann
-			// (kein UIResource-Flag).
-			defaultTextIconGap     = ((Integer)UIManager.get(pp + "textIconGap")).intValue();
-			defaultTextShiftOffset = ((Integer)UIManager.get(pp + "textShiftOffset")).intValue();
-			defaultForeground      = UIManager.getColor(pp + "foreground");
-			defaultBackground      = UIManager.getColor(pp + "background");
-			defaultFont            = UIManager.getFont(pp + "font");
-			defaultBorder          = UIManager.getBorder(pp + "border");
-			defaultMargin          = UIManager.getInsets(pp + "margin");
-			
-			defaultsInitialized = true;
-		}
-		
-		Color  currentForeground = b.getForeground();
-		Color  currentBackground = b.getBackground();
-		Font   currentFont       = b.getFont();
-		Border currentBorder     = b.getBorder();
-		Insets currentMargin     = b.getMargin();
-		
-		// Defaults welche durch diesen Test kommen, können später bedenkenlos
-		// wieder entfernt werden, ohne das es beim Umschalten zwischen Themes
-		// zu Problemen kommt.
-		if (currentForeground == null || currentForeground instanceof UIResource) b.setForeground(defaultForeground);
-		if (currentBackground == null || currentBackground instanceof UIResource) b.setBackground(defaultBackground);
-		if (currentFont       == null || currentFont       instanceof UIResource) b.setFont(defaultFont);
-		if (currentBorder     == null || currentBorder     instanceof UIResource) b.setBorder(defaultBorder);
-		if (currentMargin     == null || currentMargin     instanceof UIResource) b.setMargin(defaultMargin);
-		
-		if(PlastikLookAndFeel.getDefaultOpacity() == false) {
-			b.setOpaque(false);
-		}
-		
-		if(PlastikLookAndFeel.isRolloverEnabled()) {
-			b.setRolloverEnabled(true);
-		}
-	}
+		super.installDefaults(b);
+		LookAndFeel.installProperty(b, "opaque", Boolean.FALSE);
+		LookAndFeel.installProperty(b, "rolloverEnabled", Boolean.TRUE);
+	}	
 	
 	public void uninstallDefaults(AbstractButton b) {
-		if (b.getForeground() instanceof PlastikUIResource) b.setForeground(null);
-		if (b.getBackground() instanceof PlastikUIResource) b.setForeground(null);
-		if (b.getFont()       instanceof PlastikUIResource) b.setFont(null);
-		if (b.getBorder()     instanceof PlastikUIResource) b.setBorder(null);
-		if (b.getMargin()     instanceof PlastikUIResource) b.setMargin(null);
-		defaultsInitialized = false;
+		super.uninstallDefaults(b);
+		LookAndFeel.installProperty(b, "opaque", Boolean.TRUE);
+		LookAndFeel.installProperty(b, "rolloverEnabled", Boolean.FALSE);
 	}
-	
-	/**
-	 * Ich bastle hier einen Workaround mit dem man auch ohne das isOpaque() 
-	 * false liefert transparenzen darstellen kann. 
-	 */
-	public void update(Graphics g, JComponent c) {
-		AbstractButton button = (AbstractButton) c;
-		ButtonModel model = button.getModel();
-		
-		// Ein Hack um Transparenzen zu ermöglichen.
-		PlastikUtils.drawTransparentBackground(g, c);
 
+	public void update(Graphics g, JComponent c) {
+		
+		// if opaque, then fill the background with the parents background-color
+		if (c.isOpaque()) {
+			Component parent = c.getParent();
+			if (parent != null) {
+				g.setColor(parent.getBackground());
+				g.fillRect(0, 0, c.getWidth(), c.getHeight());
+			}
+		}
+		
 		// Zeichnen, um die Transparenz wurde sich schon gekümmert!
 		paint(g, c);
 	}
@@ -244,7 +194,8 @@ public class PlastikButtonUI extends BasicButtonUI {
 			g.setColor(theme.getColor(foreground, FOREGROUND));
 			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + textStep, textRect.y + fm.getAscent() + textStep);
 		} else {
-			g.setColor(theme.getColor(foreground, FOREGROUND_INACTIVE | PlastikColorTheme.BRIGHTER));
+			Color background = b.getBackground();
+			g.setColor(theme.getColor(background, FOREGROUND_INACTIVE | PlastikColorTheme.BRIGHTER));
 			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + 1 + textStep, textRect.y + fm.getAscent() + 1 + textStep);
 			g.setColor(theme.getColor(foreground, FOREGROUND_INACTIVE | PlastikColorTheme.DARKER));
 			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + textStep, textRect.y + fm.getAscent() + textStep);
