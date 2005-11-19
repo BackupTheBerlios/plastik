@@ -8,6 +8,7 @@ import java.awt.Font;
 import javax.swing.UIDefaults;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
+import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.basic.BasicLookAndFeel;
 
 import de.hampelratte.plastik.borders.PlastikBorder;
@@ -201,6 +202,7 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("Button.border", new PlastikButtonBorder());
 		table.put("Button.font", table.getFont("Common.font"));
 		table.put("Button.foreground", new PlastikColorUIResource(0, 0, 0));
+		table.put("Button.margin", new InsetsUIResource(3, 14, 3, 14));
 		
 		// combobox
 		table.put("ComboBox.background", Color.WHITE);
