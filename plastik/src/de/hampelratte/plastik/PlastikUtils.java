@@ -31,6 +31,7 @@ public class PlastikUtils {
 	 *
 	 * @param g Das Graphics-Objekt mit dem die Komponente gezeichnet wird
 	 * @param component Die Komponente selbst
+	 * @depreacted this is now obsolete
 	 */
 	public static void drawTransparentBackground(Graphics g, JComponent component) {	
 		if (component.isOpaque()) {
