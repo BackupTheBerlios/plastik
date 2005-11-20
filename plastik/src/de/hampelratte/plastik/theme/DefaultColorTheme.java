@@ -42,11 +42,18 @@ public class DefaultColorTheme extends AbstractColorTheme {
 		
 		
 	// BUTTON (optional)--------------------------------------------------------
+		setAdjustmentValue(-35, BUTTON | BACKGROUND | DARKER);
+		setAdjustmentValue(-19, BUTTON | BACKGROUND | DARKER_GRADIENT);
 		setAdjustmentValue( -4, BUTTON | BACKGROUND_PRESSED | BRIGHTER_GRADIENT);
 		setAdjustmentValue(  4, BUTTON | BACKGROUND_PRESSED | DARKER_GRADIENT);
+		setAdjustmentValue( -8, BUTTON | BACKGROUND_PRESSED | BRIGHTER);
+		setAdjustmentValue(  8, BUTTON | BACKGROUND_PRESSED | DARKER);
 		setAdjustmentValue( 40, BUTTON | FOREGROUND_COMPONENT | INACTIVE | BRIGHTER);
 		setAdjustmentValue(-40, BUTTON | FOREGROUND_COMPONENT | INACTIVE | DARKER);
 		
+	// LABEL (optional)---------------------------------------------------------
+		setAdjustmentValue( 40, LABEL | FOREGROUND_COMPONENT | INACTIVE | BRIGHTER);
+		setAdjustmentValue(-40, LABEL | FOREGROUND_COMPONENT | INACTIVE | DARKER);
 		
 	}
 	
