@@ -1,89 +1,101 @@
 package de.hampelratte.plastik.borders;
 
+import de.hampelratte.plastik.PlastikLookAndFeel;
+import de.hampelratte.plastik.theme.PlastikColorTheme;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
-
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
-import javax.swing.UIManager;
+import javax.swing.JButton;
+import javax.swing.border.AbstractBorder;
 import javax.swing.plaf.UIResource;
 
-import de.hampelratte.plastik.PlastikUtils;
-
-public class PlastikButtonBorder extends PlastikBorder implements UIResource {
-
-	public void paintBorder(Component c, Graphics g, int x, int y, int width,
-			int height) {
-		super.paintBorder(c, g, x, y, width, height);
-
-		AbstractButton b = (AbstractButton) c;
-		ButtonModel model = b.getModel();
-
-		Color highlightColor = UIManager.getColor("Common.highlight");
-		Color highlightSmoother = UIManager
-				.getColor("Common.highlightSmoother");
-		Color background = b.getBackground();
-		Color top;
-		Color bottom;
+public class PlastikButtonBorder extends AbstractBorder implements UIResource {
+	
+	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+		AbstractButton button = (AbstractButton) c;
+		ButtonModel model = button.getModel();
+		PlastikColorTheme theme = PlastikLookAndFeel.getTheme().getColorTheme();
+		
 		g.translate(x, y);
-
-		// draw 3d lines
-		// farben sind die gradienten vom button // TODO ins LaF
-		if (background instanceof UIResource) {
+		int x1 = 0, y1 = 0;
+		int x2 = width-1, y2 = height-1;
+		
+		if (button instanceof JButton && ((JButton)button).isDefaultButton()) {
+			g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND | PlastikColorTheme.DARKER));
+			drawRoundRect(g, x1, y1, x2, y2);
+			g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND | PlastikColorTheme.DARKER_GRADIENT));
+			drawRoundRectCorners(g, x1, y1, x2, y2);
+			x1++; y1++;	x2--; y2--;
+		}
+		
+		g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BORDER));
+		drawRoundRect(g, x1, y1, x2, y2);
+		g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BORDER | PlastikColorTheme.BRIGHTER));
+		drawRoundRectCorners(g, x1, y1, x2, y2);
+		
+		if (button.isContentAreaFilled()) {
+			Color top, bottom;
+			Color background = button.getBackground();
 			if (!model.isEnabled()) {
-				top = new Color(239, 239, 239);
-				bottom = new Color(233, 233, 233);
+				top    = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.INACTIVE | PlastikColorTheme.BRIGHTER);
+				bottom = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.INACTIVE | PlastikColorTheme.DARKER);
 			} else if (model.isArmed() && model.isPressed()) {
-				top = new Color(203, 205, 209);
-				bottom = new Color(213, 215, 219);
+				top    = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.BRIGHTER);
+				bottom = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.DARKER);
 			} else {
-				top = new Color(233, 235, 239);
-				bottom = new Color(213, 215, 219);
+				top    = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.BRIGHTER);
+				bottom = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.DARKER);
 			}
-		} else {
-			// TODO calculate corresponding colors
-			if (!model.isEnabled()) {
-				top = background;
-				bottom = background;
-			} else {
-				top = background;
-				int rgb = PlastikUtils.computeAdjustedColor(
-						background.getRGB(), -25);
-				bottom = new Color(rgb);
-			}
+
+			g.setColor(top);
+			g.drawLine(x1+2, y1+1, x2-2, y1+1);
+			g.drawLine(x1+1, y1+2, x1+1, y2-2);
+
+			g.setColor(bottom);
+			g.drawLine(x1+2, y2-1, x2-2, y2-1);
+			g.drawLine(x2-1, y1+2, x2-1, y2-2);
 		}
-
-		g.setColor(top); // lighter line
-		g.drawLine(2, 1, width - 3, 1);
-		g.drawLine(1, 2, 1, height - 3);
-		g.setColor(bottom); // darker lines
-		g.drawLine(2, height - 2, width - 3, height - 2);
-		g.drawLine(width - 2, 2, width - 2, height - 3);
-
-		// draw highlight
-		if (b.isEnabled() && !b.getModel().isPressed() && b.isRolloverEnabled()
-				&& b.getModel().isRollover()) {
-			g.setColor(highlightColor);
-			g.drawLine(2, 1, width - 3, 1);
-			g.drawLine(2, height - 2, width - 3, height - 2);
-
-			g.setColor(highlightSmoother);
-			g.drawLine(1, 2, width - 2, 2);
-			g.drawLine(1, height - 3, width - 2, height - 3);
+		
+		if (button.isEnabled() && !model.isPressed() && button.isRolloverEnabled() && model.isRollover()) {
+			g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.ROLLOVER));
+			g.drawLine(x1+2, y1+1, x2-2, y1+1);
+			g.drawLine(x1+2, y2-1, x2-2, y2-1);
+			
+			g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.ROLLOVER | PlastikColorTheme.BRIGHTER));
+			g.drawLine(x1+1, y1+2, x2-1, y1+2);
+			g.drawLine(x1+1, y2-2, x2-1, y2-2);
 		}
+		
 		g.translate(-x, -y);
+	}
+	
+	private void drawRoundRect(Graphics g, int x1, int y1, int x2, int y2) {
+		g.drawLine(x1+1, y1+1, x1+1, y1+1);
+		g.drawLine(x1+2, y1,   x2-2, y1);
+		g.drawLine(x2-1, y1+1, x2-1, y1+1);
+		g.drawLine(x2,   y1+2, x2,   y2-2);
+		g.drawLine(x2-1, y2-1, x2-1, y2-1);
+		g.drawLine(x2-2, y2,   x1+2, y2);
+		g.drawLine(x1+1, y2-1, x1+1, y2-1);
+		g.drawLine(x1,   y2-2, x1,   y1+2);		
+	}
+	
+	private void drawRoundRectCorners(Graphics g, int x1, int y1, int x2, int y2) {
+		g.drawLine(x1,   y1+1, x1+1, y1);
+		g.drawLine(x2-1, y1,   x2,   y1+1);
+		g.drawLine(x2-1, y2,   x2,   y2-1);
+		g.drawLine(x1,   y2-1, x1+1, y2);		
+	}
+
+	public Insets getBorderInsets(Component c) {
+		return getBorderInsets(c, new Insets(0, 0, 0, 0));
 	}
 
 	public Insets getBorderInsets(Component c, Insets insets) {
-		AbstractButton b = (AbstractButton) c;
 		insets.top = insets.left = insets.right = insets.bottom = 2;
-		/*
-		 * if(b.getModel().isPressed() || !b.isEnabled()) { insets.top =
-		 * insets.left = insets.right = insets.bottom = 1; } else { insets.top =
-		 * insets.left = insets.right = insets.bottom = 2; }
-		 */
 		return insets;
 	}
 }
