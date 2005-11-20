@@ -208,9 +208,9 @@ public class PlastikButtonUI extends BasicButtonUI {
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
 		focusRect.setBounds(viewRect);
 		
-		focusRect.x += 3;
+		focusRect.x += 2;
 		focusRect.y += 2;
-		focusRect.width  -= 7;
+		focusRect.width  -= 5;
 		focusRect.height -= 5;
 		
 		PlastikColorTheme theme = PlastikLookAndFeel.getTheme().getColorTheme();
