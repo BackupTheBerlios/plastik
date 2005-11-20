@@ -60,43 +60,12 @@ public class PlastikLabelUI extends MetalLabelUI {
 	protected void paintDisabledText(JLabel l, Graphics g, String s, int textX, int textY) {
 		int mnemonicIndex = l.getDisplayedMnemonicIndex();
 		Color foreground = l.getForeground();
+		Color background = l.getBackground();
 		PlastikColorTheme theme = PlastikLookAndFeel.getTheme().getColorTheme();
 		
-		g.setColor(theme.getColor(foreground, FOREGROUND_INACTIVE | PlastikColorTheme.BRIGHTER));
+		g.setColor(theme.getColor(background, FOREGROUND_INACTIVE | PlastikColorTheme.BRIGHTER));
 		BasicGraphicsUtils.drawStringUnderlineCharAt(g, s, mnemonicIndex, textX + 1, textY + 1);
 		g.setColor(theme.getColor(foreground, FOREGROUND_INACTIVE | PlastikColorTheme.DARKER));
 		BasicGraphicsUtils.drawStringUnderlineCharAt(g, s, mnemonicIndex, textX, textY);
     }
 }
-/*
-public class AvioLabelUI extends BasicLabelUI {
-	
-    protected static AvioLabelUI labelUI = new AvioLabelUI();
-
-    public static ComponentUI createUI(JComponent c) {
-		return labelUI;
-    }
-
-	public void paint(Graphics g, JComponent c) {
-		Graphics2D g2d = (Graphics2D) g;
-		Object antialising = null;
-		if (AvioLookAndFeel.useTextAntialising(c)) {
-			antialising = g2d.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
-			if (antialising != RenderingHints.VALUE_TEXT_ANTIALIAS_ON) {
-				g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-			}
-		}
-		
-		super.paint(g, c);
-		
-		if (antialising != null) {
-			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, antialising);
-		}
-	}
-	
-    protected void paintDisabledText(JLabel l, Graphics g, String s, int textX, int textY) {
-		int mnemIndex = l.getDisplayedMnemonicIndex();
-		g.setColor(UIManager.getColor("Label.disabledForeground"));
-		BasicGraphicsUtils.drawStringUnderlineCharAt(g, s, mnemIndex, textX, textY);
-    }
-}*/
