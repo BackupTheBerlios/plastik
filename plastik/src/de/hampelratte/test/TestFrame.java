@@ -70,7 +70,7 @@ public class TestFrame extends JFrame {
 		Container allContentPane = exampleFrame.getContentPane();
 		
 		allPanel = new AllComponentsPanel();
-		getRootPane().setDefaultButton(allPanel.getDefaultButton());
+		exampleFrame.getRootPane().setDefaultButton(allPanel.getDefaultButton());
 		
 		Container contentPane = getContentPane();
 		contentPane.add(desktopPane, BorderLayout.CENTER);
@@ -96,9 +96,6 @@ public class TestFrame extends JFrame {
 		constraints.insets.top = 10;
 		uiChoosingLayout.setConstraints(antialisingButton, constraints);
 		uiChoosingContentPane.add(antialisingButton);
-		
-		
-		
 		
 		// Metal ist voll buggy und wir schleppen das jetzt rum
 		uiChoosingFrame.putClientProperty("JInternalFrame.isPalette", Boolean.TRUE); 
