@@ -200,6 +200,7 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		// button
 		table.put("Button.background", new PlastikColorUIResource(229, 231, 236));
 		table.put("Button.border", new PlastikButtonBorder());
+		table.put("Button.defaultButtonFollowsFocus", Boolean.FALSE);
 		table.put("Button.font", table.getFont("Common.font"));
 		table.put("Button.foreground", new PlastikColorUIResource(0, 0, 0));
 		table.put("Button.margin", new InsetsUIResource(3, 14, 3, 14));
