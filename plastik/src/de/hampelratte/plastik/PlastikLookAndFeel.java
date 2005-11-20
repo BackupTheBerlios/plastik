@@ -141,6 +141,7 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("SpinnerUI", "de.hampelratte.plastik.PlastikSpinnerUI");
 		table.put("TextFieldUI", "de.hampelratte.plastik.PlastikTextFieldUI");
 		table.put("TextAreaUI", "de.hampelratte.plastik.PlastikTextAreaUI");
+		table.put("ToggleButtonUI", "de.hampelratte.plastik.PlastikToggleButtonUI");
 		table.put("ToolTipUI", "de.hampelratte.plastik.PlastikToolTipUI");
 	}
 
@@ -248,6 +249,15 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("TextField.border", new PlastikTextComponentBorder());
 		table.put("TextField.disabledBackground", table.get("Common.background"));
 		table.put("TextField.font", table.getFont("Common.font"));
+		
+		// togglebutton
+		table.put("ToggleButton.background", new PlastikColorUIResource(229, 231, 236));
+		// TODO use own border
+		table.put("ToggleButton.border", new PlastikButtonBorder());
+		table.put("ToggleButton.font", table.getFont("Common.font"));
+		table.put("ToggleButton.foreground", new PlastikColorUIResource(0, 0, 0));
+		table.put("ToggleButton.margin", new InsetsUIResource(3, 14, 3, 14));
+
 
 		// tooltip
 		table.put("ToolTip.font", table.getFont("Common.font"));
