@@ -7,7 +7,9 @@
 package de.hampelratte.test;
 
 import java.awt.Color;
+import java.awt.Component;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
 /**
  *
@@ -19,7 +21,10 @@ public class AllComponentsPanel extends javax.swing.JPanel {
 	public AllComponentsPanel() {
 		initComponents();
 	}
-	
+
+	public JButton getDefaultButton() {
+		return jButton11;
+	}
 	
 	
 	/** This method is called from within the constructor to
@@ -61,6 +66,8 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         redSlider = new javax.swing.JSlider();
         greenSlider = new javax.swing.JSlider();
         blueSlider = new javax.swing.JSlider();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
@@ -330,11 +337,26 @@ public class AllComponentsPanel extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         buttonPanel.add(jPanel2, gridBagConstraints);
+
+        jButton10.setText("margin");
+        jButton10.setMargin(new java.awt.Insets(20, 2, 20, 2));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        buttonPanel.add(jButton10, gridBagConstraints);
+
+        jButton11.setText("default");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        buttonPanel.add(jButton11, gridBagConstraints);
 
         jTabbedPane1.addTab("JButton", buttonPanel);
 
@@ -537,6 +559,8 @@ public class AllComponentsPanel extends javax.swing.JPanel {
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JSlider greenSlider;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

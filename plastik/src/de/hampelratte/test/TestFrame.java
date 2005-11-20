@@ -70,6 +70,7 @@ public class TestFrame extends JFrame {
 		Container allContentPane = exampleFrame.getContentPane();
 		
 		allPanel = new AllComponentsPanel();
+		getRootPane().setDefaultButton(allPanel.getDefaultButton());
 		
 		Container contentPane = getContentPane();
 		contentPane.add(desktopPane, BorderLayout.CENTER);
@@ -108,7 +109,7 @@ public class TestFrame extends JFrame {
 		exampleFrame.setVisible(true);
 		allContentPane.add(allPanel, BorderLayout.CENTER);
 		
-
+		
 	}
 	
 	public static void main(String[] args) {
