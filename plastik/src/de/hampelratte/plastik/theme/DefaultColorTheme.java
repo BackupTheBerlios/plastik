@@ -26,7 +26,7 @@ public class DefaultColorTheme extends AbstractColorTheme {
 		setColor(  0,   0,   0, COMMON | FOREGROUND_PRESSED       | INACTIVE );
 		setColor( 16,  16,  16, COMMON | FOCUS                               );
 		setColor( 16,  16,  16, COMMON | FOCUS                    | INACTIVE );
-		setColor(103, 141, 178, COMMON | ROLLOVER                            );
+		setColor(103, 141, 178, 170, COMMON | ROLLOVER                            );
 		setColor(  0,   0,   0, COMMON | ROLLOVER                 | INACTIVE );
 		setColor(134, 134, 134, COMMON | BORDER_COMPONENT                    );
 		setColor(134, 134, 134, COMMON | BORDER_COMPONENT         | INACTIVE );	
