@@ -15,6 +15,7 @@ import de.hampelratte.plastik.borders.PlastikBorder;
 import de.hampelratte.plastik.borders.PlastikButtonBorder;
 import de.hampelratte.plastik.borders.PlastikScrollPaneBorder;
 import de.hampelratte.plastik.borders.PlastikTextComponentBorder;
+import de.hampelratte.plastik.borders.PlastikToggleButtonBorder;
 import de.hampelratte.plastik.theme.PlastikTheme;
 
 
@@ -252,8 +253,7 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		
 		// togglebutton
 		table.put("ToggleButton.background", new PlastikColorUIResource(229, 231, 236));
-		// TODO use own border
-		table.put("ToggleButton.border", new PlastikButtonBorder());
+		table.put("ToggleButton.border", new PlastikToggleButtonBorder());
 		table.put("ToggleButton.font", table.getFont("Common.font"));
 		table.put("ToggleButton.foreground", new PlastikColorUIResource(0, 0, 0));
 		table.put("ToggleButton.margin", new InsetsUIResource(3, 14, 3, 14));
