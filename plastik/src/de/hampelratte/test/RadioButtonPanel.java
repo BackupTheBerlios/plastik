@@ -33,6 +33,7 @@ public class RadioButtonPanel extends JPanel {
 	private void initialize() {
 		this.setLayout(new FlowLayout());
 		this.setSize(413, 296);
+		this.setBackground(new java.awt.Color(0,204,0));
 		this.add(getJRadioButton(), null);
 		this.add(getJRadioButton1(), null);
 		this.add(getJRadioButton2(), null);
