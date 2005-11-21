@@ -37,7 +37,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jToggleButton17 = new javax.swing.JToggleButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabs = new javax.swing.JTabbedPane();
         labelPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -68,7 +68,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         blueSlider = new javax.swing.JSlider();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        toggleButtonPanel = new javax.swing.JPanel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
@@ -85,6 +85,51 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         jToggleButton14 = new javax.swing.JToggleButton();
         jToggleButton15 = new javax.swing.JToggleButton();
         jToggleButton16 = new javax.swing.JToggleButton();
+        menuBarPanel = new javax.swing.JPanel();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
+        jPanel1 = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JSeparator();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        jSeparator2 = new javax.swing.JSeparator();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
+        jSeparator3 = new javax.swing.JSeparator();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jSeparator10 = new javax.swing.JSeparator();
+        jCheckBoxMenuItem7 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem8 = new javax.swing.JCheckBoxMenuItem();
+        jSeparator11 = new javax.swing.JSeparator();
+        jRadioButtonMenuItem7 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem8 = new javax.swing.JRadioButtonMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JSeparator();
+        jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem4 = new javax.swing.JCheckBoxMenuItem();
+        jSeparator5 = new javax.swing.JSeparator();
+        jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem4 = new javax.swing.JRadioButtonMenuItem();
+        jSeparator6 = new javax.swing.JSeparator();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JSeparator();
+        jCheckBoxMenuItem5 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem6 = new javax.swing.JCheckBoxMenuItem();
+        jSeparator8 = new javax.swing.JSeparator();
+        jRadioButtonMenuItem5 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem6 = new javax.swing.JRadioButtonMenuItem();
+        jSeparator9 = new javax.swing.JSeparator();
+        jMenu6 = new javax.swing.JMenu();
 
         jToggleButton17.setText("jToggleButton17");
 
@@ -195,7 +240,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         labelPanel.add(jLabel12, gridBagConstraints);
 
-        jTabbedPane1.addTab("JLabel", labelPanel);
+        tabs.addTab("JLabel", labelPanel);
 
         buttonPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -358,23 +403,23 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         buttonPanel.add(jButton11, gridBagConstraints);
 
-        jTabbedPane1.addTab("JButton", buttonPanel);
+        tabs.addTab("JButton", buttonPanel);
 
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        toggleButtonPanel.setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setEnabled(false);
+        toggleButtonPanel.setEnabled(false);
         jToggleButton1.setText("jToggleButton1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton1, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton1, gridBagConstraints);
 
         jToggleButton2.setSelected(true);
         jToggleButton2.setText("jToggleButton2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton2, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton2, gridBagConstraints);
 
         jToggleButton3.setText("jToggleButton3");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -382,7 +427,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton3, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton3, gridBagConstraints);
 
         jToggleButton4.setSelected(true);
         jToggleButton4.setText("jToggleButton4");
@@ -391,7 +436,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton4, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton4, gridBagConstraints);
 
         jToggleButton5.setText("jToggleButton5");
         jToggleButton5.setEnabled(false);
@@ -400,7 +445,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton5, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton5, gridBagConstraints);
 
         jToggleButton6.setSelected(true);
         jToggleButton6.setText("jToggleButton6");
@@ -410,7 +455,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton6, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton6, gridBagConstraints);
 
         jToggleButton7.setText("jToggleButton7");
         jToggleButton7.setEnabled(false);
@@ -419,7 +464,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton7, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton7, gridBagConstraints);
 
         jToggleButton8.setSelected(true);
         jToggleButton8.setText("jToggleButton8");
@@ -429,7 +474,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton8, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton8, gridBagConstraints);
 
         jToggleButton9.setBackground(new java.awt.Color(255, 204, 51));
         jToggleButton9.setForeground(new java.awt.Color(255, 0, 0));
@@ -439,7 +484,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton9, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton9, gridBagConstraints);
 
         jToggleButton10.setBackground(new java.awt.Color(255, 204, 51));
         jToggleButton10.setForeground(new java.awt.Color(255, 0, 0));
@@ -450,7 +495,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton10, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton10, gridBagConstraints);
 
         jToggleButton11.setBackground(new java.awt.Color(255, 204, 51));
         jToggleButton11.setForeground(new java.awt.Color(255, 0, 0));
@@ -460,7 +505,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton11, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton11, gridBagConstraints);
 
         jToggleButton12.setBackground(new java.awt.Color(255, 204, 51));
         jToggleButton12.setForeground(new java.awt.Color(255, 0, 0));
@@ -471,7 +516,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton12, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton12, gridBagConstraints);
 
         jToggleButton13.setBackground(new java.awt.Color(255, 204, 51));
         jToggleButton13.setForeground(new java.awt.Color(255, 0, 0));
@@ -482,7 +527,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton13, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton13, gridBagConstraints);
 
         jToggleButton14.setBackground(new java.awt.Color(255, 204, 51));
         jToggleButton14.setForeground(new java.awt.Color(255, 0, 0));
@@ -494,7 +539,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton14, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton14, gridBagConstraints);
 
         jToggleButton15.setBackground(new java.awt.Color(255, 204, 51));
         jToggleButton15.setForeground(new java.awt.Color(255, 0, 0));
@@ -505,7 +550,7 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton15, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton15, gridBagConstraints);
 
         jToggleButton16.setBackground(new java.awt.Color(255, 204, 51));
         jToggleButton16.setForeground(new java.awt.Color(255, 0, 0));
@@ -517,11 +562,144 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel1.add(jToggleButton16, gridBagConstraints);
+        toggleButtonPanel.add(jToggleButton16, gridBagConstraints);
 
-        jTabbedPane1.addTab("JToggleButton", jPanel1);
+        tabs.addTab("JToggleButton", toggleButtonPanel);
 
-        add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        menuBarPanel.setLayout(new java.awt.BorderLayout());
+
+        jInternalFrame1.setVisible(true);
+        jInternalFrame1.getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        jMenu1.setText("Menu");
+        jMenuItem1.setText("Item");
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Item");
+        jMenu1.add(jMenuItem2);
+
+        jMenu1.add(jSeparator1);
+
+        jCheckBoxMenuItem1.setText("CheckBox");
+        jMenu1.add(jCheckBoxMenuItem1);
+
+        jCheckBoxMenuItem2.setText("CheckBox");
+        jMenu1.add(jCheckBoxMenuItem2);
+
+        jMenu1.add(jSeparator2);
+
+        jRadioButtonMenuItem1.setText("RadioButton");
+        jMenu1.add(jRadioButtonMenuItem1);
+
+        jRadioButtonMenuItem2.setText("RadioButton");
+        jMenu1.add(jRadioButtonMenuItem2);
+
+        jMenu1.add(jSeparator3);
+
+        jMenu4.setText("Menu");
+        jMenuItem7.setText("Item");
+        jMenu4.add(jMenuItem7);
+
+        jMenuItem8.setText("Item");
+        jMenu4.add(jMenuItem8);
+
+        jMenu4.add(jSeparator10);
+
+        jCheckBoxMenuItem7.setText("CheckBox");
+        jMenu4.add(jCheckBoxMenuItem7);
+
+        jCheckBoxMenuItem8.setText("CheckBox");
+        jMenu4.add(jCheckBoxMenuItem8);
+
+        jMenu4.add(jSeparator11);
+
+        jRadioButtonMenuItem7.setText("RadioButton");
+        jMenu4.add(jRadioButtonMenuItem7);
+
+        jRadioButtonMenuItem8.setText("RadioButton");
+        jMenu4.add(jRadioButtonMenuItem8);
+
+        jMenu1.add(jMenu4);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Disabled");
+        jMenuItem3.setText("Item");
+        jMenuItem3.setEnabled(false);
+        jMenu2.add(jMenuItem3);
+
+        jMenuItem4.setText("Item");
+        jMenuItem4.setEnabled(false);
+        jMenu2.add(jMenuItem4);
+
+        jSeparator4.setEnabled(false);
+        jMenu2.add(jSeparator4);
+
+        jCheckBoxMenuItem3.setText("CheckBox");
+        jCheckBoxMenuItem3.setEnabled(false);
+        jMenu2.add(jCheckBoxMenuItem3);
+
+        jCheckBoxMenuItem4.setText("CheckBox");
+        jCheckBoxMenuItem4.setEnabled(false);
+        jMenu2.add(jCheckBoxMenuItem4);
+
+        jSeparator5.setEnabled(false);
+        jMenu2.add(jSeparator5);
+
+        jRadioButtonMenuItem3.setText("RadioButton");
+        jRadioButtonMenuItem3.setEnabled(false);
+        jMenu2.add(jRadioButtonMenuItem3);
+
+        jRadioButtonMenuItem4.setText("RadioButton");
+        jRadioButtonMenuItem4.setEnabled(false);
+        jMenu2.add(jRadioButtonMenuItem4);
+
+        jSeparator6.setEnabled(false);
+        jMenu2.add(jSeparator6);
+
+        jMenu5.setText("Menu");
+        jMenu5.setEnabled(false);
+        jMenu2.add(jMenu5);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Menu");
+        jMenuItem5.setText("Item");
+        jMenu3.add(jMenuItem5);
+
+        jMenuItem6.setText("Item");
+        jMenu3.add(jMenuItem6);
+
+        jMenu3.add(jSeparator7);
+
+        jCheckBoxMenuItem5.setText("CheckBox");
+        jMenu3.add(jCheckBoxMenuItem5);
+
+        jCheckBoxMenuItem6.setText("CheckBox");
+        jMenu3.add(jCheckBoxMenuItem6);
+
+        jMenu3.add(jSeparator8);
+
+        jRadioButtonMenuItem5.setText("RadioButton");
+        jMenu3.add(jRadioButtonMenuItem5);
+
+        jRadioButtonMenuItem6.setText("RadioButton");
+        jMenu3.add(jRadioButtonMenuItem6);
+
+        jMenu3.add(jSeparator9);
+
+        jMenu6.setText("Menu");
+        jMenu3.add(jMenu6);
+
+        jMenuBar1.add(jMenu3);
+
+        jInternalFrame1.setJMenuBar(jMenuBar1);
+
+        menuBarPanel.add(jInternalFrame1, java.awt.BorderLayout.CENTER);
+
+        tabs.addTab("JMenuBar", menuBarPanel);
+
+        add(tabs, java.awt.BorderLayout.CENTER);
 
     }
     // </editor-fold>//GEN-END:initComponents
@@ -569,6 +747,15 @@ public class AllComponentsPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem5;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem6;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem7;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem8;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -581,9 +768,42 @@ public class AllComponentsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem4;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem5;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem6;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem7;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem8;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton10;
     private javax.swing.JToggleButton jToggleButton11;
@@ -602,7 +822,10 @@ public class AllComponentsPanel extends javax.swing.JPanel {
     private javax.swing.JToggleButton jToggleButton8;
     private javax.swing.JToggleButton jToggleButton9;
     private javax.swing.JPanel labelPanel;
+    private javax.swing.JPanel menuBarPanel;
     private javax.swing.JSlider redSlider;
+    private javax.swing.JTabbedPane tabs;
+    private javax.swing.JPanel toggleButtonPanel;
     // End of variables declaration//GEN-END:variables
 	
 }
