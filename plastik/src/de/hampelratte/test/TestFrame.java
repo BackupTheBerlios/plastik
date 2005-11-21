@@ -14,6 +14,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
 import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
@@ -37,6 +38,11 @@ public class TestFrame extends JFrame {
 			private JToggleButton antialisingButton;
 		private JInternalFrame exampleFrame;
 			private AllComponentsPanel allPanel;
+				private ButtonPanel buttonPanel;
+				private LabelPanel labelPanel;
+				private ToggleButtonPanel toggleButtonPanel;
+				private RadioButtonPanel radioButtonPanel;
+				private MenuBarPanel menuBarPanel;
 	
 	
 	public TestFrame() {
@@ -63,14 +69,29 @@ public class TestFrame extends JFrame {
 		//JToggleButton tog = new JToggleButton(getChangeAntialiasingAction());
 		antialisingButton = new JToggleButton(getChangeAntialiasingAction());
 		
-		// examplesFrame
+		// exampleFrame
 		exampleFrame = new JInternalFrame("Examples", true, false, true, true);
 		exampleFrame.setBounds(140, 5, 640, 550);
 		
 		Container allContentPane = exampleFrame.getContentPane();
 		
+		//-allPanel-------------------------------------------------------------
 		allPanel = new AllComponentsPanel();
-		exampleFrame.getRootPane().setDefaultButton(allPanel.getDefaultButton());
+		buttonPanel = new ButtonPanel();
+		labelPanel = new LabelPanel();
+		toggleButtonPanel = new ToggleButtonPanel();
+		radioButtonPanel = new RadioButtonPanel();
+		menuBarPanel = new MenuBarPanel();
+		
+		JTabbedPane pane = allPanel.getTabbedPane();
+		pane.add(buttonPanel);
+		pane.add(labelPanel);
+		pane.add(toggleButtonPanel);
+		pane.add(radioButtonPanel);
+		pane.add(menuBarPanel);
+		
+		
+//		exampleFrame.getRootPane().setDefaultButton(allPanel.getDefaultButton());
 		
 		Container contentPane = getContentPane();
 		contentPane.add(desktopPane, BorderLayout.CENTER);
