@@ -14,8 +14,8 @@ public class PlastikColorUIResource extends Color implements PlastikUIResource {
 		super(r, g, b, a);
 	}
 
-	public PlastikColorUIResource(int rgb) {
-		super(rgb, true);
+	public PlastikColorUIResource(int rgba) {
+		super(rgba, true);
 	}
 
 	public PlastikColorUIResource(float r, float g, float b) {
