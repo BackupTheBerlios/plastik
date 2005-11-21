@@ -64,7 +64,7 @@ public class PlastikToggleButtonBorder extends AbstractBorder implements UIResou
 			g.drawLine(x2-1, y1+2, x2-1, y2-2);
 		}
 		
-		if (button.isEnabled() && !model.isPressed() && button.isRolloverEnabled() && model.isRollover()) {
+		if (button.isEnabled() && !model.isPressed() && button.isRolloverEnabled() && model.isRollover() && !model.isSelected()) {
 			g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.ROLLOVER));
 			g.drawLine(x1+2, y1+1, x2-2, y1+1);
 			g.drawLine(x1+2, y2-1, x2-2, y2-1);
