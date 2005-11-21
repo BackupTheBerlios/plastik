@@ -1,32 +1,28 @@
-/*
- * AllComponentsPanel.java
- *
- * Created on 3. November 2005, 15:23
- */
-
 package de.hampelratte.test;
 
 import java.awt.Color;
 import java.awt.Component;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 
-/**
- *
- * @author  TBN
- */
 public class AllComponentsPanel extends javax.swing.JPanel {
 	
 	/** Creates new form AllComponentsPanel */
 	public AllComponentsPanel() {
 		initComponents();
 	}
-
-	public JButton getDefaultButton() {
-		return jButton11;
+	
+	public JTabbedPane getTabbedPane() {
+		return tabs;
 	}
 	
-	
+	private void updateColors() {
+		Color color = new Color(redSlider.getValue(), greenSlider.getValue(), blueSlider.getValue());
+		int count = tabs.getTabCount();
+		for (int i=0; i<count; i++) {
+			tabs.getComponentAt(i).setBackground(color);
+		}
+	}
+
 	/** This method is called from within the constructor to
 	 * initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is
@@ -36,341 +32,74 @@ public class AllComponentsPanel extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jToggleButton17 = new javax.swing.JToggleButton();
         tabs = new javax.swing.JTabbedPane();
-        labelPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        buttonPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        buttonOpaqueToggle = new javax.swing.JToggleButton();
+        jPanel1 = new javax.swing.JPanel();
+        redLabel = new javax.swing.JLabel();
+        greenLabel = new javax.swing.JLabel();
+        blueLabel = new javax.swing.JLabel();
         redSlider = new javax.swing.JSlider();
         greenSlider = new javax.swing.JSlider();
         blueSlider = new javax.swing.JSlider();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        toggleButtonPanel = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
-        jToggleButton5 = new javax.swing.JToggleButton();
-        jToggleButton6 = new javax.swing.JToggleButton();
-        jToggleButton7 = new javax.swing.JToggleButton();
-        jToggleButton8 = new javax.swing.JToggleButton();
-        jToggleButton9 = new javax.swing.JToggleButton();
-        jToggleButton10 = new javax.swing.JToggleButton();
-        jToggleButton11 = new javax.swing.JToggleButton();
-        jToggleButton12 = new javax.swing.JToggleButton();
-        jToggleButton13 = new javax.swing.JToggleButton();
-        jToggleButton14 = new javax.swing.JToggleButton();
-        jToggleButton15 = new javax.swing.JToggleButton();
-        jToggleButton16 = new javax.swing.JToggleButton();
-        menuBarPanel = new javax.swing.JPanel();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jPanel1 = new javax.swing.JPanel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JSeparator();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
-        jSeparator2 = new javax.swing.JSeparator();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
-        jSeparator3 = new javax.swing.JSeparator();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jSeparator10 = new javax.swing.JSeparator();
-        jCheckBoxMenuItem7 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem8 = new javax.swing.JCheckBoxMenuItem();
-        jSeparator11 = new javax.swing.JSeparator();
-        jRadioButtonMenuItem7 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem8 = new javax.swing.JRadioButtonMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jSeparator4 = new javax.swing.JSeparator();
-        jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem4 = new javax.swing.JCheckBoxMenuItem();
-        jSeparator5 = new javax.swing.JSeparator();
-        jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem4 = new javax.swing.JRadioButtonMenuItem();
-        jSeparator6 = new javax.swing.JSeparator();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jSeparator7 = new javax.swing.JSeparator();
-        jCheckBoxMenuItem5 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem6 = new javax.swing.JCheckBoxMenuItem();
-        jSeparator8 = new javax.swing.JSeparator();
-        jRadioButtonMenuItem5 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem6 = new javax.swing.JRadioButtonMenuItem();
-        jSeparator9 = new javax.swing.JSeparator();
-        jMenu6 = new javax.swing.JMenu();
-
-        jToggleButton17.setText("jToggleButton17");
 
         setLayout(new java.awt.BorderLayout());
 
-        labelPanel.setLayout(new java.awt.GridBagLayout());
+        add(tabs, java.awt.BorderLayout.CENTER);
 
-        jLabel1.setDisplayedMnemonic('n');
-        jLabel1.setText("normal");
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        redLabel.setText("Red:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 4);
+        jPanel1.add(redLabel, gridBagConstraints);
+
+        greenLabel.setText("Green:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        labelPanel.add(jLabel1, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 4);
+        jPanel1.add(greenLabel, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 3, 14));
-        jLabel2.setText("14 Bold Italic");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        labelPanel.add(jLabel2, gridBagConstraints);
-
-        jLabel3.setBackground(new java.awt.Color(255, 204, 204));
-        jLabel3.setForeground(new java.awt.Color(204, 0, 51));
-        jLabel3.setText("red Color");
+        blueLabel.setText("Blue:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        labelPanel.add(jLabel3, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 4);
+        jPanel1.add(blueLabel, gridBagConstraints);
 
-        jLabel7.setBackground(new java.awt.Color(255, 204, 204));
-        jLabel7.setForeground(new java.awt.Color(204, 0, 51));
-        jLabel7.setText("red Color opaque");
-        jLabel7.setOpaque(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        labelPanel.add(jLabel7, gridBagConstraints);
-
-        jLabel4.setText("<html><b>HTML</b><br><i>styled label</i></html>");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        labelPanel.add(jLabel4, gridBagConstraints);
-
-        jLabel5.setText("normal");
-        jLabel5.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        labelPanel.add(jLabel5, gridBagConstraints);
-
-        jLabel6.setDisplayedMnemonic('B');
-        jLabel6.setFont(new java.awt.Font("Dialog", 3, 14));
-        jLabel6.setText("14 Bold Italic");
-        jLabel6.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        labelPanel.add(jLabel6, gridBagConstraints);
-
-        jLabel8.setBackground(new java.awt.Color(255, 204, 204));
-        jLabel8.setForeground(new java.awt.Color(204, 0, 51));
-        jLabel8.setText("red Color opaque");
-        jLabel8.setEnabled(false);
-        jLabel8.setOpaque(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        labelPanel.add(jLabel8, gridBagConstraints);
-
-        jLabel9.setBackground(new java.awt.Color(255, 204, 204));
-        jLabel9.setForeground(new java.awt.Color(204, 0, 51));
-        jLabel9.setText("red Color");
-        jLabel9.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        labelPanel.add(jLabel9, gridBagConstraints);
-
-        jLabel10.setText("<html><b>HTML</b><br><i>styled label</i><br>disabled</html>");
-        jLabel10.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        labelPanel.add(jLabel10, gridBagConstraints);
-
-        jLabel11.setForeground(new java.awt.Color(255, 153, 0));
-        jLabel11.setText("Enabled:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = 2;
-        labelPanel.add(jLabel11, gridBagConstraints);
-
-        jLabel12.setForeground(new java.awt.Color(255, 153, 0));
-        jLabel12.setText("Disabled:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        labelPanel.add(jLabel12, gridBagConstraints);
-
-        tabs.addTab("JLabel", labelPanel);
-
-        buttonPanel.setLayout(new java.awt.GridBagLayout());
-
-        jButton1.setText("normal");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        buttonPanel.add(jButton1, gridBagConstraints);
-
-        jButton2.setText("normal (disabled)");
-        jButton2.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        buttonPanel.add(jButton2, gridBagConstraints);
-
-        jButton3.setText("not filled");
-        jButton3.setContentAreaFilled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        buttonPanel.add(jButton3, gridBagConstraints);
-
-        jButton4.setText("not filled (disabled)");
-        jButton4.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        buttonPanel.add(jButton4, gridBagConstraints);
-
-        jButton5.setText("no border");
-        jButton5.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        buttonPanel.add(jButton5, gridBagConstraints);
-
-        jButton6.setText("<html><b>HTML</b><br><i>styled label</i></html>");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        buttonPanel.add(jButton6, gridBagConstraints);
-
-        jButton7.setBackground(new java.awt.Color(255, 204, 51));
-        jButton7.setForeground(new java.awt.Color(255, 0, 0));
-        jButton7.setText("colored");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        buttonPanel.add(jButton7, gridBagConstraints);
-
-        jButton8.setBackground(new java.awt.Color(255, 204, 51));
-        jButton8.setForeground(new java.awt.Color(255, 0, 0));
-        jButton8.setText("colored not filled");
-        jButton8.setContentAreaFilled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        buttonPanel.add(jButton8, gridBagConstraints);
-
-        jButton9.setBackground(new java.awt.Color(255, 204, 51));
-        jButton9.setForeground(new java.awt.Color(255, 0, 0));
-        jButton9.setText("colored (disabled)");
-        jButton9.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        buttonPanel.add(jButton9, gridBagConstraints);
-
-        jPanel2.setLayout(new java.awt.GridBagLayout());
-
-        jPanel2.setBorder(new javax.swing.border.TitledBorder("Background/opaque"));
-        buttonOpaqueToggle.setText("toggle opaque");
-        buttonOpaqueToggle.setPreferredSize(new java.awt.Dimension(120, 26));
-        buttonOpaqueToggle.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                buttonOpaqueToggleItemStateChanged(evt);
-            }
-        });
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 5);
-        jPanel2.add(buttonOpaqueToggle, gridBagConstraints);
-
-        redSlider.setMajorTickSpacing(40);
         redSlider.setMaximum(255);
-        redSlider.setMinorTickSpacing(10);
-        redSlider.setPaintLabels(true);
-        redSlider.setPaintTicks(true);
         redSlider.setValue(239);
         redSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                redSliderStateChanged(evt);
+                colorChanged(evt);
             }
         });
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel2.add(redSlider, gridBagConstraints);
+        jPanel1.add(redSlider, gridBagConstraints);
 
-        greenSlider.setMajorTickSpacing(40);
         greenSlider.setMaximum(255);
-        greenSlider.setMinorTickSpacing(10);
-        greenSlider.setPaintLabels(true);
-        greenSlider.setPaintTicks(true);
         greenSlider.setValue(239);
         greenSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                greenSliderStateChanged(evt);
+                colorChanged(evt);
             }
         });
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        jPanel2.add(greenSlider, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 0);
+        jPanel1.add(greenSlider, gridBagConstraints);
 
-        blueSlider.setMajorTickSpacing(40);
         blueSlider.setMaximum(255);
-        blueSlider.setMinorTickSpacing(10);
-        blueSlider.setPaintLabels(true);
-        blueSlider.setPaintTicks(true);
         blueSlider.setValue(239);
         blueSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                blueSliderStateChanged(evt);
+                colorChanged(evt);
             }
         });
 
@@ -378,456 +107,26 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        jPanel2.add(blueSlider, gridBagConstraints);
+        jPanel1.add(blueSlider, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        buttonPanel.add(jPanel2, gridBagConstraints);
-
-        jButton10.setText("margin");
-        jButton10.setMargin(new java.awt.Insets(20, 2, 20, 2));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        buttonPanel.add(jButton10, gridBagConstraints);
-
-        jButton11.setText("default");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        buttonPanel.add(jButton11, gridBagConstraints);
-
-        tabs.addTab("JButton", buttonPanel);
-
-        toggleButtonPanel.setLayout(new java.awt.GridBagLayout());
-
-        toggleButtonPanel.setEnabled(false);
-        jToggleButton1.setText("jToggleButton1");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton1, gridBagConstraints);
-
-        jToggleButton2.setSelected(true);
-        jToggleButton2.setText("jToggleButton2");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton2, gridBagConstraints);
-
-        jToggleButton3.setText("jToggleButton3");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton3, gridBagConstraints);
-
-        jToggleButton4.setSelected(true);
-        jToggleButton4.setText("jToggleButton4");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton4, gridBagConstraints);
-
-        jToggleButton5.setText("jToggleButton5");
-        jToggleButton5.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton5, gridBagConstraints);
-
-        jToggleButton6.setSelected(true);
-        jToggleButton6.setText("jToggleButton6");
-        jToggleButton6.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton6, gridBagConstraints);
-
-        jToggleButton7.setText("jToggleButton7");
-        jToggleButton7.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton7, gridBagConstraints);
-
-        jToggleButton8.setSelected(true);
-        jToggleButton8.setText("jToggleButton8");
-        jToggleButton8.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton8, gridBagConstraints);
-
-        jToggleButton9.setBackground(new java.awt.Color(255, 204, 51));
-        jToggleButton9.setForeground(new java.awt.Color(255, 0, 0));
-        jToggleButton9.setText("jToggleButton9");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton9, gridBagConstraints);
-
-        jToggleButton10.setBackground(new java.awt.Color(255, 204, 51));
-        jToggleButton10.setForeground(new java.awt.Color(255, 0, 0));
-        jToggleButton10.setSelected(true);
-        jToggleButton10.setText("jToggleButton10");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton10, gridBagConstraints);
-
-        jToggleButton11.setBackground(new java.awt.Color(255, 204, 51));
-        jToggleButton11.setForeground(new java.awt.Color(255, 0, 0));
-        jToggleButton11.setText("jToggleButton11");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton11, gridBagConstraints);
-
-        jToggleButton12.setBackground(new java.awt.Color(255, 204, 51));
-        jToggleButton12.setForeground(new java.awt.Color(255, 0, 0));
-        jToggleButton12.setSelected(true);
-        jToggleButton12.setText("jToggleButton12");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton12, gridBagConstraints);
-
-        jToggleButton13.setBackground(new java.awt.Color(255, 204, 51));
-        jToggleButton13.setForeground(new java.awt.Color(255, 0, 0));
-        jToggleButton13.setText("jToggleButton13");
-        jToggleButton13.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton13, gridBagConstraints);
-
-        jToggleButton14.setBackground(new java.awt.Color(255, 204, 51));
-        jToggleButton14.setForeground(new java.awt.Color(255, 0, 0));
-        jToggleButton14.setSelected(true);
-        jToggleButton14.setText("jToggleButton14");
-        jToggleButton14.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton14, gridBagConstraints);
-
-        jToggleButton15.setBackground(new java.awt.Color(255, 204, 51));
-        jToggleButton15.setForeground(new java.awt.Color(255, 0, 0));
-        jToggleButton15.setText("jToggleButton15");
-        jToggleButton15.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton15, gridBagConstraints);
-
-        jToggleButton16.setBackground(new java.awt.Color(255, 204, 51));
-        jToggleButton16.setForeground(new java.awt.Color(255, 0, 0));
-        jToggleButton16.setSelected(true);
-        jToggleButton16.setText("jToggleButton16");
-        jToggleButton16.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        toggleButtonPanel.add(jToggleButton16, gridBagConstraints);
-
-        tabs.addTab("JToggleButton", toggleButtonPanel);
-
-        menuBarPanel.setLayout(new java.awt.BorderLayout());
-
-        jInternalFrame1.setVisible(true);
-        jInternalFrame1.getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
-
-        jMenu1.setText("Menu");
-        jMenuItem1.setText("Item");
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Item");
-        jMenu1.add(jMenuItem2);
-
-        jMenu1.add(jSeparator1);
-
-        jCheckBoxMenuItem1.setText("CheckBox");
-        jMenu1.add(jCheckBoxMenuItem1);
-
-        jCheckBoxMenuItem2.setText("CheckBox");
-        jMenu1.add(jCheckBoxMenuItem2);
-
-        jMenu1.add(jSeparator2);
-
-        jRadioButtonMenuItem1.setText("RadioButton");
-        jMenu1.add(jRadioButtonMenuItem1);
-
-        jRadioButtonMenuItem2.setText("RadioButton");
-        jMenu1.add(jRadioButtonMenuItem2);
-
-        jMenu1.add(jSeparator3);
-
-        jMenu4.setText("Menu");
-        jMenuItem7.setText("Item");
-        jMenu4.add(jMenuItem7);
-
-        jMenuItem8.setText("Item");
-        jMenu4.add(jMenuItem8);
-
-        jMenu4.add(jSeparator10);
-
-        jCheckBoxMenuItem7.setText("CheckBox");
-        jMenu4.add(jCheckBoxMenuItem7);
-
-        jCheckBoxMenuItem8.setText("CheckBox");
-        jMenu4.add(jCheckBoxMenuItem8);
-
-        jMenu4.add(jSeparator11);
-
-        jRadioButtonMenuItem7.setText("RadioButton");
-        jMenu4.add(jRadioButtonMenuItem7);
-
-        jRadioButtonMenuItem8.setText("RadioButton");
-        jMenu4.add(jRadioButtonMenuItem8);
-
-        jMenu1.add(jMenu4);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Disabled");
-        jMenuItem3.setText("Item");
-        jMenuItem3.setEnabled(false);
-        jMenu2.add(jMenuItem3);
-
-        jMenuItem4.setText("Item");
-        jMenuItem4.setEnabled(false);
-        jMenu2.add(jMenuItem4);
-
-        jSeparator4.setEnabled(false);
-        jMenu2.add(jSeparator4);
-
-        jCheckBoxMenuItem3.setText("CheckBox");
-        jCheckBoxMenuItem3.setEnabled(false);
-        jMenu2.add(jCheckBoxMenuItem3);
-
-        jCheckBoxMenuItem4.setText("CheckBox");
-        jCheckBoxMenuItem4.setEnabled(false);
-        jMenu2.add(jCheckBoxMenuItem4);
-
-        jSeparator5.setEnabled(false);
-        jMenu2.add(jSeparator5);
-
-        jRadioButtonMenuItem3.setText("RadioButton");
-        jRadioButtonMenuItem3.setEnabled(false);
-        jMenu2.add(jRadioButtonMenuItem3);
-
-        jRadioButtonMenuItem4.setText("RadioButton");
-        jRadioButtonMenuItem4.setEnabled(false);
-        jMenu2.add(jRadioButtonMenuItem4);
-
-        jSeparator6.setEnabled(false);
-        jMenu2.add(jSeparator6);
-
-        jMenu5.setText("Menu");
-        jMenu5.setEnabled(false);
-        jMenu2.add(jMenu5);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Menu");
-        jMenuItem5.setText("Item");
-        jMenu3.add(jMenuItem5);
-
-        jMenuItem6.setText("Item");
-        jMenu3.add(jMenuItem6);
-
-        jMenu3.add(jSeparator7);
-
-        jCheckBoxMenuItem5.setText("CheckBox");
-        jMenu3.add(jCheckBoxMenuItem5);
-
-        jCheckBoxMenuItem6.setText("CheckBox");
-        jMenu3.add(jCheckBoxMenuItem6);
-
-        jMenu3.add(jSeparator8);
-
-        jRadioButtonMenuItem5.setText("RadioButton");
-        jMenu3.add(jRadioButtonMenuItem5);
-
-        jRadioButtonMenuItem6.setText("RadioButton");
-        jMenu3.add(jRadioButtonMenuItem6);
-
-        jMenu3.add(jSeparator9);
-
-        jMenu6.setText("Menu");
-        jMenu3.add(jMenu6);
-
-        jMenuBar1.add(jMenu3);
-
-        jInternalFrame1.setJMenuBar(jMenuBar1);
-
-        menuBarPanel.add(jInternalFrame1, java.awt.BorderLayout.CENTER);
-
-        tabs.addTab("JMenuBar", menuBarPanel);
-        
-        tabs.addTab("JRadioButton", new RadioButtonPanel());
-
-        add(tabs, java.awt.BorderLayout.CENTER);
+        add(jPanel1, java.awt.BorderLayout.SOUTH);
 
     }
     // </editor-fold>//GEN-END:initComponents
 
-	private void buttonOpaqueToggleItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_buttonOpaqueToggleItemStateChanged
-		boolean b = buttonOpaqueToggle.isSelected();
-		JButton[] ba = new JButton[] {jButton1, jButton2, jButton3, jButton4, jButton5, jButton6, jButton7, jButton8, jButton9};
-	/*	for (int i=0; i<ba.length; i++) {
-			ba[i].setOpaque(b);
-		}*/
-		buttonOpaqueToggle.setText(b ? "opaque" : "not opaque");
-		ba[0].setOpaque(b);
-		ba[1].setOpaque(!b);
-	}//GEN-LAST:event_buttonOpaqueToggleItemStateChanged
-
-	private void blueSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_blueSliderStateChanged
-		updateButtonsBackground();
-	}//GEN-LAST:event_blueSliderStateChanged
-
-	private void greenSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_greenSliderStateChanged
-		updateButtonsBackground();
-	}//GEN-LAST:event_greenSliderStateChanged
-
-	private void redSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_redSliderStateChanged
-		updateButtonsBackground();
-	}//GEN-LAST:event_redSliderStateChanged
-	
-	private void updateButtonsBackground() {
-		buttonPanel.setBackground(new Color(redSlider.getValue(), greenSlider.getValue(), blueSlider.getValue()));
-	}
-	
+	private void colorChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_colorChanged
+		updateColors();
+	}//GEN-LAST:event_colorChanged
+		
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel blueLabel;
     private javax.swing.JSlider blueSlider;
-    private javax.swing.JToggleButton buttonOpaqueToggle;
-    private javax.swing.JPanel buttonPanel;
+    private javax.swing.JLabel greenLabel;
     private javax.swing.JSlider greenSlider;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem5;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem6;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem7;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem8;
-    private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem4;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem5;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem6;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem7;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem8;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator10;
-    private javax.swing.JSeparator jSeparator11;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton10;
-    private javax.swing.JToggleButton jToggleButton11;
-    private javax.swing.JToggleButton jToggleButton12;
-    private javax.swing.JToggleButton jToggleButton13;
-    private javax.swing.JToggleButton jToggleButton14;
-    private javax.swing.JToggleButton jToggleButton15;
-    private javax.swing.JToggleButton jToggleButton16;
-    private javax.swing.JToggleButton jToggleButton17;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
-    private javax.swing.JToggleButton jToggleButton5;
-    private javax.swing.JToggleButton jToggleButton6;
-    private javax.swing.JToggleButton jToggleButton7;
-    private javax.swing.JToggleButton jToggleButton8;
-    private javax.swing.JToggleButton jToggleButton9;
-    private javax.swing.JPanel labelPanel;
-    private javax.swing.JPanel menuBarPanel;
+    private javax.swing.JLabel redLabel;
     private javax.swing.JSlider redSlider;
     private javax.swing.JTabbedPane tabs;
-    private javax.swing.JPanel toggleButtonPanel;
     // End of variables declaration//GEN-END:variables
 	
 }
