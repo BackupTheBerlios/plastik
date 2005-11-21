@@ -698,6 +698,8 @@ public class AllComponentsPanel extends javax.swing.JPanel {
         menuBarPanel.add(jInternalFrame1, java.awt.BorderLayout.CENTER);
 
         tabs.addTab("JMenuBar", menuBarPanel);
+        
+        tabs.addTab("JRadioButton", new RadioButtonPanel());
 
         add(tabs, java.awt.BorderLayout.CENTER);
 
