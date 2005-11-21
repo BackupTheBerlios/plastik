@@ -15,6 +15,7 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.Icon;
 import javax.swing.JComponent;
+import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
@@ -22,7 +23,6 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.plaf.metal.MetalRadioButtonUI;
 import javax.swing.text.View;
-
 
 public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 
@@ -34,37 +34,35 @@ public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 
 	protected Color disabledTextColor;
 
-	private boolean defaults_initialized = false;
-
 	public static ComponentUI createUI(JComponent c) {
 		return radioButtonUI;
 	}
 
 	public void installDefaults(AbstractButton b) {
 		super.installDefaults(b);
-		if (!defaults_initialized) {
-			initIcons(b);
-			focusColor = UIManager.getColor("Common.focus");
-			highlightColor = UIManager.getColor("Common.highlight");
-			disabledTextColor = UIManager.getColor("Common.disabledText");
-			defaults_initialized = true;
-			
-			if(PlastikLookAndFeel.isRolloverEnabled()) {
-				b.setRolloverEnabled(PlastikLookAndFeel.isRolloverEnabled());
-			}
-		}
-		b.setOpaque(true);
+		initIcons(b);
+		focusColor = UIManager.getColor("Common.focus");
+		highlightColor = UIManager.getColor("Common.highlight");
+		disabledTextColor = UIManager.getColor("Common.disabledText");
+
+		Object obj;
+		obj = PlastikLookAndFeel.getDefaultOpacity() ? Boolean.TRUE : Boolean.FALSE;
+		LookAndFeel.installProperty(b, "opaque", obj);
+
+		obj = PlastikLookAndFeel.isRolloverEnabled() ? Boolean.TRUE	: Boolean.FALSE;
+		LookAndFeel.installProperty(b, "rolloverEnabled", obj);
 	}
 
 	protected void uninstallDefaults(AbstractButton b) {
 		super.uninstallDefaults(b);
-		defaults_initialized = false;
+		LookAndFeel.installProperty(b, "opaque", Boolean.TRUE);
+		LookAndFeel.installProperty(b, "rolloverEnabled", Boolean.FALSE);
 	}
 
 	protected Color getDisabledTextColor() {
 		return disabledTextColor;
 	}
-	
+
 	protected Color getHighlightTextColor() {
 		return highlightColor;
 	}
@@ -72,7 +70,7 @@ public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 	protected Color getFocusColor() {
 		return focusColor;
 	}
-	
+
 	protected void initIcons(AbstractButton b) {
 		b.setIcon(PlastikIconFactory.getRadioButtonIcon());
 		b.setSelectedIcon(PlastikIconFactory.getRadioButtonSelectedIcon());
@@ -84,7 +82,7 @@ public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 	public synchronized void paint(Graphics g, JComponent c) {
 		AbstractButton b = (AbstractButton) c;
 		ButtonModel model = b.getModel();
-		
+
 		Dimension size = c.getSize();
 
 		Font f = c.getFont();
@@ -111,7 +109,7 @@ public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 				textRect, b.getIconTextGap());
 
 		// fill background
-		if (c.isOpaque()) {
+		if (b.isContentAreaFilled()) {
 			g.setColor(b.getBackground());
 			g.fillRect(0, 0, size.width, size.height);
 		}
@@ -132,7 +130,7 @@ public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 					icon = b.getSelectedIcon();
 				}
 			} else if (model.isSelected()) {
-					icon = (Icon) b.getSelectedIcon();
+				icon = (Icon) b.getSelectedIcon();
 			}
 
 			if (icon == null) {
@@ -140,8 +138,9 @@ public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 			}
 
 			icon.paintIcon(c, g, iconRect.x, iconRect.y);
-			
-			if( (b.isRolloverEnabled() && model.isRollover() && model.isEnabled()) ) {
+
+			if ((b.isRolloverEnabled() && model.isRollover() && model
+					.isEnabled())) {
 				paintHighlight(g, iconRect);
 			}
 
@@ -150,12 +149,11 @@ public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 			getDefaultIcon().paintIcon(c, g, iconRect.x, iconRect.y);
 		}
 
-		
 		// Draw the Text
-		if(PlastikLookAndFeel.isTextAntialiasing()) {
-			Graphics2D g2d = (Graphics2D)g;
+		if (PlastikLookAndFeel.isTextAntialiasing()) {
+			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-	                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+					RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		}
 		if (text != null) {
 			View v = (View) c.getClientProperty(BasicHTML.propertyKey);
@@ -183,20 +181,25 @@ public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 	}
 
 	protected void paintHighlight(Graphics g, Rectangle iconRect) {
-		Graphics2D g2 = (Graphics2D)g;
+		Graphics2D g2 = (Graphics2D) g;
 		Color c = getHighlightTextColor();
-		// todo farbe mit alpha über installDefaults(performance) aus uimanager holen
+		// todo farbe mit alpha über installDefaults(performance) aus uimanager
+		// holen
 		Color highlight = new Color(c.getRed(), c.getGreen(), c.getBlue(), 170);
 		g2.setColor(highlight);
 		g2.translate(iconRect.x, iconRect.y);
-		g2.drawLine(4,1,8,1); // line 2
-		g2.drawLine(2,2,10,2); // line 3
-		g2.drawLine(2,3,3,3); g2.drawLine(9,3,10,3); // lines 4
-		g2.drawLine(1,4,1,8); g2.drawLine(11,4,11,8); // lines 5 - 9
-		g2.drawLine(2,4,2,8); g2.drawLine(10,4,10,8); // lines 5 - 9
-		g2.drawLine(2,9,3,9); g2.drawLine(9,9,10,9); // lines 10
-		g2.drawLine(2,10,10,10); // line 11
-		g2.drawLine(4,11,8,11); // line 12
+		g2.drawLine(4, 1, 8, 1); // line 2
+		g2.drawLine(2, 2, 10, 2); // line 3
+		g2.drawLine(2, 3, 3, 3);
+		g2.drawLine(9, 3, 10, 3); // lines 4
+		g2.drawLine(1, 4, 1, 8);
+		g2.drawLine(11, 4, 11, 8); // lines 5 - 9
+		g2.drawLine(2, 4, 2, 8);
+		g2.drawLine(10, 4, 10, 8); // lines 5 - 9
+		g2.drawLine(2, 9, 3, 9);
+		g2.drawLine(9, 9, 10, 9); // lines 10
+		g2.drawLine(2, 10, 10, 10); // line 11
+		g2.drawLine(4, 11, 8, 11); // line 12
 		g2.translate(-iconRect.x, -iconRect.y);
 	}
 
