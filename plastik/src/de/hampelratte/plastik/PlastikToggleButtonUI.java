@@ -1,8 +1,10 @@
 package de.hampelratte.plastik;
 
 import de.hampelratte.plastik.theme.PlastikColorTheme;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -16,6 +18,7 @@ import javax.swing.JComponent;
 import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.plaf.basic.BasicToggleButtonUI;
 import javax.swing.text.View;
@@ -177,5 +180,64 @@ public class PlastikToggleButtonUI extends BasicToggleButtonUI {
 			}
 			Gradients.drawBoxGradient(g, viewRect, top, bottom);
 		}
+	}
+	
+	private static final int FOREGROUND
+			= PlastikColorTheme.BUTTON
+			| PlastikColorTheme.FOREGROUND_COMPONENT;
+	
+	private static final int FOREGROUND_INACTIVE
+			= PlastikColorTheme.BUTTON
+			| PlastikColorTheme.FOREGROUND_COMPONENT
+			| PlastikColorTheme.INACTIVE;
+	
+	protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
+        ButtonModel model = b.getModel();
+        FontMetrics fm    = g.getFontMetrics();
+        int mnemonicIndex = b.getDisplayedMnemonicIndex();
+		int textStep = ((model.isArmed() && model.isPressed()) || model.isSelected()) ? 1 : 0;
+		Color foreground = b.getForeground();
+		PlastikColorTheme theme = PlastikLookAndFeel.getTheme().getColorTheme();
+		if (model.isEnabled()) {
+			g.setColor(theme.getColor(foreground, FOREGROUND));
+			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + textStep, textRect.y + fm.getAscent() + textStep);
+		} else {
+			Color background = b.getBackground();
+			g.setColor(theme.getColor(background, FOREGROUND_INACTIVE | PlastikColorTheme.BRIGHTER));
+			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + 1 + textStep, textRect.y + fm.getAscent() + 1 + textStep);
+			g.setColor(theme.getColor(foreground, FOREGROUND_INACTIVE | PlastikColorTheme.DARKER));
+			BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemonicIndex, textRect.x + textStep, textRect.y + fm.getAscent() + textStep);
+		}
+    }
+		
+	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
+		focusRect.setBounds(viewRect);
+		
+		focusRect.x += 2;
+		focusRect.y += 2;
+		focusRect.width  -= 5;
+		focusRect.height -= 5;
+		
+		PlastikColorTheme theme = PlastikLookAndFeel.getTheme().getColorTheme();
+		Color color = theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.FOCUS);
+		g.setColor(color);
+		
+		Graphics2D g2d = (Graphics2D) g;
+		float[] dashes = { 1f, 1f };
+		BasicStroke stroke = new BasicStroke(1.0f, BasicStroke.CAP_BUTT,
+				BasicStroke.JOIN_MITER, 1.0f, dashes, 1.0f);
+		g2d.setStroke(stroke);
+		g2d.drawRect(focusRect.x, focusRect.y, focusRect.width, focusRect.height);		
+	}
+	
+	public Dimension getPreferredSize(JComponent c) {
+		Dimension d = super.getPreferredSize(c);
+		AbstractButton b = (AbstractButton) c;
+		Insets margin = b.getMargin();
+		if (margin != null) {
+			d.width += margin.left + margin.right;
+			d.height += margin.top + margin.bottom;
+		}
+		return d;
 	}
 }
