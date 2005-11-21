@@ -24,6 +24,7 @@ import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.plaf.metal.MetalRadioButtonUI;
 import javax.swing.text.View;
 
+// TODO use theme colors
 public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 
 	private static final PlastikRadioButtonUI radioButtonUI = new PlastikRadioButtonUI();
@@ -40,7 +41,7 @@ public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 
 	public void installDefaults(AbstractButton b) {
 		super.installDefaults(b);
-		initIcons(b);
+		installIcons(b);
 		focusColor = UIManager.getColor("Common.focus");
 		highlightColor = UIManager.getColor("Common.highlight");
 		disabledTextColor = UIManager.getColor("Common.disabledText");
@@ -55,6 +56,7 @@ public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 
 	protected void uninstallDefaults(AbstractButton b) {
 		super.uninstallDefaults(b);
+		uninstallIcons(b);
 		LookAndFeel.installProperty(b, "opaque", Boolean.TRUE);
 		LookAndFeel.installProperty(b, "rolloverEnabled", Boolean.FALSE);
 	}
@@ -71,12 +73,20 @@ public class PlastikRadioButtonUI extends MetalRadioButtonUI {
 		return focusColor;
 	}
 
-	protected void initIcons(AbstractButton b) {
+	protected void installIcons(AbstractButton b) {
 		b.setIcon(PlastikIconFactory.getRadioButtonIcon());
 		b.setSelectedIcon(PlastikIconFactory.getRadioButtonSelectedIcon());
 		b.setDisabledIcon(PlastikIconFactory.getRadioButtonDisabledIcon());
 		b.setDisabledSelectedIcon(PlastikIconFactory.getRadioButtonDisabledSelectedIcon());
 		b.setPressedIcon(PlastikIconFactory.getRadioButtonPressedIcon());
+	}
+	
+	protected void uninstallIcons(AbstractButton b) {
+		b.setIcon(null);
+		b.setSelectedIcon(null);
+		b.setDisabledIcon(null);
+		b.setDisabledSelectedIcon(null);
+		b.setPressedIcon(null);
 	}
 
 	public synchronized void paint(Graphics g, JComponent c) {
