@@ -43,6 +43,8 @@ public class ButtonPanel extends javax.swing.JPanel {
         coloredDisabledButton = new javax.swing.JButton();
         marginButton = new javax.swing.JButton();
         defaultButton = new javax.swing.JButton();
+        iconOnlyButton = new javax.swing.JButton();
+        iconButton = new javax.swing.JButton();
 
         setLayout(new java.awt.GridBagLayout());
 
@@ -131,6 +133,22 @@ public class ButtonPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         add(defaultButton, gridBagConstraints);
 
+        iconOnlyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/display.png")));
+        iconOnlyButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        add(iconOnlyButton, gridBagConstraints);
+
+        iconButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/question.png")));
+        iconButton.setText("with icon");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        add(iconButton, gridBagConstraints);
+
     }
     // </editor-fold>//GEN-END:initComponents
 	
@@ -141,6 +159,8 @@ public class ButtonPanel extends javax.swing.JPanel {
     private javax.swing.JButton coloredNotFilledButton;
     private javax.swing.JButton defaultButton;
     private javax.swing.JButton htmlButton;
+    private javax.swing.JButton iconButton;
+    private javax.swing.JButton iconOnlyButton;
     private javax.swing.JButton marginButton;
     private javax.swing.JButton noBorderButton;
     private javax.swing.JButton normalButton;
