@@ -27,88 +27,112 @@ import de.hampelratte.plastik.theme.DefaultPlastikTheme;
  * Dieser Test soll das Verhalten beim Umschalten der UI aufzeigen.
  */
 public class TestFrame extends JFrame {
-	
+
 	private JFrame thisFrame = this;
+
 	private JDesktopPane desktopPane;
-		private JInternalFrame uiChoosingFrame;
-			private JButton metalButton;
-			private JButton plastikButton;
-			private JButton motifButton;
-			private JButton windowsButton;
-			private JToggleButton antialisingButton;
-		private JInternalFrame exampleFrame;
-			private AllComponentsPanel allPanel;
-				private ButtonPanel buttonPanel;
-				private LabelPanel labelPanel;
-				private ToggleButtonPanel toggleButtonPanel;
-				private RadioButtonPanel radioButtonPanel;
-				private MenuBarPanel menuBarPanel;
+
+	private JInternalFrame uiChoosingFrame;
+
+	private JButton metalButton;
+
+	private JButton plastikButton;
+
+	private JButton motifButton;
+
+	private JButton windowsButton;
+
+	private JToggleButton antialisingButton;
+
+	private JInternalFrame exampleFrame;
+
+	private AllComponentsPanel allPanel;
+
+	private ButtonPanel buttonPanel;
+
+	private LabelPanel labelPanel;
+
+	private ToggleButtonPanel toggleButtonPanel;
+
+	private RadioButtonPanel radioButtonPanel;
+
+	private MenuBarPanel menuBarPanel;
 	
-	
+	private CheckboxPanel checkboxPanel;
+
 	public TestFrame() {
+		PlastikLookAndFeel.setTextAntialiasing(true);
+		PlastikLookAndFeel.setDefaultOpacity(false);
+		PlastikLookAndFeel.setRolloverEnabled(true);
+		PlastikLookAndFeel.setTheme(new DefaultPlastikTheme());
+		PlastikLookAndFeel laf = new PlastikLookAndFeel();
+		changeLookTo(laf);
+		
 		initComponents();
 	}
-	
+
 	private void initComponents() {
 		desktopPane = new JDesktopPane();
-		
+
 		// uiChoosingFrame
 		uiChoosingFrame = new JInternalFrame("UI-Chooser", true, false, false, false);
 		uiChoosingFrame.setBounds(5, 5, 130, 250);
-		
+
 		Container uiChoosingContentPane = uiChoosingFrame.getContentPane();
 		GridBagLayout uiChoosingLayout = new GridBagLayout();
-		GridBagConstraints constraints = new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5,5,5,5), 0, 0);
+		GridBagConstraints constraints = new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0);
 		uiChoosingContentPane.setLayout(uiChoosingLayout);
-		
+
 		metalButton = new JButton(getChooseMetalAction());
 		plastikButton = new JButton(getChoosePlastikAction());
 		motifButton = new JButton(getChooseMotifAction());
 		windowsButton = new JButton(getChooseWindowsAction());
-		
-		//JToggleButton tog = new JToggleButton(getChangeAntialiasingAction());
+
+		// JToggleButton tog = new JToggleButton(getChangeAntialiasingAction());
 		antialisingButton = new JToggleButton(getChangeAntialiasingAction());
-		
+		antialisingButton.setSelected(true);
+
 		// exampleFrame
 		exampleFrame = new JInternalFrame("Examples", true, false, true, true);
 		exampleFrame.setBounds(140, 5, 640, 550);
-		
+
 		Container allContentPane = exampleFrame.getContentPane();
-		
-		//-allPanel-------------------------------------------------------------
+
+		// -allPanel-------------------------------------------------------------
 		allPanel = new AllComponentsPanel();
 		buttonPanel = new ButtonPanel();
 		labelPanel = new LabelPanel();
 		toggleButtonPanel = new ToggleButtonPanel();
 		radioButtonPanel = new RadioButtonPanel();
 		menuBarPanel = new MenuBarPanel();
-		
+		checkboxPanel = new CheckboxPanel();
+
 		JTabbedPane pane = allPanel.getTabbedPane();
 		pane.add(buttonPanel);
 		pane.add(labelPanel);
 		pane.add(toggleButtonPanel);
 		pane.add(radioButtonPanel);
 		pane.add(menuBarPanel);
-		
-		
-//		exampleFrame.getRootPane().setDefaultButton(allPanel.getDefaultButton());
-		
+		pane.add(checkboxPanel);
+
+		// exampleFrame.getRootPane().setDefaultButton(allPanel.getDefaultButton());
+
 		Container contentPane = getContentPane();
 		contentPane.add(desktopPane, BorderLayout.CENTER);
 		desktopPane.add(uiChoosingFrame);
-		
+
 		uiChoosingLayout.setConstraints(metalButton, constraints);
 		uiChoosingContentPane.add(metalButton);
-		
+
 		constraints.gridy = 1;
 		constraints.insets.top = 0;
 		uiChoosingLayout.setConstraints(plastikButton, constraints);
 		uiChoosingContentPane.add(plastikButton);
-		
+
 		constraints.gridy = 2;
 		uiChoosingLayout.setConstraints(motifButton, constraints);
 		uiChoosingContentPane.add(motifButton);
-		
+
 		constraints.gridy = 3;
 		uiChoosingLayout.setConstraints(windowsButton, constraints);
 		uiChoosingContentPane.add(windowsButton);
@@ -117,27 +141,27 @@ public class TestFrame extends JFrame {
 		constraints.insets.top = 10;
 		uiChoosingLayout.setConstraints(antialisingButton, constraints);
 		uiChoosingContentPane.add(antialisingButton);
-		
+
 		// Metal ist voll buggy und wir schleppen das jetzt rum
-		uiChoosingFrame.putClientProperty("JInternalFrame.isPalette", Boolean.TRUE); 
+		uiChoosingFrame.putClientProperty("JInternalFrame.isPalette",Boolean.TRUE);
 		uiChoosingFrame.putClientProperty("JInternalFrame.frameType", "palette");
 		uiChoosingFrame.setVisible(true);
-		
+
 		desktopPane.add(exampleFrame);
 		exampleFrame.setVisible(true);
 		allContentPane.add(allPanel, BorderLayout.CENTER);
-		
-		
+
 	}
-	
+
 	public static void main(String[] args) {
 		TestFrame f = new TestFrame();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(800, 600);
 		f.setVisible(true);
 	}
-	
+
 	private Action chooseMetalAction = null;
+
 	private Action getChooseMetalAction() {
 		if (chooseMetalAction == null) {
 			chooseMetalAction = new AbstractAction("Metal LnF") {
@@ -148,8 +172,9 @@ public class TestFrame extends JFrame {
 		}
 		return chooseMetalAction;
 	}
-	
+
 	private Action choosePlastikAction = null;
+
 	private Action getChoosePlastikAction() {
 		if (choosePlastikAction == null) {
 			choosePlastikAction = new AbstractAction("Plastik LnF") {
@@ -157,16 +182,17 @@ public class TestFrame extends JFrame {
 					PlastikLookAndFeel.setTextAntialiasing(false);
 					PlastikLookAndFeel.setDefaultOpacity(false);
 					PlastikLookAndFeel.setRolloverEnabled(true);
+					PlastikLookAndFeel.setTheme(new DefaultPlastikTheme());
 					PlastikLookAndFeel laf = new PlastikLookAndFeel();
-					laf.setTheme(new DefaultPlastikTheme());
 					changeLookTo(laf);
 				}
 			};
 		}
 		return choosePlastikAction;
 	}
-	
+
 	private Action chooseMotifAction = null;
+
 	private Action getChooseMotifAction() {
 		if (chooseMotifAction == null) {
 			chooseMotifAction = new AbstractAction("Motif LnF") {
@@ -177,8 +203,9 @@ public class TestFrame extends JFrame {
 		}
 		return chooseMotifAction;
 	}
-	
+
 	private Action chooseWindowsAction = null;
+
 	private Action getChooseWindowsAction() {
 		if (chooseWindowsAction == null) {
 			chooseWindowsAction = new AbstractAction("Windows LnF") {
@@ -190,14 +217,14 @@ public class TestFrame extends JFrame {
 		return chooseWindowsAction;
 	}
 
-	
 	private Action changeAntialiasingAction = null;
+
 	private Action getChangeAntialiasingAction() {
 		if (changeAntialiasingAction == null) {
 			changeAntialiasingAction = new AbstractAction("antialising") {
-				
-				private boolean antialisingEnabled = false;
-				
+
+				private boolean antialisingEnabled = true;
+
 				public void actionPerformed(ActionEvent e) {
 					antialisingEnabled = !antialisingEnabled;
 					PlastikLookAndFeel.setTextAntialiasing(antialisingEnabled);
@@ -207,27 +234,29 @@ public class TestFrame extends JFrame {
 		}
 		return changeAntialiasingAction;
 	}
-	
+
 	private boolean changeLookTo(String lfName) {
 		try {
 			UIManager.setLookAndFeel(lfName);
 			SwingUtilities.updateComponentTreeUI(this);
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			JOptionPane.showConfirmDialog(this, ex.getMessage());
 			return false;
 		}
 		return true;
 	}
-	
+
 	private boolean changeLookTo(LookAndFeel laf) {
 		try {
 			UIManager.setLookAndFeel(laf);
 			SwingUtilities.updateComponentTreeUI(this);
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			JOptionPane.showConfirmDialog(this, ex.getMessage());
 			return false;
 		}
 		return true;
 	}
-	
+
 }
