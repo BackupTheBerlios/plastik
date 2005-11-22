@@ -334,7 +334,6 @@ public class PlastikIconFactory {
 
 		public void paintIcon(Component c, Graphics g, int x, int y) {
 			super.paintIcon(c, g, x, y);
-			getColors();
 			Graphics2D g2 = (Graphics2D) g;
 
 			// fill selection
