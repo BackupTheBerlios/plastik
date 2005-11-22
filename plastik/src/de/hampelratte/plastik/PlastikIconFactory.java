@@ -89,8 +89,8 @@ public class PlastikIconFactory {
 				Gradients.drawRoundGradient(g, new Rectangle(x, y, 13, 13),
 					new Color(252, 252, 252), new Color(236, 236, 236));
 			} else {
-				Gradients.drawRoundGradient(g, new Rectangle(x, y, 13, 13),
-						new Color(239, 239, 239), new Color(233, 233, 233));
+				g2.setColor(button.getBackground());
+				g2.fillOval(x, y, 13, 13);
 			}
 
 			g2.translate(x, y);
