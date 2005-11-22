@@ -45,6 +45,8 @@ public class ButtonPanel extends javax.swing.JPanel {
         defaultButton = new javax.swing.JButton();
         iconOnlyButton = new javax.swing.JButton();
         iconButton = new javax.swing.JButton();
+        iconOnlyButton1 = new javax.swing.JButton();
+        iconButton1 = new javax.swing.JButton();
 
         setLayout(new java.awt.GridBagLayout());
 
@@ -149,6 +151,24 @@ public class ButtonPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         add(iconButton, gridBagConstraints);
 
+        iconOnlyButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/display.png")));
+        iconOnlyButton1.setEnabled(false);
+        iconOnlyButton1.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        add(iconOnlyButton1, gridBagConstraints);
+
+        iconButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/question.png")));
+        iconButton1.setText("with icon");
+        iconButton1.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        add(iconButton1, gridBagConstraints);
+
     }
     // </editor-fold>//GEN-END:initComponents
 	
@@ -160,7 +180,9 @@ public class ButtonPanel extends javax.swing.JPanel {
     private javax.swing.JButton defaultButton;
     private javax.swing.JButton htmlButton;
     private javax.swing.JButton iconButton;
+    private javax.swing.JButton iconButton1;
     private javax.swing.JButton iconOnlyButton;
+    private javax.swing.JButton iconOnlyButton1;
     private javax.swing.JButton marginButton;
     private javax.swing.JButton noBorderButton;
     private javax.swing.JButton normalButton;
