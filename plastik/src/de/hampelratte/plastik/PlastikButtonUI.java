@@ -103,11 +103,16 @@ public class PlastikButtonUI extends BasicButtonUI {
 		paintBackground(g, b, model);
 		
 		// painting icon 
-        if (b.getIcon() != null)
+        if (b.getIcon() != null) {
+			if (model.isArmed() && model.isPressed()) {
+				iconRect.x++;
+				iconRect.y++;
+			}
 			paintIcon(g, c, iconRect);
+		}
 		
 		// painting text
-		if (text != null && !text.equals("")) {
+		if (text != null && text.length() != 0) {
 			
 			Graphics2D g2d = (Graphics2D) g;
 			
@@ -134,7 +139,7 @@ public class PlastikButtonUI extends BasicButtonUI {
 		}
 		
         // painting focus
-        if (b.isFocusPainted() && b.hasFocus()) {
+        if (b.isFocusPainted() && b.hasFocus() && text != null && text.length() != 0) {
             paintFocus(g,b,viewRect,textRect,iconRect);
         }
 	}
@@ -212,6 +217,12 @@ public class PlastikButtonUI extends BasicButtonUI {
 		focusRect.y += 2;
 		focusRect.width  -= 5;
 		focusRect.height -= 5;
+		
+		ButtonModel model = b.getModel();
+		if (model.isArmed() && model.isPressed()) {
+			focusRect.x++;
+			focusRect.y++;
+		}
 		
 		PlastikColorTheme theme = PlastikLookAndFeel.getTheme().getColorTheme();
 		Color color = theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.FOCUS);
