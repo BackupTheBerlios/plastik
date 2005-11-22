@@ -10,10 +10,10 @@ package de.hampelratte.test;
  *
  * @author  TBN
  */
-public class RadioButtonPanel extends javax.swing.JPanel {
+public class CheckboxPanel extends javax.swing.JPanel {
 	
 	/** Creates new form RadioButtonPanel */
-	public RadioButtonPanel() {
+	public CheckboxPanel() {
 		initComponents();
 	}
 	
@@ -26,24 +26,24 @@ public class RadioButtonPanel extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        normal = new javax.swing.JRadioButton();
-        selected = new javax.swing.JRadioButton();
-        normalDisabled = new javax.swing.JRadioButton();
-        selectedDisabled = new javax.swing.JRadioButton();
-        normalColored = new javax.swing.JRadioButton();
-        selectedColored = new javax.swing.JRadioButton();
-        normalColoredDisabled = new javax.swing.JRadioButton();
-        selectedColoredDisabled = new javax.swing.JRadioButton();
-        normalNotFilled = new javax.swing.JRadioButton();
-        selectedNotFilled = new javax.swing.JRadioButton();
-        normalBorderPainted = new javax.swing.JRadioButton();
-        selectedBorderPainted = new javax.swing.JRadioButton();
-        normalBorderPaintedDisabled = new javax.swing.JRadioButton();
-        selectedBorderPaintedDisabled = new javax.swing.JRadioButton();
+        normal = new javax.swing.JCheckBox();
+        selected = new javax.swing.JCheckBox();
+        normalDisabled = new javax.swing.JCheckBox();
+        selectedDisabled = new javax.swing.JCheckBox();
+        normalColored = new javax.swing.JCheckBox();
+        selectedColored = new javax.swing.JCheckBox();
+        normalColoredDisabled = new javax.swing.JCheckBox();
+        selectedColoredDisabled = new javax.swing.JCheckBox();
+        normalNotFilled = new javax.swing.JCheckBox();
+        selectedNotFilled = new javax.swing.JCheckBox();
+        normalBorderPainted = new javax.swing.JCheckBox();
+        selectedBorderPainted = new javax.swing.JCheckBox();
+        normalBorderPaintedDisabled = new javax.swing.JCheckBox();
+        selectedBorderPaintedDisabled = new javax.swing.JCheckBox();
 
         setLayout(new java.awt.GridBagLayout());
 
-        setName("JRadioButton");
+        setName("JCheckBox");
         this.setSize(new java.awt.Dimension(487,265));
         normal.setText("normal");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -187,20 +187,20 @@ public class RadioButtonPanel extends javax.swing.JPanel {
 	
 	
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton normal;
-    private javax.swing.JRadioButton normalBorderPainted;
-    private javax.swing.JRadioButton normalBorderPaintedDisabled;
-    private javax.swing.JRadioButton normalColored;
-    private javax.swing.JRadioButton normalColoredDisabled;
-    private javax.swing.JRadioButton normalDisabled;
-    private javax.swing.JRadioButton normalNotFilled;
-    private javax.swing.JRadioButton selected;
-    private javax.swing.JRadioButton selectedBorderPainted;
-    private javax.swing.JRadioButton selectedBorderPaintedDisabled;
-    private javax.swing.JRadioButton selectedColored;
-    private javax.swing.JRadioButton selectedColoredDisabled;
-    private javax.swing.JRadioButton selectedDisabled;
-    private javax.swing.JRadioButton selectedNotFilled;
+    private javax.swing.JCheckBox normal;
+    private javax.swing.JCheckBox normalBorderPainted;
+    private javax.swing.JCheckBox normalBorderPaintedDisabled;
+    private javax.swing.JCheckBox normalColored;
+    private javax.swing.JCheckBox normalColoredDisabled;
+    private javax.swing.JCheckBox normalDisabled;
+    private javax.swing.JCheckBox normalNotFilled;
+    private javax.swing.JCheckBox selected;
+    private javax.swing.JCheckBox selectedBorderPainted;
+    private javax.swing.JCheckBox selectedBorderPaintedDisabled;
+    private javax.swing.JCheckBox selectedColored;
+    private javax.swing.JCheckBox selectedColoredDisabled;
+    private javax.swing.JCheckBox selectedDisabled;
+    private javax.swing.JCheckBox selectedNotFilled;
     // End of variables declaration//GEN-END:variables
 	
 }  //  @jve:decl-index=0:visual-constraint="10,10"

@@ -18,12 +18,12 @@ public class PlastikCheckBoxUI extends PlastikRadioButtonUI {
 		return checkboxUI;
 	}
 
-	protected void initIcons(AbstractButton b) {
+	protected void installIcons(AbstractButton b) {
 		b.setIcon(PlastikIconFactory.getCheckboxIcon());
-		b.setSelectedIcon(PlastikIconFactory.getCheckboxSelectedIcon());
-		b.setPressedIcon(PlastikIconFactory.getCheckboxPressedIcon());
-		b.setDisabledIcon(PlastikIconFactory.getCheckboxDisabledIcon());
-		b.setDisabledSelectedIcon(PlastikIconFactory.getCheckboxDisabledSelectedIcon());
+	}
+	
+	protected void uninstallIcons(AbstractButton b) {
+		b.setIcon(null);
 	}
 	
 	protected void paintHighlight(Graphics g, Rectangle iconRect) {
