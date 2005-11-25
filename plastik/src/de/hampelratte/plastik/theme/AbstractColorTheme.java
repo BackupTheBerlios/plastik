@@ -7,8 +7,34 @@ import java.util.ArrayList;
 
 public abstract class AbstractColorTheme implements PlastikColorTheme {
 	
-	protected int[] adjustmentValues;
+	// colors used by KDE
+	protected static final int KDE_DEFAULT_BACKGROUND           = 0;
+	protected static final int KDE_DEFAULT_TEXT                 = 1;
+	protected static final int KDE_SELECTED_BACKGROUND          = 2;
+	protected static final int KDE_SELECTED_TEXT                = 3;
+	protected static final int KDE_LINK                         = 4;
+	protected static final int KDE_USED_LINK                    = 5;
+	protected static final int KDE_WINDOW_BACKGROUND            = 6;
+	protected static final int KDE_WINDOW_TEXT                  = 7;
+	protected static final int KDE_BUTTON_BACKGROUND            = 8;
+	protected static final int KDE_BUTTON_TEXT                  = 9;
+	protected static final int KDE_ACTIVE_TITLEBAR              = 10;
+	protected static final int KDE_ACTIVE_TITLEBAR_TEXT         = 11;
+	protected static final int KDE_ACTIVE_TITLEBAR_GRADIENT     = 12;
+	protected static final int KDE_ACTIVE_TITLEBAR_BUTTON       = 13;
+	protected static final int KDE_INACTIVE_TITLEBAR            = 14;
+	protected static final int KDE_INACTIVE_TITLEBAR_TEXT       = 15;
+	protected static final int KDE_INACTIVE_TITLEBAR_GRADIENT   = 16;
+	protected static final int KDE_INACTIVE_TITLEBAR_BUTTON     = 17;
+	protected static final int KDE_ACTIVE_WINDOWBORDER          = 18;
+	protected static final int KDE_ACTIVE_WINDOWBORDER_HANDLE   = 19;
+	protected static final int KDE_INACTIVE_WINDOWBORDER        = 20;
+	protected static final int KDE_INACTIVE_WINDOWBORDER_HANDLE = 21;
+	protected static final int KDE_ALTERNATIVE_LIST_BACKGROUND  = 22;
+	
+	// colors and adjustmentvalues
 	protected int colorCount;
+	protected int[] adjustmentValues;
 	protected PlastikColorUIResource[] colorArray;
 	
 	public AbstractColorTheme() {
