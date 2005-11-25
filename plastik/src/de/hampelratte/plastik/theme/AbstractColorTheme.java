@@ -44,6 +44,17 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		colorArray = new PlastikColorUIResource[colorCount];
 	}
 	
+	// TODO imlpement this (horror)
+	protected void setKDEColor(Color color, int type) {
+		switch (type) {
+			case KDE_DEFAULT_BACKGROUND:
+				//1. delete colors
+				//2. define colors
+				//3. define adjustmentvalues
+				break;
+		}
+	}
+	
 	private void precomputeAdjustmentValues() {
 		for (int i=0; i<colorCount; i+=16) {
 			// active
