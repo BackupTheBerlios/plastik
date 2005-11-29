@@ -8,6 +8,11 @@ import de.hampelratte.plastik.theme.AbstractIconTheme;
 // and moved to de.hampelratte.plastik.theme
 // it should also be inherited from AbstractPlastikIconTheme
 
+// Diskussion: finde ich nicht, warum nicht einfach CrystalSVGTheme
+// im DefaultPlastikTheme als default setzen
+// ich meine warum sollte das CrystalSVGTheme nicht so heiﬂen?
+// nur weil es das default ist?
+
 public class CrystalSVGTheme extends AbstractIconTheme {
 
 	public ImageIcon getInfoIcon() {
