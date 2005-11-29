@@ -47,13 +47,30 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	// TODO implement this (horror)
 	protected void setKDEColor(Color color, int type) {
 		switch (type) {
-			case KDE_DEFAULT_BACKGROUND:
+			case KDE_BUTTON_BACKGROUND:
 				//1. delete colors
+				deleteColors(BACKGROUND_COMPONENT);
 				//2. define colors
 				//3. define adjustmentvalues
 				break;
+			
 		}
 	}
+	
+	protected void deleteColors(int colorType) {
+		colorType = colorType << TYPES_SHIFT;
+		
+		// Alle Komponenten durchlaufen und an die Stelle des betreffenden 
+		// colorTypes springen.
+		for (int i=colorType; i<colorCount; i+=256) {
+			
+			// Jede Variation (active/darker etc.) löschen.
+			for (int j=0; j<16; j++) {
+				colorArray[i+j] = null;
+			}
+		}
+	}
+	
 	
 	private void precomputeAdjustmentValues() {
 		for (int i=0; i<colorCount; i+=16) {
