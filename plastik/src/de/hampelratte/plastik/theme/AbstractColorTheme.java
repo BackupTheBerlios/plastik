@@ -44,7 +44,7 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		colorArray = new PlastikColorUIResource[colorCount];
 	}
 	
-	// TODO imlpement this (horror)
+	// TODO implement this (horror)
 	protected void setKDEColor(Color color, int type) {
 		switch (type) {
 			case KDE_DEFAULT_BACKGROUND:
@@ -77,6 +77,41 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	}
 	
 	/**
+	 * Bestimmt einen Korrekturwert, bestehend aus der Änderung der Helligkeit 
+	 * und des Alpha-Wertes.
+	 *
+	 * @param brightnessAdjustment Helligkeitsänderung im Bereich (-255..255)
+	 * @param alphaAdjustment Alphakanaländerung im Bereich (-255..255)
+	 * @return Es wird ein Wert zurückgegeben welcher die beiden Änderungen 
+	 *         vereint.
+	 * TODO translate comment
+	 */
+	public static int computeAdjustmentValue(int brightnessAdjustment, int alphaAdjustment) {
+		if (brightnessAdjustment < -255 || brightnessAdjustment > 255)
+			throw new IllegalArgumentException("brightnessAdjustment "+brightnessAdjustment+" out of range (-255..255)");
+		if (alphaAdjustment < -255 || brightnessAdjustment > 255)
+			throw new IllegalArgumentException("alphaAdjustment "+alphaAdjustment+" out of range (-255..255)");
+		brightnessAdjustment += 255; //max = 255+255 = 510, min = -255+255 = 0 (9 Bit)
+		alphaAdjustment      += 255; //max = 255+255 = 510, min = -255+255 = 0 (9 Bit)
+		int adjustmentValue = brightnessAdjustment & (alphaAdjustment << 16);
+		return adjustmentValue;
+	}
+	
+	/**
+	 * Gewinnt aus einem Korrekturwert die Helligkeitsänderung.
+	 */
+	public static int getBrightnessAdjustment(int adjustmentValue) {
+		return (adjustmentValue & 0xFFFF) - 255;
+	}
+	
+	/**
+	 * Gewinnt aus einem Korrekturwert die Alphaänderung
+	 */
+	public static int getAlphaAdjustment(int adjustmentValue) {
+		return ((adjustmentValue >> 16) & 0xFFFF) - 255;
+	}
+	
+	/**
 	 * Setzt den Helligkeitskorrekturwert für eine einzelne Farbe.
 	 * Die entsprechende Farbe wird dabei aber nicht aktualisiert, dies muss 
 	 * manuel geschehen.
@@ -84,7 +119,7 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	public void setAdjustmentValue(int adjustmentValue, int type) {
 		adjustmentValues[type] = adjustmentValue;
 	}
-	
+		
 	/**
 	 * Gibt den Helligkeitskorrekturwert für eine einzelne Farbe zurück.
 	 */
@@ -196,7 +231,10 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	 *              Helligkeitsänderung angibt.
 	 * @return Die berechnete Farbe als int.
 	 */
-	public static final int computeAdjustedColor(int argb, int light) {
+	public static final int computeAdjustedColor(int argb, int adjustmentValue) {
+		int light = getBrightnessAdjustment(adjustmentValue);
+		int alpha = getAlphaAdjustment(adjustmentValue);
+		
 		float h, s, l;
 		int a = (argb >> 24) & 0xFF;
 		int r = (argb >> 16) & 0xFF;
@@ -228,17 +266,18 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 			}
 		}
 		
-	
 		l += (float) light / 255.0f;
 		l = Math.max(0.0f, Math.min(1.0f, l));
-		
 		
 		sum = (l <= 0.5) ? l*(s+1.0f) : l+s - l*s;
 		dif = 2.0f * l - sum;
 		r = Math.round((255.0f * hueToRGB(dif, sum, h+1.0f/3.0f)));
 		g = Math.round((255.0f * hueToRGB(dif, sum, h          )));
 		b = Math.round((255.0f * hueToRGB(dif, sum, h-1.0f/3.0f)));
-		
+
+		a += alpha;
+		a = Math.max(0, Math.min(255, a));
+
 		return (a << 24) | (r << 16) | (g << 8) | (b << 0);
 	}
 	
