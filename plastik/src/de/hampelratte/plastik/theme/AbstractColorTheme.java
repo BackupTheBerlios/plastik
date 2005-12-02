@@ -45,41 +45,39 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	}
 	
 	// TODO implement this (horror)
-	protected void setKDEColor(Color color, int type) {
-		switch (type) {
-			case KDE_BUTTON_BACKGROUND:
-				//1. delete colors
-				deleteColors(BACKGROUND_COMPONENT);
-				deleteColors(BACKGROUND_PRESSED);
-				//2. define color
-				setColor(color, BACKGROUND_COMPONENT);
-				setColor(color, BACKGROUND_COMPONENT | INACTIVE);
-				setColor(color, BACKGROUND_PRESSED);
-				setColor(color, BACKGROUND_PRESSED | INACTIVE);
-				//3. define adjustmentvalues
-				setMultipleAdjustments(BACKGROUND_COMPONENT, 
-					new int[] {   0,  40,  80,  20, -40, -80, -20,   0,
-						          0,  20,  40,  10, -20, -40, -10,   0}, 
-					new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
-							      0,   0,   0,   0,   0,   0,   0,   0}
-				);
-				// The first adjustment acts like an offset for all the other 
-				// adjustments
-				setMultipleAdjustments(BACKGROUND_PRESSED, 
-					new int[] { -50, -40,  80, -20,  40, -80,  20,   0,
-						        -20, -20,  40, -10,  20, -40,  10,   0}, 
-					new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
-							      0,   0,   0,   0,   0,   0,   0,   0}
-				);
-				break;
-			case KDE_BUTTON_TEXT:
-				break;
-		}
+	protected void setKDEColors(Color[] kdeColors) {
+		// 1. delete all colors
+		// TODO replace this calls by one call of deleteAllColors()
+		deleteColors(BACKGROUND_COMPONENT);
+		deleteColors(BACKGROUND_PRESSED);
+		
+		// 2. define all colors
+		setColor(kdeColors[KDE_BUTTON_BACKGROUND], BACKGROUND_COMPONENT);
+		setColor(kdeColors[KDE_WINDOW_BACKGROUND], BACKGROUND_COMPONENT | INACTIVE);
+		setColor(kdeColors[KDE_BUTTON_BACKGROUND], BACKGROUND_PRESSED);
+		setColor(kdeColors[KDE_WINDOW_BACKGROUND], BACKGROUND_PRESSED | INACTIVE);
+		
+		//3. define adjustmentvalues
+		// The first adjustment acts like an offset for all the other
+		// adjustments
+		setMultipleAdjustments(
+				BACKGROUND_COMPONENT,
+				new int[] {   0,  40,  80,  20, -40, -80, -20,   0,
+				              0,  20,  40,  10, -20, -40, -10,   0},
+				new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
+				              0,   0,   0,   0,   0,   0,   0,   0});
+		setMultipleAdjustments(
+				BACKGROUND_PRESSED,
+				new int[] { -50, -40,  80, -20,  40, -80,  20,   0,
+				            -20, -20,  40, -10,  20, -40,  10,   0},
+				new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
+				              0,   0,   0,   0,   0,   0,   0,   0});
 	}
 	
+	// TODO remove this method if it is no longer needed
 	protected void deleteColors(int colorType) {
 		int nextColorStep = 256;
-		// Alle Komponenten durchlaufen und an die Stelle des betreffenden 
+		// Alle Komponenten durchlaufen und an die Stelle des betreffenden
 		// colorTypes springen.
 		for (int i=colorType; i<colorCount; i+=nextColorStep) {
 			
@@ -133,12 +131,12 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	}
 	
 	/**
-	 * Bestimmt einen Korrekturwert, bestehend aus der Änderung der Helligkeit 
+	 * Bestimmt einen Korrekturwert, bestehend aus der Änderung der Helligkeit
 	 * und des Alpha-Wertes.
 	 *
 	 * @param brightnessAdjustment Helligkeitsänderung im Bereich (-255..255)
 	 * @param alphaAdjustment Alphakanaländerung im Bereich (-255..255)
-	 * @return Es wird ein Wert zurückgegeben welcher die beiden Änderungen 
+	 * @return Es wird ein Wert zurückgegeben welcher die beiden Änderungen
 	 *         vereint.
 	 * TODO translate comment
 	 */
@@ -152,7 +150,7 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		int adjustmentValue = brightnessAdjustment | (alphaAdjustment << 16);
 		return adjustmentValue;
 	}
-		
+	
 	/**
 	 * Gewinnt aus einem Korrekturwert die Helligkeitsänderung.
 	 */
@@ -169,13 +167,13 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	
 	/**
 	 * Setzt den Helligkeitskorrekturwert für eine einzelne Farbe.
-	 * Die entsprechende Farbe wird dabei aber nicht aktualisiert, dies muss 
+	 * Die entsprechende Farbe wird dabei aber nicht aktualisiert, dies muss
 	 * manuel geschehen.
 	 */
 	public void setAdjustmentValue(int adjustmentValue, int type) {
 		adjustmentValues[type] = adjustmentValue;
 	}
-		
+	
 	/**
 	 * Gibt den Helligkeitskorrekturwert für eine einzelne Farbe zurück.
 	 */
@@ -192,8 +190,8 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	}
 	
 	/**
-	 * Setzt eine eine einzelne Grundfarbe (Farbe ohne Varianten). Dabei wird 
-	 * aber sehr wohl zwischen ACTIVE und INACTIVE unterschieden. 
+	 * Setzt eine eine einzelne Grundfarbe (Farbe ohne Varianten). Dabei wird
+	 * aber sehr wohl zwischen ACTIVE und INACTIVE unterschieden.
 	 */
 	public void setColor(Color color, int type) {
 		int index = type & (INACTIVE_MASK | TYPES_MASK | UI_MASK); // ignoring the variants
@@ -202,12 +200,12 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		if (ad != 0) {
 			rgb = computeAdjustedColor(rgb, ad);
 		}
-		colorArray[index] = new PlastikColorUIResource(rgb);		
+		colorArray[index] = new PlastikColorUIResource(rgb);
 	}
 	
 	/**
-	 * This function should return a cached version of the color if the param 
-	 * color is an instance of PlastikColorUIResource. If the param is no 
+	 * This function should return a cached version of the color if the param
+	 * color is an instance of PlastikColorUIResource. If the param is no
 	 * UIResource then it should return a computed color.
 	 *
 	 * @param color the color-object of the component.
@@ -217,7 +215,7 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		if (color instanceof PlastikColorUIResource) {
 			return getColor(type);
 		}
-		// the next line ensures that secondary colors are computed correctly, 
+		// the next line ensures that secondary colors are computed correctly,
 		// so first the variant is left out
 		color = computeColor(color, type & (UI_MASK | TYPES_MASK | INACTIVE_MASK));
 		return computeColor(color, type);
@@ -228,32 +226,32 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		
 		if (color != null) {
 			return color;
-		} 
+		}
 		
-		// Die Farbe existiert nicht, daher wird als Erstes die Frage 
-		// gestellt ob es sich um eine Variante oder eine "Grundfarbe" 
+		// Die Farbe existiert nicht, daher wird als Erstes die Frage
+		// gestellt ob es sich um eine Variante oder eine "Grundfarbe"
 		// (Variante ist NORMAL) handelt. [index zeigt auf die Grundfarbe]
 		int index = type & (INACTIVE_MASK | TYPES_MASK | UI_MASK);
 		if (index == type) {
 			// Es ist eine "Grundfarbe", da die Variante NORMAL (0) ist.
-			// Es wird nun bei COMMON nachgefragt, da dort die "Grundfarbe" auf 
-			// jeden Fall vorhanden sein sollte, es sei denn dieser Aufruf fragt 
+			// Es wird nun bei COMMON nachgefragt, da dort die "Grundfarbe" auf
+			// jeden Fall vorhanden sein sollte, es sei denn dieser Aufruf fragt
 			// bereits nach COMMON
 			if ((type & UI_MASK) == COMMON) {
 				throw new IllegalStateException("at least the basecolors for COMMON must be defined");
 			} else {
-				// Die Farbe wird von COMMON abgefragt, entsprechend des 
+				// Die Farbe wird von COMMON abgefragt, entsprechend des
 				// Adjustments verändert (falls != 0) und gespeichert.
 				color = getColor(COMMON + (type & (INACTIVE_MASK | TYPES_MASK)));
 				if (adjustmentValues[type] != 0) {
 					color = new PlastikColorUIResource(computeAdjustedColor(color.getRGB(), adjustmentValues[type]));
 				}
 				colorArray[type] = color;
-			}	
+			}
 		} else {
 			// Es ist keine "Grundfarbe", da die Variante nicht NORMAL (0) ist.
-			// Es wird nun bei COMMON nachgefragt, da dies zumindest die 
-			// "Grundfarbe" liefern können muss, es sei denn dieser Aufruf fragt 
+			// Es wird nun bei COMMON nachgefragt, da dies zumindest die
+			// "Grundfarbe" liefern können muss, es sei denn dieser Aufruf fragt
 			// bereits nach COMMON.
 			if ((type & UI_MASK) == COMMON) {
 				// Frage nach der Grundfarbe:
@@ -280,13 +278,13 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	}
 	
 	/**
-	 * Berechnet aus der übergebenen Farbe eine hellere (1 bis 255) bzw. eine 
+	 * Berechnet aus der übergebenen Farbe eine hellere (1 bis 255) bzw. eine
 	 * dunklere (-1 bis -255) Farbe. Dabei orientiert sich die Berechnung an dem
 	 * HSL-Farbmodel (L-Lightness).
-	 * 
-	 * @param rgb Die Farbe als int von der die hellere oder dunklere Farbe 
+	 *
+	 * @param rgb Die Farbe als int von der die hellere oder dunklere Farbe
 	 *            bestimmt werden soll.
-	 * @param light Ein Integer zwischen -255 und 255 welcher die 
+	 * @param light Ein Integer zwischen -255 und 255 welcher die
 	 *              Helligkeitsänderung angibt.
 	 * @return Die berechnete Farbe als int.
 	 */
@@ -299,7 +297,7 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		int r = (argb >> 16) & 0xFF;
 		int g = (argb >>  8) & 0xFF;
 		int b = (argb >>  0) & 0xFF;
-	
+		
 		int max = Math.max(r, Math.max(g, b));
 		int min = Math.min(r, Math.min(g, b));
 		
@@ -311,7 +309,7 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 			h = s = 0.0f;
 		} else {
 			s = (l <= 0.5f) ? dif/sum : dif/(2.0f*255.0f - sum);
-		
+			
 			if (r == max) {
 				h =             (g-b) / dif / 6.0f;
 			} else if (g == max) {
@@ -319,7 +317,7 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 			} else {
 				h = 2.0f/3.0f + (r-g) / dif / 6.0f;
 			}
-
+			
 			if (h < 0.0f) {
 				h += 1.0f;
 			}
@@ -333,10 +331,10 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		r = Math.round((255.0f * hueToRGB(dif, sum, h+1.0f/3.0f)));
 		g = Math.round((255.0f * hueToRGB(dif, sum, h          )));
 		b = Math.round((255.0f * hueToRGB(dif, sum, h-1.0f/3.0f)));
-
+		
 		a += alpha;
 		a = Math.max(0, Math.min(255, a));
-
+		
 		return (a << 24) | (r << 16) | (g << 8) | (b << 0);
 	}
 	

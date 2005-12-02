@@ -55,8 +55,32 @@ public class DefaultColorTheme extends AbstractColorTheme {
 		setAdjustmentValue( 40, LABEL | FOREGROUND_COMPONENT | INACTIVE | BRIGHTER);
 		setAdjustmentValue(-40, LABEL | FOREGROUND_COMPONENT | INACTIVE | DARKER);
 		
-		setKDEColor(new Color(245, 240, 220), KDE_BUTTON_BACKGROUND);
+		setKDEColors(new Color[] {
+			new Color(255, 255, 255), // KDE_DEFAULT_BACKGROUND
+			new Color(  0,   0,   0), // KDE_DEFAULT_TEXT
+			new Color(250, 225, 146), // KDE_SELECTED_BACKGROUND
+			new Color(  0,   0,   0), // KDE_SELECTED_TEXT
+			new Color(  0,   0, 255), // KDE_LINK
+			new Color(100,   0, 100), // KDE_USED_LINK
+			new Color(239, 239, 239), // KDE_WINDOW_BACKGROUND
+			new Color(  0,   0,   0), // KDE_WINDOW_TEXT
+			new Color(221, 223, 228), // KDE_BUTTON_BACKGROUND
+			new Color(  0,   0,   0), // KDE_BUTTON_TEXT
+			new Color(255,   0,   0), // KDE_ACTIVE_TITLEBAR
+			new Color(  0, 255,   0), // KDE_ACTIVE_TITLEBAR_TEXT
+			new Color(200,   0,   0), // KDE_ACTIVE_TITLEBAR_GRADIENT
+			new Color(  0,   0, 255), // KDE_ACTIVE_TITLEBAR_BUTTON
+			new Color(100, 100, 100), // KDE_INACTIVE_TITLEBAR
+			new Color(200, 200, 200), // KDE_INACTIVE_TITLEBAR_TEXT
+			new Color(120, 120, 120), // KDE_INACTIVE_TITLEBAR_GRADIENT
+			new Color( 50,  50,  50), // KDE_INACTIVE_TITLEBAR_BUTTON
+			new Color(255, 255,   0), // KDE_ACTIVE_WINDOWBORDER
+			new Color(  0, 255, 255), // KDE_ACTIVE_WINDOWBORDER_HANDLE
+			new Color(150, 150, 150), // KDE_INACTIVE_WINDOWBORDER
+			new Color( 80,  80,  80), // KDE_INACTIVE_WINDOWBORDER_HANDLE
+			new Color(255, 245, 230), // KDE_ALTERNATIVE_LIST_BACKGROUND
+		});
 		
 	}
-	
+
 }
