@@ -42,18 +42,20 @@ public class DefaultColorTheme extends AbstractColorTheme {
 		
 		
 	// BUTTON (optional)--------------------------------------------------------
-		setAdjustmentValue(-35, BUTTON | BACKGROUND | DARKER);
-		setAdjustmentValue(-19, BUTTON | BACKGROUND | DARKER_GRADIENT);
-		setAdjustmentValue( -4, BUTTON | BACKGROUND_PRESSED | BRIGHTER_GRADIENT);
-		setAdjustmentValue(  4, BUTTON | BACKGROUND_PRESSED | DARKER_GRADIENT);
-		setAdjustmentValue( -8, BUTTON | BACKGROUND_PRESSED | BRIGHTER);
-		setAdjustmentValue(  8, BUTTON | BACKGROUND_PRESSED | DARKER);
-		setAdjustmentValue( 40, BUTTON | FOREGROUND_COMPONENT | INACTIVE | BRIGHTER);
-		setAdjustmentValue(-40, BUTTON | FOREGROUND_COMPONENT | INACTIVE | DARKER);
+		setAdjustmentValue(computeAdjustmentValue(-35, 0), BUTTON | BACKGROUND | DARKER);
+		setAdjustmentValue(computeAdjustmentValue(-19, 0), BUTTON | BACKGROUND | DARKER_GRADIENT);
+		setAdjustmentValue(computeAdjustmentValue( -4, 0), BUTTON | BACKGROUND_PRESSED | BRIGHTER_GRADIENT);
+		setAdjustmentValue(computeAdjustmentValue(  4, 0), BUTTON | BACKGROUND_PRESSED | DARKER_GRADIENT);
+		setAdjustmentValue(computeAdjustmentValue( -8, 0), BUTTON | BACKGROUND_PRESSED | BRIGHTER);
+		setAdjustmentValue(computeAdjustmentValue(  8, 0), BUTTON | BACKGROUND_PRESSED | DARKER);
+		setAdjustmentValue(computeAdjustmentValue( 40, 0), BUTTON | FOREGROUND_COMPONENT | INACTIVE | BRIGHTER);
+		setAdjustmentValue(computeAdjustmentValue(-40, 0), BUTTON | FOREGROUND_COMPONENT | INACTIVE | DARKER);
 		
 	// LABEL (optional)---------------------------------------------------------
 		setAdjustmentValue( 40, LABEL | FOREGROUND_COMPONENT | INACTIVE | BRIGHTER);
 		setAdjustmentValue(-40, LABEL | FOREGROUND_COMPONENT | INACTIVE | DARKER);
+		
+		setKDEColor(new Color(245, 240, 220), KDE_BUTTON_BACKGROUND);
 		
 	}
 	

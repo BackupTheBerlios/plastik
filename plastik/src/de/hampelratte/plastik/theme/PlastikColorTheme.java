@@ -15,9 +15,9 @@ public interface PlastikColorTheme {
 	public static final int TYPES_SHIFT    = 4;
 	public static final int UI_SHIFT       = 8;
 	
-	public static final int VARIANTS_COUNT =  7;
+	public static final int VARIANTS_COUNT =  8;
 	public static final int INACTIVE_COUNT =  2;
-	public static final int TYPES_COUNT    =  5;
+	public static final int TYPES_COUNT    = 16;
 	public static final int UI_COUNT       = 43;
 	
 	// color variants for the colors (0x00000007)

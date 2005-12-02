@@ -50,23 +50,62 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 			case KDE_BUTTON_BACKGROUND:
 				//1. delete colors
 				deleteColors(BACKGROUND_COMPONENT);
-				//2. define colors
+				deleteColors(BACKGROUND_PRESSED);
+				//2. define color
+				setColor(color, BACKGROUND_COMPONENT);
+				setColor(color, BACKGROUND_COMPONENT | INACTIVE);
+				setColor(color, BACKGROUND_PRESSED);
+				setColor(color, BACKGROUND_PRESSED | INACTIVE);
 				//3. define adjustmentvalues
+				setMultipleAdjustments(BACKGROUND_COMPONENT, 
+					new int[] {   0,  40,  80,  20, -40, -80, -20,   0,
+						          0,  20,  40,  10, -20, -40, -10,   0}, 
+					new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
+							      0,   0,   0,   0,   0,   0,   0,   0}
+				);
+				// The first adjustment acts like an offset for all the other 
+				// adjustments
+				setMultipleAdjustments(BACKGROUND_PRESSED, 
+					new int[] { -50, -40,  80, -20,  40, -80,  20,   0,
+						        -20, -20,  40, -10,  20, -40,  10,   0}, 
+					new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
+							      0,   0,   0,   0,   0,   0,   0,   0}
+				);
 				break;
-			
+			case KDE_BUTTON_TEXT:
+				break;
 		}
 	}
 	
 	protected void deleteColors(int colorType) {
-		colorType = colorType << TYPES_SHIFT;
-		
+		int nextColorStep = 256;
 		// Alle Komponenten durchlaufen und an die Stelle des betreffenden 
 		// colorTypes springen.
-		for (int i=colorType; i<colorCount; i+=256) {
+		for (int i=colorType; i<colorCount; i+=nextColorStep) {
 			
-			// Jede Variation (active/darker etc.) löschen.
+			// Jede Variation (inactive/darker etc.) löschen.
 			for (int j=0; j<16; j++) {
 				colorArray[i+j] = null;
+			}
+		}
+	}
+	
+	protected void setMultipleAdjustments(int colorType, int[] brightnessAdjustments, int[] alphaAdjustments) {
+		int length = 16;
+		if (brightnessAdjustments == null || brightnessAdjustments.length != length)
+			throw new IllegalArgumentException("brightnessAdjustments can't be null and must have "+length+" elements");
+		if (alphaAdjustments == null || alphaAdjustments.length != length)
+			throw new IllegalArgumentException("alphaAdjustments can't be null and must have "+length+" elements");
+		
+		int[] adjustmentValues = new int[length];
+		for (int i=0; i<length; i++) {
+			adjustmentValues[i] = computeAdjustmentValue(brightnessAdjustments[i], alphaAdjustments[i]);
+		}
+		
+		int nextColorStep = 256;
+		for (int i=colorType; i<colorCount; i+=nextColorStep) {
+			for (int j=0; j<length; j++) {
+				this.adjustmentValues[i+j] = adjustmentValues[j];
 			}
 		}
 	}
@@ -75,21 +114,21 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	private void precomputeAdjustmentValues() {
 		for (int i=0; i<colorCount; i+=16) {
 			// active
-			adjustmentValues[i]    =   0; // normal
-			adjustmentValues[i+1]  =  20; // brighter
-			adjustmentValues[i+2]  =  40; // brighter more
-			adjustmentValues[i+3]  =  10; // brighter gradient
-			adjustmentValues[i+4]  = -20; // darker
-			adjustmentValues[i+5]  = -40; // darker more
-			adjustmentValues[i+6]  = -10; // darker gradient
+			adjustmentValues[i]    = computeAdjustmentValue(  0, 0); // normal
+			adjustmentValues[i+1]  = computeAdjustmentValue( 20, 0); // brighter
+			adjustmentValues[i+2]  = computeAdjustmentValue( 40, 0); // brighter more
+			adjustmentValues[i+3]  = computeAdjustmentValue( 10, 0); // brighter gradient
+			adjustmentValues[i+4]  = computeAdjustmentValue(-20, 0); // darker
+			adjustmentValues[i+5]  = computeAdjustmentValue(-40, 0); // darker more
+			adjustmentValues[i+6]  = computeAdjustmentValue(-10, 0); // darker gradient
 			// inactive
-			adjustmentValues[i+8]  =   0; // normal
-			adjustmentValues[i+9]  =  10; // brighter
-			adjustmentValues[i+10] =  20; // brighter more
-			adjustmentValues[i+11] =   5; // brighter gradient
-			adjustmentValues[i+12] = -10; // darker
-			adjustmentValues[i+13] = -20; // darker more
-			adjustmentValues[i+14] =  -5; // darker gradient
+			adjustmentValues[i+8]  = computeAdjustmentValue(  0, 0); // normal
+			adjustmentValues[i+9]  = computeAdjustmentValue( 10, 0); // brighter
+			adjustmentValues[i+10] = computeAdjustmentValue( 20, 0); // brighter more
+			adjustmentValues[i+11] = computeAdjustmentValue(  5, 0); // brighter gradient
+			adjustmentValues[i+12] = computeAdjustmentValue(-10, 0); // darker
+			adjustmentValues[i+13] = computeAdjustmentValue(-20, 0); // darker more
+			adjustmentValues[i+14] = computeAdjustmentValue( -5, 0); // darker gradient
 		}
 	}
 	
@@ -110,10 +149,10 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 			throw new IllegalArgumentException("alphaAdjustment "+alphaAdjustment+" out of range (-255..255)");
 		brightnessAdjustment += 255; //max = 255+255 = 510, min = -255+255 = 0 (9 Bit)
 		alphaAdjustment      += 255; //max = 255+255 = 510, min = -255+255 = 0 (9 Bit)
-		int adjustmentValue = brightnessAdjustment & (alphaAdjustment << 16);
+		int adjustmentValue = brightnessAdjustment | (alphaAdjustment << 16);
 		return adjustmentValue;
 	}
-	
+		
 	/**
 	 * Gewinnt aus einem Korrekturwert die Helligkeitsänderung.
 	 */
@@ -178,6 +217,9 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		if (color instanceof PlastikColorUIResource) {
 			return getColor(type);
 		}
+		// the next line ensures that secondary colors are computed correctly, 
+		// so first the variant is left out
+		color = computeColor(color, type & (UI_MASK | TYPES_MASK | INACTIVE_MASK));
 		return computeColor(color, type);
 	}
 	
