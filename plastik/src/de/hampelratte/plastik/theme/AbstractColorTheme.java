@@ -62,8 +62,8 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		// adjustments
 		setMultipleAdjustments(
 				BACKGROUND_COMPONENT,
-				new int[] {   0,  40,  80,  20, -40, -80, -20,   0,
-				              0,  20,  40,  10, -20, -40, -10,   0},
+				new int[] {   0,  21,  40,  10, -21, -40, -10,   0,
+				              0,  21,  40,  10, -21, -40, -10,   0},
 				new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
 				              0,   0,   0,   0,   0,   0,   0,   0});
 		setMultipleAdjustments(
