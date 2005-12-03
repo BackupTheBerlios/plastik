@@ -165,8 +165,8 @@ public class PlastikToggleButtonUI extends BasicToggleButtonUI {
 			Color bottom = null;
 			if (!model.isEnabled()) {
 				if (model.isSelected()) {
-					top    = theme.getColor(background, BACKGROUND_INACTIVE | PlastikColorTheme.DARKER_GRADIENT);
-					bottom = theme.getColor(background, BACKGROUND_INACTIVE | PlastikColorTheme.BRIGHTER_GRADIENT);
+					top    = theme.getColor(background, BACKGROUND_PRESSED_INACTIVE | PlastikColorTheme.BRIGHTER_GRADIENT);
+					bottom = theme.getColor(background, BACKGROUND_PRESSED_INACTIVE | PlastikColorTheme.DARKER_GRADIENT);
 				} else {
 					top    = theme.getColor(background, BACKGROUND_INACTIVE | PlastikColorTheme.BRIGHTER_GRADIENT);
 					bottom = theme.getColor(background, BACKGROUND_INACTIVE | PlastikColorTheme.DARKER_GRADIENT);
