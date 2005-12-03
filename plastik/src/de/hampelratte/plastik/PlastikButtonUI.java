@@ -172,8 +172,8 @@ public class PlastikButtonUI extends BasicButtonUI {
 				top    = theme.getColor(background, BACKGROUND_INACTIVE | PlastikColorTheme.BRIGHTER_GRADIENT);
 				bottom = theme.getColor(background, BACKGROUND_INACTIVE | PlastikColorTheme.DARKER_GRADIENT);
 			} else if (model.isArmed() && model.isPressed()) {
-				top    = theme.getColor(background, BACKGROUND_PRESSED | PlastikColorTheme.BRIGHTER_GRADIENT);
-				bottom = theme.getColor(background, BACKGROUND_PRESSED | PlastikColorTheme.DARKER_GRADIENT);
+				top    = theme.getColor(background, BACKGROUND_PRESSED | PlastikColorTheme.DARKER_GRADIENT);
+				bottom = theme.getColor(background, BACKGROUND_PRESSED | PlastikColorTheme.BRIGHTER_GRADIENT);
 			} else {
 				top    = theme.getColor(background, BACKGROUND | PlastikColorTheme.BRIGHTER_GRADIENT);
 				bottom = theme.getColor(background, BACKGROUND | PlastikColorTheme.DARKER_GRADIENT);

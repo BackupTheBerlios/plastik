@@ -64,7 +64,7 @@ public class DefaultColorTheme extends AbstractColorTheme {
 			new Color(100,   0, 100), // KDE_USED_LINK
 			new Color(239, 239, 239), // KDE_WINDOW_BACKGROUND
 			new Color(  0,   0,   0), // KDE_WINDOW_TEXT
-			new Color(221, 223, 228), // KDE_BUTTON_BACKGROUND
+			new Color(220, 223, 226), // KDE_BUTTON_BACKGROUND
 			new Color(  0,   0,   0), // KDE_BUTTON_TEXT
 			new Color(255,   0,   0), // KDE_ACTIVE_TITLEBAR
 			new Color(  0, 255,   0), // KDE_ACTIVE_TITLEBAR_TEXT

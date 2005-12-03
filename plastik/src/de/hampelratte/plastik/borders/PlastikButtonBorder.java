@@ -24,16 +24,16 @@ public class PlastikButtonBorder extends AbstractBorder implements UIResource {
 		int x2 = width-1, y2 = height-1;
 		
 		if (button instanceof JButton && ((JButton)button).isDefaultButton()) {
-			g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND | PlastikColorTheme.DARKER));
+			g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BORDER_COMPONENT | PlastikColorTheme.BRIGHTER));
 			drawRoundRect(g, x1, y1, x2, y2);
-			g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND | PlastikColorTheme.DARKER_GRADIENT));
+			g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BORDER_COMPONENT | PlastikColorTheme.BRIGHTER_MORE));
 			drawRoundRectCorners(g, x1, y1, x2, y2);
 			x1++; y1++;	x2--; y2--;
 		}
 		
-		g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BORDER));
+		g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BORDER_COMPONENT));
 		drawRoundRect(g, x1, y1, x2, y2);
-		g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BORDER | PlastikColorTheme.BRIGHTER));
+		g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BORDER_COMPONENT | PlastikColorTheme.BRIGHTER_GRADIENT));
 		drawRoundRectCorners(g, x1, y1, x2, y2);
 		
 		if (button.isContentAreaFilled()) {
@@ -43,8 +43,9 @@ public class PlastikButtonBorder extends AbstractBorder implements UIResource {
 				top    = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.INACTIVE | PlastikColorTheme.BRIGHTER);
 				bottom = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.INACTIVE | PlastikColorTheme.DARKER);
 			} else if (model.isArmed() && model.isPressed()) {
-				top    = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.BRIGHTER);
-				bottom = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.DARKER);
+				// Attention: brightness is swapped
+				top    = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.DARKER);
+				bottom = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.BRIGHTER);
 			} else {
 				top    = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.BRIGHTER);
 				bottom = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.DARKER);

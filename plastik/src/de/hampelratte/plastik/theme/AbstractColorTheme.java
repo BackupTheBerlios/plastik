@@ -48,18 +48,33 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 	protected void setKDEColors(Color[] kdeColors) {
 		// 1. delete all colors
 		// TODO replace this calls by one call of deleteAllColors()
+		deleteColors(BACKGROUND);
 		deleteColors(BACKGROUND_COMPONENT);
 		deleteColors(BACKGROUND_PRESSED);
+		deleteColors(BORDER);
+		deleteColors(BORDER_COMPONENT);
 		
 		// 2. define all colors
+		setColor(kdeColors[KDE_WINDOW_BACKGROUND], BACKGROUND);
+		setColor(kdeColors[KDE_WINDOW_BACKGROUND], BACKGROUND | INACTIVE);
 		setColor(kdeColors[KDE_BUTTON_BACKGROUND], BACKGROUND_COMPONENT);
 		setColor(kdeColors[KDE_WINDOW_BACKGROUND], BACKGROUND_COMPONENT | INACTIVE);
 		setColor(kdeColors[KDE_BUTTON_BACKGROUND], BACKGROUND_PRESSED);
 		setColor(kdeColors[KDE_WINDOW_BACKGROUND], BACKGROUND_PRESSED | INACTIVE);
+		setColor(kdeColors[KDE_WINDOW_BACKGROUND], BORDER);
+		setColor(kdeColors[KDE_WINDOW_BACKGROUND], BORDER | INACTIVE);
+		setColor(kdeColors[KDE_BUTTON_BACKGROUND], BORDER_COMPONENT);
+		setColor(kdeColors[KDE_WINDOW_BACKGROUND], BORDER_COMPONENT | INACTIVE);
 		
 		//3. define adjustmentvalues
 		// The first adjustment acts like an offset for all the other
 		// adjustments
+		setMultipleAdjustments(
+				BACKGROUND, 
+				new int[] {   0,  21,  40,  10, -21, -40, -10,   0,
+				             -3,   6,  12,   3,  -6, -12,  -3,   0},
+				new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
+				              0,   0,   0,   0,   0,   0,   0,   0});
 		setMultipleAdjustments(
 				BACKGROUND_COMPONENT,
 				new int[] {   0,  21,  40,  10, -21, -40, -10,   0,
@@ -68,10 +83,23 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 				              0,   0,   0,   0,   0,   0,   0,   0});
 		setMultipleAdjustments(
 				BACKGROUND_PRESSED,
-				new int[] { -24, -21, -40, -10,  21,  40,  10,   0,
-				            -12,  -6, -12,  -3,   6,  12,   3,   0},
+				new int[] { -24,  21,  40,  10, -21, -40, -10,   0,
+				            -12,   6,  12,   3,  -6, -12,  -3,   0},
 				new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
 				              0,   0,   0,   0,   0,   0,   0,   0});
+		setMultipleAdjustments(
+				BORDER,
+				new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
+				              0,   0,   0,   0,   0,   0,   0,   0},
+				new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
+				              0,   0,   0,   0,   0,   0,   0,   0});
+		setMultipleAdjustments(
+				BORDER_COMPONENT,
+				new int[] { -88,  50,  70,  30,   0,   0,   0,   0,
+				            -20,   0,   0,   0,   0,   0,   0,   0},
+				new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
+				              0,   0,   0,   0,   0,   0,   0,   0});
+		
 	}
 	
 	// TODO remove this method if it is no longer needed

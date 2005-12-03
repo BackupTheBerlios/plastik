@@ -26,16 +26,16 @@ public class PlastikToggleButtonBorder extends AbstractBorder implements UIResou
 		int x2 = width-1, y2 = height-1;
 		
 		if (button instanceof JButton && ((JButton)button).isDefaultButton()) {
-			g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND | PlastikColorTheme.DARKER));
+			g.setColor(theme.getColor(PlastikColorTheme.TOGGLE_BUTTON | PlastikColorTheme.BORDER_COMPONENT | PlastikColorTheme.DARKER));
 			drawRoundRect(g, x1, y1, x2, y2);
-			g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND | PlastikColorTheme.DARKER_GRADIENT));
+			g.setColor(theme.getColor(PlastikColorTheme.TOGGLE_BUTTON | PlastikColorTheme.BORDER_COMPONENT | PlastikColorTheme.DARKER_GRADIENT));
 			drawRoundRectCorners(g, x1, y1, x2, y2);
 			x1++; y1++;	x2--; y2--;
 		}
 		
-		g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BORDER));
+		g.setColor(theme.getColor(PlastikColorTheme.TOGGLE_BUTTON | PlastikColorTheme.BORDER_COMPONENT));
 		drawRoundRect(g, x1, y1, x2, y2);
-		g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BORDER | PlastikColorTheme.BRIGHTER));
+		g.setColor(theme.getColor(PlastikColorTheme.TOGGLE_BUTTON | PlastikColorTheme.BORDER_COMPONENT | PlastikColorTheme.BRIGHTER));
 		drawRoundRectCorners(g, x1, y1, x2, y2);
 		
 		if (button.isContentAreaFilled()) {
@@ -43,18 +43,18 @@ public class PlastikToggleButtonBorder extends AbstractBorder implements UIResou
 			Color background = button.getBackground();
 			if (!model.isEnabled()) {
 				if (model.isSelected()) {
-					top    = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.INACTIVE | PlastikColorTheme.BRIGHTER);
-					bottom = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.INACTIVE | PlastikColorTheme.DARKER);
+					top    = theme.getColor(background, PlastikColorTheme.TOGGLE_BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.INACTIVE | PlastikColorTheme.DARKER);
+					bottom = theme.getColor(background, PlastikColorTheme.TOGGLE_BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.INACTIVE | PlastikColorTheme.BRIGHTER);
 				} else {
-					top    = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.INACTIVE | PlastikColorTheme.BRIGHTER);
-					bottom = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.INACTIVE | PlastikColorTheme.DARKER);
+					top    = theme.getColor(background, PlastikColorTheme.TOGGLE_BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.INACTIVE | PlastikColorTheme.BRIGHTER);
+					bottom = theme.getColor(background, PlastikColorTheme.TOGGLE_BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.INACTIVE | PlastikColorTheme.DARKER);
 				}
 			} else if ((model.isArmed() && model.isPressed()) || model.isSelected()) {
-				top    = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.BRIGHTER);
-				bottom = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.DARKER);
+				top    = theme.getColor(background, PlastikColorTheme.TOGGLE_BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.DARKER);
+				bottom = theme.getColor(background, PlastikColorTheme.TOGGLE_BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.BRIGHTER);
 			} else {
-				top    = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.BRIGHTER);
-				bottom = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.DARKER);
+				top    = theme.getColor(background, PlastikColorTheme.TOGGLE_BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.BRIGHTER);
+				bottom = theme.getColor(background, PlastikColorTheme.TOGGLE_BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.DARKER);
 			}
 
 			g.setColor(top);
@@ -67,11 +67,11 @@ public class PlastikToggleButtonBorder extends AbstractBorder implements UIResou
 		}
 		
 		if (button.isEnabled() && !model.isPressed() && button.isRolloverEnabled() && model.isRollover() && !model.isSelected()) {
-			g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.ROLLOVER));
+			g.setColor(theme.getColor(PlastikColorTheme.TOGGLE_BUTTON | PlastikColorTheme.ROLLOVER));
 			g.drawLine(x1+2, y1+1, x2-2, y1+1);
 			g.drawLine(x1+2, y2-1, x2-2, y2-1);
 			
-			g.setColor(theme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.ROLLOVER | PlastikColorTheme.BRIGHTER));
+			g.setColor(theme.getColor(PlastikColorTheme.TOGGLE_BUTTON | PlastikColorTheme.ROLLOVER | PlastikColorTheme.BRIGHTER));
 			g.drawLine(x1+1, y1+2, x2-1, y1+2);
 			g.drawLine(x1+1, y2-2, x2-1, y2-2);
 		}

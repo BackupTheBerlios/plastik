@@ -1,6 +1,8 @@
 package de.hampelratte.plastik;
 
+import de.hampelratte.plastik.borders.PlastikMenuBarBorder;
 import de.hampelratte.plastik.theme.DefaultPlastikTheme;
+import de.hampelratte.plastik.theme.PlastikColorTheme;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -36,8 +38,6 @@ import de.hampelratte.plastik.theme.PlastikTheme;
  * austauschen braucht.
  * Ein Nachteil ist der höhere Aufwand.
  */
-// TODO ALLE runden ecken müssen nachgearbeitet werden. im moment sind die nicht transparent. 
-// zu sehen wenn man dem Panel in der Main.java eine andere hintergrundfarbe verpasst. 
 public class PlastikLookAndFeel extends BasicLookAndFeel {
 	
 	/** The PlastikTheme used by the LookAndFeel */
@@ -133,17 +133,19 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 
 	protected void initClassDefaults(UIDefaults table) {
 		super.initClassDefaults(table);
-		table.put("ButtonUI", "de.hampelratte.plastik.PlastikButtonUI");
-		table.put("CheckBoxUI", "de.hampelratte.plastik.PlastikCheckBoxUI");
-		table.put("ComboBoxUI", "de.hampelratte.plastik.PlastikComboBoxUI");
-		table.put("LabelUI", "de.hampelratte.plastik.PlastikLabelUI");
-		table.put("RadioButtonUI", "de.hampelratte.plastik.PlastikRadioButtonUI");
-		table.put("ScrollBarUI", "de.hampelratte.plastik.PlastikScrollBarUI");
-		table.put("SpinnerUI", "de.hampelratte.plastik.PlastikSpinnerUI");
-		table.put("TextFieldUI", "de.hampelratte.plastik.PlastikTextFieldUI");
-		table.put("TextAreaUI", "de.hampelratte.plastik.PlastikTextAreaUI");
-		table.put("ToggleButtonUI", "de.hampelratte.plastik.PlastikToggleButtonUI");
-		table.put("ToolTipUI", "de.hampelratte.plastik.PlastikToolTipUI");
+		String s = "de.hampelratte.plastik.Plastik";
+		table.put("ButtonUI",         s + "ButtonUI");
+		table.put("CheckBoxUI",       s + "CheckBoxUI");
+		table.put("ComboBoxUI",       s + "ComboBoxUI");
+		table.put("LabelUI",          s + "LabelUI");
+		table.put("MenuBarUI",        s + "MenuBarUI");
+		table.put("RadioButtonUI",    s + "RadioButtonUI");
+		table.put("ScrollBarUI",      s + "ScrollBarUI");
+		table.put("SpinnerUI",        s + "SpinnerUI");
+		table.put("TextFieldUI",      s + "TextFieldUI");
+		table.put("TextAreaUI",       s + "TextAreaUI");
+		table.put("ToggleButtonUI",   s + "ToggleButtonUI");
+		table.put("ToolTipUI",        s + "ToolTipUI");
 	}
 
 	protected void initSystemColorDefaults(UIDefaults table) {
@@ -180,6 +182,8 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 	
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
+		
+		PlastikColorTheme colorTheme = getTheme().getColorTheme();
 
 		// common
 		table.put("Common.background", new ColorUIResource(new Color(239, 239, 239)));
@@ -222,6 +226,12 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("Label.background", new PlastikColorUIResource(239, 239, 239));
 		table.put("Label.font", table.getFont("Common.font"));
 		table.put("Label.foreground", new PlastikColorUIResource(0, 0, 0));
+		
+		// menubar
+		table.put("MenuBar.background", colorTheme.getColor(PlastikColorTheme.MENU_BAR | PlastikColorTheme.BACKGROUND));
+		table.put("MenuBar.border", new PlastikMenuBarBorder());
+		table.put("MenuBar.font", table.getFont("Common.font")); // TODO use FontTheme
+		table.put("MenuBar.foreground", colorTheme.getColor(PlastikColorTheme.MENU_BAR | PlastikColorTheme.FOREGROUND));
 		
 		// panel
 		table.put("Panel.background", table.getColor("Common.background"));
