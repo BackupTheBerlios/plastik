@@ -14,6 +14,8 @@ import javax.swing.plaf.UIResource;
 
 public class PlastikToggleButtonBorder extends AbstractBorder implements UIResource {
 	
+	// TODO use TOGGLE_BUTTON instead of BUTTON
+	
 	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
 		AbstractButton button = (AbstractButton) c;
 		ButtonModel model = button.getModel();
@@ -41,8 +43,8 @@ public class PlastikToggleButtonBorder extends AbstractBorder implements UIResou
 			Color background = button.getBackground();
 			if (!model.isEnabled()) {
 				if (model.isSelected()) {
-					top    = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.INACTIVE | PlastikColorTheme.DARKER);
-					bottom = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.INACTIVE | PlastikColorTheme.BRIGHTER);
+					top    = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.INACTIVE | PlastikColorTheme.BRIGHTER);
+					bottom = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_PRESSED | PlastikColorTheme.INACTIVE | PlastikColorTheme.DARKER);
 				} else {
 					top    = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.INACTIVE | PlastikColorTheme.BRIGHTER);
 					bottom = theme.getColor(background, PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND_COMPONENT | PlastikColorTheme.INACTIVE | PlastikColorTheme.DARKER);
