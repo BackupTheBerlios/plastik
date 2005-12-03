@@ -63,13 +63,13 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		setMultipleAdjustments(
 				BACKGROUND_COMPONENT,
 				new int[] {   0,  21,  40,  10, -21, -40, -10,   0,
-				              0,  21,  40,  10, -21, -40, -10,   0},
+				             -3,   6,  12,   3,  -6, -12,  -3,   0},
 				new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
 				              0,   0,   0,   0,   0,   0,   0,   0});
 		setMultipleAdjustments(
 				BACKGROUND_PRESSED,
-				new int[] { -50, -40,  80, -20,  40, -80,  20,   0,
-				            -20, -20,  40, -10,  20, -40,  10,   0},
+				new int[] { -24, -21, -40, -10,  21,  40,  10,   0,
+				            -12,  -6, -12,  -3,   6,  12,   3,   0},
 				new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
 				              0,   0,   0,   0,   0,   0,   0,   0});
 	}
