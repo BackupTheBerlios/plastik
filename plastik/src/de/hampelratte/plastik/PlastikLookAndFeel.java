@@ -138,6 +138,7 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("CheckBoxUI",       s + "CheckBoxUI");
 		table.put("ComboBoxUI",       s + "ComboBoxUI");
 		table.put("LabelUI",          s + "LabelUI");
+		table.put("MenuUI",           s + "MenuUI");
 		table.put("MenuBarUI",        s + "MenuBarUI");
 		table.put("RadioButtonUI",    s + "RadioButtonUI");
 		table.put("ScrollBarUI",      s + "ScrollBarUI");
@@ -227,11 +228,41 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("Label.font", table.getFont("Common.font"));
 		table.put("Label.foreground", new PlastikColorUIResource(0, 0, 0));
 		
+		// menu
+		table.put("Menu.acceleratorFont", table.getFont("Common.font")); // TODO use FontTheme
+//		table.put("Menu.acceleratorForeground", acceleratorForeground);
+//		table.put("Menu.acceleratorSelectionForeground", acceleratorSelectedForeground);
+		table.put("Menu.background", colorTheme.getColor(PlastikColorTheme.MENU | PlastikColorTheme.BACKGROUND));
+//		table.put("Menu.border", new PlastikMenuBorder());
+		table.put("Menu.borderPainted", Boolean.TRUE);
+        table.put("Menu.font", table.getFont("Common.font")); // TODO use FontTheme
+		table.put("Menu.menuPopupOffsetX", new Integer(0));
+		table.put("Menu.menuPopupOffsetY", new Integer(0));
+		table.put("Menu.submenuPopupOffsetX", new Integer(-4));
+		table.put("Menu.submenuPopupOffsetY", new Integer(-3));
+		
 		// menubar
 		table.put("MenuBar.background", colorTheme.getColor(PlastikColorTheme.MENU_BAR | PlastikColorTheme.BACKGROUND));
 		table.put("MenuBar.border", new PlastikMenuBarBorder());
 		table.put("MenuBar.font", table.getFont("Common.font")); // TODO use FontTheme
 		table.put("MenuBar.foreground", colorTheme.getColor(PlastikColorTheme.MENU_BAR | PlastikColorTheme.FOREGROUND));
+		table.put("MenuBar.windowBindings", new Object[] { "F10", "takeFocus" });
+		
+		// menuitem
+//		"MenuItem.border", menuItemBorder,
+//		"MenuItem.borderPainted", Boolean.TRUE,
+//		"MenuItem.font", menuTextValue,
+//		"MenuItem.selectionForeground", menuSelectedForeground,
+//		"MenuItem.selectionBackground", menuSelectedBackground,
+//		"MenuItem.disabledForeground", menuDisabledForeground,
+//		"MenuItem.acceleratorFont", subTextValue,
+//		"MenuItem.acceleratorForeground", acceleratorForeground,
+//		"MenuItem.acceleratorSelectionForeground", acceleratorSelectedForeground,
+//		"MenuItem.acceleratorDelimiter", menuItemAcceleratorDelimiter,
+//		"MenuItem.checkIcon", new SwingLazyValue("javax.swing.plaf.metal.MetalIconFactory", "getMenuItemCheckIcon"),
+//		"MenuItem.arrowIcon", new SwingLazyValue("javax.swing.plaf.metal.MetalIconFactory", "getMenuItemArrowIcon"),
+//		// Menu Item Auditory Cue Mapping
+//		"MenuItem.commandSound", "sounds/MenuItemCommand.wav",
 		
 		// panel
 		table.put("Panel.background", table.getColor("Common.background"));
