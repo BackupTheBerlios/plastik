@@ -34,6 +34,10 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem25">
                   <Properties>
+                    <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                      <KeyStroke key="Shift+Ctrl+F"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="73"/>
                     <Property name="text" type="java.lang.String" value="Item"/>
                   </Properties>
                 </MenuItem>
@@ -118,6 +122,10 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem29">
                   <Properties>
+                    <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                      <KeyStroke key="Ctrl+Alt+E"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="73"/>
                     <Property name="text" type="java.lang.String" value="Item"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
