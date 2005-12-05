@@ -140,6 +140,7 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("LabelUI",          s + "LabelUI");
 		table.put("MenuUI",           s + "MenuUI");
 		table.put("MenuBarUI",        s + "MenuBarUI");
+		table.put("MenuItemUI",       s + "MenuItemUI");
 		table.put("RadioButtonUI",    s + "RadioButtonUI");
 		table.put("ScrollBarUI",      s + "ScrollBarUI");
 		table.put("SpinnerUI",        s + "SpinnerUI");
@@ -249,13 +250,15 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("MenuBar.windowBindings", new Object[] { "F10", "takeFocus" });
 		
 		// menuitem
-//		"MenuItem.border", menuItemBorder,
+		table.put("MenuItem.acceleratorFont", table.getFont("Common.font")); // TODO use FontTheme
+		table.put("MenuItem.background", colorTheme.getColor(PlastikColorTheme.MENU_ITEM | PlastikColorTheme.BACKGROUND));
+//		table.put("MenuItem.border", new PlastikMenuItemBoder());
+		table.put("MenuItem.font", table.getFont("Common.font")); // TODO use FontTheme
+		
 //		"MenuItem.borderPainted", Boolean.TRUE,
-//		"MenuItem.font", menuTextValue,
 //		"MenuItem.selectionForeground", menuSelectedForeground,
 //		"MenuItem.selectionBackground", menuSelectedBackground,
 //		"MenuItem.disabledForeground", menuDisabledForeground,
-//		"MenuItem.acceleratorFont", subTextValue,
 //		"MenuItem.acceleratorForeground", acceleratorForeground,
 //		"MenuItem.acceleratorSelectionForeground", acceleratorSelectedForeground,
 //		"MenuItem.acceleratorDelimiter", menuItemAcceleratorDelimiter,
