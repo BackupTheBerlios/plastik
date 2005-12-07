@@ -3,7 +3,10 @@ package de.hampelratte.plastik;
 import de.hampelratte.plastik.theme.PlastikColorTheme;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import javax.swing.ButtonModel;
+import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.plaf.ComponentUI;
@@ -16,6 +19,29 @@ public class PlastikMenuItemUI extends BasicMenuItemUI {
 	
 	public static ComponentUI createUI(JComponent c) {
 		return new PlastikMenuItemUI();
+	}
+	
+	public void paint(Graphics g, JComponent c) {
+		Graphics2D g2d = (Graphics2D) g;
+		// storing original anitalising flag
+		Object state = null;
+		if (PlastikLookAndFeel.isTextAntialiasing()) {
+			state = g2d.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
+			if (state != RenderingHints.VALUE_TEXT_ANTIALIAS_ON) {
+				g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			}
+		}
+		
+		super.paint(g, c);
+		
+		// restoring antialising flag
+		if (state != null) {
+			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, state);
+		}
+	}
+	
+	public void paintMenuItem(Graphics g, JComponent c, Icon checkIcon, Icon arrowIcon, Color background, Color foreground, int defaultTextIconGap) {
+		super.paintMenuItem(g, c, checkIcon, arrowIcon, background, foreground, defaultTextIconGap);
 	}
 	
 	public void paintBackground(Graphics g, JMenuItem item, Color bgColor) {
@@ -44,7 +70,5 @@ public class PlastikMenuItemUI extends BasicMenuItemUI {
 		
 		g.setColor(oldColor);
 	}
-	
-	
 	
 }
