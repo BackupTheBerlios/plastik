@@ -3,21 +3,166 @@ package de.hampelratte.plastik.theme;
 import de.hampelratte.plastik.PlastikColorUIResource;
 import java.awt.Color;
 
+/**
+ * This interface defines the basic constants and functions that a 
+ * PlastikColorTheme should provide. The constants are used to define a special 
+ * type of color. The theme themself should provide real Color objects for all 
+ * the possible combinations of types. The types are build by a simple OR 
+ * connection of the variant, active state, color parts and the component type.
+ */
 public interface PlastikColorTheme {
 
+	// Masks
+	/** 
+	 * This constant is used to indicate that bits that are affected to create 
+	 * the different variants of the color. The different Variants are:
+	 * <ul>
+	 * <li>{@link PlastikColorTheme#NORMAL}</li>
+	 * <li>{@link PlastikColorTheme#BRIGHTER}</li>
+	 * <li>{@link PlastikColorTheme#BRIGHTER_MORE}</li>
+	 * <li>{@link PlastikColorTheme#BRIGHTER_GRADIENT}</li>
+	 * <li>{@link PlastikColorTheme#DARKER}</li>
+	 * <li>{@link PlastikColorTheme#DARKER_MORE}</li>
+	 * <li>{@link PlastikColorTheme#DARKER_GRADIENT}</li>
+	 * </ul>
+	 */
 	public static final int VARIANTS_MASK = 0x00000007;
+	
+	/**
+	 * This constant is used to indiacte that bit that is used to differ 
+	 * between the active and inactive state. The different states are: 
+	 * <ul>
+	 * <li>{@link PlastikColorTheme#ACTIVE}</li>
+	 * <li>{@link PlastikColorTheme#INACTIVE}</li>
+	 * </ul>
+	 */
 	public static final int INACTIVE_MASK = 0x00000008;
-	public static final int TYPES_MASK    = 0x000000F0;	
+	
+	/**
+	 * This constant is used to indicate that bits that are affected to create 
+	 * colors for the different parts of a component. The types are:
+	 * <ul>
+	 * <li>{@link PlastikColorTheme#BACKGROUND}</li>
+	 * <li>{@link PlastikColorTheme#FOREGROUND}</li>
+	 * <li>{@link PlastikColorTheme#BORDER}</li>
+	 * <li>{@link PlastikColorTheme#BACKGROUND_COMPONENT}</li>
+	 * <li>{@link PlastikColorTheme#FOREGROUND_COMPONENT}</li>
+	 * <li>{@link PlastikColorTheme#BACKGROUND_PRESSED}</li>
+	 * <li>{@link PlastikColorTheme#FOREGROUND_PRESSED}</li>
+	 * <li>{@link PlastikColorTheme#BORDER_COMPONENT}</li>
+	 * <li>{@link PlastikColorTheme#FOCUS}</li>
+	 * <li>{@link PlastikColorTheme#ROLLOVER}</li>
+	 * <li>{@link PlastikColorTheme#BACKGROUND_TEXT}</li>
+	 * <li>{@link PlastikColorTheme#FOREGROUND_TEXT}</li>
+	 * <li>{@link PlastikColorTheme#BACKGROUND_TEXT_SELECTED}</li>
+	 * <li>{@link PlastikColorTheme#FOREGROUND_TEXT_SELECTED}</li>
+	 * </ul>
+	 */
+	public static final int TYPES_MASK    = 0x000000F0;
+	
+	/**
+	 * This constant is used to indicate that bits that are affected by the 
+	 * assignment to a special type of component. The supported components are:
+	 * <ul>
+	 * <li>{@link PlastikColorTheme#COMMON}</li> 
+	 * <li>{@link PlastikColorTheme#BUTTON}</li>
+	 * <li>{@link PlastikColorTheme#CHECK_BOX}</li>
+	 * <li>{@link PlastikColorTheme#CHECK_BOX_MENU_ITEM}</li>
+	 * <li>{@link PlastikColorTheme#COLOR_CHOOSER}</li>
+	 * <li>{@link PlastikColorTheme#COMBO_BOX}</li>
+	 * <li>{@link PlastikColorTheme#DESKTOP_ICON}</li>
+	 * <li>{@link PlastikColorTheme#DESKTOP_PANE}</li>
+	 * <li>{@link PlastikColorTheme#EDITOR_PANE}</li>
+	 * <li>{@link PlastikColorTheme#FORMATTED_TEXT_FIELD}</li>
+	 * <li>{@link PlastikColorTheme#INTERNAL_FRAME}</li>
+	 * <li>{@link PlastikColorTheme#LABEL}</li>
+	 * <li>{@link PlastikColorTheme#LIST}</li>
+	 * <li>{@link PlastikColorTheme#MENU}</li>
+	 * <li>{@link PlastikColorTheme#MENU_BAR}</li>
+	 * <li>{@link PlastikColorTheme#MENU_ITEM}</li>
+	 * <li>{@link PlastikColorTheme#OPTION_PANE}</li>
+	 * <li>{@link PlastikColorTheme#PANEL}</li>
+	 * <li>{@link PlastikColorTheme#PASSWORD_FIELD}</li>
+	 * <li>{@link PlastikColorTheme#POPUP_MENU}</li>
+	 * <li>{@link PlastikColorTheme#POPUP_MENU_SEPARATOR}</li>
+	 * <li>{@link PlastikColorTheme#PROGRESS_BAR}</li>
+	 * <li>{@link PlastikColorTheme#RADIO_BUTTON}</li>
+	 * <li>{@link PlastikColorTheme#RADIO_BUTTON_MENU_ITEM}</li>
+	 * <li>{@link PlastikColorTheme#ROOT_PANE}</li>
+	 * <li>{@link PlastikColorTheme#SCROLL_BAR}</li>
+	 * <li>{@link PlastikColorTheme#SCROLL_PANE}</li>
+	 * <li>{@link PlastikColorTheme#SEPARATOR}</li>
+	 * <li>{@link PlastikColorTheme#SLIDER}</li>
+	 * <li>{@link PlastikColorTheme#SPINNER}</li>
+	 * <li>{@link PlastikColorTheme#SPLIT_PANE}</li>
+	 * <li>{@link PlastikColorTheme#TABBED_PANE}</li>
+	 * <li>{@link PlastikColorTheme#TABLE}</li>
+	 * <li>{@link PlastikColorTheme#TABLE_HEADER}</li>
+	 * <li>{@link PlastikColorTheme#TEXT_AREA}</li>
+	 * <li>{@link PlastikColorTheme#TEXT_FIELD}</li>
+	 * <li>{@link PlastikColorTheme#TEXT_PANE}</li>
+	 * <li>{@link PlastikColorTheme#TOGGLE_BUTTON}</li>
+	 * <li>{@link PlastikColorTheme#TOOL_BAR}</li>
+	 * <li>{@link PlastikColorTheme#TOOL_BAR_SEPARATOR}</li>
+	 * <li>{@link PlastikColorTheme#TOOL_TIP}</li>
+	 * <li>{@link PlastikColorTheme#TREE}</li>
+	 * <li>{@link PlastikColorTheme#VIEWPORT}</li>
+	 * </ul>
+	 */
 	public static final int UI_MASK       = 0x0000FF00;
 	
+	// Shift Constants
+	/**
+	 * This constant indicates the shift width (to right) that is needed to 
+	 * affect the first bit at the lowest position.
+	 * @see PlastikColorTheme#VARIANTS_MASK
+	 */
 	public static final int VARIANTS_SHIFT = 0;
+	
+	/**
+	 * This constant indicates the shift width (to right) that is needed to 
+	 * affect the first bit at the lowest position.
+	 * @see PlastikColorTheme#INACTIVE_MASK
+	 */
 	public static final int INACTIVE_SHIFT = 3;
+	
+	/**
+	 * This constant indicates the shift width (to right) that is needed to 
+	 * affect the first bit at the lowest position.
+	 * @see PlastikColorTheme#TYPES_MASK
+	 */
 	public static final int TYPES_SHIFT    = 4;
+	
+	/**
+	 * This constant indicates the shift width (to right) that is needed to 
+	 * affect the first bit at the lowest position.
+	 * @see PlastikColorTheme#UI_MASK
+	 */
 	public static final int UI_SHIFT       = 8;
 	
+	// Counts
+	/**
+	 * This constant indicates how many different variants exists. This can 
+	 * be used for optimized storage of the resulting colors.
+	 */
 	public static final int VARIANTS_COUNT =  8;
+
+	/**
+	 * This constant indicates how many different active states exists. This 
+	 * can be used for optimized storage of the resulting colors.
+	 */
 	public static final int INACTIVE_COUNT =  2;
+	
+	/**
+	 * This constant indicates how many different types exists. This 
+	 * can be used for optimized storage of the resulting colors.
+	 */
 	public static final int TYPES_COUNT    = 16;
+	
+	/**
+	 * This constant indicates how many different ui types exists. This 
+	 * can be used for optimized storage of the resulting colors.
+	 */	
 	public static final int UI_COUNT       = 43;
 	
 	// color variants for the colors (0x00000007)
