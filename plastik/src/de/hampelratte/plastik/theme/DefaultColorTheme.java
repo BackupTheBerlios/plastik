@@ -55,6 +55,15 @@ public class DefaultColorTheme extends AbstractColorTheme {
 		setAdjustmentValue( 40, LABEL | FOREGROUND_COMPONENT | INACTIVE | BRIGHTER);
 		setAdjustmentValue(-40, LABEL | FOREGROUND_COMPONENT | INACTIVE | DARKER);
 		
+	// MENUITEM
+		setColor(250, 250, 250, MENU_ITEM | BACKGROUND);
+		setColor(103, 141, 178, MENU_ITEM | BACKGROUND | ROLLOVER);
+		setColor(Color.WHITE, MENU_ITEM | FOREGROUND_TEXT | ROLLOVER);
+	
+	// SEPARATOR
+		setColor(199, 199, 199, SEPARATOR | BACKGROUND);
+		
+		/*
 		setKDEColors(new Color[] {
 			new Color(255, 255, 255), // KDE_DEFAULT_BACKGROUND
 			new Color(  0,   0,   0), // KDE_DEFAULT_TEXT
@@ -80,7 +89,7 @@ public class DefaultColorTheme extends AbstractColorTheme {
 			new Color( 80,  80,  80), // KDE_INACTIVE_WINDOWBORDER_HANDLE
 			new Color(255, 245, 230), // KDE_ALTERNATIVE_LIST_BACKGROUND
 		});
-		
+		*/
 	}
 
 }
