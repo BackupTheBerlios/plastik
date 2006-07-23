@@ -7,10 +7,9 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
+import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.Icon;
-import javax.swing.JCheckBox;
-import javax.swing.JRadioButton;
 import javax.swing.UIManager;
 import javax.swing.plaf.UIResource;
 
@@ -81,7 +80,7 @@ public class PlastikIconFactory {
 		public void paintIcon(Component c, Graphics g, int x, int y) {
 			getColors();
 			Graphics2D g2 = (Graphics2D) g;
-			JRadioButton button = (JRadioButton)c;
+			AbstractButton button = (AbstractButton)c;
 			ButtonModel model = button.getModel();
 
 			// fill radiobutton
@@ -222,7 +221,7 @@ public class PlastikIconFactory {
 		public void paintIcon(Component c, Graphics g, int x, int y) {
 			getColors();
 			Graphics2D g2 = (Graphics2D) g;
-			JCheckBox button = (JCheckBox)c;
+			AbstractButton button = (AbstractButton)c;
 			ButtonModel model = button.getModel();
 
 			// fill checkbox
@@ -230,7 +229,8 @@ public class PlastikIconFactory {
 				Gradients.drawBoxGradient(g, new Rectangle(x, y, 13, 13),
 						new Color(252, 252, 252), new Color(236, 236, 236));
 			} else {
-				g2.fillRect(0, 0, 13, 13);
+				g2.setColor(button.getBackground());
+				g2.fillRect(x, y, 13, 13);
 			}
 
 			g2.translate(x, y);
