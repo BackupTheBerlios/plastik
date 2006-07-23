@@ -15,6 +15,7 @@ import javax.swing.plaf.basic.BasicLookAndFeel;
 
 import de.hampelratte.plastik.borders.PlastikBorder;
 import de.hampelratte.plastik.borders.PlastikButtonBorder;
+import de.hampelratte.plastik.borders.PlastikPopupMenuBorder;
 import de.hampelratte.plastik.borders.PlastikScrollPaneBorder;
 import de.hampelratte.plastik.borders.PlastikTextComponentBorder;
 import de.hampelratte.plastik.borders.PlastikToggleButtonBorder;
@@ -136,13 +137,17 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		String s = "de.hampelratte.plastik.Plastik";
 		table.put("ButtonUI",         s + "ButtonUI");
 		table.put("CheckBoxUI",       s + "CheckBoxUI");
+		table.put("CheckBoxMenuItemUI", s + "CheckBoxMenuItemUI");
 		table.put("ComboBoxUI",       s + "ComboBoxUI");
 		table.put("LabelUI",          s + "LabelUI");
 		table.put("MenuUI",           s + "MenuUI");
 		table.put("MenuBarUI",        s + "MenuBarUI");
 		table.put("MenuItemUI",       s + "MenuItemUI");
+		//table.put("PopupMenuSeparatorUI", s + "PopupMenuSeparatorUI");
 		table.put("RadioButtonUI",    s + "RadioButtonUI");
+		table.put("RadioButtonMenuItemUI", s + "RadioButtonMenuItemUI");
 		table.put("ScrollBarUI",      s + "ScrollBarUI");
+		table.put("SeparatorUI",      s + "SeparatorUI");
 		table.put("SpinnerUI",        s + "SpinnerUI");
 		table.put("TextFieldUI",      s + "TextFieldUI");
 		table.put("TextAreaUI",       s + "TextAreaUI");
@@ -234,7 +239,7 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 //		table.put("Menu.acceleratorForeground", acceleratorForeground);
 //		table.put("Menu.acceleratorSelectionForeground", acceleratorSelectedForeground);
 		table.put("Menu.background", colorTheme.getColor(PlastikColorTheme.MENU | PlastikColorTheme.BACKGROUND));
-//		table.put("Menu.border", new PlastikMenuBorder());
+//		table.put("Menu.border", null/*new PlastikMenuBorder()*/);
 		table.put("Menu.borderPainted", Boolean.TRUE);
         table.put("Menu.font", table.getFont("Common.font")); // TODO use FontTheme
 		table.put("Menu.menuPopupOffsetX", new Integer(0));
@@ -252,7 +257,7 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		// menuitem
 		table.put("MenuItem.acceleratorFont", table.getFont("Common.font")); // TODO use FontTheme
 		table.put("MenuItem.background", colorTheme.getColor(PlastikColorTheme.MENU_ITEM | PlastikColorTheme.BACKGROUND));
-//		table.put("MenuItem.border", new PlastikMenuItemBoder());
+//		table.put("MenuItem.border", /*new PlastikMenuItemBoder()*/ null);
 		table.put("MenuItem.font", table.getFont("Common.font")); // TODO use FontTheme
 		
 //		"MenuItem.borderPainted", Boolean.TRUE,
@@ -271,6 +276,10 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("Panel.background", table.getColor("Common.background"));
 		table.put("Panel.font", table.getFont("Common.font"));
 		
+		// popup menu
+		table.put("PopupMenu.background", colorTheme.getColor(PlastikColorTheme.POPUP_MENU | PlastikColorTheme.BORDER));
+		table.put("PopupMenu.border", new PlastikPopupMenuBorder());
+		
 		// radiobutton
 		table.put("RadioButton.background", table.getColor("Common.background"));
 		table.put("RadioButton.font", table.getFont("Common.font"));
@@ -278,6 +287,9 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		// scrollpane
 		table.put("ScrollPane.background", table.getColor("Common.background"));
 		table.put("ScrollPane.border", new PlastikScrollPaneBorder());
+		
+		// separator
+		table.put("Separator.background", colorTheme.getColor(PlastikColorTheme.SEPARATOR | PlastikColorTheme.BACKGROUND));
 		
 		// slider
 		table.put("Slider.background", table.getColor("Common.background"));
