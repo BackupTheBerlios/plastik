@@ -10,6 +10,7 @@
 
 package de.hampelratte.test;
 
+import de.hampelratte.plastik.PlastikLookAndFeel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -94,6 +95,7 @@ public class TransparencyTest {
 	
 	private boolean changeLookTo(String lfName) {
 		try {
+			PlastikLookAndFeel.setDefaultOpacity(false);
 			UIManager.setLookAndFeel(lfName);
 			if (frame != null)
 				SwingUtilities.updateComponentTreeUI(frame);
