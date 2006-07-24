@@ -1,6 +1,5 @@
 package de.hampelratte.plastik;
 
-import de.hampelratte.plastik.theme.PlastikColorTheme;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
@@ -12,6 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.JComponent;
@@ -22,6 +22,8 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.plaf.basic.BasicToggleButtonUI;
 import javax.swing.text.View;
+
+import de.hampelratte.plastik.theme.PlastikColorTheme;
 
 public class PlastikToggleButtonUI extends BasicToggleButtonUI {
 	
@@ -41,6 +43,11 @@ public class PlastikToggleButtonUI extends BasicToggleButtonUI {
 	}
 	
 	public static ComponentUI createUI(JComponent c) {
+		Insets         i     = c.getInsets();
+        viewRect.x      = i.left;
+        viewRect.y      = i.top;
+        viewRect.width  = c.getWidth()  - (i.right  + viewRect.x);
+        viewRect.height = c.getHeight() - (i.bottom + viewRect.y);
 		return TOGGLE_BUTTON_UI;
 	}
 	
