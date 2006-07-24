@@ -37,12 +37,18 @@
                     <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                       <KeyStroke key="Shift+Ctrl+F"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icons/CrystalSVG/folder.png"/>
+                    </Property>
                     <Property name="mnemonic" type="int" value="73"/>
                     <Property name="text" type="java.lang.String" value="Item"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem26">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icons/CrystalSVG/folder_new.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Item"/>
                   </Properties>
                 </MenuItem>
@@ -125,6 +131,9 @@
                     <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                       <KeyStroke key="Ctrl+Alt+E"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icons/CrystalSVG/folder.png"/>
+                    </Property>
                     <Property name="mnemonic" type="int" value="73"/>
                     <Property name="text" type="java.lang.String" value="Item"/>
                     <Property name="enabled" type="boolean" value="false"/>
@@ -132,6 +141,9 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem30">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icons/CrystalSVG/folder_new.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Item"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
@@ -190,11 +202,17 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem31">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icons/CrystalSVG/folder.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Item"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem32">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icons/CrystalSVG/folder_new.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Item"/>
                   </Properties>
                 </MenuItem>

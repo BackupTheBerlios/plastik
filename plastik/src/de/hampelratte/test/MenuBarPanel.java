@@ -74,10 +74,12 @@ public class MenuBarPanel extends javax.swing.JPanel {
         jInternalFrame4.setVisible(true);
         jMenu19.setText("Menu");
         jMenuItem25.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder.png")));
         jMenuItem25.setMnemonic('I');
         jMenuItem25.setText("Item");
         jMenu19.add(jMenuItem25);
 
+        jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder_new.png")));
         jMenuItem26.setText("Item");
         jMenu19.add(jMenuItem26);
 
@@ -128,11 +130,13 @@ public class MenuBarPanel extends javax.swing.JPanel {
 
         jMenu21.setText("Disabled");
         jMenuItem29.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder.png")));
         jMenuItem29.setMnemonic('I');
         jMenuItem29.setText("Item");
         jMenuItem29.setEnabled(false);
         jMenu21.add(jMenuItem29);
 
+        jMenuItem30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder_new.png")));
         jMenuItem30.setText("Item");
         jMenuItem30.setEnabled(false);
         jMenu21.add(jMenuItem30);
@@ -169,9 +173,11 @@ public class MenuBarPanel extends javax.swing.JPanel {
         jMenuBar4.add(jMenu21);
 
         jMenu23.setText("Menu");
+        jMenuItem31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder.png")));
         jMenuItem31.setText("Item");
         jMenu23.add(jMenuItem31);
 
+        jMenuItem32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder_new.png")));
         jMenuItem32.setText("Item");
         jMenu23.add(jMenuItem32);
 
