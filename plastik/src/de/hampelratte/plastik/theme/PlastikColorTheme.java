@@ -247,13 +247,28 @@ public interface PlastikColorTheme {
 	 * color is an instance of PlastikColorUIResource. If the param is no 
 	 * UIResource then it should return a computed color.
 	 *
-	 * @param color the color-object of the component.
-	 * @param type the requested type.
+	 * @param color the color-object of the component
+	 * @param type the requested variant
+	 * @return the requested color
 	 */
 	public Color getColor(Color color, int type);
 	
+	/**
+	 * This function should return a cached version of the requested color.
+	 *
+	 * @param type the requested variant
+	 * @return the requested color as a PlstikColorUIResource object
+	 */
 	public PlastikColorUIResource getColor(int type);
 	
+	/**
+	 * This function computes a color that is computed in respect to the NORMAL 
+	 * color that is given as the argument.
+	 *
+	 * @param color the NORMAL color
+	 * @param type the requested variant
+	 * @return the computed color
+	 */
 	public Color computeColor(Color color, int type);
 	
 }
