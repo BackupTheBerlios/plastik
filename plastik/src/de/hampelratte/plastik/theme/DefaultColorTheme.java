@@ -41,7 +41,8 @@ public class DefaultColorTheme extends AbstractColorTheme {
 		setColor(  0,   0,   0, COMMON | FOREGROUND_TEXT_SELECTED | INACTIVE );
 		
 		
-	// BUTTON (optional)--------------------------------------------------------
+	// BUTTON
+		setColor(229, 231, 236, BUTTON | BACKGROUND);
 		setAdjustmentValue(computeAdjustmentValue(-35, 0), BUTTON | BACKGROUND | DARKER);
 		setAdjustmentValue(computeAdjustmentValue(-19, 0), BUTTON | BACKGROUND | DARKER_GRADIENT);
 		setAdjustmentValue(computeAdjustmentValue( -4, 0), BUTTON | BACKGROUND_PRESSED | BRIGHTER_GRADIENT);
@@ -59,7 +60,10 @@ public class DefaultColorTheme extends AbstractColorTheme {
 		setColor(250, 250, 250, MENU_ITEM | BACKGROUND);
 		setColor(103, 141, 178, MENU_ITEM | BACKGROUND | ROLLOVER);
 		setColor(Color.WHITE, MENU_ITEM | FOREGROUND_TEXT | ROLLOVER);
-	
+		
+	// POPUP_MENU
+		setColor(141, 141, 141, POPUP_MENU | BORDER);
+		
 	// SEPARATOR
 		setColor(199, 199, 199, SEPARATOR | BACKGROUND);
 		
