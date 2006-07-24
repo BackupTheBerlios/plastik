@@ -8,8 +8,12 @@ import javax.swing.ImageIcon;
 public abstract class AbstractIconTheme implements PlastikIconTheme {
 	
 	public ImageIcon loadImage(Class cl, String name) {
-      URL url = cl.getResource(name);
-      return new ImageIcon(url);
+		URL url = cl.getResource(name);
+		ImageIcon icon = null;
+		if (url != null) {
+			icon = new ImageIcon(url);
+		}
+		return icon;
 	}
 
 	public abstract ImageIcon getInfoIcon();
