@@ -44,7 +44,14 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		colorArray = new PlastikColorUIResource[colorCount];
 	}
 	
-	// TODO implement this (horror)
+	
+	/**
+	 * This assigns the given KDE-colors to the Plastik-Theme color-mapping.
+	 * The given Colors must in the same order as the constants above.
+	 * This method deletes all predefined Colors, assignes the kde-colors to 
+	 * the normal colors and set the correct adjustmentvalues.
+	 * TODO: not completly implemented
+	 */
 	protected void setKDEColors(Color[] kdeColors) {
 		// 1. delete all colors
 		// TODO replace this calls by one call of deleteAllColors()
@@ -67,12 +74,12 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		setColor(kdeColors[KDE_WINDOW_BACKGROUND], BORDER_COMPONENT | INACTIVE);
 		
 		//3. define adjustmentvalues
-		// The first adjustment acts like an offset for all the other
-		// adjustments
+		// The first adjustment in the array acts like an offset for all the 
+		// other adjustments. 
 		setMultipleAdjustments(
 				BACKGROUND, 
-				new int[] {   0,  21,  40,  10, -21, -40, -10,   0,
-				             -3,   6,  12,   3,  -6, -12,  -3,   0},
+				new int[] {   0,  21,  40,  10, -21, -40, -10,   0,  // active
+				             -3,   6,  12,   3,  -6, -12,  -3,   0}, // inactive
 				new int[] {   0,   0,   0,   0,   0,   0,   0,   0,
 				              0,   0,   0,   0,   0,   0,   0,   0});
 		setMultipleAdjustments(
@@ -116,6 +123,16 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		}
 	}
 	
+	/**
+	 * This method is used to directly assign multiple adjustmentvalues at once.
+	 * The adjustments apply to all ui-components as once. (COMMON, BUTTON, ...)
+	 *
+	 * @param colorType the type for that the adjustmentvalues should be set. 
+	 * @param brightnessAdjustments an array of 16 Elements, that define the 
+	 *                              brigtnesscorrection for the set color.
+	 * @param alphaAdjustments an array of 16 Elements, that define the 
+	 *                              alphacorrection for the set color.
+	 */
 	protected void setMultipleAdjustments(int colorType, int[] brightnessAdjustments, int[] alphaAdjustments) {
 		int length = 16;
 		if (brightnessAdjustments == null || brightnessAdjustments.length != length)
@@ -249,17 +266,34 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 		return computeColor(color, type);
 	}
 	
+	/**
+	 * Diese Funktion schaut nach ob die gesuchte Farbe bereits definiert ist 
+	 * oder nicht. In dem Falle das die Farbe bereits definiert ist wird dise 
+	 * ohne weiteren Umweg zurückgegeben.
+	 *
+	 * Die Grundfarben von COMMON sollten immer existieren. Wir allerdings nach 
+	 * einer Variante davon gefragt, dann wird diese entsprechend aus der 
+	 * Grundfarbe und dem zugehörigen Adjustment-Wert berechnet.
+	 *
+	 * Bei anderen UI-Komponenten wird zunächst auch auf die Grundfarbe der 
+	 * Komponente zurückgegriffen und mit Hilfe des zugehörigen 
+	 * Adjustment-Wertes die neue Farbe berechnet. Sollte die Grundfarbe der 
+	 * Komponente nicht existieren, so wird diese von COMMON durch nochmaligen 
+	 * Aufruf der Methode vorher besorgt.
+	 */
 	public PlastikColorUIResource getColor(int type) {
 		PlastikColorUIResource color = colorArray[type];
 		
 		if (color != null) {
-			return color;
+			return color; // Farbe ist bereits gestgelegt worden
 		}
 		
 		// Die Farbe existiert nicht, daher wird als Erstes die Frage
 		// gestellt ob es sich um eine Variante oder eine "Grundfarbe"
-		// (Variante ist NORMAL) handelt. [index zeigt auf die Grundfarbe]
+		// (Variante ist NORMAL) handelt. 
+		// index zeigt auf die Grundfarbe, da die Variante ignoriert wird.
 		int index = type & (INACTIVE_MASK | TYPES_MASK | UI_MASK);
+		
 		if (index == type) {
 			// Es ist eine "Grundfarbe", da die Variante NORMAL (0) ist.
 			// Es wird nun bei COMMON nachgefragt, da dort die "Grundfarbe" auf
@@ -270,33 +304,22 @@ public abstract class AbstractColorTheme implements PlastikColorTheme {
 			} else {
 				// Die Farbe wird von COMMON abgefragt, entsprechend des
 				// Adjustments verändert (falls != 0) und gespeichert.
-				color = getColor(COMMON + (type & (INACTIVE_MASK | TYPES_MASK)));
-				if (adjustmentValues[type] != 0) {
-					color = new PlastikColorUIResource(computeAdjustedColor(color.getRGB(), adjustmentValues[type]));
+				color = getColor(COMMON + (index & (INACTIVE_MASK | TYPES_MASK)));
+				if (adjustmentValues[index] != 0) {
+					color = new PlastikColorUIResource(computeAdjustedColor(color.getRGB(), adjustmentValues[index]));
 				}
-				colorArray[type] = color;
+				colorArray[index] = color;
 			}
 		} else {
 			// Es ist keine "Grundfarbe", da die Variante nicht NORMAL (0) ist.
-			// Es wird nun bei COMMON nachgefragt, da dies zumindest die
-			// "Grundfarbe" liefern können muss, es sei denn dieser Aufruf fragt
-			// bereits nach COMMON.
-			if ((type & UI_MASK) == COMMON) {
-				// Frage nach der Grundfarbe:
-				color = getColor(index);
-				if (adjustmentValues[type] != 0) {
-					color = new PlastikColorUIResource(computeAdjustedColor(color.getRGB(), adjustmentValues[type]));
-				}
-				colorArray[type] = color;
-			} else {
-				// Frage nach der eigenen Grundfarbe.
-				//color = getColor(COMMON + (index & (INACTIVE_MASK | TYPES_MASK)));
-				color = getColor(index);
-				if (adjustmentValues[type] != 0) {
-					color = new PlastikColorUIResource(computeAdjustedColor(color.getRGB(), adjustmentValues[type]));
-				}
-				colorArray[type] = color;
+			// Es wird zunächst die Grundfarbe der Komponente erfragt und 
+			// entsprechend des Adjustments verändert (falls != 0) und 
+			// gespeichert.
+			color = getColor(index);
+			if (adjustmentValues[type] != 0) {
+				color = new PlastikColorUIResource(computeAdjustedColor(color.getRGB(), adjustmentValues[type]));
 			}
+			colorArray[type] = color;
 		}
 		return color;
 	}
