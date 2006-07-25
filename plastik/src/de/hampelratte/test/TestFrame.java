@@ -59,6 +59,8 @@ public class TestFrame extends JFrame {
 	private MenuBarPanel menuBarPanel;
 	
 	private CheckboxPanel checkboxPanel;
+	
+	private TextFieldPanel textFieldPanel;
 
 	public TestFrame() {
 		PlastikLookAndFeel.setTextAntialiasing(true);
@@ -106,6 +108,7 @@ public class TestFrame extends JFrame {
 		radioButtonPanel = new RadioButtonPanel();
 		menuBarPanel = new MenuBarPanel();
 		checkboxPanel = new CheckboxPanel();
+		textFieldPanel = new TextFieldPanel();
 
 		JTabbedPane pane = allPanel.getTabbedPane();
 		pane.add(buttonPanel);
@@ -114,6 +117,7 @@ public class TestFrame extends JFrame {
 		pane.add(radioButtonPanel);
 		pane.add(menuBarPanel);
 		pane.add(checkboxPanel);
+		pane.add(textFieldPanel);
 
 		// exampleFrame.getRootPane().setDefaultButton(allPanel.getDefaultButton());
 
