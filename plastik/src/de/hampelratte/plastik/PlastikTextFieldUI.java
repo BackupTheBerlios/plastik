@@ -1,6 +1,5 @@
 package de.hampelratte.plastik;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,15 +11,15 @@ import java.beans.PropertyChangeEvent;
 
 import javax.swing.JComponent;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTextFieldUI;
-import javax.swing.text.JTextComponent;
 
+
+// FIXME antialiasing funktioniert nicht bei, wenn man in einem
+// right to left orientierten feld geschrieben hat
 public class PlastikTextFieldUI extends BasicTextFieldUI {
 
 	private static PlastikTextFieldUI textFieldUI;
-	private JTextComponent editor;
 	
 	public static ComponentUI createUI(JComponent c) {
 		JTextField tf = (JTextField)c;
@@ -33,10 +32,10 @@ public class PlastikTextFieldUI extends BasicTextFieldUI {
 		super.propertyChange(evt);
 	}
 	
+	
+	private JTextField tf;
 	public void installUI(JComponent c) {
-        if (c instanceof JTextComponent) {
-            editor = (JTextComponent) c;
-        }
+		tf = (JTextField)c;
         super.installUI(c);
 	}
 	
@@ -56,22 +55,32 @@ public class PlastikTextFieldUI extends BasicTextFieldUI {
 	}
 	
 	public void update(Graphics g, JComponent c) {
-		c.setOpaque(false);
-
-		Color background = c.isEnabled() ? c.getBackground() : UIManager.getColor("Common.background");
-		// draw background
-		g.setColor(background);
-		Insets i = c.getInsets();
-		int width = c.getWidth() - i.left - i.right;
-		int height = c.getHeight() - i.top - i.bottom;
-		g.fillRect(i.left,i.top, width, height);
-		
-		if(PlastikLookAndFeel.isTextAntialiasing()) {
-			Graphics2D g2d = (Graphics2D)g;
-			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-					RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		// storing original anitalising flag
+		Graphics2D g2d = (Graphics2D) g;
+		Object state = null;
+		if (PlastikLookAndFeel.isTextAntialiasing()) {
+			state = g2d.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
+			if (state != RenderingHints.VALUE_TEXT_ANTIALIAS_ON) {
+				g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			}
 		}
+		
 		super.paint(g,c);
+		
+		// restoring antialising flag
+		if (state != null) {
+			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, state);
+		}
+	}
+	
+	protected void paintBackground(Graphics g) {
+		if(tf.isOpaque()) {
+			g.setColor(tf.getBackground());
+			Insets i = tf.getInsets();
+			int width = tf.getWidth() - i.left - i.right;
+			int height = tf.getHeight() - i.top - i.bottom;
+			g.fillRect(i.left,i.top, width, height);
+		}
 	}
 	
 	public Dimension getPreferredSize(JComponent c) {
