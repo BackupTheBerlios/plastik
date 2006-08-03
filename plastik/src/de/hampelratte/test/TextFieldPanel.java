@@ -59,7 +59,7 @@ public class TextFieldPanel extends javax.swing.JPanel {
     	gridBagConstraints21.weightx = 1.0;
     	gridBagConstraints21.insets = new java.awt.Insets(5,5,5,5);
     	gridBagConstraints21.gridx = 0;
-    	setName("TextField");
+    	setName("JTextField");
         GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
         gridBagConstraints2.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints2.gridy = 1;

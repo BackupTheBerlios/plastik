@@ -61,6 +61,8 @@ public class TestFrame extends JFrame {
 	private CheckboxPanel checkboxPanel;
 	
 	private TextFieldPanel textFieldPanel;
+	
+	private TextAreaPanel textAreaPanel;
 
 	public TestFrame() {
 		PlastikLookAndFeel.setTextAntialiasing(true);
@@ -109,6 +111,7 @@ public class TestFrame extends JFrame {
 		menuBarPanel = new MenuBarPanel();
 		checkboxPanel = new CheckboxPanel();
 		textFieldPanel = new TextFieldPanel();
+		textAreaPanel = new TextAreaPanel();
 
 		JTabbedPane pane = allPanel.getTabbedPane();
 		pane.add(buttonPanel);
@@ -118,6 +121,7 @@ public class TestFrame extends JFrame {
 		pane.add(menuBarPanel);
 		pane.add(checkboxPanel);
 		pane.add(textFieldPanel);
+		pane.add(textAreaPanel);
 
 		// exampleFrame.getRootPane().setDefaultButton(allPanel.getDefaultButton());
 

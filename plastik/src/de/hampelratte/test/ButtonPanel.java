@@ -8,6 +8,8 @@ package de.hampelratte.test;
 
 import javax.swing.JButton;
 
+import de.hampelratte.plastik.PlastikLookAndFeel;
+
 /**
  *
  * @author  TBN
@@ -135,7 +137,8 @@ public class ButtonPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         add(defaultButton, gridBagConstraints);
 
-        iconOnlyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/display.png")));
+        //iconOnlyButton.setIcon(new ImageIcon(new PlastikLookAndFeel().getClass().getResource("themes/iconthemes/CrystalSVG/icons/display.png")));
+        iconOnlyButton.setIcon(PlastikLookAndFeel.getTheme().getIconTheme().getComputerIcon());
         iconOnlyButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -143,7 +146,7 @@ public class ButtonPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         add(iconOnlyButton, gridBagConstraints);
 
-        iconButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/question.png")));
+        iconButton.setIcon(PlastikLookAndFeel.getTheme().getIconTheme().getQuestionIcon());
         iconButton.setText("with icon");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -151,7 +154,7 @@ public class ButtonPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         add(iconButton, gridBagConstraints);
 
-        iconOnlyButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/display.png")));
+        iconOnlyButton1.setIcon(PlastikLookAndFeel.getTheme().getIconTheme().getQuestionIcon());
         iconOnlyButton1.setEnabled(false);
         iconOnlyButton1.setMargin(new java.awt.Insets(0, 0, 0, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -160,7 +163,7 @@ public class ButtonPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         add(iconOnlyButton1, gridBagConstraints);
 
-        iconButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/question.png")));
+        iconButton1.setIcon(PlastikLookAndFeel.getTheme().getIconTheme().getComputerIcon());
         iconButton1.setText("with icon");
         iconButton1.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();

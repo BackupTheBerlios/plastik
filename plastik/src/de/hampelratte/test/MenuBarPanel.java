@@ -6,6 +6,11 @@
 
 package de.hampelratte.test;
 
+import java.awt.ComponentOrientation;
+
+import de.hampelratte.plastik.PlastikLookAndFeel;
+import de.hampelratte.plastik.theme.PlastikIconTheme;
+
 /**
  *
  * @author  TBN
@@ -73,14 +78,20 @@ public class MenuBarPanel extends javax.swing.JPanel {
         setName("JMenuBar");
         jInternalFrame4.setVisible(true);
         jMenu19.setText("Menu");
+        jMenu19.setMnemonic('M');
         jMenuItem25.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder.png")));
+        PlastikIconTheme iconTheme = PlastikLookAndFeel.getTheme().getIconTheme();
+        jMenuItem25.setIcon(iconTheme.getDirectoryIcon());
+        //jMenuItem25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder.png")));
         jMenuItem25.setMnemonic('I');
         jMenuItem25.setText("Item");
+        jMenuItem25.setContentAreaFilled(false);
         jMenu19.add(jMenuItem25);
 
-        jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder_new.png")));
-        jMenuItem26.setText("Item");
+        jMenuItem26.setIcon(iconTheme.getNewFolderIcon());
+        //jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder_new.png")));
+        jMenuItem26.setText("Item right to left");
+        jMenuItem26.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         jMenu19.add(jMenuItem26);
 
         jMenu19.add(jSeparator34);
@@ -88,7 +99,8 @@ public class MenuBarPanel extends javax.swing.JPanel {
         jCheckBoxMenuItem25.setText("CheckBox");
         jMenu19.add(jCheckBoxMenuItem25);
 
-        jCheckBoxMenuItem26.setText("CheckBox");
+        jCheckBoxMenuItem26.setText("CheckBox right to left");
+        jCheckBoxMenuItem26.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         jMenu19.add(jCheckBoxMenuItem26);
 
         jMenu19.add(jSeparator35);
@@ -96,7 +108,9 @@ public class MenuBarPanel extends javax.swing.JPanel {
         jRadioButtonMenuItem25.setText("RadioButton");
         jMenu19.add(jRadioButtonMenuItem25);
 
-        jRadioButtonMenuItem26.setText("RadioButton");
+        jRadioButtonMenuItem26.setText("RadioButton left to right");
+        jRadioButtonMenuItem26.setSelected(true);
+        jRadioButtonMenuItem26.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         jMenu19.add(jRadioButtonMenuItem26);
 
         jMenu19.add(jSeparator36);
@@ -130,13 +144,15 @@ public class MenuBarPanel extends javax.swing.JPanel {
 
         jMenu21.setText("Disabled");
         jMenuItem29.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder.png")));
+        jMenuItem29.setIcon(iconTheme.getDirectoryIcon());
+        //jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder.png")));
         jMenuItem29.setMnemonic('I');
         jMenuItem29.setText("Item");
         jMenuItem29.setEnabled(false);
         jMenu21.add(jMenuItem29);
 
-        jMenuItem30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder_new.png")));
+        jMenuItem30.setIcon(iconTheme.getNewFolderIcon());
+        //jMenuItem30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder_new.png")));
         jMenuItem30.setText("Item");
         jMenuItem30.setEnabled(false);
         jMenu21.add(jMenuItem30);
@@ -173,17 +189,20 @@ public class MenuBarPanel extends javax.swing.JPanel {
         jMenuBar4.add(jMenu21);
 
         jMenu23.setText("Menu");
-        jMenuItem31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder.png")));
+        jMenuItem31.setIcon(iconTheme.getDirectoryIcon());
+        //jMenuItem31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder.png")));
         jMenuItem31.setText("Item");
         jMenu23.add(jMenuItem31);
 
-        jMenuItem32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder_new.png")));
+        jMenuItem32.setIcon(iconTheme.getNewFolderIcon());
+        //jMenuItem32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CrystalSVG/folder_new.png")));
         jMenuItem32.setText("Item");
         jMenu23.add(jMenuItem32);
 
         jMenu23.add(jSeparator42);
 
         jCheckBoxMenuItem31.setText("CheckBox");
+        jCheckBoxMenuItem31.setIcon(iconTheme.getNewFolderIcon());
         jMenu23.add(jCheckBoxMenuItem31);
 
         jCheckBoxMenuItem32.setText("CheckBox");
