@@ -1,9 +1,7 @@
 package de.hampelratte.plastik;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -11,7 +9,6 @@ import java.beans.PropertyChangeEvent;
 
 import javax.swing.JComponent;
 import javax.swing.JTextArea;
-import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTextAreaUI;
 
@@ -28,12 +25,22 @@ public class PlastikTextAreaUI extends BasicTextAreaUI {
 	}
 	
 	public void update(Graphics g, JComponent c) {
-		if(PlastikLookAndFeel.isTextAntialiasing()) {
-			Graphics2D g2d = (Graphics2D)g;
-			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-					RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		// storing original anitalising flag
+		Graphics2D g2d = (Graphics2D) g;
+		Object state = null;
+		if (PlastikLookAndFeel.isTextAntialiasing()) {
+			state = g2d.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
+			if (state != RenderingHints.VALUE_TEXT_ANTIALIAS_ON) {
+				g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			}
 		}
+		
 		super.paint(g,c);
+		
+		// restoring antialising flag
+		if (state != null) {
+			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, state);
+		}
 	}
 
 	public void propertyChange(PropertyChangeEvent evt) {
