@@ -17,10 +17,10 @@ import javax.swing.JScrollBar;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.metal.MetalScrollBarUI;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
 // TODO zweiten button unten einbauen
-public class PlastikScrollBarUI extends MetalScrollBarUI {
+public class PlastikScrollBarUI extends BasicScrollBarUI {
 
 	private Color contour = UIManager.getColor("Common.contour");
 
@@ -28,9 +28,11 @@ public class PlastikScrollBarUI extends MetalScrollBarUI {
 			.getColor("Common.contourSmoother");
 
 	private boolean mousePressed = false;
+	
+	private int scrollBarWidth;
 
 	private Point pressedAt;
-
+	
 	public static ComponentUI createUI(JComponent c) {
 		PlastikScrollBarUI ui = new PlastikScrollBarUI();
 		c.addMouseMotionListener(ui.new ThumbMouseListener());
@@ -38,16 +40,20 @@ public class PlastikScrollBarUI extends MetalScrollBarUI {
 		return ui;
 	}
 
+	protected void installDefaults() {
+		super.installDefaults();
+		scrollBarWidth = UIManager.getInt("ScrollBar.width");
+        if (scrollBarWidth <= 0) {
+            scrollBarWidth = 16;
+        }
+	}
+	
 	protected JButton createDecreaseButton(int orientation) {
-		decreaseButton = new PlastikScrollButton(orientation, scrollBarWidth,
-				isFreeStanding);
-		return decreaseButton;
+		return new PlastikScrollButton(orientation, scrollBarWidth);
 	}
 
 	protected JButton createIncreaseButton(int orientation) {
-		increaseButton = new PlastikScrollButton(orientation, scrollBarWidth,
-				isFreeStanding);
-		return increaseButton;
+		return new PlastikScrollButton(orientation, scrollBarWidth);
 	}
 
 	protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
