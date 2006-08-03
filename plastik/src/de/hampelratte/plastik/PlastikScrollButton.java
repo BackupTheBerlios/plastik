@@ -8,11 +8,12 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ButtonModel;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.plaf.metal.MetalScrollButton;
 
-public class PlastikScrollButton extends MetalScrollButton {
+public class PlastikScrollButton extends JButton {
 
 	private boolean gotColors = false;
 
@@ -33,10 +34,12 @@ public class PlastikScrollButton extends MetalScrollButton {
 	private int size;
 
 	private ButtonModel model;
+	
+	private int direction; 
 
-	public PlastikScrollButton(int direction, int width, boolean freeStanding) {
-		super(direction, width, freeStanding);
+	public PlastikScrollButton(int direction, int width) {
 		super.setSize(width, width);
+		this.direction = direction;
 		this.size = width;
 		model = this.getModel();
 	}
@@ -62,7 +65,17 @@ public class PlastikScrollButton extends MetalScrollButton {
 				BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = (Graphics2D) image.getGraphics();
 
-		if (getDirection() == SwingConstants.NORTH) {
+		if (direction == SwingConstants.NORTH) {
+			// TODO real transparency
+			// paint transparent corners
+			Color parentColor = getParent().getParent().getBackground();
+			if(getParent().getParent() instanceof JScrollPane && !getParent().getParent().isOpaque()) {
+				parentColor = getParent().getParent().getParent().getBackground();
+			}
+			g2.setColor(parentColor);
+			g2.drawLine(0, 0, 0, 0);
+			g2.drawLine(size - 1, 0, size - 1, 0);
+						
 			// contour
 			g2.setColor(model.isEnabled() ? contour : contourDisabled);
 			g2.drawLine(2, 0, size - 3, 0);
@@ -86,7 +99,6 @@ public class PlastikScrollButton extends MetalScrollButton {
 			g2.drawLine(1, size - 2, size - 3, size - 2);
 
 			if (!isEnabled() || model.isPressed()) {
-				g.setColor(background);
 				g2.fillRect(1, 1, size - 3, size - 3);
 			} else {
 				// gradient
@@ -115,7 +127,17 @@ public class PlastikScrollButton extends MetalScrollButton {
 			}
 
 			g.drawImage(image, 0, 0, background, this);
-		} else if(getDirection() == SwingConstants.SOUTH) {
+		} else if(direction == SwingConstants.SOUTH) {
+			// TODO real transparency
+			// paint transparent corners
+			Color parentColor = getParent().getParent().getBackground();
+			if(getParent().getParent() instanceof JScrollPane && !getParent().getParent().isOpaque()) {
+				parentColor = getParent().getParent().getParent().getBackground();
+			}
+			g2.setColor(parentColor);
+			g2.drawLine(0, size-1, 0, size-1);
+			g2.drawLine(size - 1, size-1, size - 1, size-1);
+			
 			// contour
 			g2.setColor(model.isEnabled() ? contour : contourDisabled);
 			g2.drawLine(2, size-1, size - 3, size-1);
@@ -139,7 +161,6 @@ public class PlastikScrollButton extends MetalScrollButton {
 			g2.drawLine(2, size - 2, size - 3, size - 2);
 			
 			if (!isEnabled() || model.isPressed()) {
-				g.setColor(background);
 				g2.fillRect(1, 1, size - 3, size - 3);
 			} else {
 				// gradient
@@ -168,7 +189,17 @@ public class PlastikScrollButton extends MetalScrollButton {
 			}
 
 			g.drawImage(image, 0, 0, background, this);
-		} else if(getDirection() == SwingConstants.EAST) {
+		} else if(direction == SwingConstants.EAST) {
+			// TODO real transparency
+			// paint transparent corners
+			Color parentColor = getParent().getParent().getBackground();
+			if(getParent().getParent() instanceof JScrollPane && !getParent().getParent().isOpaque()) {
+				parentColor = getParent().getParent().getParent().getBackground();
+			}
+			g2.setColor(parentColor);
+			g2.drawLine(size-1, 0, size-1, 0);
+			g2.drawLine(size - 1, size-1, size - 1, size-1);
+			
 			// contour
 			g2.setColor(model.isEnabled() ? contour : contourDisabled);
 			g2.drawLine(size-1, 2, size - 1, size-3); // fertig
@@ -193,7 +224,6 @@ public class PlastikScrollButton extends MetalScrollButton {
 			g2.drawLine(size-2, 2, size - 2, size - 3);
 			
 			if (!isEnabled() || model.isPressed()) {
-				g.setColor(background);
 				g2.fillRect(1, 1, size - 3, size - 3);
 			} else {
 				// gradient
@@ -222,7 +252,17 @@ public class PlastikScrollButton extends MetalScrollButton {
 			}
 
 			g.drawImage(image, 0, 0, background, this);
-		} else if(getDirection() == SwingConstants.WEST) {
+		} else if(direction == SwingConstants.WEST) {
+			// TODO real transparency
+			// paint transparent corners
+			Color parentColor = getParent().getParent().getBackground();
+			if(getParent().getParent() instanceof JScrollPane && !getParent().getParent().isOpaque()) {
+				parentColor = getParent().getParent().getParent().getBackground();
+			}
+			g2.setColor(parentColor);
+			g2.drawLine(0, 0, 0, 0);
+			g2.drawLine(0, size-1, 0, size-1);
+			
 			// contour
 			g2.setColor(model.isEnabled() ? contour : contourDisabled);
 			g2.drawLine(0, 2, 0, size - 3);
@@ -247,7 +287,6 @@ public class PlastikScrollButton extends MetalScrollButton {
 			g2.drawLine(size - 2, 1, size - 2, size - 3);
 			
 			if (!isEnabled() || model.isPressed()) {
-				g.setColor(background);
 				g2.fillRect(1, 1, size - 3, size - 3);
 			} else {
 				// gradient

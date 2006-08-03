@@ -19,9 +19,10 @@ public class PlastikBorder extends AbstractBorder implements UIResource {
 
 		g.translate(x, y);
 		
+		
 		/*
 		{ // draw background
-			g.setColor(background);
+			g.setColor(c.getParent().getBackground());
 			g.drawLine(1, 0, width - 2, 0); // top
 			g.drawLine(1, height - 1, width - 2, height - 1); // bottom
 			g.drawLine(0, 1, 0, height - 2); // left
@@ -32,6 +33,14 @@ public class PlastikBorder extends AbstractBorder implements UIResource {
 			g.drawLine(width-2,1,width-2,1);
 			g.drawLine(width-2,height-2,width-2,height-2);
 		}*/
+		
+		// TODO real transparency
+		// transparent corners
+		g.setColor(c.getParent().getBackground());
+		g.drawLine(0,0,0,0);
+		g.drawLine(0,height-1,0,height-1);
+		g.drawLine(width-1,0,width-1,0);
+		g.drawLine(width-1,height-1,width-1,height-1);
 
 		g.setColor(contour);
 		// horizontal
@@ -56,7 +65,7 @@ public class PlastikBorder extends AbstractBorder implements UIResource {
 		g.drawLine(width - 1, 1, width - 1, 1);
 		g.drawLine(0, height - 2, 0, height - 2); // lowerleft
 		g.drawLine(1, height - 1, 1, height - 1);
-		g.drawLine(width - 2, height - 1, width - 2, height - 1); // upperright
+		g.drawLine(width - 2, height - 1, width - 2, height - 1); // lowerright
 		g.drawLine(width - 1, height - 2, width - 1, height - 2);
 		
 		g.translate(-x, -y);
