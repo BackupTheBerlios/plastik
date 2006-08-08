@@ -21,6 +21,8 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.plaf.basic.BasicComboPopup;
+import javax.swing.plaf.basic.ComboPopup;
 
 import de.hampelratte.plastik.borders.PlastikComboBoxArrowButtonBorder;
 
@@ -165,6 +167,9 @@ public class PlastikComboBoxUI extends BasicComboBoxUI implements MouseListener,
                 }
             }
         }
-        
+    }
+	
+	protected ComboPopup createPopup() {
+        return new PlastikComboPopup( comboBox );
     }
 }
