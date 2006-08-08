@@ -168,7 +168,7 @@ public final class PlastikComboBoxButton extends JButton {
 	                g.drawLine(x+1,3,x+1,height);
                 } else {
                 	g.setColor(contour);
-	                g.drawLine(x,1,x,height+2);
+	                g.drawLine(x,1,x,height+1);
 	                g.setColor(background);
 	                g.drawLine(x+1,2,x+1,height+1);
                 }
