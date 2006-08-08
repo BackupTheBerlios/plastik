@@ -1,16 +1,18 @@
 package de.hampelratte.plastik.borders;
 
-import de.hampelratte.plastik.PlastikLookAndFeel;
-import de.hampelratte.plastik.theme.PlastikColorTheme;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
+
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.border.AbstractBorder;
 import javax.swing.plaf.UIResource;
+
+import de.hampelratte.plastik.PlastikLookAndFeel;
+import de.hampelratte.plastik.theme.PlastikColorTheme;
 
 public class PlastikButtonBorder extends AbstractBorder implements UIResource {
 	
