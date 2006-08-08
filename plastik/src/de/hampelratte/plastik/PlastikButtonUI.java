@@ -1,6 +1,5 @@
 package de.hampelratte.plastik;
 
-import de.hampelratte.plastik.theme.PlastikColorTheme;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
@@ -12,6 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.JComponent;
@@ -22,6 +22,8 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.text.View;
+
+import de.hampelratte.plastik.theme.PlastikColorTheme;
 
 public class PlastikButtonUI extends BasicButtonUI {
 	
@@ -171,7 +173,7 @@ public class PlastikButtonUI extends BasicButtonUI {
 			if (!model.isEnabled()) {
 				top    = theme.getColor(background, BACKGROUND_INACTIVE | PlastikColorTheme.BRIGHTER_GRADIENT);
 				bottom = theme.getColor(background, BACKGROUND_INACTIVE | PlastikColorTheme.DARKER_GRADIENT);
-			} else if (model.isArmed() && model.isPressed()) {
+			} else if (model.isArmed() && model.isPressed() && !(b instanceof PlastikComboBoxButton)) {
 				top    = theme.getColor(background, BACKGROUND_PRESSED | PlastikColorTheme.DARKER_GRADIENT);
 				bottom = theme.getColor(background, BACKGROUND_PRESSED | PlastikColorTheme.BRIGHTER_GRADIENT);
 			} else {
