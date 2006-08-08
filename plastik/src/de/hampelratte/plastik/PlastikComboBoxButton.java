@@ -3,7 +3,6 @@ package de.hampelratte.plastik;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
@@ -65,10 +64,10 @@ public final class PlastikComboBoxButton extends JButton {
         setMargin(new Insets(0, LEFT_INSET, 0, RIGHT_INSET));
         borderPaintsFocus = UIManager.getBoolean("ComboBox.borderPaintsFocus");
         
-        if(!iconOnly) {
-        	setBorder(new PlastikButtonBorder());
-        } else {
+        if(iconOnly) {
         	setBorder(new PlastikComboBoxArrowButtonBorder(comboBox));
+        } else {
+        	setBorder(new PlastikButtonBorder());
         }
         
         if(PlastikLookAndFeel.isRolloverEnabled()) {
@@ -171,7 +170,7 @@ public final class PlastikComboBoxButton extends JButton {
                 	g.setColor(contour);
 	                g.drawLine(x,1,x,height+2);
 	                g.setColor(background);
-	                g.drawLine(x+1,1,x+1,height+1);
+	                g.drawLine(x+1,2,x+1,height+1);
                 }
             }
 
