@@ -2,7 +2,9 @@ package de.hampelratte.plastik;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Insets;
+import java.awt.LayoutManager;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -14,14 +16,16 @@ import java.beans.PropertyChangeListener;
 import javax.swing.ComboBoxEditor;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.LookAndFeel;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicComboBoxUI;
-import javax.swing.plaf.metal.MetalComboBoxUI;
 
 import de.hampelratte.plastik.borders.PlastikComboBoxArrowButtonBorder;
 
 // TODO editor cornerns are not transparent
-public class PlastikComboBoxUI extends MetalComboBoxUI implements MouseListener, MouseWheelListener {
+public class PlastikComboBoxUI extends BasicComboBoxUI implements MouseListener, MouseWheelListener {
 
 	public static ComponentUI createUI(JComponent c) {
 		if(PlastikLookAndFeel.getDefaultOpacity() == false) {
@@ -29,6 +33,16 @@ public class PlastikComboBoxUI extends MetalComboBoxUI implements MouseListener,
 		}
 		return new PlastikComboBoxUI();
 	}
+	
+	protected void installDefaults() {
+        super.installDefaults();
+        UIDefaults defaults = UIManager.getDefaults();
+        comboBox.setPreferredSize(new Dimension(comboBox.getWidth(), defaults.getInt("ComboBox.height")));
+        
+        Object obj;
+		obj = PlastikLookAndFeel.getDefaultOpacity() ? Boolean.TRUE : Boolean.FALSE;
+		LookAndFeel.installProperty(comboBox, "opaque", obj);
+    }
 
 	protected JButton createArrowButton() {
 		JButton button = new PlastikComboBoxButton(comboBox,
@@ -48,45 +62,7 @@ public class PlastikComboBoxUI extends MetalComboBoxUI implements MouseListener,
 	public PropertyChangeListener createPropertyChangeListener() {
 		return new PlastikPropertyChangeListener(this);
 	}
-
-	public void layoutComboBox(Container parent,
-			MetalComboBoxLayoutManager manager) {
-		if (comboBox.isEditable()) {
-			manager.superLayout(parent);
-
-			int width = comboBox.getWidth();
-			int height = comboBox.getHeight();
-
-			Insets insets = getInsets();
-			int buttonWidth = 17;
-			int buttonHeight = height - (insets.top + insets.bottom);
-			Rectangle cvb;
-
-			if (arrowButton != null) {
-				if (comboBox.getComponentOrientation().isLeftToRight()) {
-					arrowButton.setBounds(width - (insets.right + buttonWidth),
-							insets.top, buttonWidth, buttonHeight);
-				} else {
-					arrowButton.setBounds(insets.left, insets.top, buttonWidth,
-							buttonHeight);
-				}
-			}
-
-			if (editor != null) {
-				cvb = rectangleForCurrentValue();
-				editor.setBounds(cvb);
-				
-			}
-		} else if (arrowButton != null) {
-			Insets insets = comboBox.getInsets();
-			int width = comboBox.getWidth();
-			int height = comboBox.getHeight();
-			arrowButton.setBounds(insets.left, insets.top, width
-					- (insets.left + insets.right), height
-					- (insets.top + insets.bottom));
-		}
-	}
-
+	
 	public class PlastikPropertyChangeListener extends
 			BasicComboBoxUI.PropertyChangeHandler {
 		
@@ -149,4 +125,46 @@ public class PlastikComboBoxUI extends MetalComboBoxUI implements MouseListener,
 			comboBox.setSelectedIndex(index);
 		}
 	}
+	
+	protected LayoutManager createLayoutManager() {
+        return new PlastikComboBoxLayoutManager();
+    }
+	
+	public class PlastikComboBoxLayoutManager extends BasicComboBoxUI.ComboBoxLayoutManager {
+        public void layoutContainer( Container parent ) {
+        	if (comboBox.isEditable()) {
+    			int width = comboBox.getWidth();
+    			int height = comboBox.getHeight();
+
+    			Insets insets = getInsets();
+    			int buttonHeight = height - (insets.top + insets.bottom);
+    			int buttonWidth = 17;
+    			Rectangle cvb;
+
+    			if (arrowButton != null) {
+    				if (comboBox.getComponentOrientation().isLeftToRight()) {
+    					arrowButton.setBounds(width - (insets.right + buttonWidth),
+    							insets.top, buttonWidth, buttonHeight);
+    				} else {
+    					arrowButton.setBounds(insets.left, insets.top, buttonWidth,
+    							buttonHeight);
+    				}
+    			}
+    			if (editor != null) {
+    				cvb = rectangleForCurrentValue();
+    				editor.setBounds(cvb);
+    			}
+            } else {
+                if ( arrowButton != null ) {
+                    Insets insets = comboBox.getInsets();
+                    int width = comboBox.getWidth();
+                    int height = comboBox.getHeight();
+                    arrowButton.setBounds( insets.left, insets.top,
+                                           width - (insets.left + insets.right),
+                                           height - (insets.top + insets.bottom) );
+                }
+            }
+        }
+        
+    }
 }
