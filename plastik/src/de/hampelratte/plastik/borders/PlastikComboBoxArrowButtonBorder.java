@@ -64,69 +64,211 @@ public class PlastikComboBoxArrowButtonBorder extends AbstractBorder implements
 		g.translate(x, y);
 
 		// paint background
-		
 		g.setColor(background);
 		int xpos = isLeftToRight ? 0 : 1;
 		int newWidth = isLeftToRight ? width - 2 : width - 1;
-		/*
-		g.drawLine(xpos, 0, newWidth, 0);
-		g.drawLine(xpos, height - 1, newWidth, height - 1);
-		g.drawLine(0, 1, width - 1, 1);
-		g.drawLine(0, 1, 0, height - 2);
-		g.drawLine(width - 1, 1, width - 1, height - 2);
-		xpos = isLeftToRight ? width-2 : 1;
-		g.drawLine(xpos, 2, xpos, height -2);
-		*/
-		
-		AbstractButton b = (AbstractButton) c;
 
+		AbstractButton b = (AbstractButton) c;
 		// draw dark 3d lines over the bright 3d lines, if the button is pressed
-		if(b.getModel().isPressed()) {
+		if (b.getModel().isPressed()) {
 			g.setColor(new Color(182, 185, 189)); // darker lines TODO ins laf
 			xpos = isLeftToRight ? 1 : 2;
-			newWidth = isLeftToRight ? width - 3: width-2;
+			newWidth = isLeftToRight ? width - 3 : width - 2;
 			g.drawLine(xpos, 1, newWidth, 1);
-			xpos = isLeftToRight ? width-2 : 1;
+			xpos = isLeftToRight ? width - 2 : 1;
 			g.drawLine(xpos, 2, xpos, height - 3);
 		}
 
-		// paint contour
-		g.setColor(contour);
-		// horizontal
-		xpos = isLeftToRight ? 0 : 2;
-		newWidth = isLeftToRight ? width - 3 : width - 1;
-		g.drawLine(xpos, 0, newWidth, 0);
-		g.drawLine(xpos, height - 1, newWidth, height - 1);
-		// vertical
-		xpos = isLeftToRight ? width - 1 : 0;
-		g.drawLine(xpos, 2, xpos, height - 3);
-		xpos = isLeftToRight ? 0 : width - 1;
-		g.drawLine(xpos, 1, xpos, height - 2);
+		if (isLeftToRight) {
+			if (combo.isEditable()) {
+				{ // paint background
+					// TODO real transparency
+					g.setColor(combo.getParent().getBackground());
+					g.drawRect(0, 0, width - 1, height - 1);
+					g.setColor(combo.getBackground());
+					// horizontal
+					g.drawLine(0, 0, width - 3, 0);
+					g.drawLine(0, height - 1, width - 3, height - 1);
+					g.drawLine(1, 1, width - 3, 1);
+					// vertical
+					g.drawLine(width - 1, 2, width - 1, height - 3);
+					g.drawLine(0, 1, 0, height - 2);
+					g.drawLine(width - 2, 2, width - 2, height - 3);
 
-		// corners
-		xpos = isLeftToRight ? width - 2 : 1;
-		g.drawLine(xpos, 1, xpos, 1);
-		g.drawLine(xpos, height - 2, xpos, height - 2);
+					// corners
+					g.drawLine(width - 2, 1, width - 2, 1); // top right
+					g.drawLine(width - 2, height - 2, width - 2, height - 2); // bottom right
+					// smooth corners
+					g.drawLine(width - 2, 0, width - 2, 0); // top right
+					g.drawLine(width - 1, 1, width - 1, 1);
+					g.drawLine(width - 1, height - 2, width - 1, height - 2); // bottom right
+					g.drawLine(width - 2, height - 1, width - 2, height - 1);
+				}
 
-		// smooth corners
-		g.setColor(contourSmoother);
-		xpos = isLeftToRight ? width - 1 : 0;
-		int increment = isLeftToRight ? -1 : 1;
-		g.drawLine(xpos, 1, xpos, 1); // upper corner
-		g.drawLine(xpos + increment, 0, xpos + increment, 0);
-		g.drawLine(xpos, height - 2, xpos, height - 2); // lower corner
-		g.drawLine(xpos + increment, height - 1, xpos + increment, height - 1);
+				// paint contour
+				g.setColor(contour);
+				// horizontal
+				g.drawLine(0, 0, width - 3, 0);
+				g.drawLine(0, height - 1, width - 3, height - 1);
+				// vertical
+				g.drawLine(width - 1, 2, width - 1, height - 3);
+				g.drawLine(0, 1, 0, height - 2);
 
-		// paint inner lines
-		/*
-		xpos = isLeftToRight ? 1 : 2;
-		newWidth = isLeftToRight ? width - 3 : width - 1;
-		g.drawLine(xpos, 1, newWidth, 1); // horizontal
-		// TODO farbe ins laf einbauen
-		g.setColor(b.getModel().isPressed() ? contourSmoother : new Color(225,
-				225, 225));
-		g.drawLine(xpos, 2, xpos, height - 2); // vertical
-		*/
+				// corners
+				g.drawLine(width - 2, 1, width - 2, 1); // top right
+				g.drawLine(width - 2, height - 2, width - 2, height - 2); // bottom right
+
+				// smooth corners
+				g.setColor(contourSmoother);
+				g.drawLine(width - 2, 0, width - 2, 0); // top right
+				g.drawLine(width - 1, 1, width - 1, 1);
+				g.drawLine(width - 1, height - 2, width - 1, height - 2); // bottom right
+				g.drawLine(width - 2, height - 1, width - 2, height - 1);
+			} else {
+				{ // paint background
+					// TODO real transparency
+					g.setColor(combo.getParent().getBackground());
+					g.drawRect(0, 0, width - 1, height - 1);
+					
+					g.setColor(combo.getBackground());
+					// horizontal
+					g.drawLine(1, 0, width - 2, 0);
+					g.drawLine(2, 1, width - 3, 1);
+					g.drawLine(1, height - 1, width - 2, height - 1);
+					// vertical
+					g.drawLine(width - 1, 1, width - 1, height - 2);
+					g.drawLine(width - 2, 2, width - 2, height - 3);
+					g.drawLine(0, 1, 0, height - 2);
+
+					// corners
+					g.drawLine(1, 1, 1, 1); // top left
+					g.drawLine(1, height - 2, 1, height - 2); // bottom left
+					g.drawLine(width - 2, 1, width - 2, 1); // top right
+					g.drawLine(width - 2, height - 2, width - 2, height - 2); // bottom right
+				}
+				
+				// paint contour
+				g.setColor(contour);
+				// horizontal
+				g.drawLine(2, 0, width - 3, 0);
+				g.drawLine(2, height - 1, width - 3, height - 1);
+				// vertical
+				g.drawLine(width - 1, 2, width - 1, height - 3);
+				g.drawLine(0, 2, 0, height - 3);
+
+				// corners
+				g.drawLine(1, 1, 1, 1); // top left
+				g.drawLine(1, height - 2, 1, height - 2); // bottom left
+				g.drawLine(width - 2, 1, width - 2, 1); // top right
+				g.drawLine(width - 2, height - 2, width - 2, height - 2); // bottom right
+
+				// smooth corners
+				g.setColor(contourSmoother);
+				g.drawLine(width - 2, 0, width - 2, 0); // top right
+				g.drawLine(width - 1, 1, width - 1, 1);
+				g.drawLine(width - 1, height - 2, width - 1, height - 2); // bottom right
+				g.drawLine(width - 2, height - 1, width - 2, height - 1);
+				g.drawLine(1, 0, 1, 0); // top left
+				g.drawLine(0, 1, 0, 1);
+				g.drawLine(0, height - 2, 0, height - 2); // bottom left
+				g.drawLine(1, height - 1, 1, height - 1);
+			}
+		} else {
+			if (combo.isEditable()) {
+				{ // paint background
+					// TODO real transparency
+					g.setColor(combo.getParent().getBackground());
+					g.drawRect(0, 0, width - 1, height - 1);
+					g.setColor(combo.getBackground());
+					// horizontal
+					g.drawLine(2, 0, width - 1, 0);
+					g.drawLine(2, 1, width - 1, 1);
+					g.drawLine(2, height - 1, width - 1, height - 1);
+					// vertical
+					g.drawLine(0, 2, 0, height - 3);
+					g.drawLine(1, 2, 1, height - 3);
+					g.drawLine(width - 1, 1, width - 1, height - 2);
+
+					// corners
+					g.drawLine(1, 1, 1, 1); // top right
+					g.drawLine(1, height - 2, 1, height - 2); // bottom right
+
+					// smooth corners
+					g.drawLine(1, 0, 1, 0); // top right
+					g.drawLine(0, 1, 0, 1);
+					g.drawLine(0, height - 2, 0, height - 2); // bottom right
+					g.drawLine(1, height - 1, 1, height - 1);
+				}
+				
+				// paint contour
+				g.setColor(contour);
+				// horizontal
+				g.drawLine(2, 0, width - 1, 0);
+				g.drawLine(2, height - 1, width - 1, height - 1);
+				// vertical
+				g.drawLine(0, 2, 0, height - 3);
+				g.drawLine(width - 1, 1, width - 1, height - 2);
+
+				// corners
+				g.drawLine(1, 1, 1, 1); // top left
+				g.drawLine(1, height - 2, 1, height - 2); // bottom left
+
+				// smooth corners
+				g.setColor(contourSmoother);
+				g.drawLine(1, 0, 1, 0); // top left
+				g.drawLine(0, 1, 0, 1);
+				g.drawLine(0, height - 2, 0, height - 2); // bottom left
+				g.drawLine(1, height - 1, 1, height - 1);
+			} else {
+				{ // paint background
+					// TODO real transparency
+					g.setColor(combo.getParent().getBackground());
+					g.drawRect(0, 0, width - 1, height - 1);
+					
+					g.setColor(combo.getBackground());
+					// horizontal
+					g.drawLine(1, 0, width - 2, 0);
+					g.drawLine(2, 1, width - 3, 1);
+					g.drawLine(1, height - 1, width - 2, height - 1);
+					// vertical
+					g.drawLine(width - 1, 1, width - 1, height - 2);
+					g.drawLine(0, 1, 0, height - 2);
+					g.drawLine(1, 2, 1, height - 3);
+
+					// corners
+					g.drawLine(1, 1, 1, 1); // top left
+					g.drawLine(1, height - 2, 1, height - 2); // bottom left
+					g.drawLine(width - 2, 1, width - 2, 1); // top right
+					g.drawLine(width - 2, height - 2, width - 2, height - 2); // bottom right
+				}
+				
+				// paint contour
+				g.setColor(contour);
+				// horizontal
+				g.drawLine(2, 0, width - 3, 0);
+				g.drawLine(2, height - 1, width - 3, height - 1);
+				// vertical
+				g.drawLine(width - 1, 2, width - 1, height - 3);
+				g.drawLine(0, 2, 0, height - 3);
+
+				// corners
+				g.drawLine(1, 1, 1, 1); // top left
+				g.drawLine(1, height - 2, 1, height - 2); // bottom left
+				g.drawLine(width - 2, 1, width - 2, 1); // top right
+				g.drawLine(width - 2, height - 2, width - 2, height - 2); // bottom
+
+				// smooth corners
+				g.setColor(contourSmoother);
+				g.drawLine(width - 2, 0, width - 2, 0); // top right
+				g.drawLine(width - 1, 1, width - 1, 1);
+				g.drawLine(width - 1, height - 2, width - 1, height - 2); // bottom right
+				g.drawLine(width - 2, height - 1, width - 2, height - 1);
+				g.drawLine(1, 0, 1, 0); // top left
+				g.drawLine(0, 1, 0, 1);
+				g.drawLine(0, height - 2, 0, height - 2); // bottom left
+				g.drawLine(1, height - 1, 1, height - 1);
+			}
+		}
 
 		if (b.isEnabled() && !b.getModel().isPressed() && b.isRolloverEnabled()
 				&& b.getModel().isRollover()) {
