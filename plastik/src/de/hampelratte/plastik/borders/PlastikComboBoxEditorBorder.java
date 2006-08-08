@@ -66,9 +66,12 @@ public class PlastikComboBoxEditorBorder extends AbstractBorder implements
 		int xpos = 0;
 		int newWidth = 0;
 		
-		/*
 		{ // paint background
-			g.setColor(background);
+			// TODO real transparency
+			g.setColor(c.getParent().getParent().getBackground());
+			g.drawRect(0,0,width-1, height-1);
+			
+			g.setColor(c.getBackground());
 			xpos = isLeftToRight ? 1 : 0;
 			newWidth = isLeftToRight ? width - 1 : width - 2;
 			g.drawLine(xpos, 0, newWidth, 0);
@@ -79,7 +82,9 @@ public class PlastikComboBoxEditorBorder extends AbstractBorder implements
 			g.drawLine(xpos, 1, xpos, height - 2);
 			xpos = isLeftToRight ? 1 : width - 2;
 			g.drawLine(xpos, 1, xpos, height - 2);
-		}*/
+			xpos = isLeftToRight ? width - 1 : 0;
+			g.drawLine(xpos, 2, xpos, height - 2);
+		}
 
 		{ // paint contour 
 			g.setColor(hasFocus(comp) ? highlight : contour);
@@ -114,6 +119,7 @@ public class PlastikComboBoxEditorBorder extends AbstractBorder implements
 		g.drawLine(xpos, 1, newWidth, 1); // horizontal
 		xpos = isLeftToRight ? 1 : width - 2;
 		g.drawLine(xpos, 2, xpos, height - 3); // vertical
+		xpos = isLeftToRight ? width - 1 : 0;
 
 		if (hasFocus(comp)) {
 			if (isLeftToRight) {
