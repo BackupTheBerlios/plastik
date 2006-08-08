@@ -164,12 +164,12 @@ public final class PlastikComboBoxButton extends JButton {
                 if(isRolloverEnabled() && getModel().isRollover()) {
                 	g.setColor(contour);
 	                g.drawLine(x,3,x,height);
-	                g.setColor(getModel().isPressed() ? new Color(0,0,0,0) : background);
+	                g.setColor(getBackground().brighter()); // TODO color
 	                g.drawLine(x+1,3,x+1,height);
                 } else {
                 	g.setColor(contour);
 	                g.drawLine(x,1,x,height+1);
-	                g.setColor(background);
+	                g.setColor(getBackground().brighter()); // TODO color
 	                g.drawLine(x+1,2,x+1,height+1);
                 }
             }

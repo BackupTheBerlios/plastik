@@ -7,11 +7,14 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 
+import javax.swing.JTextField;
 import javax.swing.UIDefaults;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
+import javax.swing.plaf.IconUIResource;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.basic.BasicLookAndFeel;
+import javax.swing.text.DefaultEditorKit;
 
 import de.hampelratte.plastik.borders.PlastikBorder;
 import de.hampelratte.plastik.borders.PlastikButtonBorder;
@@ -143,6 +146,7 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("MenuUI",           s + "MenuUI");
 		table.put("MenuBarUI",        s + "MenuBarUI");
 		table.put("MenuItemUI",       s + "MenuItemUI");
+		table.put("PopupMenuUI",      s + "PopupMenuUI");
 		//table.put("PopupMenuSeparatorUI", s + "PopupMenuSeparatorUI");
 		table.put("RadioButtonUI",    s + "RadioButtonUI");
 		table.put("RadioButtonMenuItemUI", s + "RadioButtonMenuItemUI");
@@ -187,6 +191,98 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 
 	}
 	
+	Object fieldInputMap = new UIDefaults.LazyInputMap(new Object[] {
+					   "ctrl C", DefaultEditorKit.copyAction,
+					   "ctrl V", DefaultEditorKit.pasteAction,
+					   "ctrl X", DefaultEditorKit.cutAction,
+					     "COPY", DefaultEditorKit.copyAction,
+					    "PASTE", DefaultEditorKit.pasteAction,
+					      "CUT", DefaultEditorKit.cutAction,
+				   "shift LEFT", DefaultEditorKit.selectionBackwardAction,
+		        "shift KP_LEFT", DefaultEditorKit.selectionBackwardAction,
+			      "shift RIGHT", DefaultEditorKit.selectionForwardAction,
+			   "shift KP_RIGHT", DefaultEditorKit.selectionForwardAction,
+					"ctrl LEFT", DefaultEditorKit.previousWordAction,
+			     "ctrl KP_LEFT", DefaultEditorKit.previousWordAction,
+			       "ctrl RIGHT", DefaultEditorKit.nextWordAction,
+			    "ctrl KP_RIGHT", DefaultEditorKit.nextWordAction,
+			  "ctrl shift LEFT", DefaultEditorKit.selectionPreviousWordAction,
+		   "ctrl shift KP_LEFT", DefaultEditorKit.selectionPreviousWordAction,
+			 "ctrl shift RIGHT", DefaultEditorKit.selectionNextWordAction,
+		  "ctrl shift KP_RIGHT", DefaultEditorKit.selectionNextWordAction,
+					   "ctrl A", DefaultEditorKit.selectAllAction,
+					     "HOME", DefaultEditorKit.beginLineAction,
+					      "END", DefaultEditorKit.endLineAction,
+			       "shift HOME", DefaultEditorKit.selectionBeginLineAction,
+			        "shift END", DefaultEditorKit.selectionEndLineAction,
+			       "typed \010", DefaultEditorKit.deletePrevCharAction,
+		               "DELETE", DefaultEditorKit.deleteNextCharAction,
+		                "RIGHT", DefaultEditorKit.forwardAction,
+		                 "LEFT", DefaultEditorKit.backwardAction,
+		             "KP_RIGHT", DefaultEditorKit.forwardAction,
+		              "KP_LEFT", DefaultEditorKit.backwardAction,
+					    "ENTER", JTextField.notifyAction,
+		      "ctrl BACK_SLASH", "unselect"/*DefaultEditorKit.unselectAction*/,
+		      "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
+	});
+	
+	Object multilineInputMap = new UIDefaults.LazyInputMap(new Object[] {
+					   "ctrl C", DefaultEditorKit.copyAction,
+					   "ctrl V", DefaultEditorKit.pasteAction,
+					   "ctrl X", DefaultEditorKit.cutAction,
+					     "COPY", DefaultEditorKit.copyAction,
+					    "PASTE", DefaultEditorKit.pasteAction,
+					      "CUT", DefaultEditorKit.cutAction,
+		           "shift LEFT", DefaultEditorKit.selectionBackwardAction,
+                "shift KP_LEFT", DefaultEditorKit.selectionBackwardAction,
+		          "shift RIGHT", DefaultEditorKit.selectionForwardAction,
+		       "shift KP_RIGHT", DefaultEditorKit.selectionForwardAction,
+		       		"ctrl LEFT", DefaultEditorKit.previousWordAction,
+		         "ctrl KP_LEFT", DefaultEditorKit.previousWordAction,
+		           "ctrl RIGHT", DefaultEditorKit.nextWordAction,
+		        "ctrl KP_RIGHT", DefaultEditorKit.nextWordAction,
+		      "ctrl shift LEFT", DefaultEditorKit.selectionPreviousWordAction,
+	       "ctrl shift KP_LEFT", DefaultEditorKit.selectionPreviousWordAction,
+		     "ctrl shift RIGHT", DefaultEditorKit.selectionNextWordAction,
+	      "ctrl shift KP_RIGHT", DefaultEditorKit.selectionNextWordAction,
+			           "ctrl A", DefaultEditorKit.selectAllAction,
+			             "HOME", DefaultEditorKit.beginLineAction,
+			              "END", DefaultEditorKit.endLineAction,
+		           "shift HOME", DefaultEditorKit.selectionBeginLineAction,
+		            "shift END", DefaultEditorKit.selectionEndLineAction,
+		            	   "UP", DefaultEditorKit.upAction,
+					    "KP_UP", DefaultEditorKit.upAction,
+					     "DOWN", DefaultEditorKit.downAction,
+					  "KP_DOWN", DefaultEditorKit.downAction,
+					  "PAGE_UP", DefaultEditorKit.pageUpAction,
+					"PAGE_DOWN", DefaultEditorKit.pageDownAction,
+				"shift PAGE_UP", "selection-page-up",
+	          "shift PAGE_DOWN", "selection-page-down",
+	       "ctrl shift PAGE_UP", "selection-page-left",
+	     "ctrl shift PAGE_DOWN", "selection-page-right",
+			 		 "shift UP", DefaultEditorKit.selectionUpAction,
+			 	  "shift KP_UP", DefaultEditorKit.selectionUpAction,
+		           "shift DOWN", DefaultEditorKit.selectionDownAction,
+		        "shift KP_DOWN", DefaultEditorKit.selectionDownAction,
+			            "ENTER", DefaultEditorKit.insertBreakAction,
+		           "typed \010", DefaultEditorKit.deletePrevCharAction,
+                       "DELETE", DefaultEditorKit.deleteNextCharAction,
+                        "RIGHT", DefaultEditorKit.forwardAction,
+                         "LEFT", DefaultEditorKit.backwardAction, 
+                     "KP_RIGHT", DefaultEditorKit.forwardAction,
+                      "KP_LEFT", DefaultEditorKit.backwardAction,
+			              "TAB", DefaultEditorKit.insertTabAction,
+		      "ctrl BACK_SLASH", "unselect"/*DefaultEditorKit.unselectAction*/,
+			        "ctrl HOME", DefaultEditorKit.beginAction,
+			         "ctrl END", DefaultEditorKit.endAction,
+		      "ctrl shift HOME", DefaultEditorKit.selectionBeginAction,
+		       "ctrl shift END", DefaultEditorKit.selectionEndAction,
+                       "ctrl T", "next-link-action",
+                 "ctrl shift T", "previous-link-action",
+                   "ctrl SPACE", "activate-link-action",
+              "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
+	});
+	
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
 		
@@ -211,24 +307,55 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("Common.innerContourSmoother", new PlastikColorUIResource(new Color(0, 0, 0, 102)));
 		
 		// button
-		table.put("Button.background", new PlastikColorUIResource(229, 231, 236));
+		table.put("Button.background", colorTheme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND));
 		table.put("Button.border", new PlastikButtonBorder());
 		table.put("Button.defaultButtonFollowsFocus", Boolean.FALSE);
 		table.put("Button.font", table.getFont("Common.font"));
-		table.put("Button.foreground", new PlastikColorUIResource(0, 0, 0));
+		table.put("Button.foreground", colorTheme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.FOREGROUND_TEXT));
 		table.put("Button.margin", new InsetsUIResource(3, 14, 3, 14));
 		
 		// combobox
-		table.put("ComboBox.background", Color.WHITE);
+		table.put("ComboBox.background", colorTheme.getColor(PlastikColorTheme.BUTTON | PlastikColorTheme.BACKGROUND));
 		table.put("ComboBox.border", null);
 		table.put("ComboBox.disabledBackground", table.get("Common.background"));
 	    table.put("ComboBox.disabledForeground",table.get("Common.disabledText"));
 		table.put("ComboBox.font", table.getFont("Common.font"));
 	    table.put("ComboBox.foreground", table.get("Common.foreground"));
-	    table.put("ComboBox.selectionBackground", table.getColor("textHighlight") );
-	    table.put("ComboBox.selectionForeground", Color.WHITE );
+	    table.put("ComboBox.height", new Integer(26));
+	    table.put("ComboBox.selectionBackground", colorTheme.getColor(PlastikColorTheme.MENU_ITEM | PlastikColorTheme.BACKGROUND | PlastikColorTheme.ROLLOVER | PlastikColorTheme.BRIGHTER) );
+	    table.put("ComboBox.selectionForeground", Color.WHITE ); // TODO color
 
-		
+	    // internalframe
+	    table.put("InternalFrame.icon", new UIDefaults.ProxyLazyValue("javax.swing.plaf.metal.MetalIconFactory", "getInternalFrameDefaultMenuIcon"));
+	    table.put("InternalFrame.border", new UIDefaults.ProxyLazyValue("javax.swing.plaf.metal.MetalBorders$InternalFrameBorder"));
+	    table.put("InternalFrame.optionDialogBorder", new UIDefaults.ProxyLazyValue("javax.swing.plaf.metal.MetalBorders$OptionDialogBorder"));
+	    table.put("InternalFrame.paletteBorder", new UIDefaults.ProxyLazyValue("javax.swing.plaf.metal.MetalBorders$PaletteBorder"));
+	    table.put("InternalFrame.paletteTitleHeight", new Integer(11));
+	    table.put("InternalFrame.paletteCloseIcon", new UIDefaults.ProxyLazyValue("javax.swing.plaf.metal.MetalIconFactory$PaletteCloseIcon"));
+	    
+	    /*table.put("InternalFrame.closeIcon", 
+	          new UIDefaults.ProxyLazyValue(
+	             "javax.swing.plaf.metal.MetalIconFactory", 
+	             "getInternalFrameCloseIcon",
+	             internalFrameIconArgs));
+	    table.put("InternalFrame.maximizeIcon", 
+	          new UIDefaults.ProxyLazyValue(
+	             "javax.swing.plaf.metal.MetalIconFactory", 
+	             "getInternalFrameMaximizeIcon",
+	             internalFrameIconArgs));
+	    table.put("InternalFrame.iconifyIcon", 
+	          new UIDefaults.ProxyLazyValue(
+	             "javax.swing.plaf.metal.MetalIconFactory", 
+	             "getInternalFrameMinimizeIcon",
+	             internalFrameIconArgs));
+	    table.put("InternalFrame.minimizeIcon", 
+	          new UIDefaults.ProxyLazyValue(
+	             "javax.swing.plaf.metal.MetalIconFactory", 
+	             "getInternalFrameAltMaximizeIcon",
+	             internalFrameIconArgs));
+	    table.put("InternalFrame.titleFont",  windowTitleValue);*/
+	    table.put("InternalFrame.windowBindings", null);
+
 		// label
 		table.put("Label.background", new PlastikColorUIResource(239, 239, 239));
 		table.put("Label.font", table.getFont("Common.font"));
@@ -280,9 +407,16 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("PopupMenu.background", colorTheme.getColor(PlastikColorTheme.POPUP_MENU | PlastikColorTheme.BORDER));
 		table.put("PopupMenu.border", new PlastikPopupMenuBorder());
 		
+		// optionpane
+		table.put("OptionPane.errorIcon", getTheme().getIconTheme().getErrorIcon());
+		table.put("OptionPane.informationIcon", getTheme().getIconTheme().getInfoIcon());
+		table.put("OptionPane.questionIcon", getTheme().getIconTheme().getQuestionIcon());
+		table.put("OptionPane.warningIcon", getTheme().getIconTheme().getWarningIcon());
+		
 		// radiobutton
 		table.put("RadioButton.background", table.getColor("Common.background"));
 		table.put("RadioButton.font", table.getFont("Common.font"));
+		table.put("RadioButton.border", new PlastikScrollPaneBorder());
 		
 		// scrollpane
 		table.put("ScrollPane.background", table.getColor("Common.background"));
@@ -298,14 +432,26 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		table.put("TabbedPane.font", table.getFont("Common.font"));
 		
 		// textarea
+		table.put("TextArea.focusInputMap", multilineInputMap);
 		table.put("TextArea.border", new PlastikTextComponentBorder());
 		table.put("TextArea.font", table.getFont("Common.font"));
+		table.put("TextArea.background", colorTheme.getColor(PlastikColorTheme.BACKGROUND_TEXT));
+		table.put("TextArea.disabledBackground", colorTheme.getColor(PlastikColorTheme.BACKGROUND_TEXT | PlastikColorTheme.INACTIVE));
+		table.put("TextArea.selectionBackground", colorTheme.getColor(PlastikColorTheme.BACKGROUND_TEXT_SELECTED));
+		table.put("TextArea.selectionForeground", colorTheme.getColor(PlastikColorTheme.FOREGROUND_TEXT_SELECTED));
+		table.put("TextArea.inactiveBackground", colorTheme.getColor(PlastikColorTheme.BACKGROUND_TEXT | PlastikColorTheme.INACTIVE));
+		table.put("TextArea.inactiveForeground", colorTheme.getColor(PlastikColorTheme.FOREGROUND_TEXT | PlastikColorTheme.INACTIVE));
 		
 		// textfield
-		table.put("TextField.background", new ColorUIResource(Color.WHITE));
+		table.put("TextField.focusInputMap", fieldInputMap);
+		table.put("TextField.background", colorTheme.getColor(PlastikColorTheme.BACKGROUND_TEXT));
 		table.put("TextField.border", new PlastikTextComponentBorder());
-		table.put("TextField.disabledBackground", table.get("Common.background"));
+		table.put("TextField.disabledBackground", colorTheme.getColor(PlastikColorTheme.BACKGROUND_TEXT | PlastikColorTheme.INACTIVE));
 		table.put("TextField.font", table.getFont("Common.font"));
+		table.put("TextField.selectionBackground", colorTheme.getColor(PlastikColorTheme.BACKGROUND_TEXT_SELECTED));
+		table.put("TextField.selectionForeground", colorTheme.getColor(PlastikColorTheme.FOREGROUND_TEXT_SELECTED));
+		table.put("TextField.inactiveBackground", colorTheme.getColor(PlastikColorTheme.BACKGROUND_TEXT | PlastikColorTheme.INACTIVE));
+		table.put("TextField.inactiveForeground", colorTheme.getColor(PlastikColorTheme.FOREGROUND_TEXT | PlastikColorTheme.INACTIVE));
 		
 		// togglebutton
 		table.put("ToggleButton.background", new PlastikColorUIResource(229, 231, 236));
