@@ -21,7 +21,6 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicComboBoxUI;
-import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.ComboPopup;
 
 import de.hampelratte.plastik.borders.PlastikComboBoxArrowButtonBorder;
@@ -45,6 +44,13 @@ public class PlastikComboBoxUI extends BasicComboBoxUI implements MouseListener,
 		obj = PlastikLookAndFeel.getDefaultOpacity() ? Boolean.TRUE : Boolean.FALSE;
 		LookAndFeel.installProperty(comboBox, "opaque", obj);
     }
+	
+	protected void uninstallListeners() {
+		super.uninstallListeners();
+		if(editor != null) {
+			editor.removeMouseListener(this);
+		}
+	}
 
 	protected JButton createArrowButton() {
 		JButton button = new PlastikComboBoxButton(comboBox,
