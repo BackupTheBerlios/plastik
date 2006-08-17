@@ -117,18 +117,20 @@ public class PlastikSpinnerUI extends BasicSpinnerUI implements
 	}
 
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		if (e.getWheelRotation() == 1) {
-			for (int i = 1; i <= e.getClickCount(); i++) {
-				Object o = spinner.getModel().getPreviousValue();
-				if(o != null) {
-					spinner.getModel().setValue(o);
+		if (spinner.isEnabled()) {
+			if (e.getWheelRotation() == 1) {
+				for (int i = 1; i <= e.getClickCount(); i++) {
+					Object o = spinner.getModel().getPreviousValue();
+					if (o != null) {
+						spinner.getModel().setValue(o);
+					}
 				}
-			}
-		} else {
-			for (int i = 1; i <= e.getClickCount(); i++) {
-				Object o = spinner.getModel().getNextValue();
-				if (o != null) {
-					spinner.getModel().setValue(o);
+			} else {
+				for (int i = 1; i <= e.getClickCount(); i++) {
+					Object o = spinner.getModel().getNextValue();
+					if (o != null) {
+						spinner.getModel().setValue(o);
+					}
 				}
 			}
 		}
