@@ -65,6 +65,8 @@ public class TestFrame extends JFrame {
 	private TextAreaPanel textAreaPanel;
 	
 	private ComboBoxPanel comboBoxPanel;
+	
+	private SpinnerPanel spinnerPanel;
 
 	public TestFrame() {
 		PlastikLookAndFeel.setTextAntialiasing(true);
@@ -115,6 +117,7 @@ public class TestFrame extends JFrame {
 		textFieldPanel = new TextFieldPanel();
 		textAreaPanel = new TextAreaPanel();
 		comboBoxPanel = new ComboBoxPanel();
+		spinnerPanel = new SpinnerPanel();
 
 		JTabbedPane pane = allPanel.getTabbedPane();
 		pane.add(buttonPanel);
@@ -126,6 +129,7 @@ public class TestFrame extends JFrame {
 		pane.add(textFieldPanel);
 		pane.add(textAreaPanel);
 		pane.add(comboBoxPanel);
+		pane.add(spinnerPanel);
 
 		// exampleFrame.getRootPane().setDefaultButton(allPanel.getDefaultButton());
 

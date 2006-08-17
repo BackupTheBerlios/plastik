@@ -27,7 +27,6 @@ import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.LookAndFeel;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -39,8 +38,7 @@ import javax.swing.text.InternationalFormatter;
 
 import de.hampelratte.plastik.borders.PlastikSpinnerEditorBorder;
 
-
-//TODO rollover und focus highlight
+// TODO vom user gesetzte background color wird nicht gemalt
 public class PlastikSpinnerUI extends BasicSpinnerUI implements
 		MouseListener, FocusListener, MouseWheelListener {
 
@@ -56,7 +54,6 @@ public class PlastikSpinnerUI extends BasicSpinnerUI implements
 	private JButton previousButton;
 
 	public static ComponentUI createUI(JComponent c) {
-		c.setOpaque(false);
 		PlastikSpinnerUI ui = new PlastikSpinnerUI();
 		return ui;
 	}
@@ -85,27 +82,29 @@ public class PlastikSpinnerUI extends BasicSpinnerUI implements
 
 	protected JComponent createEditor() {
 		editor = new JTextField();
-		editor.setOpaque(false);
 		editor.addMouseListener(this);
+		editor.setBorder(new PlastikSpinnerEditorBorder(spinner));
 		return editor;
 	}
 
 	protected void installDefaults() {
 		spinner.setLayout(createLayout());
 		spinner.getEditor().setBorder(new PlastikSpinnerEditorBorder(spinner));
-		LookAndFeel.installColorsAndFont(spinner, "Spinner.background",
-				"Spinner.foreground", "Spinner.font");
 	}
 
 	protected void installListeners() {
 		super.installListeners();
 		spinner.addMouseWheelListener(this);
 	}
+	
+	protected void uninstallListeners() {
+		super.uninstallListeners();
+		spinner.removeMouseWheelListener(this);
+	}
 
 	protected void replaceEditor(JComponent oldEditor, JComponent newEditor) {
 		super.replaceEditor(oldEditor, newEditor);
 		newEditor.setBorder(new PlastikSpinnerEditorBorder(spinner));
-		newEditor.setOpaque(false);
 		newEditor.addMouseListener(this);
 		for(int i=0; i<newEditor.getComponentCount(); i++) {
 			newEditor.getComponent(i).addMouseListener(this);
