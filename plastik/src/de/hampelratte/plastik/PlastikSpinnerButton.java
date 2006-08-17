@@ -23,13 +23,9 @@ public class PlastikSpinnerButton extends JButton {
 	private Color innerContourPressed = UIManager
 			.getColor("Common.innerContourPressed");
 	
-	private PlastikSpinnerUI spinnerUI;
-
-	public PlastikSpinnerButton(int orientation, PlastikSpinnerUI spinnerUI, JSpinner spinner) {
+	public PlastikSpinnerButton(int orientation, JSpinner spinner) {
 		this.orientation = orientation;
-		this.spinnerUI = spinnerUI;
-		this.setBorder(new PlastikSpinnerButtonBorder(orientation, this,
-						spinnerUI, spinner));
+		this.setBorder(new PlastikSpinnerButtonBorder(orientation, spinner));
 		this.setPreferredSize(new Dimension(17, 13));
 		if(PlastikLookAndFeel.isRolloverEnabled()) {
 			this.setRolloverEnabled(true);

@@ -12,9 +12,6 @@ import javax.swing.UIManager;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 
-import de.hampelratte.plastik.PlastikSpinnerButton;
-import de.hampelratte.plastik.PlastikSpinnerUI;
-
 public class PlastikSpinnerButtonBorder extends AbstractBorder implements
 		Border {
 
@@ -23,8 +20,6 @@ public class PlastikSpinnerButtonBorder extends AbstractBorder implements
 	private JButton button;
 
 	private JSpinner spinner;
-
-	private PlastikSpinnerUI spinnerUI;
 
 	private Color background = UIManager.getColor("Common.background");
 
@@ -38,11 +33,8 @@ public class PlastikSpinnerButtonBorder extends AbstractBorder implements
 	private Color highlightSmoother = UIManager
 			.getColor("Common.highlightSmoother");
 
-	public PlastikSpinnerButtonBorder(int position,
-			PlastikSpinnerButton button, PlastikSpinnerUI spinnerUI,
-			JSpinner spinner) {
+	public PlastikSpinnerButtonBorder(int position, JSpinner spinner) {
 		this.position = position;
-		this.button = button;
 		this.spinner = spinner;
 	}
 
