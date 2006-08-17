@@ -138,25 +138,26 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 	protected void initClassDefaults(UIDefaults table) {
 		super.initClassDefaults(table);
 		String s = "de.hampelratte.plastik.Plastik";
-		table.put("ButtonUI",         s + "ButtonUI");
-		table.put("CheckBoxUI",       s + "CheckBoxUI");
-		table.put("CheckBoxMenuItemUI", s + "CheckBoxMenuItemUI");
-		table.put("ComboBoxUI",       s + "ComboBoxUI");
-		table.put("LabelUI",          s + "LabelUI");
-		table.put("MenuUI",           s + "MenuUI");
-		table.put("MenuBarUI",        s + "MenuBarUI");
-		table.put("MenuItemUI",       s + "MenuItemUI");
-		table.put("PopupMenuUI",      s + "PopupMenuUI");
+		table.put("ButtonUI",         		s + "ButtonUI");
+		table.put("CheckBoxUI",       		s + "CheckBoxUI");
+		table.put("CheckBoxMenuItemUI", 	s + "CheckBoxMenuItemUI");
+		table.put("ComboBoxUI",       		s + "ComboBoxUI");
+		table.put("FormattedTextFieldUI",	s + "FormattedTextFieldUI");
+		table.put("LabelUI",          		s + "LabelUI");
+		table.put("MenuUI",           		s + "MenuUI");
+		table.put("MenuBarUI",        		s + "MenuBarUI");
+		table.put("MenuItemUI",       		s + "MenuItemUI");
+		table.put("PopupMenuUI",      		s + "PopupMenuUI");
 		//table.put("PopupMenuSeparatorUI", s + "PopupMenuSeparatorUI");
-		table.put("RadioButtonUI",    s + "RadioButtonUI");
-		table.put("RadioButtonMenuItemUI", s + "RadioButtonMenuItemUI");
-		table.put("ScrollBarUI",      s + "ScrollBarUI");
-		table.put("SeparatorUI",      s + "SeparatorUI");
-		table.put("SpinnerUI",        s + "SpinnerUI");
-		table.put("TextFieldUI",      s + "TextFieldUI");
-		table.put("TextAreaUI",       s + "TextAreaUI");
-		table.put("ToggleButtonUI",   s + "ToggleButtonUI");
-		table.put("ToolTipUI",        s + "ToolTipUI");
+		table.put("RadioButtonUI",    		s + "RadioButtonUI");
+		table.put("RadioButtonMenuItemUI", 	s + "RadioButtonMenuItemUI");
+		table.put("ScrollBarUI",      		s + "ScrollBarUI");
+		table.put("SeparatorUI",      		s + "SeparatorUI");
+		table.put("SpinnerUI",        		s + "SpinnerUI");
+		table.put("TextFieldUI",      		s + "TextFieldUI");
+		table.put("TextAreaUI",       		s + "TextAreaUI");
+		table.put("ToggleButtonUI",   		s + "ToggleButtonUI");
+		table.put("ToolTipUI",        		s + "ToolTipUI");
 	}
 
 	protected void initSystemColorDefaults(UIDefaults table) {
@@ -324,6 +325,23 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 	    table.put("ComboBox.height", new Integer(26));
 	    table.put("ComboBox.selectionBackground", colorTheme.getColor(PlastikColorTheme.MENU_ITEM | PlastikColorTheme.BACKGROUND | PlastikColorTheme.ROLLOVER | PlastikColorTheme.BRIGHTER) );
 	    table.put("ComboBox.selectionForeground", Color.WHITE ); // TODO color
+	    table.put("ComboBox.ancestorInputMap", new UIDefaults.LazyInputMap(new Object[] {
+			     "ESCAPE", "hidePopup",
+			    "PAGE_UP", "pageUpPassThrough",
+			  "PAGE_DOWN", "pageDownPassThrough",
+			       "HOME", "homePassThrough",
+			        "END", "endPassThrough",
+			       "DOWN", "selectNext",
+			    "KP_DOWN", "selectNext",
+			   "alt DOWN", "togglePopup",
+			"alt KP_DOWN", "togglePopup",
+			     "alt UP", "togglePopup",
+			  "alt KP_UP", "togglePopup",
+			      "SPACE", "spacePopup",
+			     "ENTER", "enterPressed",
+			         "UP", "selectPrevious",
+			      "KP_UP", "selectPrevious"
+		      }));
 
 	    // internalframe
 	    table.put("InternalFrame.icon", new UIDefaults.ProxyLazyValue("javax.swing.plaf.metal.MetalIconFactory", "getInternalFrameDefaultMenuIcon"));
@@ -424,6 +442,10 @@ public class PlastikLookAndFeel extends BasicLookAndFeel {
 		
 		// separator
 		table.put("Separator.background", colorTheme.getColor(PlastikColorTheme.SEPARATOR | PlastikColorTheme.BACKGROUND));
+		
+		// spinner
+		table.put("Spinner.background", colorTheme.getColor(PlastikColorTheme.COMMON | PlastikColorTheme.BACKGROUND_TEXT));
+		table.put("Spinner.foreground", colorTheme.getColor(PlastikColorTheme.COMMON | PlastikColorTheme.FOREGROUND_TEXT));
 		
 		// slider
 		table.put("Slider.background", table.getColor("Common.background"));
