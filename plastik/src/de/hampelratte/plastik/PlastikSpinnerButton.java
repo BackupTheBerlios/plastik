@@ -25,7 +25,7 @@ public class PlastikSpinnerButton extends JButton {
 	
 	public PlastikSpinnerButton(int orientation, JSpinner spinner) {
 		this.orientation = orientation;
-		this.setBorder(new PlastikSpinnerButtonBorder(orientation, spinner));
+		this.setBorder(new PlastikSpinnerButtonBorder(orientation, this, spinner));
 		this.setPreferredSize(new Dimension(17, 13));
 		if(PlastikLookAndFeel.isRolloverEnabled()) {
 			this.setRolloverEnabled(true);

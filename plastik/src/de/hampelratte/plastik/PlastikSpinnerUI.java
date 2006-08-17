@@ -60,9 +60,9 @@ public class PlastikSpinnerUI extends BasicSpinnerUI implements
 
 	protected Component createNextButton() {
 		if (spinner.getComponentOrientation().isLeftToRight()) {
-			nextButton = new PlastikSpinnerButton(SwingConstants.NORTH, this, spinner);
+			nextButton = new PlastikSpinnerButton(SwingConstants.NORTH, spinner);
 		} else {
-			nextButton = new PlastikSpinnerButton(SwingConstants.NORTH, this, spinner);
+			nextButton = new PlastikSpinnerButton(SwingConstants.NORTH, spinner);
 		}
 		nextButton.addActionListener(nextButtonHandler);
 		nextButton.addMouseListener(nextButtonHandler);
@@ -71,9 +71,9 @@ public class PlastikSpinnerUI extends BasicSpinnerUI implements
 
 	protected Component createPreviousButton() {
 		if (spinner.getComponentOrientation().isLeftToRight()) {
-			previousButton = new PlastikSpinnerButton(SwingConstants.SOUTH, this, spinner);
+			previousButton = new PlastikSpinnerButton(SwingConstants.SOUTH, spinner);
 		} else {
-			previousButton = new PlastikSpinnerButton(SwingConstants.SOUTH, this, spinner);
+			previousButton = new PlastikSpinnerButton(SwingConstants.SOUTH, spinner);
 		}
 		previousButton.addActionListener(previousButtonHandler);
 		previousButton.addMouseListener(previousButtonHandler);
